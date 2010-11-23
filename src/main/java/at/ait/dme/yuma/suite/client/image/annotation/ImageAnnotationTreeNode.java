@@ -123,7 +123,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 
 		if (annotation.getCreated() != null) {
 			headerDate.setText("("
-					+ DateTimeFormat.getShortDateTimeFormat().format(annotation.getModified())
+					+ DateTimeFormat.getShortDateTimeFormat().format(annotation.getLastModified())
 					+ ")");
 			headerDate.setStyleName("imageAnnotation-header-date");
 		}
@@ -198,10 +198,10 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 		annotationPanel.add(text);
 		
 		// Semantic tags
-		if (annotation.hasSemanticTags()) {
+		if (annotation.hasTags()) {
 			FlowPanel tagPanel = new FlowPanel();
 			tagPanel.setStyleName("imageAnnotation-taglist");
-			for (SemanticTag t : annotation.getSemanticTags()) {
+			for (SemanticTag t : annotation.getTags()) {
 				InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""
 						+ t.getURI() + "\" title=\"" 
 						+ t.getDescription() + "\">" 
@@ -347,15 +347,6 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	}
 
 	/**
-	 * get the external object id of this node's annotations
-	 * 
-	 * @return id of the external object
-	 */
-	public String getExternalObjectId() {
-		return annotation.getExternalObjectId();
-	}
-
-	/**
 	 * get the annotation text
 	 * 
 	 * @return text
@@ -441,7 +432,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 				+ msg.flagSubject()
 				+ "&body="
 				+ msg.flagBody(annotation.getTitle(), baseUrl + "annotate.jsp?objectURL="
-						+ annotation.getImageUrl() + "%26flaggedId=" + annotation.getId(), 
+						+ annotation.getObjectId() + "%26flaggedId=" + annotation.getId(), 
 						Application.getUser());
 	}
 

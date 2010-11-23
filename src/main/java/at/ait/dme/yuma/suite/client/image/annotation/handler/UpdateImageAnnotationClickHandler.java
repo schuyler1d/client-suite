@@ -58,7 +58,6 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 		ImageAnnotation annotation = new ImageAnnotation(
 				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getAnnotationId():null, 						
 				Application.getImageUrl(),
-				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getExternalObjectId():null,
 				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getParentAnnotationId():null, 						
 				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getAnnotationRootId():null, 							
 				Application.getUser(), 
@@ -67,8 +66,7 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 				annotationForm.getAnnotationScope(),
 				annotationForm.getSemanticTags());
 		annotation.setCreated(getAnnotationTreeNode().getAnnotation().getCreated());
-		annotation.setModified(new Date());
-		annotation.setMimeType(getAnnotationTreeNode().getAnnotation().getMimeType());
+		annotation.setLastModified(new Date());
 		
 		// create the fragment if necessary
 		addFragment(annotation);

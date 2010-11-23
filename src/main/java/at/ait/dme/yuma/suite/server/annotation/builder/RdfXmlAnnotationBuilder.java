@@ -53,6 +53,7 @@ import org.openrdf.rio.rdfxml.RDFXMLWriter;
 import org.openrdf.rio.rdfxml.util.RDFXMLPrettyWriter;
 import org.openrdf.sail.memory.MemoryStore;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
@@ -238,7 +239,6 @@ public class RdfXmlAnnotationBuilder {
 		URI replyType = vFactory.createURI(THREAD_REPLY);
 		URI agreeType = vFactory.createURI(REPLY_TYPE_AGREE);		
 		URI annotatesPredicate = vFactory.createURI(ANNOTATION_ANNOTATES);
-		URI linkedToPredicate = vFactory.createURI(ANNOTATION_LINKED_TO);
 		URI annotationCreatedPredicate = vFactory.createURI(ANNOTATION_CREATED);
 		URI annotationModifiedPredicate = vFactory.createURI(ANNOTATION_MODIFIED);		
 		URI annotationBodyPredicate = vFactory.createURI(ANNOTEA_ANNOTATION_BODY);
@@ -262,14 +262,8 @@ public class RdfXmlAnnotationBuilder {
 		URI htmlBodyPredicate = vFactory.createURI(HTTP_BODY);
 	
 		// annotation resource
-		con.add(annotationNode,annotatesPredicate,vFactory.createURI(annotation.getImageUrl()));
-		
-		// linked to
-		if(annotation.getExternalObjectId()!=null) {
-			con.add(annotationNode,linkedToPredicate,
-					vFactory.createLiteral(annotation.getExternalObjectId()));
-		}
-		
+		con.add(annotationNode,annotatesPredicate,vFactory.createURI(annotation.getObjectId()));
+				
 		// reply?
 		if(annotation.getParentId()!=null) {
 			con.add(annotationNode,RDF.TYPE,replyType);
@@ -298,16 +292,16 @@ public class RdfXmlAnnotationBuilder {
 		}
 		
 		// date
-		String modified=W3CDateTimeParser.formatW3CDateTime(annotation.getModified());		
+		String modified=W3CDateTimeParser.formatW3CDateTime(annotation.getLastModified());		
 		con.add(annotationNode,annotationModifiedPredicate,vFactory.createLiteral(modified));		
 		con.add(annotationNode,dcDateTypePredicate,vFactory.createLiteral(modified));
 		String date=W3CDateTimeParser.formatW3CDateTime(annotation.getCreated());
 		con.add(annotationNode,annotationCreatedPredicate,vFactory.createLiteral(date));	
 		
 		// format (mime type)
-		if(annotation.getMimeType()!=null)
+		if(annotation.getType() != null)
 			con.add(annotationNode,dcFormatPredicate,
-					vFactory.createLiteral(annotation.getMimeType()));		
+					vFactory.createLiteral(annotation.getType().name()));		
 		
 		// annotated image fragment
 		if(annotation.hasFragment()) {
@@ -318,7 +312,7 @@ public class RdfXmlAnnotationBuilder {
 		}
 		
 		// linked to resources
-		if(annotation.hasSemanticTags()) {
+		if(annotation.hasTags()) {
 		    con.add(annotationNode, annotationLinkedToResourcesPredicate, 
 		    		vFactory.createLiteral(createLinkedToResourcesFragment(annotation)));
 		}
@@ -337,12 +331,12 @@ public class RdfXmlAnnotationBuilder {
 	    
 	    // scope
 	    con.add(annotationNode, annotationScopePredicate, 
-	    		vFactory.createLiteral(annotation.getScopeAsString()));
+	    		vFactory.createLiteral(annotation.getScope().name()));
 	    
 	    // replies
 	    if(annotation.hasReplies()) {
-	    	for(ImageAnnotation reply : annotation.getReplies()) 
-	    		toRdf(con,vFactory, reply);
+	    	for(Annotation reply : annotation.getReplies()) 
+	    		toRdf(con,vFactory, (ImageAnnotation) reply);
 	    }
 	}
 	
@@ -351,8 +345,8 @@ public class RdfXmlAnnotationBuilder {
         StringWriter sw = new StringWriter();
         XMLOutputter xmlOutputter = new XMLOutputter();
 
-        if(annotation.hasSemanticTags()) {
-		    for(SemanticTag t : annotation.getSemanticTags()) {
+        if(annotation.hasTags()) {
+		    for(SemanticTag t : annotation.getTags()) {
 		        Element tagEl = new Element("linked-resource");
 		        Element title = new Element("title", DUBLIN_CORE_NAMESPACE);
 		        Element type = new Element("type", DUBLIN_CORE_NAMESPACE);
@@ -400,7 +394,7 @@ public class RdfXmlAnnotationBuilder {
 	 */
 	private static String createMpeg21FragmentURI(ImageAnnotation annotation) {
 		// TODO zoom level has still to be considered here
-		String mpeg21URI = annotation.getImageUrl()+"#";
+		String mpeg21URI = annotation.getObjectId()+"#";
 		ImageFragment fragment = annotation.getFragment();
 		Shape shape = fragment.getShape();
 		
@@ -495,7 +489,7 @@ public class RdfXmlAnnotationBuilder {
 		 */
 		ImageRect imageRect = fragment.getImageRect();		
 		Element image = new Element(SVG_IMAGE,SVG_NS);
-		image.setAttribute(new Attribute(XLINK_HREF,annotation.getImageUrl(),XLINK_NS));
+		image.setAttribute(new Attribute(XLINK_HREF,annotation.getObjectId(),XLINK_NS));
 		image.setAttribute(new Attribute(SVG_X, String.valueOf(imageRect.getLeft())+PX));
 		image.setAttribute(new Attribute(SVG_Y, String.valueOf(imageRect.getTop())+PX));		
 		image.setAttribute(new Attribute(SVG_WIDTH, String.valueOf(imageRect.getWidth())+PX));

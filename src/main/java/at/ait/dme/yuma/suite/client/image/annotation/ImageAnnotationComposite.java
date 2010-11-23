@@ -35,6 +35,7 @@ import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.image.ImageComposite;
 import at.ait.dme.yuma.suite.client.image.StandardImageComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.CreateImageAnnotationClickHandler;
@@ -375,7 +376,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 				public void onSuccess(List<ImageAnnotation> foundAnnotations) {
 					// remove annotations the user is not allowed to see
 					for(ImageAnnotation annotation : foundAnnotations) { 
-						if(annotation.getScope()==ImageAnnotation.Scope.PRIVATE && 
+						if(annotation.getScope() == Scope.PRIVATE && 
 								!Application.isAuthenticatedUser(annotation.getCreatedBy()))
 							continue;
 						annotations.add(annotation);

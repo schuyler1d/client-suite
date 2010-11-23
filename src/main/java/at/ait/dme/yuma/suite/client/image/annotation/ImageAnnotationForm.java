@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.client.image.annotation;
 import java.util.List;
 
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation.Scope;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 
 import com.google.gwt.user.client.ui.Composite;
 

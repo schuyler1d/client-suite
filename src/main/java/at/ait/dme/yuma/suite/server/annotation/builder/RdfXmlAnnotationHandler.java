@@ -41,6 +41,8 @@ import org.openrdf.model.Value;
 import org.openrdf.rio.RDFHandler;
 import org.openrdf.rio.RDFHandlerException;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.server.util.W3CDateTimeParser;
@@ -152,7 +154,9 @@ public class RdfXmlAnnotationHandler implements RDFHandler {
 		for(ImageAnnotation annotation : annotations) {
 			ArrayList<ImageAnnotation> replies = allReplies.remove(annotation.getId());
 			if(replies!=null) {
-				annotation.setReplies(replies);
+				for (ImageAnnotation reply : replies) {
+					annotation.addReply(reply);
+				}
 				addAnnotationReplies(replies);
 			}
 		}			
@@ -170,10 +174,7 @@ public class RdfXmlAnnotationHandler implements RDFHandler {
 		annotation.setId(currentResource.stringValue());
 		
 		Value imageUrl = currentStatements.get(RdfXmlAnnotationBuilder.ANNOTATION_ANNOTATES);
-		if(imageUrl!=null) annotation.setImageUrl(imageUrl.stringValue());
-	
-		Value extObjectId = currentStatements.get(RdfXmlAnnotationBuilder.ANNOTATION_LINKED_TO);
-		if(extObjectId!=null) annotation.setExternalObjectId(extObjectId.stringValue());
+		if(imageUrl!=null) annotation.setObjectId(imageUrl.stringValue());
 	
 		Value inReplyTo=currentStatements.get(RdfXmlAnnotationBuilder.THREAD_IN_REPLY_TO);
 		if(inReplyTo!=null) {
@@ -194,10 +195,10 @@ public class RdfXmlAnnotationHandler implements RDFHandler {
 		if(title!=null) annotation.setTitle(StringEscapeUtils.unescapeXml(title.stringValue()));
 		
 		Value format = currentStatements.get(RdfXmlAnnotationBuilder.DUBLIN_CORE_FORMAT);
-		if(format!=null) annotation.setMimeType(format.stringValue());
+		if(format!=null) annotation.setType(Type.valueOf(format.stringValue()));
 
 		Value scope = currentStatements.get(RdfXmlAnnotationBuilder.ANNOTATION_SCOPE);
-		if(scope!=null) annotation.setScopeFromString(scope.stringValue());
+		if(scope!=null) annotation.setScope(Scope.valueOf(scope.stringValue()));
 
 		Value body = currentStatements.get(RdfXmlAnnotationBuilder.HTTP_BODY);
 		if(body!=null) {
@@ -224,7 +225,7 @@ public class RdfXmlAnnotationHandler implements RDFHandler {
 		
 		Value modified = currentStatements.get(RdfXmlAnnotationBuilder.ANNOTATION_MODIFIED);
 		if(modified!=null) {
-			annotation.setModified(W3CDateTimeParser.parseW3CDateTime(modified.stringValue()));
+			annotation.setLastModified(W3CDateTimeParser.parseW3CDateTime(modified.stringValue()));
 		}
 		
 		Value fragment = currentStatements.get(RdfXmlAnnotationBuilder.ANNOTATION_IMAGE_FRAGMENT);
@@ -236,7 +237,7 @@ public class RdfXmlAnnotationHandler implements RDFHandler {
 		
 		Value linkedToResources = currentStatements.get(RdfXmlAnnotationBuilder.ANNOTATION_LINKED_TO_RESOURCES);
         if(linkedToResources != null) {
-            annotation.setSemanticTags(RdfXmlAnnotationBuilder.
+            annotation.setTags(RdfXmlAnnotationBuilder.
             		// TODO this sucks (looks like someone has to pay a round of beers :))!
             		parseLinkedResources("<isLinkedToResources>" + 
             				linkedToResources.stringValue() + "</isLinkedToResources>"));

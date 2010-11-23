@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.server.annotation.builder;
+package at.ait.dme.yuma.suite.server.annotation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +29,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
@@ -41,17 +44,18 @@ import at.ait.dme.yuma.suite.client.image.shape.Rectangle;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
 
 /**
- * converts image annotations to json and vice versa
+ * Converts annotations from and to JSON.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-public class JsonAnnotationBuilder {
+public class JSONAnnotationBuilder {
 
-	public static ArrayList<ImageAnnotation> fromJson(String json) {
-		ArrayList<ImageAnnotation> annotations = new ArrayList<ImageAnnotation>();
+	public static ArrayList<Annotation> fromJson(String json) {
+		ArrayList<Annotation> annotations = new ArrayList<Annotation>();
 		JSONArray jsonArray=(JSONArray)JSONValue.parse(json);
 		
-		if(jsonArray==null) return annotations;
+		if (jsonArray==null) return annotations;
 		
 		for(Object obj : jsonArray) {
 			JSONObject jsonObj = (JSONObject)obj;
@@ -61,11 +65,8 @@ public class JsonAnnotationBuilder {
 			if(id!=null) annotation.setId(id);
 			
 			String imageUrl = (String)jsonObj.get("imageUrl");
-			if(imageUrl!=null) annotation.setImageUrl(imageUrl);
+			if(imageUrl!=null) annotation.setObjectId(imageUrl);
 
-			String externalObjectId = (String)jsonObj.get("linkedTo");
-			if(externalObjectId!=null) annotation.setExternalObjectId(externalObjectId);
-			
 			String parentId = (String)jsonObj.get("parentId");
 			if(parentId!=null) annotation.setParentId(parentId);
 		
@@ -79,10 +80,10 @@ public class JsonAnnotationBuilder {
 			if(text!=null) annotation.setText(text);
 		
 			String scope = (String)jsonObj.get("scope");
-			if(scope!=null) annotation.setScopeFromString(scope);
+			if(scope!=null) annotation.setScope(Scope.valueOf(scope));
 		
 			String format = (String)jsonObj.get("format");
-			if(format!=null) annotation.setMimeType(format);
+			if(format!=null) annotation.setType(Type.valueOf(format));
 		
 			String createdBy = (String)jsonObj.get("createdBy");
 			if(createdBy!=null) annotation.setCreatedBy(createdBy);			
@@ -91,14 +92,14 @@ public class JsonAnnotationBuilder {
 			if(created!=null) annotation.setCreated(new Date(created));
 			
 			Long modified = (Long)jsonObj.get("modified");
-			if(modified!=null) annotation.setModified(new Date(modified));
+			if(modified!=null) annotation.setLastModified(new Date(modified));
 			
 			JSONObject jsonFragment = (JSONObject)jsonObj.get("fragment");			
 			if(jsonFragment!=null) annotation.setFragment(fromJson(jsonFragment));									
 			
 			JSONArray jsonReplies=(JSONArray)jsonObj.get("replies");
 			if(jsonReplies!=null) {
-				ArrayList<ImageAnnotation> replies = fromJson(jsonReplies.toString());
+				ArrayList<Annotation> replies = fromJson(jsonReplies.toString());
 				annotation.setReplies(replies);
 			}
 			
@@ -160,33 +161,35 @@ public class JsonAnnotationBuilder {
 		return fragment;
 	}
 	
-	public static String toJson(ImageAnnotation annotation) {
-		Collection<ImageAnnotation> annotations = new ArrayList<ImageAnnotation>();
+	public static String toJson(Annotation annotation) {
+		Collection<Annotation> annotations = new ArrayList<Annotation>();
 		annotations.add(annotation);
 		return toJson(annotations);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String toJson(Collection<ImageAnnotation> annotations) {
+	public static String toJson(Collection<Annotation> annotations) {
 		JSONArray jsonArray = new JSONArray();
 		if(annotations!=null) {
-			for(ImageAnnotation annotation : annotations) {
+			for(Annotation annotation : annotations) {
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("id", annotation.getId());
-				jsonObj.put("imageUrl", annotation.getImageUrl());
-				jsonObj.put("linkedTo", annotation.getExternalObjectId());				
+				jsonObj.put("imageUrl", annotation.getObjectId());
 				jsonObj.put("parentId", annotation.getParentId());		
 				jsonObj.put("rootId", annotation.getRootId());						
 				jsonObj.put("title", annotation.getTitle());		
 				jsonObj.put("text", annotation.getText());
-				jsonObj.put("format", annotation.getMimeType());	
-				jsonObj.put("scope", annotation.getScopeAsString());					
-				jsonObj.put("modified", annotation.getModified().getTime());	
+				jsonObj.put("format", annotation.getType());	
+				jsonObj.put("scope", annotation.getScope());					
+				jsonObj.put("modified", annotation.getLastModified().getTime());	
 				jsonObj.put("created", annotation.getCreated().getTime());					
 				jsonObj.put("createdBy", annotation.getCreatedBy());
 				
-				if(annotation.hasFragment()) {														
-					jsonObj.put("fragment", toJson(annotation.getFragment()));				
+				if (annotation.getType() == Type.IMAGE) {
+					ImageAnnotation i = (ImageAnnotation) annotation;
+					if(i.hasFragment()) {														
+						jsonObj.put("fragment", toJson(i.getFragment()));				
+					}
 				}
 				
 				if(annotation.hasReplies())

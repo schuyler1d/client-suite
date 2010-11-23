@@ -109,8 +109,8 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	
 		annotationComposite.getImageComposite().setAnnotationForm(this);
 		
-		if (update && annotationTreeNode.getAnnotation().hasSemanticTags()) {
-			for (SemanticTag t : annotationTreeNode.getAnnotation().getSemanticTags()) {
+		if (update && annotationTreeNode.getAnnotation().hasTags()) {
+			for (SemanticTag t : annotationTreeNode.getAnnotation().getTags()) {
 				addTag(t);
 			}
 		}

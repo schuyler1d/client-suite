@@ -98,7 +98,7 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 				storedAnnotation = (ImageAnnotation) annotations.iterator().next();
 			
 			//remove from cache
-			annotationCache.remove(annotation.getImageUrl());
+			annotationCache.remove(annotation.getObjectId());
 		} catch (AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
 			throw ase;
@@ -131,7 +131,7 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 				storedAnnotation=(ImageAnnotation)annotations.iterator().next();
 			
 			//remove from cache
-			annotationCache.remove(annotation.getImageUrl());
+			annotationCache.remove(annotation.getObjectId());
 		} catch(AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
 			throw ase;

@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.image.ImageComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionEvent;
 
@@ -149,15 +150,15 @@ public class ImageAnnotationTree extends Tree {
 		// process replies
 		if(annotation.hasReplies()) {
 			// sort replies ascending by creation date
-			List<ImageAnnotation> replies = annotation.getReplies();
-			Collections.sort(replies, new Comparator<ImageAnnotation>() {
-				public int compare(ImageAnnotation o1, ImageAnnotation o2) {
+			List<Annotation> replies = annotation.getReplies();
+			Collections.sort(replies, new Comparator<Annotation>() {
+				public int compare(Annotation o1, Annotation o2) {
 					return o1.getCreated().compareTo(o2.getCreated());
 				}					
 			});
 			// add replies to the tree
-			for(ImageAnnotation reply : replies) {
-				addAnnotation(reply, annotation, node.getAnnotationTreeItem());				
+			for(Annotation reply : replies) {
+				addAnnotation((ImageAnnotation) reply, annotation, node.getAnnotationTreeItem());				
 			}			
 		}
 	}

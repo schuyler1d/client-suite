@@ -67,7 +67,7 @@ public class ImageAnnotationServiceImpl extends RemoteServiceServlet
 			throws AnnotationServiceException {
 		
 		// set the mime type of the annotated object
-		annotation.setMimeType(getServletContext().getMimeType(annotation.getImageUrl()));
+		// annotation.setMimeType(getServletContext().getMimeType(annotation.getObjectId()));
 
 		return new ImageAnnotationManager(getThreadLocalRequest()).createAnnotation(annotation);
 	}

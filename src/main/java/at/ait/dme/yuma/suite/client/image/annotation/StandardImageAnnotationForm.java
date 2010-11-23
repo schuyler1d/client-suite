@@ -190,8 +190,8 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
         linksStack.setStyleName("imageAnnotation-form-links");
         linksPanel.add(linksStack);
         
-        if(update&&annotationTreeNode.getAnnotation().hasSemanticTags()) {
-            for(SemanticTag t: annotationTreeNode.getAnnotation().getSemanticTags()) {
+        if(update&&annotationTreeNode.getAnnotation().hasTags()) {
+            for(SemanticTag t: annotationTreeNode.getAnnotation().getTags()) {
                 addLink(t, linksStack, true);
                 if(!this.tags.contains(t)) {
                     this.tags.add(t);

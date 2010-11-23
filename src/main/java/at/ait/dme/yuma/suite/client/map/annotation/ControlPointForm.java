@@ -30,7 +30,7 @@ import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationTreeNode;
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation.Scope;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.CancelImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.SaveImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.UpdateImageAnnotationClickHandler;

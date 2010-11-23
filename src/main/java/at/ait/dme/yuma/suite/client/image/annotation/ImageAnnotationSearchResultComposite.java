@@ -26,6 +26,7 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.server.ImageAnnotationService;
 import at.ait.dme.yuma.suite.client.server.ImageAnnotationServiceAsync;
 import at.ait.dme.yuma.suite.client.table.SortableTable;
@@ -136,7 +137,7 @@ public class ImageAnnotationSearchResultComposite extends Composite {
 								&& !Application.isAuthenticatedUser(annotation.getCreatedBy()))
 							continue;
 					
-						if(annotation.getImageUrl()==null) continue;
+						if(annotation.getObjectId()==null) continue;
 							
 						String style = (row%2 == 0)?"tableRowEven":"tableRowOdd";
 						RowFormatter rowFormatter = resultTable.getRowFormatter();
@@ -167,19 +168,17 @@ public class ImageAnnotationSearchResultComposite extends Composite {
 	private String buildLink(ImageAnnotation annotation) {		
 		StringBuilder builder = new StringBuilder();
 		
-		if(annotation.getMimeType()==null || annotation.getMimeType().startsWith("image"))			
+		if (annotation.getType() == null || annotation.getType() == Type.IMAGE)			
 			builder.append("<a href=\"").append(Application.getBaseUrl()).append("annotate.jsp?");
-		else if(annotation.getMimeType().startsWith("video"))
+		else if (annotation.getType() == Type.VIDEO)
 			builder.append("<a href=\"").append("http://dme.arcs.ac.at/video-annotation-frontend")
 				.append("/videoannotation.html?");
 		
-		builder.append("&objectURL=").append(annotation.getImageUrl());
-		if(annotation.getExternalObjectId()!=null)
-			builder.append("&id=").append(annotation.getExternalObjectId());
+		builder.append("&objectURL=").append(annotation.getObjectId());
 		
 		builder.append("&user=").append(Application.getUser()).
 		append("&db=").append(Application.getDatabaseName()).
-		append("\">").append(annotation.getImageUrl()).append("</a>");					
+		append("\">").append(annotation.getObjectId()).append("</a>");					
 		
 		return builder.toString();
 	}
