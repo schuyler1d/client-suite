@@ -34,19 +34,20 @@ import javax.ws.rs.QueryParam;
 import org.jboss.resteasy.client.ClientResponse;
 
 /**
- * the interface to the RESTful annotation middleware
+ * The interface to the RESTful YUMA Annotation Server
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-@Path("annotation-middleware/annotations")
-public interface AnnotationMiddleware {
+@Path("yuma-server/json")
+public interface AnnotationServer {
 	
 	@POST
-	@Consumes("application/rdf+xml")	
+	@Consumes("application/json")	
 	public ClientResponse<String> createAnnotation(String annotation);
 	
 	@PUT
-	@Consumes("application/rdf+xml")
+	@Consumes("application/json")
 	@Path("/annotation/{id}")
 	public ClientResponse<String> updateAnnotation(@PathParam("id") String id, String annotation);
 	
@@ -55,12 +56,12 @@ public interface AnnotationMiddleware {
 	public ClientResponse<String> deleteAnnotation(@PathParam("id") String id);
 	
 	@GET
-	@Produces("application/rdf+xml")
+	@Produces("application/json")
 	@Path("/{obj-id}")
 	public ClientResponse<String> listAnnotations(@PathParam("obj-id") String objectId);
 	
 	@GET
-	@Produces("application/rdf+xml")
+	@Produces("application/json")
 	@Path("/search")
 	public ClientResponse<String> findAnnotations(@QueryParam("q") String query);
 

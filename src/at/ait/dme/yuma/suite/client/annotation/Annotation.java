@@ -23,7 +23,6 @@ package at.ait.dme.yuma.suite.client.annotation;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
@@ -37,15 +36,18 @@ import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
  * can be shared between different implementations of Annotation {@link Annotation}.
  * 
  * @author Christian Sadilek
- */
-// TODO complete when implementing video and/or audio annotation! 
+ * @author Rainer Simon
+ */ 
 public abstract class Annotation implements Serializable {
+	
 	private static final long serialVersionUID = 5702749187171740401L;
 
-	/** annotation linked resources **/
+	/**
+	 * The semantic tags which are part of this annotation
+	 */
 	protected List<SemanticTag> semanticTags;
 	
-	public Collection<SemanticTag> getSemanticTags() {
+	public List<SemanticTag> getSemanticTags() {
 	    return semanticTags;
 	}
 	
@@ -63,4 +65,5 @@ public abstract class Annotation implements Serializable {
 	public boolean hasSemanticTags() {
 		return (semanticTags!=null && !semanticTags.isEmpty());
 	}
+	
 }

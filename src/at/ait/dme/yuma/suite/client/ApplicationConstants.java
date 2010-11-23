@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.client;
 
 import com.google.gwt.i18n.client.Constants;
 
-public interface AnnotationConstants extends Constants {
+public interface ApplicationConstants extends Constants {
 	public String actionCreate();
 	public String actionCreateFragment();
 	public String actionReply();

@@ -92,7 +92,7 @@ public class RaphaelTag {
 		this.listener = listener;
 		
 		// Text
-		textEl = paper.text(x, y, tag.getTitle(), TagCloud.FONT, fontsize, hAlign, TagCloud.TAG_TEXT_COLOR, 0);
+		textEl = paper.text(x, y, tag.getLabel(), TagCloud.FONT, fontsize, hAlign, TagCloud.TAG_TEXT_COLOR, 0);
 		bbox = textEl.getBBox();
 		
 		// Background

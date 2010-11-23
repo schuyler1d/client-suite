@@ -43,8 +43,8 @@ import org.json.simple.JSONValue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import at.ait.dme.yuma.suite.client.User;
 import at.ait.dme.yuma.suite.client.server.exception.AuthenticationException;
-import at.ait.dme.yuma.suite.client.user.User;
 import at.ait.dme.yuma.suite.server.auth.AuthenticationServiceImpl;
 
 public class AuthenticationTest {

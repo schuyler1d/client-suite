@@ -245,7 +245,7 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 		return annotations;
 	}
 	
-	private AnnotationMiddleware getAnnotationService() {
+	private AnnotationServer getAnnotationService() {
 		HttpClient client = new HttpClient();
 		/*
 		 * Credentials defaultcreds = new UsernamePasswordCredentials("both",
@@ -269,7 +269,7 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 			}
 		}
 
-		return ProxyFactory.create(AnnotationMiddleware.class, annotationMiddlewareBaseUrl,
+		return ProxyFactory.create(AnnotationServer.class, annotationMiddlewareBaseUrl,
 				new ApacheHttpClientExecutor(client));
 	}
 }

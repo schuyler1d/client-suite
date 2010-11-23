@@ -360,7 +360,7 @@ public class RdfXmlAnnotationBuilder {
 		        Element language = new Element("language", DUBLIN_CORE_NAMESPACE);
 		        Element description = new Element("description", DUBLIN_CORE_NAMESPACE);
 		        
-		        title.setText(t.getTitle());
+		        title.setText(t.getLabel());
 		        type.setText(t.getType());
 		        seeAlso.setAttribute(new Attribute("resource", t.getURI(), RDF_NAMESPACE));
 		        language.setText(StringEscapeUtils.escapeXml(t.getLang()));

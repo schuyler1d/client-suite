@@ -43,7 +43,6 @@ import at.ait.dme.yuma.suite.client.server.WebsiteCaptureServiceAsync;
 import at.ait.dme.yuma.suite.client.server.exception.TilesetGenerationException;
 import at.ait.dme.yuma.suite.client.server.exception.TilesetNotFoundException;
 import at.ait.dme.yuma.suite.client.tagcloud.annotation.TagEnabledAnnotationForm;
-import at.ait.dme.yuma.suite.client.user.User;
 import at.ait.dme.yuma.suite.client.util.LoadMask;
 import at.ait.dme.yuma.suite.client.util.MinMaxWindowPanel;
 
@@ -77,7 +76,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class Application implements EntryPoint {
 	private static final String LEMO_COOKIE_NAME = "lemo_user";
 	private static User authenticatedUser = null;
-	private static AnnotationConstants annotationConstants = null;
+	private static ApplicationConstants annotationConstants = null;
 	
 	private ImageComposite imageComposite = null;
 	
@@ -494,9 +493,9 @@ public class Application implements EntryPoint {
 	 * 
 	 * @return constants
 	 */
-	public static AnnotationConstants getConstants() {
+	public static ApplicationConstants getConstants() {
 		if(annotationConstants==null)
-			annotationConstants=(AnnotationConstants)GWT.create(AnnotationConstants.class);
+			annotationConstants=(ApplicationConstants)GWT.create(ApplicationConstants.class);
 		return annotationConstants;
 	}
 	

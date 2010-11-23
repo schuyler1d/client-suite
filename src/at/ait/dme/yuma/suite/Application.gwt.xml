@@ -17,12 +17,6 @@
   
     <servlet path='/annotate.jsp' 
     	class='org.apache.jasper.servlet.JspServlet' />
-    	
-	<servlet path='/annotate-tiled.jsp' 
-    	class='org.apache.jasper.servlet.JspServlet' />
-
-    <servlet path='/zoom' 
-  		class='at.ait.dme.yuma.suite.server.image.ImageZoomServiceImpl'/>
   
     <servlet path='/imageannotation' 
   		class='at.ait.dme.yuma.suite.server.annotation.ImageAnnotationServiceImpl'/>

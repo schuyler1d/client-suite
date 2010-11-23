@@ -25,50 +25,51 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * A 'Semantic Tag' - i.e. a tag which represents a resource
+ * A Semantic Tag - i.e. a tag which represents a resource
  * on the linked data Web.
  * 
  * @author Rainer Simon
  */
 public class SemanticTag implements Serializable {
+	
 	private static final long serialVersionUID = 948700343852610581L;
 
-	/**
-	 * The tag title
-	 */
-	private String title;
-	
-	/**
-	 * The type
-	 */
-	private String type;
-	
-	/**
-	 * Language(s)
-	 */
-	private String lang;
-	
-	/**
-	 * The description/abstract for this tag
-	 */
-	private String description;
-	
 	/**
 	 * The tag URI
 	 */
 	private String uri;
 	
 	/**
+	 * The tag title
+	 */
+	private String label;
+	
+	/**
 	 * Alternative labels
 	 */
 	private List<String> alternativeLabels = null;
+
+	/**
+	 * The description/abstract for this tag
+	 */
+	private String description;
 	
+	/**
+	 * Language(s)
+	 */
+	private String lang;
+		
+	/**
+	 * The type
+	 */
+	private String type;
+			
 	public SemanticTag() {
 		// Required for GWT serialization
 	}
 	
-	public SemanticTag(String title, List<String> alternativeLabels, String type, String lang, String description, String uri) {
-		this.title = title;
+	public SemanticTag(String label, List<String> alternativeLabels, String type, String lang, String description, String uri) {
+		this.label = label;
 		this.alternativeLabels = alternativeLabels;
 		this.type = type;
 		this.lang = lang;
@@ -76,8 +77,8 @@ public class SemanticTag implements Serializable {
 		this.uri = uri;
 	}
 	
-	public String getTitle() {
-		return title;
+	public String getLabel() {
+		return label;
 	}
 	
 	public boolean hasAltLabels() {
@@ -111,7 +112,7 @@ public class SemanticTag implements Serializable {
 	public boolean equals(Object tag) {
 		if (!(tag instanceof SemanticTag)) return false; 
 		SemanticTag s = (SemanticTag) tag;
-		return this.uri.equals(s.uri) && this.title.equals(s.title);
+		return this.uri.equals(s.uri) && this.label.equals(s.label);
 	}
 
 }

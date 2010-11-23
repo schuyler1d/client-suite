@@ -22,7 +22,7 @@
 package at.ait.dme.yuma.suite.client.map.explore;
 
 
-import at.ait.dme.yuma.suite.client.AnnotationConstants;
+import at.ait.dme.yuma.suite.client.ApplicationConstants;
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.map.TiledImageComposite;
 
@@ -54,7 +54,7 @@ public class ExplorationComposite extends Composite {
 		// Container stack panel
 		containerPanel = new StackLayoutPanel(Unit.EM);
 		
-		AnnotationConstants i18n = Application.getConstants();
+		ApplicationConstants i18n = Application.getConstants();
 		
 		// Map metadata
 		String metadataURL = Application.getImageUrl().substring(0, Application.getImageUrl().lastIndexOf(".") + 1) + XML;

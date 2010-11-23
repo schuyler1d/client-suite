@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.client.user;
+package at.ait.dme.yuma.suite.client;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -85,15 +85,6 @@
 		<servlet-name>imageannotation</servlet-name>
 		<url-pattern>/yuma/imageannotation</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>zoom</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.image.ImageZoomServiceImpl</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>zoom</servlet-name>
-		<url-pattern>/yuma/zoom</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>authentication</servlet-name>
@@ -148,16 +139,7 @@
 		<servlet-name>annotate</servlet-name>
 		<url-pattern>/yuma/annotate</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>annotate-tiled</servlet-name>
-		<jsp-file>/yuma/annotate-tiled.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>annotate-tiled</servlet-name>
-		<url-pattern>/yuma/annotate-tiled</url-pattern>
-	</servlet-mapping>
-	
+		
 	<servlet>
 		<servlet-name>importkml</servlet-name>
 		<servlet-class>at.ait.dme.yuma.suite.server.map.KMLConverterServlet</servlet-class>
@@ -209,7 +191,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>georeferencer</servlet-name>
-		<url-pattern>/georeferencer</url-pattern>
+		<url-pattern>/yuma/georeferencer</url-pattern>
 	</servlet-mapping>
 
 	<!--  restrict access to key store -->

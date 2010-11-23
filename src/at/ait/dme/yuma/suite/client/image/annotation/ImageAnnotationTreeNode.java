@@ -205,7 +205,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 				InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""
 						+ t.getURI() + "\" title=\"" 
 						+ t.getDescription() + "\">" 
-						+ t.getTitle() + "</a>"
+						+ t.getLabel() + "</a>"
 				);
 				tagPanel.add(span);
 			}

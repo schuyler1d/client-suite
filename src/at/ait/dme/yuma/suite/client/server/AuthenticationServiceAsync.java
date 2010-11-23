@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.client.server;
 
-import at.ait.dme.yuma.suite.client.user.User;
+import at.ait.dme.yuma.suite.client.User;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

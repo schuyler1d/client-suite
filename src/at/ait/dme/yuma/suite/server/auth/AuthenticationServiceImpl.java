@@ -43,9 +43,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import at.ait.dme.yuma.suite.client.User;
 import at.ait.dme.yuma.suite.client.server.AuthenticationService;
 import at.ait.dme.yuma.suite.client.server.exception.AuthenticationException;
-import at.ait.dme.yuma.suite.client.user.User;
 import at.ait.dme.yuma.suite.server.util.Config;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

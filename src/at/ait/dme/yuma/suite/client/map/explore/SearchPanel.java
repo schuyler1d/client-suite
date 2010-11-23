@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.client.map.explore;
 
 import org.gwt.mosaic.ui.client.MessageBox;
 
-import at.ait.dme.yuma.suite.client.AnnotationConstants;
+import at.ait.dme.yuma.suite.client.ApplicationConstants;
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
 import at.ait.dme.yuma.suite.client.map.TiledImageComposite;
@@ -67,7 +67,7 @@ public class SearchPanel extends FlowPanel {
 	
 	public SearchPanel(TiledImageComposite imageComposite) {
 		this.searchLayer = imageComposite.getSearchLayer();		
-		AnnotationConstants i18n = Application.getConstants();
+		ApplicationConstants i18n = Application.getConstants();
 		
 		HorizontalPanel hPanel = new HorizontalPanel();
 		hPanel.setStyleName("explore-PlaceSearch");
