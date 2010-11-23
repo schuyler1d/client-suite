@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="image-annotation-frontend" default="create-war" basedir=".">
+<project name="yuma-client-suite" default="create-war" basedir=".">
+	
 	<property name="gwt.war.dir" location="war" />
-	<property name="gwt.module.name" value="at.ait.dme.yuma.Application" />
+	<property name="gwt.module.name" value="at.ait.dme.yuma.suite.Application" />
 	<property name="root.package" value="at.ait" />
 	
-	<property name="src.dir" location="src" />
-	<property name="test.dir" location="test" />
+	<property name="src.dir" location="src/main/java" />
+	<property name="src.resources.dir" location="src/main/resources" />
+	
+	<property name="test.dir" location="src/test/java" />
+	<property name="test.resources.dir" location="src/test/resources" />
+
 	<property name="web.inf.dir" location="${gwt.war.dir}/WEB-INF" />
 	<property name="classes.dir" location="${web.inf.dir}/classes" />
 	<property name="client.lib.dir" location="lib" />
 	<property name="server.lib.dir" location="${web.inf.dir}/lib" />
+
 	<property name="keys.dir" location="keys" />
 	<property name="report.dir" location="report" />
 	<property name="tiles.dir" value="tiles" />
@@ -63,6 +69,7 @@
 				<classpath>
 					<pathelement location="${src.dir}" />
 					<pathelement location="${test.dir}" />
+					<pathelement location="${test.resources.dir}" />
 					<pathelement location="${classes.dir}" />												
 					<fileset dir="${client.lib.dir}">
 						<include name="*.jar" />
@@ -88,6 +95,7 @@
 			<arg value="${gwt.module.name}" />
 			<classpath>
 				<pathelement location="${src.dir}" />
+				<pathelement location="${src.resources.dir}" />
 				<pathelement location="${classes.dir}" />
 				<fileset dir="${client.lib.dir}">
 					<include name="*.jar" />
