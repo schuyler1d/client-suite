@@ -22,7 +22,6 @@
 package at.ait.dme.yuma.suite.server.annotation;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -67,28 +66,7 @@ public class JSONAnnotationBuilderTest {
 	
 	@Test
 	public void testJSONSerialization() {
-		Annotation a = new ImageAnnotation();
-		a.setId("4sfd4345kvr326546");
-		a.setParentId(null);
-		a.setRootId(null);
-		a.setObjectId("http://upload.wikimedia.org/wikipedia/commons/7/77/Lissabon.jpg");
-		a.setCreated(new Date());
-		a.setLastModified(new Date());
-		a.setCreatedBy("rsimon");
-		a.setTitle("Ponte 25 de Abril");
-		a.setText("The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, " +
-				"capital of Portugal, to the municipality of Almada on the left bank of the Tagus " +
-				"river. It was inaugurated on August 6, 1966 and a train platform was added in 1999. " +
-				"It is often compared to the Golden Gate Bridge in San Francisco, USA, due to " +
-				"their similarities and same construction company. With a total length of 2.277 m, " +
-				"it is the 19th largest suspension bridge in the world. The upper platform carries " +
-				"six car lanes, the lower platform two train tracks. Until 1974 the bridge was named " +
-				"Salazar Bridge.");
-		a.setType(Type.IMAGE);
-		a.setFragment(null);
-		a.setScope(Scope.PUBLIC);
-		
-		String serialized = JSONAnnotationBuilder.toJSON(a).toString();
+		String serialized = JSONAnnotationBuilder.toJSON(Data.IMAGE_ANNOTATION).toString();
 		System.out.println(serialized);
 	}
 

@@ -21,6 +21,12 @@
 
 package at.ait.dme.yuma.suite.server;
 
+import java.util.Date;
+
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+
 public class Data {
 	
 	public static final String ANNOTATION_JSON =
@@ -57,5 +63,30 @@ public class Data {
 		    "{ \"alt-labels\" : { } , \"label\" : \"Portugal\" , \"type\" : \"place\" , \"relation\" : { \"namespace\" : \"\" , \"property\" : \"spatiallyContains\" } , \"alt-descriptions\" : { } , \"lang\" : \"en\" , \"uri\" : \"http://www.geonames.org/2264397/\"} " +
 		  "]" +
 		"} ]";
+	
+	public static ImageAnnotation IMAGE_ANNOTATION;
+	
+	static {
+		IMAGE_ANNOTATION = new ImageAnnotation();
+		IMAGE_ANNOTATION.setId("4sfd4345kvr326546");
+		IMAGE_ANNOTATION.setParentId(null);
+		IMAGE_ANNOTATION.setRootId(null);
+		IMAGE_ANNOTATION.setObjectId("http://upload.wikimedia.org/wikipedia/commons/7/77/Lissabon.jpg");
+		IMAGE_ANNOTATION.setCreated(new Date());
+		IMAGE_ANNOTATION.setLastModified(new Date());
+		IMAGE_ANNOTATION.setCreatedBy("rsimon");
+		IMAGE_ANNOTATION.setTitle("Ponte 25 de Abril");
+		IMAGE_ANNOTATION.setText("The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, " +
+				"capital of Portugal, to the municipality of Almada on the left bank of the Tagus " +
+				"river. It was inaugurated on August 6, 1966 and a train platform was added in 1999. " +
+				"It is often compared to the Golden Gate Bridge in San Francisco, USA, due to " +
+				"their similarities and same construction company. With a total length of 2.277 m, " +
+				"it is the 19th largest suspension bridge in the world. The upper platform carries " +
+				"six car lanes, the lower platform two train tracks. Until 1974 the bridge was named " +
+				"Salazar Bridge.");
+		IMAGE_ANNOTATION.setType(Type.IMAGE);
+		IMAGE_ANNOTATION.setFragment(null);
+		IMAGE_ANNOTATION.setScope(Scope.PUBLIC);
+	}
 
 }
