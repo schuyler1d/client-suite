@@ -300,7 +300,7 @@ public class StandardImageComposite extends ImageComposite {
 	@Override
 	public void showFragment(final ImageAnnotation annotation) {
 		if(!annotation.hasFragment()) return;
-		ImageFragment fragment = annotation.getFragment();
+		ImageFragment fragment = (ImageFragment) annotation.getFragment();
 		
 		// create a copy so we can roll back changes if the user cancels the operation
 		Shape shape = fragment.getShape().copy();

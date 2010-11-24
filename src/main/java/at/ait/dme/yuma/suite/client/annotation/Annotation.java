@@ -99,6 +99,11 @@ public abstract class Annotation implements Serializable {
 	private Type type;
 	
 	/**
+	 * The media fragment
+	 */
+	private MediaFragment fragment;
+	
+	/**
 	 * The annotation scope
 	 */
 	private Scope scope;
@@ -106,7 +111,7 @@ public abstract class Annotation implements Serializable {
 	/**
 	 * The semantic tags which are part of this annotation
 	 */
-	protected List<SemanticTag> semanticTags;
+	protected List<SemanticTag> tags;
 	
 	/**
 	 * Nested replies
@@ -193,6 +198,18 @@ public abstract class Annotation implements Serializable {
 		this.type = type;
 	}
 	
+	public MediaFragment getFragment() {
+		return fragment;
+	}
+	
+	public void setFragment(MediaFragment fragment) {
+		this.fragment = fragment;
+	}
+	
+	public boolean hasFragment() {
+		return (fragment != null && !fragment.isVoid());
+	}
+	
 	public Scope getScope() {
 		return scope;
 	}
@@ -202,22 +219,22 @@ public abstract class Annotation implements Serializable {
 	}
 
 	public List<SemanticTag> getTags() {
-	    return semanticTags;
+	    return tags;
 	}
 	
 	public void addTag(SemanticTag semanticTag) {
-	    if(semanticTags == null) {
-	        semanticTags = new ArrayList<SemanticTag>();
+	    if(tags == null) {
+	        tags = new ArrayList<SemanticTag>();
 	    }
-	    semanticTags.add(semanticTag);
+	    tags.add(semanticTag);
 	}
 	
 	public void setTags(List<SemanticTag> semanticTags) {
-	    this.semanticTags = semanticTags;
+	    this.tags = semanticTags;
 	}
 	
 	public boolean hasTags() {
-		return (semanticTags != null && !semanticTags.isEmpty());
+		return (tags != null && !tags.isEmpty());
 	}
 	
 	public List<Annotation> getReplies() {
@@ -304,7 +321,7 @@ public abstract class Annotation implements Serializable {
 		if (!equalsNullable(scope, a.scope))
 			return false;
 
-		if (!equalsNullable(semanticTags, a.semanticTags))
+		if (!equalsNullable(tags, a.tags))
 			return false;
 		
 		if (!equalsNullable(replies, a.replies))

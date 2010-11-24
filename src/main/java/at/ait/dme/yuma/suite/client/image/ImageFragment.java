@@ -21,28 +21,33 @@
 
 package at.ait.dme.yuma.suite.client.image;
 
-import java.io.Serializable;
-
+import at.ait.dme.yuma.suite.client.annotation.MediaFragment;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
 import at.ait.dme.yuma.suite.client.image.shape.VoidShape;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 /**
- * represents an image fragment
+ * A media fragment implementation for image fragments
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-public class ImageFragment implements Serializable, IsSerializable {
-	private static final long serialVersionUID = 8505694614569600054L;
+public class ImageFragment extends MediaFragment {
 	
-	// the image rect visible to the user
+	private static final long serialVersionUID = -4686905856920588224L;
+
+	/**
+	 * The image rect visible to the user
+	 */
 	private ImageRect visibleRect;
 	
-	// the image rect that indicates whether the image was zoomed or dragged
+	/**
+	 * The image rect that indicates whether the image was zoomed or dragged
+	 */
 	private ImageRect imageRect;
 	
-	// the shape that defines the fragment 
+	/**
+	 * The shape that defines the fragment 
+	 */
 	private Shape shape;
 	
 	public ImageFragment() {

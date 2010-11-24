@@ -45,6 +45,7 @@ import at.ait.dme.gwt.openlayers.client.layers.Vector;
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
@@ -405,7 +406,7 @@ public class AnnotationLayer {
 		if(!annotation.hasFragment()) return;
 		
 		if (!fragments.containsKey(annotation)) {
-			VectorFeature f = AnnotationUtils.shapeToVectorFeature(annotation.getFragment().getShape());
+			VectorFeature f = AnnotationUtils.shapeToVectorFeature(((ImageFragment)annotation.getFragment()).getShape());
 			
 			// Add feature to GUI
 			lAnnotations.addFeature(f);

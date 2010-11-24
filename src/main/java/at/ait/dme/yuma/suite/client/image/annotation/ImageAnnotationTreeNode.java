@@ -25,8 +25,8 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
+import at.ait.dme.yuma.suite.client.annotation.MediaFragment;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.CreateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.DeleteImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.map.annotation.GoogleMapsComposite;
@@ -306,7 +306,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 * 
 	 * @return image fragment
 	 */
-	public ImageFragment getImageFragment() {
+	public MediaFragment getImageFragment() {
 		return annotation.getFragment();
 	}
 

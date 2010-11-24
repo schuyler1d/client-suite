@@ -22,8 +22,7 @@
 package at.ait.dme.yuma.suite.server.annotation;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -32,74 +31,73 @@ import org.json.simple.JSONValue;
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.MediaFragment;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
-import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.client.image.shape.Color;
-import at.ait.dme.yuma.suite.client.image.shape.Cross;
-import at.ait.dme.yuma.suite.client.image.shape.Ellipse;
-import at.ait.dme.yuma.suite.client.image.shape.Point;
-import at.ait.dme.yuma.suite.client.image.shape.Polygon;
-import at.ait.dme.yuma.suite.client.image.shape.Rectangle;
-import at.ait.dme.yuma.suite.client.image.shape.Shape;
 
 /**
- * Converts annotations from and to JSON.
+ * Converts annotations to and from JSON.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon
  */
 public class JSONAnnotationBuilder {
+	
+	private static final String KEY_ID = "id";
+	private static final String KEY_PARENT_ID = "parentId";
+	private static final String KEY_ROOT_ID = "rootId";
+	private static final String KEY_OBJECT_ID = "objectId";
+	private static final String KEY_CREATED = "created";	
+	private static final String KEY_LAST_MODIFIED = "lastModfied";
+	private static final String KEY_CREATED_BY = "createdBy";
+	private static final String KEY_TITLE = "title";
+	private static final String KEY_TEXT = "text";
+	private static final String KEY_TYPE = "type";
+	private static final String KEY_FRAGMENT = "fragment";
+	private static final String KEY_SCOPE = "scope";
+	// private static final String KEY_TAGS = "tags";
+	private static final String KEY_REPLIES = "replies";
 
-	public static ArrayList<Annotation> fromJson(String json) {
+	public static ArrayList<Annotation> toAnnotations(String json) {
 		ArrayList<Annotation> annotations = new ArrayList<Annotation>();
 		JSONArray jsonArray=(JSONArray)JSONValue.parse(json);
 		
-		if (jsonArray==null) return annotations;
+		if (jsonArray == null)
+			return annotations;
 		
-		for(Object obj : jsonArray) {
-			JSONObject jsonObj = (JSONObject)obj;
-			ImageAnnotation annotation = new ImageAnnotation();
+		for (Object obj : jsonArray) {
+			JSONObject jsonObj = (JSONObject) obj;
+			Annotation annotation;
 			
-			String id = (String)jsonObj.get("id");
-			if(id!=null) annotation.setId(id);
+			Type type = Type.valueOf((String) jsonObj.get(KEY_TYPE));
+			if (type == Type.IMAGE) {
+				annotation = new ImageAnnotation();				
+				annotation.setFragment(toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));									
+			} else {
+				throw new RuntimeException("Unsupported annotation type: " + type.name());
+			}
 			
-			String imageUrl = (String)jsonObj.get("imageUrl");
-			if(imageUrl!=null) annotation.setObjectId(imageUrl);
+			annotation.setId((String) jsonObj.get(KEY_ID));
+			annotation.setParentId((String) jsonObj.get(KEY_PARENT_ID));
+			annotation.setRootId((String) jsonObj.get(KEY_ROOT_ID));
+			annotation.setObjectId((String) jsonObj.get(KEY_OBJECT_ID));
+			// created 
+			// lastModified
+			annotation.setCreatedBy((String) jsonObj.get(KEY_CREATED_BY));
+			annotation.setTitle((String) jsonObj.get(KEY_TITLE));
+			annotation.setText((String) jsonObj.get(KEY_TEXT));
+			annotation.setType(type);
+			
+			String scope = (String) jsonObj.get(KEY_SCOPE);
+			if (scope != null) {
+				annotation.setScope(Scope.valueOf(scope));
+			} else {
+				annotation.setScope(Scope.PUBLIC);
+			}
 
-			String parentId = (String)jsonObj.get("parentId");
-			if(parentId!=null) annotation.setParentId(parentId);
-		
-			String rootId = (String)jsonObj.get("rootId");
-			if(rootId!=null) annotation.setRootId(rootId);
-		
-			String title = (String)jsonObj.get("title");
-			if(title!=null) annotation.setTitle(title);
-			
-			String text = (String)jsonObj.get("text");
-			if(text!=null) annotation.setText(text);
-		
-			String scope = (String)jsonObj.get("scope");
-			if(scope!=null) annotation.setScope(Scope.valueOf(scope));
-		
-			String format = (String)jsonObj.get("format");
-			if(format!=null) annotation.setType(Type.valueOf(format));
-		
-			String createdBy = (String)jsonObj.get("createdBy");
-			if(createdBy!=null) annotation.setCreatedBy(createdBy);			
-
-			Long created = (Long)jsonObj.get("created");
-			if(created!=null) annotation.setCreated(new Date(created));
-			
-			Long modified = (Long)jsonObj.get("modified");
-			if(modified!=null) annotation.setLastModified(new Date(modified));
-			
-			JSONObject jsonFragment = (JSONObject)jsonObj.get("fragment");			
-			if(jsonFragment!=null) annotation.setFragment(fromJson(jsonFragment));									
-			
-			JSONArray jsonReplies=(JSONArray)jsonObj.get("replies");
-			if(jsonReplies!=null) {
-				ArrayList<Annotation> replies = fromJson(jsonReplies.toString());
+			JSONArray jsonReplies = (JSONArray) jsonObj.get(KEY_REPLIES);
+			if (jsonReplies != null) {
+				ArrayList<Annotation> replies = toAnnotations(jsonReplies.toString());
 				annotation.setReplies(replies);
 			}
 			
@@ -108,9 +106,11 @@ public class JSONAnnotationBuilder {
 		return annotations;
 	}
 	
-	private static ImageFragment fromJson(JSONObject jsonFragment) {
+	private static ImageFragment toImageFragment(String imageFragment) {
+		/*
 		ImageFragment fragment = null;
-		if(jsonFragment!=null) {		
+		
+		if (imageFragment != null) {		
 			JSONObject jsonImageRect = (JSONObject)jsonFragment.get("imageRect");
 			int left = ((Long)jsonImageRect.get("left")).intValue();
 			int top = ((Long)jsonImageRect.get("top")).intValue();
@@ -159,53 +159,61 @@ public class JSONAnnotationBuilder {
 			fragment = new ImageFragment(visibleRect, imageRect, shape);
 		}
 		return fragment;
+		*/
+		return null;
 	}
 	
-	public static String toJson(Annotation annotation) {
-		Collection<Annotation> annotations = new ArrayList<Annotation>();
+	public static JSONArray toJSON(Annotation annotation) {
+		List<Annotation> annotations = new ArrayList<Annotation>();
 		annotations.add(annotation);
-		return toJson(annotations);
+		return toJSON(annotations);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static String toJson(Collection<Annotation> annotations) {
+	public static JSONArray toJSON(List<Annotation> annotations) {
 		JSONArray jsonArray = new JSONArray();
-		if(annotations!=null) {
+		if (annotations != null) {
 			for(Annotation annotation : annotations) {
 				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("id", annotation.getId());
-				jsonObj.put("imageUrl", annotation.getObjectId());
-				jsonObj.put("parentId", annotation.getParentId());		
-				jsonObj.put("rootId", annotation.getRootId());						
-				jsonObj.put("title", annotation.getTitle());		
-				jsonObj.put("text", annotation.getText());
-				jsonObj.put("format", annotation.getType());	
-				jsonObj.put("scope", annotation.getScope());					
-				jsonObj.put("modified", annotation.getLastModified().getTime());	
-				jsonObj.put("created", annotation.getCreated().getTime());					
-				jsonObj.put("createdBy", annotation.getCreatedBy());
-				
+
+				jsonObj.put(KEY_ID, annotation.getId());
+				jsonObj.put(KEY_PARENT_ID, annotation.getParentId());		
+				jsonObj.put(KEY_ROOT_ID, annotation.getRootId());						
+				jsonObj.put(KEY_OBJECT_ID, annotation.getObjectId());						
+				jsonObj.put(KEY_CREATED, annotation.getCreated().toString());
+				jsonObj.put(KEY_LAST_MODIFIED, annotation.getLastModified());
+				jsonObj.put(KEY_CREATED_BY, annotation.getCreatedBy());
+				jsonObj.put(KEY_TITLE, annotation.getTitle());		
+				jsonObj.put(KEY_TEXT, annotation.getText());
+				jsonObj.put(KEY_TYPE, annotation.getType().name());
+								
 				if (annotation.getType() == Type.IMAGE) {
 					ImageAnnotation i = (ImageAnnotation) annotation;
 					if(i.hasFragment()) {														
-						jsonObj.put("fragment", toJson(i.getFragment()));				
+						jsonObj.put("fragment", toJSON(i.getFragment()));				
 					}
 				}
+
+				jsonObj.put(KEY_SCOPE, annotation.getScope().name());
 				
-				if(annotation.hasReplies())
-					jsonObj.put("replies", (JSONArray)JSONValue.parse(
-							toJson(annotation.getReplies())));
+				// TODO tags!
+				// if (annotation.hasTags()) 
+				//	jsonObj.put(KEY_TAGS, toJSON(annotation.getTags()));
+				
+				if (annotation.hasReplies())
+					jsonObj.put(KEY_REPLIES, toJSON(annotation.getReplies()));
 
 				jsonArray.add(jsonObj);
 			}
 		}
-		return jsonArray.toString();
+		
+		return jsonArray;
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static JSONObject toJson(ImageFragment fragment) {
+	private static JSONObject toJSON(MediaFragment fragment) {
 		JSONObject jsonFragment = new JSONObject();		
 		
+		/*
 		JSONObject jsonImageRect= new JSONObject();
 		jsonImageRect.put("left", fragment.getImageRect().getLeft());
 		jsonImageRect.put("top", fragment.getImageRect().getTop());
@@ -251,7 +259,9 @@ public class JSONAnnotationBuilder {
 		jsonColor.put("b", fragment.getShape().getColor().getB());
 		jsonShape.put("color", jsonColor);					
 		jsonFragment.put("shape", jsonShape);			
-	
+		*/
+		
 		return jsonFragment;
 	}
+	
 }

@@ -207,7 +207,7 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 		// list all annotations of this object and keep only those that have
 		// a fragment with a shape of one of the given types
 		for(ImageAnnotation annotation : listAnnotations(imageUrl)) {
-			ImageFragment fragment = annotation.getFragment();
+			ImageFragment fragment = (ImageFragment) annotation.getFragment();
 			if(fragment!=null && fragment.getShape() != null && shapeTypes!=null &&
 					shapeTypes.contains(fragment.getShape().getClass().getName())) {
 				annotations.add(annotation);

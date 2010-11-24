@@ -395,7 +395,7 @@ public class RdfXmlAnnotationBuilder {
 	private static String createMpeg21FragmentURI(ImageAnnotation annotation) {
 		// TODO zoom level has still to be considered here
 		String mpeg21URI = annotation.getObjectId()+"#";
-		ImageFragment fragment = annotation.getFragment();
+		ImageFragment fragment = (ImageFragment) annotation.getFragment();
 		Shape shape = fragment.getShape();
 		
 		mpeg21URI+=MPEG21_MEDIA_POINTER + "(~" + MPEG21_REGION_NODE + "(";
@@ -466,7 +466,7 @@ public class RdfXmlAnnotationBuilder {
 	 * @return string svg representation
 	 */
 	private static String createSvgFragment(ImageAnnotation annotation) throws IOException {
-		ImageFragment fragment = annotation.getFragment();
+		ImageFragment fragment = (ImageFragment) annotation.getFragment();
 		Shape shape = fragment.getShape();
 		ImageRect visibleRect = fragment.getVisibleRect();
 

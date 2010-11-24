@@ -25,6 +25,7 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.client.ErrorMessages;
 import at.ait.dme.yuma.suite.client.image.ImageComposite;
+import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
@@ -190,7 +191,7 @@ public class TiledImageComposite extends ImageComposite {
 
 	@Override
 	public void selectFragment(ImageAnnotation annotation, boolean selected) {
-		if (annotation.getFragment() != null && annotation.getFragment().getShape() instanceof GeoPoint) {
+		if (annotation.getFragment() != null && ((ImageFragment) annotation.getFragment()).getShape() instanceof GeoPoint) {
 			lControlPoints.selectFragment(annotation, selected);
 		} else {
 			lAnnotation.selectFragment(annotation, selected);
@@ -199,7 +200,7 @@ public class TiledImageComposite extends ImageComposite {
 	
 	@Override
 	public void showFragment(ImageAnnotation annotation) {
-		if (annotation.getFragment().getShape() instanceof GeoPoint) {
+		if (((ImageFragment)annotation.getFragment()).getShape() instanceof GeoPoint) {
 			lControlPoints.showFragment(annotation);
 		} else {
 			lAnnotation.showFragment(annotation);
@@ -208,7 +209,7 @@ public class TiledImageComposite extends ImageComposite {
 	
 	@Override
 	public void hideFragment(ImageAnnotation annotation) {
-		if (annotation.getFragment().getShape() instanceof GeoPoint) {
+		if (((ImageFragment)annotation.getFragment()).getShape() instanceof GeoPoint) {
 			lControlPoints.hideFragment(annotation);
 		} else {
 			lAnnotation.hideFragment(annotation);

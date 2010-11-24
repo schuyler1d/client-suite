@@ -85,18 +85,6 @@ public class ImageAnnotation extends Annotation {
 		this(id, objectId, parentId, rootId, createdBy, title, text, scope, null);
 	}
 	
-	public ImageFragment getFragment() {
-		return fragment;
-	}
-
-	public void setFragment(ImageFragment fragment) {
-		this.fragment = fragment;
-	}
-	
-	public boolean hasFragment() {
-		return (fragment != null && !fragment.isVoid());
-	}
-
 	public String toHtml() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>")		

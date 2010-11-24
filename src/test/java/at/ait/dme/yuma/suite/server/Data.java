@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.server;
 public class Data {
 	
 	public static final String ANNOTATION_JSON =
-		"[ { \"id\" : \"id\" , "+ 
+		"[ { \"id\" : \"4sfd4345kvr326546\" , "+ 
 		  "\"parent-id\" : \"\" , " +
 		  "\"root-id\" : \"\" , " +
 		  "\"title\" : \"Ponte 25 de Abril\" , "+

@@ -32,6 +32,7 @@ import at.ait.dme.gwt.openlayers.client.controls.DragFeature;
 import at.ait.dme.gwt.openlayers.client.event.DragCompleteListener;
 import at.ait.dme.gwt.openlayers.client.geometry.Point;
 import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
+import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
@@ -100,8 +101,8 @@ public class ControlPointLayer extends AnnotationLayer {
 	@Override
 	public void showFragment(ImageAnnotation annotation) {
 		if (!fragments.containsKey(annotation)) {
-			if (annotation.getFragment().getShape() instanceof GeoPoint) {
-				GeoPoint g = (GeoPoint) annotation.getFragment().getShape();
+			if (((ImageFragment)annotation.getFragment()).getShape() instanceof GeoPoint) {
+				GeoPoint g = (GeoPoint) ((ImageFragment)annotation.getFragment()).getShape();
 				VectorFeature f = VectorFeature.create(Point.create(g.getX(), g.getY()));
 				lAnnotations.addFeature(f);
 				fragments.put(annotation, f);		

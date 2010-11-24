@@ -46,7 +46,6 @@ import at.ait.dme.yuma.suite.client.image.shape.Polygon;
 import at.ait.dme.yuma.suite.client.image.shape.Rectangle;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
 import at.ait.dme.yuma.suite.client.image.shape.VoidShape;
-import at.ait.dme.yuma.suite.server.annotation.JSONAnnotationBuilder;
 import at.ait.dme.yuma.suite.server.annotation.builder.RdfXmlAnnotationBuilder;
 
 public class ImageAnnotationBuilderTest {
@@ -192,7 +191,7 @@ public class ImageAnnotationBuilderTest {
 		
 		ImageAnnotation a = rdfAnnotations.iterator().next();
 		assertEquals(a.getFragment(), new ImageFragment());
-		assertTrue(a.getFragment().getShape() instanceof VoidShape);
-		assertEquals(a.getFragment().getShape(), new VoidShape());	
+		assertTrue(((ImageFragment)a.getFragment()).getShape() instanceof VoidShape);
+		assertEquals(((ImageFragment)a.getFragment()).getShape(), new VoidShape());	
 	}
 }

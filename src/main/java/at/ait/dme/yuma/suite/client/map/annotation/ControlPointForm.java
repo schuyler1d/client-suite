@@ -26,6 +26,7 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
@@ -144,7 +145,7 @@ public class ControlPointForm extends ImageAnnotationForm {
 		if (update) {
 			ImageAnnotation annotation = annotationTreeNode.getAnnotation();
 			placeName.setText(annotation.getTitle());
-			GeoPoint p = (GeoPoint) annotation.getFragment().getShape();
+			GeoPoint p = (GeoPoint) ((ImageFragment)annotation.getFragment()).getShape();
 			lon.setText(Double.toString(p.getLng()));
 			lat.setText(Double.toString(p.getLat()));
 			setXY(p.getX(), p.getY());

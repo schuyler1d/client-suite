@@ -148,7 +148,7 @@ public class GoogleMapsComposite extends Composite {
 	 * @return latlng
 	 */
 	private LatLng transformPoint(ImageAnnotation annotation, XYCoordinate xyCoord) {
-		ImageRect imageRect = annotation.getFragment().getImageRect();
+		ImageRect imageRect = ((ImageFragment)annotation.getFragment()).getImageRect();
 		float xRatio =  ((float)imageRect.getWidth() / (xyCoord.x - imageRect.getLeft()));
 		float yRatio =  ((float)imageRect.getHeight() / (xyCoord.y - imageRect.getTop()));
 	
@@ -209,7 +209,7 @@ public class GoogleMapsComposite extends Composite {
 			if(!annotation.hasFragment()) continue;
 			List<XYCoordinate> xyCoordinates = new ArrayList<XYCoordinate>();
 			
-			Shape shape = annotation.getFragment().getShape();
+			Shape shape = ((ImageFragment)annotation.getFragment()).getShape();
 			if(shape instanceof Polygon) {
 				Polygon polygon = (Polygon)shape;
 					for (Point p : polygon.getPoints()) {
@@ -229,7 +229,7 @@ public class GoogleMapsComposite extends Composite {
 				xyCoordinates.add(new XYCoordinate(shape.getLeft(), shape.getTop()+shape.getHeight()));
 			}
 			// add the center as last point to avoid an extra transformation call
-			xyCoordinates.add(getCenter(annotation.getFragment()));
+			xyCoordinates.add(getCenter((ImageFragment) annotation.getFragment()));
 		
 			if(Application.getBbox()!=null) {
 				coords = transformPoints(annotation, xyCoordinates);
@@ -256,7 +256,7 @@ public class GoogleMapsComposite extends Composite {
 	 * @return overlay
 	 */
 	private void drawOverlay(List<LatLng> coords, ImageAnnotation annotation) {
-		Shape shape = annotation.getFragment().getShape();
+		Shape shape = ((ImageFragment)annotation.getFragment()).getShape();
 		
 		if(!coords.isEmpty()) {
 			LatLng center = coords.remove(coords.size()-1);
@@ -305,7 +305,7 @@ public class GoogleMapsComposite extends Composite {
 		
 		for (ImageAnnotation annotation : annotations) {
 			if(!annotation.hasFragment()) continue;
-			sb.append(AnnotationUtils.shapeToVectorFeature(annotation.getFragment().getShape()).
+			sb.append(AnnotationUtils.shapeToVectorFeature(((ImageFragment)annotation.getFragment()).getShape()).
 					getGeometry().toString());
 			sb.append("@" + annotation.getTitle() + "@" + annotation.getText());
 			sb.append(";");
