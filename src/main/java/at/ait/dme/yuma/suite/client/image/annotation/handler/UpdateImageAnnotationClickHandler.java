@@ -24,6 +24,7 @@ package at.ait.dme.yuma.suite.client.image.annotation.handler;
 import java.util.Date;
 
 import at.ait.dme.yuma.suite.client.Application;
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
@@ -73,18 +74,18 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 		
 		// update the annotation on the server
 		getImageAnnotationService().updateAnnotation(annotation,
-			new AsyncCallback<ImageAnnotation>() {
+			new AsyncCallback<Annotation>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToSaveAnnotation());				
 				}
 
 				// on success update the annotation in the tree
-				public void onSuccess(ImageAnnotation result) {
+				public void onSuccess(Annotation result) {
 					if (getAnnotationTreeNode() != null)
 						result.setReplies(getAnnotationTreeNode().getAnnotation().getReplies());
 
 					annotationComposite.removeAnnotation(getAnnotationTreeNode());
-					annotationComposite.addAnnotation(result, getAnnotationTreeNode().
+					annotationComposite.addAnnotation((ImageAnnotation) result, getAnnotationTreeNode().
 							getParentAnnotation());
 					annotationComposite.hideAnnotationForm(getAnnotationTreeNode(), false);
 					annotationComposite.disableLoadingImage();

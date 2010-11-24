@@ -123,7 +123,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setId(String id) {
-		this.annotationId = id;
+		this.annotationId = toNullIfEmpty(id);
 	}
 
 	public String getParentId() {
@@ -131,7 +131,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setParentId(String parentId) {
-		this.parentId = parentId;
+		this.parentId = toNullIfEmpty(parentId);
 	}
 	
 	public String getRootId() {
@@ -139,7 +139,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setRootId(String rootId) {
-		this.rootId = rootId;
+		this.rootId = toNullIfEmpty(rootId);
 	}
 	
 	public String getObjectId() {
@@ -147,7 +147,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setObjectId(String objectId) {
-		this.objectId = objectId;
+		this.objectId = toNullIfEmpty(objectId);
 	}
 
 	public Date getCreated() {
@@ -171,7 +171,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+		this.createdBy = toNullIfEmpty(createdBy);
 	}
 
 	public String getTitle() {
@@ -179,7 +179,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = toNullIfEmpty(title);
 	}
 	
 	public String getText() {
@@ -187,7 +187,7 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public void setText(String text) {
-		this.text = text;
+		this.text = toNullIfEmpty(text);
 	}		
 	
 	public Type getType() {
@@ -260,7 +260,6 @@ public abstract class Annotation implements Serializable {
 	public boolean hasReplies() {
 		return (replies != null && !replies.isEmpty());
 	}
-	
 	
 	@Override
 	public boolean equals(Object other) {
@@ -343,6 +342,16 @@ public abstract class Annotation implements Serializable {
 			return a == null;
 		
 		return a.equals(b);
+	}
+	
+	protected String toNullIfEmpty(String str) {
+		if (str == null)
+			return null;
+		
+		if (str.trim().isEmpty())
+			return null;
+		
+		return str;
 	}
 
 }

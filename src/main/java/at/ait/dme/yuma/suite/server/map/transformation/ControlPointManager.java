@@ -29,10 +29,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
-import at.ait.dme.yuma.suite.server.annotation.ImageAnnotationManager;
+import at.ait.dme.yuma.suite.server.annotation.AnnotationManager;
 
 /**
  * Provides map control points
@@ -56,14 +57,14 @@ public class ControlPointManager {
 			return;
 		}
 		
-		Collection<ImageAnnotation> annotations = new ArrayList<ImageAnnotation>();
+		Collection<Annotation> annotations = new ArrayList<Annotation>();
 		
 		Set<String> shapeTypes = new HashSet<String>();
 		shapeTypes.add(GeoPoint.class.getName());
-		annotations = new ImageAnnotationManager(clientRequest).listAnnotations(mapUrl,shapeTypes);
+		annotations = new AnnotationManager(clientRequest).listAnnotations(mapUrl,shapeTypes);
 		
-		for(ImageAnnotation annotation : annotations) {
-			controlPoints.add(ControlPoint.fromAnnotation(annotation));
+		for(Annotation annotation : annotations) {
+			controlPoints.add(ControlPoint.fromAnnotation((ImageAnnotation) annotation));
 		}
 	}
 	

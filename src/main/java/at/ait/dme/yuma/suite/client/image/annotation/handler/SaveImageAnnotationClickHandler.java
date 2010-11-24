@@ -22,6 +22,7 @@
 package at.ait.dme.yuma.suite.client.image.annotation.handler;
 
 import at.ait.dme.yuma.suite.client.Application;
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
@@ -77,17 +78,17 @@ public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler
 		
 		// now save the annotation
 		getImageAnnotationService().createAnnotation(annotation,
-			new AsyncCallback<ImageAnnotation>() {
+			new AsyncCallback<Annotation>() {
 			
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToSaveAnnotation());					
 				}
 
 				// on success add the annotation to the tree
-				public void onSuccess(ImageAnnotation result) {
+				public void onSuccess(Annotation result) {
 					ImageAnnotationTreeNode treeNode = getAnnotationTreeNode();
 					ImageAnnotation parent = (treeNode == null) ? null : treeNode.getAnnotation();
-					annotationComposite.addAnnotation(result, parent);
+					annotationComposite.addAnnotation((ImageAnnotation) result, parent);
 					annotationComposite.hideAnnotationForm(treeNode, false);
 					annotationComposite.disableLoadingImage();
 				}

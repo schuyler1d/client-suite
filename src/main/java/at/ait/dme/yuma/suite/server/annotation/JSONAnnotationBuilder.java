@@ -44,12 +44,12 @@ import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 public class JSONAnnotationBuilder {
 	
 	private static final String KEY_ID = "id";
-	private static final String KEY_PARENT_ID = "parentId";
-	private static final String KEY_ROOT_ID = "rootId";
-	private static final String KEY_OBJECT_ID = "objectId";
+	private static final String KEY_PARENT_ID = "parent-id";
+	private static final String KEY_ROOT_ID = "root-id";
+	private static final String KEY_OBJECT_ID = "object-id";
 	private static final String KEY_CREATED = "created";	
-	private static final String KEY_LAST_MODIFIED = "lastModfied";
-	private static final String KEY_CREATED_BY = "createdBy";
+	private static final String KEY_LAST_MODIFIED = "last-modfied";
+	private static final String KEY_CREATED_BY = "created-by";
 	private static final String KEY_TITLE = "title";
 	private static final String KEY_TEXT = "text";
 	private static final String KEY_TYPE = "type";
@@ -69,7 +69,7 @@ public class JSONAnnotationBuilder {
 			JSONObject jsonObj = (JSONObject) obj;
 			Annotation annotation;
 			
-			Type type = Type.valueOf((String) jsonObj.get(KEY_TYPE));
+			Type type = Type.valueOf(((String) jsonObj.get(KEY_TYPE)).toUpperCase());
 			if (type == Type.IMAGE) {
 				annotation = new ImageAnnotation();				
 				annotation.setFragment(toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));									
@@ -90,7 +90,7 @@ public class JSONAnnotationBuilder {
 			
 			String scope = (String) jsonObj.get(KEY_SCOPE);
 			if (scope != null) {
-				annotation.setScope(Scope.valueOf(scope));
+				annotation.setScope(Scope.valueOf(scope.toUpperCase()));
 			} else {
 				annotation.setScope(Scope.PUBLIC);
 			}

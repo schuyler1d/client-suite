@@ -30,8 +30,8 @@ import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationTreeNode;
 import at.ait.dme.yuma.suite.client.image.shape.VoidShape;
-import at.ait.dme.yuma.suite.client.server.ImageAnnotationService;
-import at.ait.dme.yuma.suite.client.server.ImageAnnotationServiceAsync;
+import at.ait.dme.yuma.suite.client.server.AnnotationService;
+import at.ait.dme.yuma.suite.client.server.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.client.server.exception.RESTfulServiceException;
 
 import com.google.gwt.core.client.GWT;
@@ -80,9 +80,9 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	 *  
 	 * @return ImageAnnotationServiceAsync reference to the image annotation service
 	 */
-	protected ImageAnnotationServiceAsync getImageAnnotationService() {
-		ImageAnnotationServiceAsync imageAnnotationService = 
-			(ImageAnnotationServiceAsync) GWT.create(ImageAnnotationService.class);
+	protected AnnotationServiceAsync getImageAnnotationService() {
+		AnnotationServiceAsync imageAnnotationService = 
+			(AnnotationServiceAsync) GWT.create(AnnotationService.class);
 		return imageAnnotationService;
 	}
 	

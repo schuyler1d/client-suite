@@ -40,7 +40,7 @@ import org.jboss.resteasy.client.ClientResponse;
  * @author Rainer Simon
  */
 @Path("yuma-server/json")
-public interface AnnotationServer {
+public interface RESTAnnotationServer {
 	
 	@POST
 	@Consumes("application/json")	

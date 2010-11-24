@@ -28,7 +28,6 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 import at.ait.dme.yuma.suite.client.image.ImageComposite;
 import at.ait.dme.yuma.suite.client.image.StandardImageComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationSearchResultComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.client.image.shape.ShapeTypeRegistry;
@@ -334,7 +333,7 @@ public class Application implements EntryPoint {
 	 * display the search result composite in a popup panel
 	 * 
 	 * @param searchTerm
-	 */
+	 *
 	private void startSearch(String searchTerm) {
 		WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(10, 10, 1000, 400);
 		window.setCaption("Search");
@@ -342,6 +341,7 @@ public class Application implements EntryPoint {
 		window.setWidget(new ImageAnnotationSearchResultComposite(searchTerm));
 		window.show();
 	}
+	*/
 	
 	/**
 	 * returns the image composite

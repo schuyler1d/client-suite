@@ -40,11 +40,11 @@ import org.jboss.resteasy.util.HttpResponseCodes;
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap;
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap.EvictionPolicy;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.client.server.ImageAnnotationService;
+import at.ait.dme.yuma.suite.client.server.AnnotationService;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
-import at.ait.dme.yuma.suite.server.annotation.builder.RdfXmlAnnotationBuilder;
 import at.ait.dme.yuma.suite.server.util.Config;
 import at.ait.dme.yuma.suite.server.util.URLEncoder;
 
@@ -52,9 +52,10 @@ import at.ait.dme.yuma.suite.server.util.URLEncoder;
  * This class contains all actions on annotations.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-public class ImageAnnotationManager implements ImageAnnotationService {
-	private static Logger logger = Logger.getLogger(ImageAnnotationManager.class);
+public class AnnotationManager implements AnnotationService {
+	private static Logger logger = Logger.getLogger(AnnotationManager.class);
 
 	private static final String ANNOTATION_SERVICE_URL_PROPERTY = "annotation.middleware.base.url";
 	private static final String FAILED_TO_PARSE_ANNOTATION = "failed to parse anntotation";
@@ -65,72 +66,63 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 	// we will use a simple cache here for now.
 	// TODO don't use this on a cluster
 	private static final int MAX_SIZE_ANNOTATION_CACHE = 20;
-	private static ConcurrentLinkedHashMap<String, Collection<ImageAnnotation>> annotationCache = 
-		new ConcurrentLinkedHashMap<String, Collection<ImageAnnotation>>(EvictionPolicy.LRU, 
+	private static ConcurrentLinkedHashMap<String, Collection<Annotation>> annotationCache = 
+		new ConcurrentLinkedHashMap<String, Collection<Annotation>>(EvictionPolicy.LRU, 
 				MAX_SIZE_ANNOTATION_CACHE);
 
 	public static void init(Config config) throws ServletException {
 		annotationMiddlewareBaseUrl = config.getStringProperty(ANNOTATION_SERVICE_URL_PROPERTY);
 	}
 
-	public ImageAnnotationManager(HttpServletRequest clientRequest) {
+	public AnnotationManager(HttpServletRequest clientRequest) {
 		this.clientRequest = clientRequest;
 	}
 	
 	@Override
-	public ImageAnnotation createAnnotation(ImageAnnotation annotation)
+	public Annotation createAnnotation(Annotation annotation)
 			throws AnnotationServiceException {
 
-		ImageAnnotation storedAnnotation = null;
+		String annotationId = null;
 		try {
-			// call the annotation middleware
-			ClientResponse<String> response = getAnnotationService().createAnnotation(
-					RdfXmlAnnotationBuilder.toRdfXml(annotation));
+			// Call the Annotation Server
+			ClientResponse<String> response = getAnnotationServer()
+				.createAnnotation(JSONAnnotationBuilder.toJSON(annotation).toString());
 
-			// check the response
+			// Check response
 			if (response.getStatus() != HttpResponseCodes.SC_CREATED)
 				throw new AnnotationServiceException(response.getStatus());
-
-			// parse the response
-			Collection<ImageAnnotation> annotations = 
-				RdfXmlAnnotationBuilder.fromRdfXml(response.getEntity());
-			if (!annotations.isEmpty())
-				storedAnnotation = (ImageAnnotation) annotations.iterator().next();
+			annotationId = response.getEntity();
 			
-			//remove from cache
+			// Remove from cache
 			annotationCache.remove(annotation.getObjectId());
-		} catch (AnnotationServiceException ase) {
-			logger.error(ase.getMessage(), ase);
-			throw ase;
+		} catch (AnnotationServiceException e) {
+			logger.error(e.getMessage(), e);
+			throw e;
 		} catch (Exception e) {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
 			throw new AnnotationServiceException(e.getMessage());
 		}
-		return storedAnnotation;
+		
+		annotation.setId(annotationId);
+		return annotation;
 	}
 	
 	@Override
-	public ImageAnnotation updateAnnotation(ImageAnnotation annotation) 
+	public Annotation updateAnnotation(Annotation annotation) 
 			throws AnnotationServiceException {
 		
-		ImageAnnotation storedAnnotation = null;
+		String annotationId = null;
 		try {					
-			// call the annotation middleware			
-			ClientResponse<String> response = getAnnotationService().
-				updateAnnotation(URLEncoder.encode(annotation.getId()),
-						RdfXmlAnnotationBuilder.toRdfXml(annotation));
+			// Call the Annotation Server
+			ClientResponse<String> response = getAnnotationServer()
+				.updateAnnotation(URLEncoder.encode(annotation.getId()), JSONAnnotationBuilder.toJSON(annotation).toString());
 			
-			// check the response			
-			if(response.getStatus()!=HttpResponseCodes.SC_OK)
-				throw new AnnotationServiceException(response.getStatus());
-		
-			// parse the response			
-			Collection<ImageAnnotation> annotations = 
-				RdfXmlAnnotationBuilder.fromRdfXml(response.getEntity());
-			if(!annotations.isEmpty()) 
-				storedAnnotation=(ImageAnnotation)annotations.iterator().next();
+			// Check response			
+			if(response.getStatus() != HttpResponseCodes.SC_OK)
+				throw new AnnotationServiceException(response.getStatus());	
+			annotationId = response.getEntity();
 			
-			//remove from cache
+			// Remove from cache
 			annotationCache.remove(annotation.getObjectId());
 		} catch(AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
@@ -139,22 +131,24 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
 			throw new AnnotationServiceException(e.getMessage());
 		} 
-		return storedAnnotation;
+		
+		annotation.setId(annotationId);
+		return annotation;
 	}
 	
 	@Override
 	public void deleteAnnotation(String annotationId) throws AnnotationServiceException {
 		try {					
-			// call the annotation middleware			
-			ClientResponse<String> response = getAnnotationService().
+			// Call the Annotation Server
+			ClientResponse<String> response = getAnnotationServer().
 				deleteAnnotation(URLEncoder.encode(annotationId));
 			
-			// check the response			
-			if(response.getStatus()!=HttpResponseCodes.SC_OK&&
-					response.getStatus()!=HttpResponseCodes.SC_NO_CONTENT)
+			// Check response			
+			if(response.getStatus() != HttpResponseCodes.SC_OK &&
+					response.getStatus() != HttpResponseCodes.SC_NO_CONTENT)
 				throw new AnnotationServiceException(response.getStatus());
 			
-			//clear cache
+			// Clear cache
 			annotationCache.clear();
 		} catch(AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
@@ -166,26 +160,27 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 	}
 	
 	@Override
-	public Collection<ImageAnnotation> listAnnotations(String imageUrl) 
+	public Collection<Annotation> listAnnotations(String objectId) 
 			throws AnnotationServiceException {
 		
-		Collection<ImageAnnotation> annotations = null;			
+		Collection<Annotation> annotations = null;			
 
 		try {
-			if((annotations=annotationCache.get(imageUrl))==null) {
-				// call the annotation middleware			
-				ClientResponse<String> response=getAnnotationService().
-					listAnnotations(URLEncoder.encode(imageUrl));	
+			if ((annotations = annotationCache.get(objectId)) == null) {
 				
-				// check the response
-				if(response.getStatus()!=HttpResponseCodes.SC_OK)
+				// Call the Annotation Server
+				ClientResponse<String> response=getAnnotationServer().
+					listAnnotations(URLEncoder.encode(objectId));	
+				
+				// Check response
+				if (response.getStatus() != HttpResponseCodes.SC_OK)
 					throw new AnnotationServiceException(response.getStatus());
 				
-				// parse the response			
-				annotations = RdfXmlAnnotationBuilder.fromRdfXml(response.getEntity());
+				// Parse the response
+				annotations = JSONAnnotationBuilder.toAnnotations(response.getEntity());
 				
-				// cache the response
-				annotationCache.putIfAbsent(imageUrl, annotations);
+				// Cache the response
+				annotationCache.putIfAbsent(objectId, annotations);
 			}
 		} catch(AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
@@ -199,53 +194,27 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 	}
 	
 	@Override
-	public Collection<ImageAnnotation> listAnnotations(String imageUrl,
-			Set<String> shapeTypes) throws AnnotationServiceException {
+	public Collection<Annotation> listAnnotations(String objectId, Set<String> shapeTypes)
+		throws AnnotationServiceException {
 		
-		Collection<ImageAnnotation> annotations = new ArrayList<ImageAnnotation>(); 
+		Collection<Annotation> annotations = new ArrayList<Annotation>(); 
 		
-		// list all annotations of this object and keep only those that have
+		// List all annotations of this object and keep only those that have
 		// a fragment with a shape of one of the given types
-		for(ImageAnnotation annotation : listAnnotations(imageUrl)) {
-			ImageFragment fragment = (ImageFragment) annotation.getFragment();
-			if(fragment!=null && fragment.getShape() != null && shapeTypes!=null &&
-					shapeTypes.contains(fragment.getShape().getClass().getName())) {
-				annotations.add(annotation);
+		for (Annotation a : listAnnotations(objectId)) {
+			if (a.getType() == Type.IMAGE) {
+				ImageFragment fragment = (ImageFragment) a.getFragment();
+				if (fragment != null && fragment.getShape() != null && shapeTypes != null &&
+						shapeTypes.contains(fragment.getShape().getClass().getName())) {
+					annotations.add(a);
+				}
 			}
 		}
 
 		return annotations;
 	}
 	
-	@Override
-	public Collection<ImageAnnotation> findAnnotations(String searchTerm) 
-			throws AnnotationServiceException {
-		
-		Collection<ImageAnnotation> annotations = null;			
-
-		try {
-			// call the annotation middleware			
-			ClientResponse<String> response=getAnnotationService().
-				findAnnotations(URLEncoder.encode(searchTerm));	
-			
-			// check the response
-			if(response.getStatus()!=HttpResponseCodes.SC_OK)
-				throw new AnnotationServiceException(response.getStatus());
-			
-			// parse the response			
-			annotations = RdfXmlAnnotationBuilder.fromRdfXml(response.getEntity());
-		} catch(AnnotationServiceException ase) {
-			logger.error(ase.getMessage(), ase);
-			throw ase;
-		} catch (Exception e) {
-			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
-			throw new AnnotationServiceException(e.getMessage());
-		}
-		
-		return annotations;
-	}
-	
-	private AnnotationServer getAnnotationService() {
+	private RESTAnnotationServer getAnnotationServer() {
 		HttpClient client = new HttpClient();
 		/*
 		 * Credentials defaultcreds = new UsernamePasswordCredentials("both",
@@ -269,7 +238,7 @@ public class ImageAnnotationManager implements ImageAnnotationService {
 			}
 		}
 
-		return ProxyFactory.create(AnnotationServer.class, annotationMiddlewareBaseUrl,
+		return ProxyFactory.create(RESTAnnotationServer.class, annotationMiddlewareBaseUrl,
 				new ApacheHttpClientExecutor(client));
 	}
 }

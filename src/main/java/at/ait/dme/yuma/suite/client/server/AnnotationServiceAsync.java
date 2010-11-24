@@ -21,35 +21,35 @@
 
 package at.ait.dme.yuma.suite.client.server;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * asynchronous interface of the image annotation service
+ * Async interface to the image annotation service.
  * 
  * @author Christian Sadilek
- * @see ImageAnnotationService
+ * @author Rainer Simon
+ * @see AnnotationService
  */
-public interface ImageAnnotationServiceAsync {
-	public void createAnnotation(ImageAnnotation annotation, 
-			AsyncCallback<ImageAnnotation> callback);
+public interface AnnotationServiceAsync {
+	
+	public void createAnnotation(Annotation annotation, 
+			AsyncCallback<Annotation> callback);
 
-	public void updateAnnotation(ImageAnnotation annotation, 
-			AsyncCallback<ImageAnnotation> callback);
+	public void updateAnnotation(Annotation annotation, 
+			AsyncCallback<Annotation> callback);
 
 	public void deleteAnnotation(String annotationId, 
 			AsyncCallback<Void> callback);
 
-	public void listAnnotations(String imageUrl,
-			AsyncCallback<List<ImageAnnotation>> callback);
+	public void listAnnotations(String objectId,
+			AsyncCallback<Collection<Annotation>> callback);
 	
-	public void listAnnotations(String imageUrl, Set<String> shapeTypes,
-			AsyncCallback<List<ImageAnnotation>> callback);
-
-	public void findAnnotations(String searchTerm,
-			AsyncCallback<List<ImageAnnotation>> callback);
+	public void listAnnotations(String objectId, Set<String> shapeTypes,
+			AsyncCallback<Collection<Annotation>> callback);
+	
 }

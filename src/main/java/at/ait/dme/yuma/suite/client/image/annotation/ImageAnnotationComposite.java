@@ -22,6 +22,7 @@
 package at.ait.dme.yuma.suite.client.image.annotation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -35,6 +36,7 @@ import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.image.ImageComposite;
 import at.ait.dme.yuma.suite.client.image.StandardImageComposite;
@@ -43,8 +45,8 @@ import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.HasImageA
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.client.map.annotation.GoogleMapsComposite;
-import at.ait.dme.yuma.suite.client.server.ImageAnnotationService;
-import at.ait.dme.yuma.suite.client.server.ImageAnnotationServiceAsync;
+import at.ait.dme.yuma.suite.client.server.AnnotationService;
+import at.ait.dme.yuma.suite.client.server.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.client.util.MinMaxWindowPanel;
 
 import com.google.gwt.core.client.GWT;
@@ -363,23 +365,23 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 * makes a server call to retrieve all annotations for the image and displays the using a tree
 	 */
 	private void createTree(Set<String> shapeTypes) {
-		ImageAnnotationServiceAsync imageAnnotationService = (ImageAnnotationServiceAsync) GWT
-				.create(ImageAnnotationService.class);
+		AnnotationServiceAsync imageAnnotationService = (AnnotationServiceAsync) GWT
+				.create(AnnotationService.class);
 
 		imageAnnotationService.listAnnotations(Application.getImageUrl(), shapeTypes,
-			new AsyncCallback<List<ImageAnnotation>>() {
+			new AsyncCallback<Collection<Annotation>>() {
 				public void onFailure(Throwable caught) {
 					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
 					MessageBox.error(errorMessages.error(), errorMessages.failedToReadAnnotations());
 				}
 
-				public void onSuccess(List<ImageAnnotation> foundAnnotations) {
+				public void onSuccess(Collection<Annotation> foundAnnotations) {
 					// remove annotations the user is not allowed to see
-					for(ImageAnnotation annotation : foundAnnotations) { 
+					for(Annotation annotation : foundAnnotations) { 
 						if(annotation.getScope() == Scope.PRIVATE && 
 								!Application.isAuthenticatedUser(annotation.getCreatedBy()))
 							continue;
-						annotations.add(annotation);
+						annotations.add((ImageAnnotation) annotation);
 
 					}
 

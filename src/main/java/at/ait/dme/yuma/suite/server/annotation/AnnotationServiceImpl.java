@@ -28,9 +28,9 @@ import java.util.Set;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
-import at.ait.dme.yuma.suite.client.server.ImageAnnotationService;
+import at.ait.dme.yuma.suite.client.server.AnnotationService;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
 import at.ait.dme.yuma.suite.server.georeferencer.GeoreferencerUtils;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPoint;
@@ -44,54 +44,53 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * @author Christian Sadilek
  */
 
-public class ImageAnnotationServiceImpl extends RemoteServiceServlet 
-	implements ImageAnnotationService {
+public class AnnotationServiceImpl extends RemoteServiceServlet implements AnnotationService {
 	
-	private static final long serialVersionUID = 7979737020415861621L;
-	
+	private static final long serialVersionUID = 3081954210900384269L;
+
 	/**
-	 * reads the configuration from the servlet context. in case it's not found
-	 * there it tries to read it from the property file.
+	 * Reads the configuration from the servlet context. In case it's not found
+	 * there, it tries to read it from the property file.
 	 */
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 	    super.init(servletConfig);	
 	    Config config = new Config(servletConfig, 
-				getClass().getResourceAsStream("image-annotation-service.properties"));
+				getClass().getResourceAsStream("annotation-service.properties"));
 	    
-	    ImageAnnotationManager.init(config);
+	    AnnotationManager.init(config);
 	}
 
 	@Override
-	public ImageAnnotation createAnnotation(ImageAnnotation annotation) 
+	public Annotation createAnnotation(Annotation annotation) 
 			throws AnnotationServiceException {
 		
-		// set the mime type of the annotated object
-		// annotation.setMimeType(getServletContext().getMimeType(annotation.getObjectId()));
-
-		return new ImageAnnotationManager(getThreadLocalRequest()).createAnnotation(annotation);
+		return new AnnotationManager(getThreadLocalRequest()).createAnnotation(annotation);
 	}
 
 	@Override
-	public ImageAnnotation updateAnnotation(ImageAnnotation annotation) 
+	public Annotation updateAnnotation(Annotation annotation) 
 			throws AnnotationServiceException {
 
-		return new ImageAnnotationManager(getThreadLocalRequest()).updateAnnotation(annotation);
+		return new AnnotationManager(getThreadLocalRequest()).updateAnnotation(annotation);
 	}
 	
 	@Override
-	public void deleteAnnotation(String annotationId) throws AnnotationServiceException {
+	public void deleteAnnotation(String annotationId)
+		throws AnnotationServiceException {
 		
-		new ImageAnnotationManager(getThreadLocalRequest()).deleteAnnotation(annotationId);
+		new AnnotationManager(getThreadLocalRequest()).deleteAnnotation(annotationId);
 	}
 	
 	@Override
-	public Collection<ImageAnnotation> listAnnotations(String imageUrl) 
+	public Collection<Annotation> listAnnotations(String objectId) 
 			throws AnnotationServiceException {
 		
-		Collection<ImageAnnotation> annotations = new ImageAnnotationManager(getThreadLocalRequest()).listAnnotations(imageUrl);
+		Collection<Annotation> annotations = 
+			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId);
 		
-		if (imageUrl.startsWith("http://georeferencer")) {
+		// TODO this mess needs to be cleaned up...
+		if (objectId.startsWith("http://georeferencer")) {
 			@SuppressWarnings("unchecked")
 			List<ControlPoint> controlPoints = (List<ControlPoint>) getThreadLocalRequest().getSession().getAttribute("controlPoints");
 			for (ControlPoint p : controlPoints) {
@@ -100,17 +99,16 @@ public class ImageAnnotationServiceImpl extends RemoteServiceServlet
 		}
 		
 		return annotations;
-		
-		
 	}
 	
 	@Override
-	public Collection<ImageAnnotation> listAnnotations(String imageUrl, 
-			Set<String> shapeTypes) throws AnnotationServiceException {
+	public Collection<Annotation> listAnnotations(String objectId, Set<String> shapeTypes)
+		throws AnnotationServiceException {
 
-		Collection<ImageAnnotation> annotations = new ImageAnnotationManager(getThreadLocalRequest()).listAnnotations(imageUrl, shapeTypes);
+		Collection<Annotation> annotations = 
+			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId, shapeTypes);
 		
-		if (imageUrl.startsWith("http://georeferencer")) {
+		if (objectId.startsWith("http://georeferencer")) {
 			if (shapeTypes.contains(GeoPoint.class.getName())) {
 				@SuppressWarnings("unchecked")
 				List<ControlPoint> controlPoints = (List<ControlPoint>) getThreadLocalRequest().getSession().getAttribute("controlPoints");
@@ -123,11 +121,5 @@ public class ImageAnnotationServiceImpl extends RemoteServiceServlet
 
 		return annotations;
 	}
-	
-	@Override
-	public Collection<ImageAnnotation> findAnnotations(String searchTerm) 
-			throws AnnotationServiceException {
-	
-		return new ImageAnnotationManager(getThreadLocalRequest()).findAnnotations(searchTerm);
-	}
+
 }

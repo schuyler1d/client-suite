@@ -40,13 +40,14 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
-import at.ait.dme.yuma.suite.server.annotation.ImageAnnotationManager;
+import at.ait.dme.yuma.suite.server.annotation.AnnotationManager;
 import at.ait.dme.yuma.suite.server.image.ImageTilesetGenerator;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPoint;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPointManager;
@@ -67,7 +68,7 @@ public class ControlPointManagerTest {
 		props.put("annotation.middleware.base.url","http://localhost:8080");
 		
 		Config config = new Config(props);
-		ImageAnnotationManager.init(config);	
+		AnnotationManager.init(config);	
 	}
 	
 	@Ignore @Test 
@@ -93,9 +94,9 @@ public class ControlPointManagerTest {
 		shapeTypes.add(GeoPoint.class.getName());
 		
 		// first delete all existing control points of this map
-		ImageAnnotationManager iam = new ImageAnnotationManager(null);
-		Collection<ImageAnnotation> annotations = iam.listAnnotations(imageUrl, shapeTypes);
-		for(ImageAnnotation annotation : annotations) {
+		AnnotationManager iam = new AnnotationManager(null);
+		Collection<Annotation> annotations = iam.listAnnotations(imageUrl, shapeTypes);
+		for(Annotation annotation : annotations) {
 			iam.deleteAnnotation(annotation.getId());
 		}
 		
