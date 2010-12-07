@@ -39,11 +39,12 @@ import org.jboss.resteasy.client.ClientResponse;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-@Path("yuma-server/json")
+@Path("/")
 public interface RESTAnnotationServer {
 	
 	@POST
-	@Consumes("application/json")	
+	@Consumes("application/json")
+	@Path("/annotation")
 	public ClientResponse<String> createAnnotation(String annotation);
 	
 	@PUT
@@ -57,8 +58,8 @@ public interface RESTAnnotationServer {
 	
 	@GET
 	@Produces("application/json")
-	@Path("/{obj-id}")
-	public ClientResponse<String> listAnnotations(@PathParam("obj-id") String objectId);
+	@Path("/annotation/{id}")
+	public ClientResponse<String> listAnnotations(@PathParam("id") String id);
 	
 	@GET
 	@Produces("application/json")

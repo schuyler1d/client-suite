@@ -57,10 +57,10 @@ import at.ait.dme.yuma.suite.server.util.URLEncoder;
 public class AnnotationManager implements AnnotationService {
 	private static Logger logger = Logger.getLogger(AnnotationManager.class);
 
-	private static final String ANNOTATION_SERVICE_URL_PROPERTY = "annotation.middleware.base.url";
+	private static final String ANNOTATION_SERVICE_URL_PROPERTY = "annotation.server.base.url";
 	private static final String FAILED_TO_PARSE_ANNOTATION = "failed to parse anntotation";
 	
-	private static String annotationMiddlewareBaseUrl = null;
+	private static String annotationServerBaseUrl = null;
 	private HttpServletRequest clientRequest = null;
 	
 	// we will use a simple cache here for now.
@@ -71,7 +71,7 @@ public class AnnotationManager implements AnnotationService {
 				MAX_SIZE_ANNOTATION_CACHE);
 
 	public static void init(Config config) throws ServletException {
-		annotationMiddlewareBaseUrl = config.getStringProperty(ANNOTATION_SERVICE_URL_PROPERTY);
+		annotationServerBaseUrl = config.getStringProperty(ANNOTATION_SERVICE_URL_PROPERTY);
 	}
 
 	public AnnotationManager(HttpServletRequest clientRequest) {
@@ -83,14 +83,15 @@ public class AnnotationManager implements AnnotationService {
 			throws AnnotationServiceException {
 
 		String annotationId = null;
-		try {
+		try {			
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
 				.createAnnotation(JSONAnnotationBuilder.toJSON(annotation).toString());
-
+			
 			// Check response
 			if (response.getStatus() != HttpResponseCodes.SC_CREATED)
 				throw new AnnotationServiceException(response.getStatus());
+			
 			annotationId = response.getEntity();
 			
 			// Remove from cache
@@ -238,7 +239,7 @@ public class AnnotationManager implements AnnotationService {
 			}
 		}
 
-		return ProxyFactory.create(RESTAnnotationServer.class, annotationMiddlewareBaseUrl,
+		return ProxyFactory.create(RESTAnnotationServer.class, annotationServerBaseUrl,
 				new ApacheHttpClientExecutor(client));
 	}
 }

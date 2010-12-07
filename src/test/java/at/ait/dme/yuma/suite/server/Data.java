@@ -41,8 +41,8 @@ public class Data {
 		  "suspension bridge in the world. The upper platform carries six car lanes, the lower platform two train tracks. Until " +
 		  "1974 the bridge was named Salazar Bridge.\", " +
 		  "\"scope\" : \"public\" , "+
-		  "\"last-modified\" : { \"$date\" : \"2010-11-11T11:58:23Z\"} ,"+
-		  "\"created\" : { \"$date\" : \"2010-11-11T10:58:23Z\"} , "+
+		  "\"last-modified\" : 1224043200000 ,"+
+		  "\"created\" : 1224043200000 , "+
 		  "\"created-by\" : \"rsimon\" , "+
 		  "\"fragment\" : \"" +
 			"<svg:svg xmlns:svg=\\\"http://www.w3.org/2000/svg\\\" width=\\\"640px\\\" height=\\\"480px\\\" viewbox=\\\"0px 0px 640px 480px\\\"> " +
@@ -57,7 +57,7 @@ public class Data {
 			"</svg:svg>" +
 		  "\" , "+
 		  "\"type\" : \"image\" , "+
-		  "\"object-id\" : \"http://upload.wikimedia.org/wikipedia/commons/7/77/Lissabon.jpg\", " +
+		  "\"object-id\" : \"object-lissabon\", " +
 		  "\"tags\" : [ " +
 		    "{ \"alt-labels\" : { } , \"label\" : \"Lisbon\" , \"type\" : \"place\" , \"relation\" : { \"namespace\" : \"\" , \"property\" : \"spatiallyContains\" } , \"alt-descriptions\" : { } , \"lang\" : \"en\" , \"uri\" : \"http://www.geonames.org/2267057/\"} ," +
 		    "{ \"alt-labels\" : { } , \"label\" : \"Portugal\" , \"type\" : \"place\" , \"relation\" : { \"namespace\" : \"\" , \"property\" : \"spatiallyContains\" } , \"alt-descriptions\" : { } , \"lang\" : \"en\" , \"uri\" : \"http://www.geonames.org/2264397/\"} " +
@@ -71,7 +71,7 @@ public class Data {
 		IMAGE_ANNOTATION.setId("4sfd4345kvr326546");
 		IMAGE_ANNOTATION.setParentId(null);
 		IMAGE_ANNOTATION.setRootId(null);
-		IMAGE_ANNOTATION.setObjectId("http://upload.wikimedia.org/wikipedia/commons/7/77/Lissabon.jpg");
+		IMAGE_ANNOTATION.setObjectId("object-lissabon");
 		IMAGE_ANNOTATION.setCreated(new Date());
 		IMAGE_ANNOTATION.setLastModified(new Date());
 		IMAGE_ANNOTATION.setCreatedBy("rsimon");

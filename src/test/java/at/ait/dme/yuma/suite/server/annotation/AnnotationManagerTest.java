@@ -1,6 +1,5 @@
 package at.ait.dme.yuma.suite.server.annotation;
 
-import java.util.Collection;
 import java.util.Properties;
 
 import org.junit.Test;
@@ -22,18 +21,13 @@ public class AnnotationManagerTest {
 	@Test
 	public void testAnnotationCRUD() throws Exception {
 		Properties properties = new Properties();
-		properties.put("annotation.middleware.base.url", "http://localhost:8080/");
+		properties.put("annotation.server.base.url", "http://localhost:8080/yuma-server");
 		
 		AnnotationManager.init(new Config(properties));
 		AnnotationManager manager = new AnnotationManager(null);
-
-		/*
-		String id = manager.createAnnotation(Data.IMAGE_ANNOTATION).getId();
-		System.out.println(id);
-		*/
 		
-		Collection<Annotation> annotations = manager.listAnnotations("test");
-		System.out.println(annotations.size());
+		Annotation a = manager.createAnnotation(Data.IMAGE_ANNOTATION);
+		System.out.println(a.getId());
 	}
 	
 }

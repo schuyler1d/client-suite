@@ -45,7 +45,7 @@ public class JSONAnnotationBuilderTest {
 		assertEquals("4sfd4345kvr326546", a.getId());
 		assertEquals(null, a.getParentId());
 		assertEquals(null, a.getRootId());
-		assertEquals("http://upload.wikimedia.org/wikipedia/commons/7/77/Lissabon.jpg", a.getObjectId());
+		assertEquals("object-lissabon", a.getObjectId());
 		// created 
 		// lastModified
 		assertEquals("Ponte 25 de Abril", a.getTitle());

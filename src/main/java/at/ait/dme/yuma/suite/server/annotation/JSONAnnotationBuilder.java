@@ -22,6 +22,7 @@
 package at.ait.dme.yuma.suite.server.annotation;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -48,7 +49,7 @@ public class JSONAnnotationBuilder {
 	private static final String KEY_ROOT_ID = "root-id";
 	private static final String KEY_OBJECT_ID = "object-id";
 	private static final String KEY_CREATED = "created";	
-	private static final String KEY_LAST_MODIFIED = "last-modfied";
+	private static final String KEY_LAST_MODIFIED = "last-modified";
 	private static final String KEY_CREATED_BY = "created-by";
 	private static final String KEY_TITLE = "title";
 	private static final String KEY_TEXT = "text";
@@ -81,8 +82,8 @@ public class JSONAnnotationBuilder {
 			annotation.setParentId((String) jsonObj.get(KEY_PARENT_ID));
 			annotation.setRootId((String) jsonObj.get(KEY_ROOT_ID));
 			annotation.setObjectId((String) jsonObj.get(KEY_OBJECT_ID));
-			// created 
-			// lastModified
+			annotation.setCreated(new Date((Long) jsonObj.get(KEY_CREATED)));
+			annotation.setLastModified(new Date((Long) jsonObj.get(KEY_LAST_MODIFIED)));
 			annotation.setCreatedBy((String) jsonObj.get(KEY_CREATED_BY));
 			annotation.setTitle((String) jsonObj.get(KEY_TITLE));
 			annotation.setText((String) jsonObj.get(KEY_TEXT));
@@ -180,8 +181,8 @@ public class JSONAnnotationBuilder {
 				jsonObj.put(KEY_PARENT_ID, annotation.getParentId());		
 				jsonObj.put(KEY_ROOT_ID, annotation.getRootId());						
 				jsonObj.put(KEY_OBJECT_ID, annotation.getObjectId());						
-				jsonObj.put(KEY_CREATED, annotation.getCreated().toString());
-				jsonObj.put(KEY_LAST_MODIFIED, annotation.getLastModified());
+				jsonObj.put(KEY_CREATED, new Date().getTime()); // annotation.getCreated().toString());
+				jsonObj.put(KEY_LAST_MODIFIED, new Date().getTime()); // annotation.getLastModified().toString());
 				jsonObj.put(KEY_CREATED_BY, annotation.getCreatedBy());
 				jsonObj.put(KEY_TITLE, annotation.getTitle());		
 				jsonObj.put(KEY_TEXT, annotation.getText());

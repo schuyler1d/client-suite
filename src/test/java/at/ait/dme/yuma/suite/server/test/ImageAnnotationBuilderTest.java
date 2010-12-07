@@ -21,17 +21,10 @@
 
 package at.ait.dme.yuma.suite.server.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.Test;
-import org.openrdf.repository.RepositoryException;
-import org.openrdf.rio.RDFHandlerException;
-import org.openrdf.rio.RDFParseException;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
@@ -45,7 +38,6 @@ import at.ait.dme.yuma.suite.client.image.shape.Point;
 import at.ait.dme.yuma.suite.client.image.shape.Polygon;
 import at.ait.dme.yuma.suite.client.image.shape.Rectangle;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
-import at.ait.dme.yuma.suite.client.image.shape.VoidShape;
 
 public class ImageAnnotationBuilderTest {
 
