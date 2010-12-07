@@ -18,8 +18,8 @@
     <servlet path='/annotate.jsp' 
     	class='org.apache.jasper.servlet.JspServlet' />
   
-    <servlet path='/imageannotation' 
-  		class='at.ait.dme.yuma.suite.server.annotation.ImageAnnotationServiceImpl'/>
+    <servlet path='/annotation' 
+  		class='at.ait.dme.yuma.suite.server.annotation.AnnotationServiceImpl'/>
     
     <servlet path='/auth' 
   		class='at.ait.dme.yuma.suite.server.auth.AuthenticationServiceImpl'/>

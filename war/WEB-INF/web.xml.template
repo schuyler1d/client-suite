@@ -5,8 +5,8 @@
 	</welcome-file-list>
 	
 	<context-param>
-		<param-name>annotation.middleware.base.url</param-name>
-		<param-value>http://dme.ait.ac.at</param-value>
+		<param-name>annotation.server.base.url</param-name>
+		<param-value>http://dme.ait.ac.at/yuma-server</param-value>
 	</context-param>
 	
 	<context-param>
@@ -78,12 +78,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>imageannotation</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.annotation.ImageAnnotationServiceImpl</servlet-class>
+		<servlet-name>annotation</servlet-name>
+		<servlet-class>at.ait.dme.yuma.suite.server.annotation.AnnotationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>imageannotation</servlet-name>
-		<url-pattern>/yuma/imageannotation</url-pattern>
+		<servlet-name>annotation</servlet-name>
+		<url-pattern>/yuma/annotation</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

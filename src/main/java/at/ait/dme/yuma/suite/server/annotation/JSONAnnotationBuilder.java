@@ -78,12 +78,12 @@ public class JSONAnnotationBuilder {
 				throw new RuntimeException("Unsupported annotation type: " + type.name());
 			}
 			
-			annotation.setId((String) jsonObj.get(KEY_ID));
+			annotation.setId((String) jsonObj.get(KEY_ID));			
 			annotation.setParentId((String) jsonObj.get(KEY_PARENT_ID));
 			annotation.setRootId((String) jsonObj.get(KEY_ROOT_ID));
 			annotation.setObjectId((String) jsonObj.get(KEY_OBJECT_ID));
-			annotation.setCreated(new Date((Long) jsonObj.get(KEY_CREATED)));
-			annotation.setLastModified(new Date((Long) jsonObj.get(KEY_LAST_MODIFIED)));
+			annotation.setCreated(new Date());
+			annotation.setLastModified(new Date());
 			annotation.setCreatedBy((String) jsonObj.get(KEY_CREATED_BY));
 			annotation.setTitle((String) jsonObj.get(KEY_TITLE));
 			annotation.setText((String) jsonObj.get(KEY_TEXT));
@@ -181,19 +181,21 @@ public class JSONAnnotationBuilder {
 				jsonObj.put(KEY_PARENT_ID, annotation.getParentId());		
 				jsonObj.put(KEY_ROOT_ID, annotation.getRootId());						
 				jsonObj.put(KEY_OBJECT_ID, annotation.getObjectId());						
-				jsonObj.put(KEY_CREATED, new Date().getTime()); // annotation.getCreated().toString());
-				jsonObj.put(KEY_LAST_MODIFIED, new Date().getTime()); // annotation.getLastModified().toString());
+				jsonObj.put(KEY_CREATED, annotation.getCreated().getTime());
+				jsonObj.put(KEY_LAST_MODIFIED, annotation.getLastModified().getTime());
 				jsonObj.put(KEY_CREATED_BY, annotation.getCreatedBy());
 				jsonObj.put(KEY_TITLE, annotation.getTitle());		
 				jsonObj.put(KEY_TEXT, annotation.getText());
 				jsonObj.put(KEY_TYPE, annotation.getType().name());
-								
+						
+				/*
 				if (annotation.getType() == Type.IMAGE) {
 					ImageAnnotation i = (ImageAnnotation) annotation;
 					if(i.hasFragment()) {														
 						jsonObj.put("fragment", toJSON(i.getFragment()));				
 					}
 				}
+				*/
 
 				jsonObj.put(KEY_SCOPE, annotation.getScope().name());
 				

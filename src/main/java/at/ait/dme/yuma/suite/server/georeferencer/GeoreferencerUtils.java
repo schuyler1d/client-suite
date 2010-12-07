@@ -21,9 +21,6 @@
 
 package at.ait.dme.yuma.suite.server.georeferencer;
 
-import java.util.ArrayList;
-
-import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
@@ -33,17 +30,11 @@ import at.ait.dme.yuma.suite.server.map.transformation.ControlPoint;
 public class GeoreferencerUtils {
 	
 	public static ImageAnnotation toAnnotation(ControlPoint p) {
-		ImageAnnotation annotation = new ImageAnnotation( 
-				"",
-				"",
-				null,
-				null,
-				"georeferencer.org",
-				p.getName(),
-				p.getName(),
-				Scope.PUBLIC,
-				new ArrayList<SemanticTag>()
-		);
+		ImageAnnotation annotation = new ImageAnnotation();
+		annotation.setCreatedBy("georeferencer.org");
+		annotation.setTitle(p.getName());
+		annotation.setText(p.getName());
+		annotation.setScope(Scope.PUBLIC);
 		
 		annotation.setFragment(new ImageFragment(
 			new GeoPoint(

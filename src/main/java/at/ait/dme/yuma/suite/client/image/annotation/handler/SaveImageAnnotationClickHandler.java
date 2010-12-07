@@ -21,8 +21,11 @@
 
 package at.ait.dme.yuma.suite.client.image.annotation.handler;
 
+import java.util.Date;
+
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
@@ -67,17 +70,25 @@ public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler
 		}
 		
 		// create the new annotation
-		ImageAnnotation annotation = new ImageAnnotation(Application.getImageUrl(), 
-				Application.getExternalObjectId(), parentId, rootId, Application.getUser(), 
-				annotationForm.getAnnotationTitle(), annotationForm.getAnnotationText(),
-				annotationForm.getAnnotationScope(),
-				annotationForm.getSemanticTags());
+		Date timestamp = new Date();
+		ImageAnnotation a = new ImageAnnotation();
+		a.setObjectId(Application.getImageUrl());
+		a.setParentId(parentId);
+		a.setRootId(rootId);
+		a.setCreated(timestamp);
+		a.setLastModified(timestamp);
+		a.setCreatedBy(Application.getUser());
+		a.setType(Type.IMAGE);
+		a.setTitle(annotationForm.getAnnotationTitle());
+		a.setText(annotationForm.getAnnotationText());
+		a.setScope(annotationForm.getAnnotationScope());
+		a.setTags(annotationForm.getSemanticTags());
 		
 		// create the fragment if necessary 
-		addFragment(annotation);
+		addFragment(a);
 		
 		// now save the annotation
-		getImageAnnotationService().createAnnotation(annotation,
+		getImageAnnotationService().createAnnotation(a,
 			new AsyncCallback<Annotation>() {
 			
 				public void onFailure(Throwable caught) {

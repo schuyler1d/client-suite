@@ -56,24 +56,30 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 		((FocusWidget)event.getSource()).setEnabled(false);
 
 		// create a new annotation
-		ImageAnnotation annotation = new ImageAnnotation(
-				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getAnnotationId():null, 						
-				Application.getImageUrl(),
-				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getParentAnnotationId():null, 						
-				(getAnnotationTreeNode()!=null)?getAnnotationTreeNode().getAnnotationRootId():null, 							
-				Application.getUser(), 
-				annotationForm.getAnnotationTitle(), 
-				annotationForm.getAnnotationText(),
-				annotationForm.getAnnotationScope(),
-				annotationForm.getSemanticTags());
-		annotation.setCreated(getAnnotationTreeNode().getAnnotation().getCreated());
-		annotation.setLastModified(new Date());
+		ImageAnnotation a = new ImageAnnotation();
+	
+		ImageAnnotationTreeNode node = getAnnotationTreeNode();
+		if (node != null) {
+			a.setId(node.getAnnotationId());
+			a.setParentId(node.getParentAnnotationId());
+			a.setRootId(node.getAnnotationRootId());
+		}
+
+		a.setObjectId(Application.getImageUrl());
+		a.setCreatedBy(Application.getUser());
+		a.setTitle(annotationForm.getAnnotationTitle());
+		a.setText(annotationForm.getAnnotationText());
+		a.setScope(annotationForm.getAnnotationScope());
+		a.setType(getAnnotationTreeNode().getAnnotation().getType());
+		a.setTags(annotationForm.getSemanticTags());
+		a.setCreated(getAnnotationTreeNode().getAnnotation().getCreated());
+		a.setLastModified(new Date());
 		
 		// create the fragment if necessary
-		addFragment(annotation);
+		// addFragment(a);
 		
 		// update the annotation on the server
-		getImageAnnotationService().updateAnnotation(annotation,
+		getImageAnnotationService().updateAnnotation(a,
 			new AsyncCallback<Annotation>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToSaveAnnotation());				

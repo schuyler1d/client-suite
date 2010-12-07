@@ -84,8 +84,7 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 	
 	@Override
 	public Collection<Annotation> listAnnotations(String objectId) 
-			throws AnnotationServiceException {
-		
+			throws AnnotationServiceException {	
 		Collection<Annotation> annotations = 
 			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId);
 		
@@ -103,8 +102,7 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 	
 	@Override
 	public Collection<Annotation> listAnnotations(String objectId, Set<String> shapeTypes)
-		throws AnnotationServiceException {
-
+		throws AnnotationServiceException {		
 		Collection<Annotation> annotations = 
 			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId, shapeTypes);
 		

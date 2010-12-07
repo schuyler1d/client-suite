@@ -106,7 +106,9 @@ public class ControlPointManagerTest {
 		
 		// store them as annotations
 		for(ControlPoint cp : controlPoints) {
-			ImageAnnotation annotation = new ImageAnnotation(imageUrl, "importer");
+			ImageAnnotation annotation = new ImageAnnotation();
+			annotation.setObjectId(imageUrl);
+			annotation.setCreatedBy("importer");
 			ImageFragment fragment = new ImageFragment(new ImageRect(),
 					new GeoPoint(cp.getName(),cp.getXY().x,cp.getXY().y,cp.getLatLon().lat,cp.getLatLon().lon));
 			annotation.setFragment(fragment);

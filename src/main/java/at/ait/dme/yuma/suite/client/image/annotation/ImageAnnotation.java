@@ -21,11 +21,7 @@
 
 package at.ait.dme.yuma.suite.client.image.annotation;
 
-import java.util.Date;
-import java.util.List;
-
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.image.ImageFragment;
 
 /**
@@ -41,49 +37,7 @@ public class ImageAnnotation extends Annotation {
 	/**
 	 * The annotated image fragment
 	 */
-	private ImageFragment fragment;
-		
-	public ImageAnnotation() {
-		this.setCreated(new Date());
-		this.setLastModified(new Date());
-		this.setScope(Scope.PUBLIC);
-		this.fragment = new ImageFragment();
-	}
-	
-	public ImageAnnotation(String objectId, String createdBy) {
-		this();
-		this.setObjectId(objectId);
-		this.setCreatedBy(createdBy);
-	}
-	
-	public ImageAnnotation(String id, String objectId, String createdBy) {
-		this(objectId, createdBy);
-		this.setId(id);
-	}
-	
-	public ImageAnnotation(String objectId, String parentId, String rootId,
-			String createdBy, String title, String text, Scope scope, List<SemanticTag> tags) {
-		this(objectId, createdBy);
-		this.setTitle(title);
-		this.setText(text);
-		this.setParentId(parentId);
-		this.setRootId(rootId);
-		this.setScope(scope);
-		this.setTags(tags);
-	}
-
-	public ImageAnnotation(String id, String objectId, String parentId, String rootId, 
-			String createdBy, String title, String text, Scope scope, List<SemanticTag> tags) {
-		
-		this(objectId, parentId, rootId, createdBy, title, text, scope, tags);
-		this.setId(id);
-	}
-
-	public ImageAnnotation(String id, String objectId, String parentId, String rootId, 
-			String createdBy, String title, String text, Scope scope) {
-		
-		this(id, objectId, parentId, rootId, createdBy, title, text, scope, null);
-	}
+	private ImageFragment fragment = new ImageFragment();
 	
 	public String toHtml() {
 		StringBuffer buf = new StringBuffer();
