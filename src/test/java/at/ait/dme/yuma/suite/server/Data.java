@@ -23,6 +23,7 @@ package at.ait.dme.yuma.suite.server;
 
 import java.util.Date;
 
+import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
@@ -30,8 +31,7 @@ import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 public class Data {
 	
 	public static final String ANNOTATION_JSON =
-		"[ { \"id\" : \"4sfd4345kvr326546\" , "+ 
-		  "\"parent-id\" : \"\" , " +
+		"[ { \"parent-id\" : \"\" , " +
 		  "\"root-id\" : \"\" , " +
 		  "\"title\" : \"Ponte 25 de Abril\" , "+
 		  "\"text\" : \"The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, capital of Portugal, " + 
@@ -64,19 +64,16 @@ public class Data {
 		  "]" +
 		"} ]";
 	
-	public static ImageAnnotation IMAGE_ANNOTATION;
-	
-	static {
-		IMAGE_ANNOTATION = new ImageAnnotation();
-		IMAGE_ANNOTATION.setId("4sfd4345kvr326546");
-		IMAGE_ANNOTATION.setParentId(null);
-		IMAGE_ANNOTATION.setRootId(null);
-		IMAGE_ANNOTATION.setObjectId("object-lissabon");
-		IMAGE_ANNOTATION.setCreated(new Date());
-		IMAGE_ANNOTATION.setLastModified(new Date());
-		IMAGE_ANNOTATION.setCreatedBy("rsimon");
-		IMAGE_ANNOTATION.setTitle("Ponte 25 de Abril");
-		IMAGE_ANNOTATION.setText("The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, " +
+	public static Annotation newAnnotation() {
+		Annotation a = new ImageAnnotation();
+		a.setParentId(null);
+		a.setRootId(null);
+		a.setObjectId("object-lissabon");
+		a.setCreated(new Date());
+		a.setLastModified(new Date());
+		a.setCreatedBy("rsimon");
+		a.setTitle("Ponte 25 de Abril");
+		a.setText("The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, " +
 				"capital of Portugal, to the municipality of Almada on the left bank of the Tagus " +
 				"river. It was inaugurated on August 6, 1966 and a train platform was added in 1999. " +
 				"It is often compared to the Golden Gate Bridge in San Francisco, USA, due to " +
@@ -84,9 +81,10 @@ public class Data {
 				"it is the 19th largest suspension bridge in the world. The upper platform carries " +
 				"six car lanes, the lower platform two train tracks. Until 1974 the bridge was named " +
 				"Salazar Bridge.");
-		IMAGE_ANNOTATION.setType(Type.IMAGE);
-		IMAGE_ANNOTATION.setFragment(null);
-		IMAGE_ANNOTATION.setScope(Scope.PUBLIC);
+		a.setType(Type.IMAGE);
+		a.setFragment(null);
+		a.setScope(Scope.PUBLIC);
+		return a;
 	}
 
 }

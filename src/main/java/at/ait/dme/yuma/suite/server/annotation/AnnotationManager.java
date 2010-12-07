@@ -171,7 +171,7 @@ public class AnnotationManager implements AnnotationService {
 				
 				// Call the Annotation Server
 				ClientResponse<String> response=getAnnotationServer().
-					listAnnotations(URLEncoder.encode(objectId));	
+					getAnnotationTree(URLEncoder.encode(objectId));	
 				
 				// Check response
 				if (response.getStatus() != HttpResponseCodes.SC_OK)

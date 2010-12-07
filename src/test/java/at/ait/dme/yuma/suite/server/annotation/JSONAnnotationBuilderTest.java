@@ -66,7 +66,7 @@ public class JSONAnnotationBuilderTest {
 	
 	@Test
 	public void testJSONSerialization() {
-		String serialized = JSONAnnotationBuilder.toJSON(Data.IMAGE_ANNOTATION).toString();
+		String serialized = JSONAnnotationBuilder.toJSON(Data.newAnnotation()).toString();
 		System.out.println(serialized);
 	}
 
