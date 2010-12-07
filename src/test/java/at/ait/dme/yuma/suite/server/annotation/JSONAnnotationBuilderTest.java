@@ -21,6 +21,7 @@
 
 package at.ait.dme.yuma.suite.server.annotation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -65,7 +66,7 @@ public class JSONAnnotationBuilderTest {
 	}
 	
 	@Test
-	public void testJSONSerialization() {
+	public void testJSONSerialization() throws IOException {
 		String serialized = JSONAnnotationBuilder.toJSON(Data.newAnnotation()).toString();
 		System.out.println(serialized);
 	}
