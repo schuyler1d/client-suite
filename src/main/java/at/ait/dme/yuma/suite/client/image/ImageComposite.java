@@ -22,6 +22,7 @@
 package at.ait.dme.yuma.suite.client.image;
 
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.HasImageAnnotationSelectionHandlers;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionHandler;

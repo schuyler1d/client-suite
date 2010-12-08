@@ -26,11 +26,11 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationTreeNode;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.CancelImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.SaveImageAnnotationClickHandler;

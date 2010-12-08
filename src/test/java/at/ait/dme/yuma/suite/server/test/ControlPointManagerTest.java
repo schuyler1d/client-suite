@@ -41,9 +41,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;

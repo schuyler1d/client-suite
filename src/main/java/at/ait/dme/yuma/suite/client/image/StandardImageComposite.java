@@ -32,6 +32,7 @@ import java.util.Map;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.client.image.shape.Color;
 import at.ait.dme.yuma.suite.client.image.shape.Ellipse;

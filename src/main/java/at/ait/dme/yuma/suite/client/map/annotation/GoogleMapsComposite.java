@@ -29,9 +29,9 @@ import java.util.Map;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.ErrorMessages;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.shape.Point;
 import at.ait.dme.yuma.suite.client.image.shape.Polygon;
 import at.ait.dme.yuma.suite.client.image.shape.Polyline;

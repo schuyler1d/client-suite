@@ -22,7 +22,6 @@
 package at.ait.dme.yuma.suite.client.image.annotation;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 
 /**
  * Represents an image annotation with an unique addressable URI as id.

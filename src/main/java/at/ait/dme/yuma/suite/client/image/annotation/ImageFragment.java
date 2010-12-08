@@ -19,9 +19,10 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.client.image;
+package at.ait.dme.yuma.suite.client.image.annotation;
 
 import at.ait.dme.yuma.suite.client.annotation.MediaFragment;
+import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
 import at.ait.dme.yuma.suite.client.image.shape.VoidShape;
 

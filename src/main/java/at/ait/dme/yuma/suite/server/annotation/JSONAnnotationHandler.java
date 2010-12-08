@@ -34,8 +34,8 @@ import org.json.simple.JSONValue;
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 
 /**
  * Converts annotations to and from JSON.

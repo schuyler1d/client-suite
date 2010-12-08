@@ -25,9 +25,9 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.client.ErrorMessages;
 import at.ait.dme.yuma.suite.client.image.ImageComposite;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.ImageRect;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.image.shape.Shape;
 import at.ait.dme.yuma.suite.client.map.annotation.AnnotationLayer;

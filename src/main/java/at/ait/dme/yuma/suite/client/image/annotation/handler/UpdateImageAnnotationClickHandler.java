@@ -76,7 +76,7 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 		a.setLastModified(new Date());
 		
 		// create the fragment if necessary
-		// addFragment(a);
+		addFragment(a);
 		
 		// update the annotation on the server
 		getImageAnnotationService().updateAnnotation(a,

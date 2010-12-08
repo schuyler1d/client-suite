@@ -21,27 +21,11 @@
 
 package at.ait.dme.yuma.suite.server.test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import org.junit.Test;
-
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
-import at.ait.dme.yuma.suite.client.image.ImageFragment;
-import at.ait.dme.yuma.suite.client.image.ImageRect;
-import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.client.image.shape.Color;
-import at.ait.dme.yuma.suite.client.image.shape.Cross;
-import at.ait.dme.yuma.suite.client.image.shape.Ellipse;
-import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
-import at.ait.dme.yuma.suite.client.image.shape.Point;
-import at.ait.dme.yuma.suite.client.image.shape.Polygon;
-import at.ait.dme.yuma.suite.client.image.shape.Rectangle;
-import at.ait.dme.yuma.suite.client.image.shape.Shape;
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 
 public class ImageAnnotationBuilderTest {
 
+	/*
 	private ImageAnnotation createAnnotation() {
 		// annotation w/ polygon fragment
 		ImageAnnotation annotation = new ImageAnnotation();
@@ -147,6 +131,7 @@ public class ImageAnnotationBuilderTest {
 		
 		return annotation;
 	}
+	*/
 	
 	@Test
 	public void testJson() {		
