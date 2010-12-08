@@ -83,7 +83,7 @@ public class AnnotationManager implements AnnotationService {
 		try {			
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
-				.createAnnotation(JSONAnnotationBuilder.toJSON(annotation).toString());
+				.createAnnotation(JSONAnnotationHandler.toJSON(annotation).toString());
 			
 			// Check response
 			if (response.getStatus() != HttpResponseCodes.SC_CREATED)
@@ -113,7 +113,7 @@ public class AnnotationManager implements AnnotationService {
 		try {
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
-				.updateAnnotation(URLEncoder.encode(annotation.getId()), JSONAnnotationBuilder.toJSON(annotation).toString());
+				.updateAnnotation(URLEncoder.encode(annotation.getId()), JSONAnnotationHandler.toJSON(annotation).toString());
 			
 			// Check response			
 			if(response.getStatus() != HttpResponseCodes.SC_OK)
@@ -174,7 +174,7 @@ public class AnnotationManager implements AnnotationService {
 					throw new AnnotationServiceException(response.getStatus());
 				
 				// Parse the response
-				annotations = JSONAnnotationBuilder.toAnnotations(response.getEntity());
+				annotations = JSONAnnotationHandler.toAnnotations(response.getEntity());
 				
 				// Cache the response
 				annotationCache.putIfAbsent(objectId, annotations);

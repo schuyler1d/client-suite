@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -42,7 +43,7 @@ import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class JSONAnnotationBuilder {
+public class JSONAnnotationHandler {
 	
 	private static final String KEY_ID = "id";
 	private static final String KEY_PARENT_ID = "parent-id";
@@ -59,6 +60,8 @@ public class JSONAnnotationBuilder {
 	// private static final String KEY_TAGS = "tags";
 	private static final String KEY_REPLIES = "replies";
 
+    private static Logger logger = Logger.getLogger(JSONAnnotationHandler.class);
+	
 	public static ArrayList<Annotation> toAnnotations(String json) {
 		ArrayList<Annotation> annotations = new ArrayList<Annotation>();
 		JSONArray jsonArray=(JSONArray)JSONValue.parse(json);
@@ -73,8 +76,12 @@ public class JSONAnnotationBuilder {
 			Type type = Type.valueOf(((String) jsonObj.get(KEY_TYPE)).toUpperCase());
 			if (type == Type.IMAGE) {
 				annotation = new ImageAnnotation();				
-				SVGBuilder svg = new SVGBuilder();
-				annotation.setFragment(svg.toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));									
+				SVGFragmentHandler svg = new SVGFragmentHandler();
+				try {
+					annotation.setFragment(svg.toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));
+				} catch (IOException e) {
+					logger.warn("Could not parse image fragment: " + e.getMessage());
+				}
 			} else {
 				throw new RuntimeException("Unsupported annotation type: " + type.name());
 			}
@@ -135,7 +142,7 @@ public class JSONAnnotationBuilder {
 				if (annotation.getType() == Type.IMAGE) {
 					ImageAnnotation i = (ImageAnnotation) annotation;
 					if(i.hasFragment()) {		
-						SVGBuilder svg = new SVGBuilder();
+						SVGFragmentHandler svg = new SVGFragmentHandler();
 						jsonObj.put("fragment", svg.toSVG((ImageFragment) i.getFragment()));				
 					}
 				}

@@ -39,7 +39,7 @@ public class JSONAnnotationBuilderTest {
 	
 	@Test
 	public void testJSONParsing() {
-		ArrayList<Annotation> annotations = JSONAnnotationBuilder.toAnnotations(Data.ANNOTATION_JSON);
+		ArrayList<Annotation> annotations = JSONAnnotationHandler.toAnnotations(Data.ANNOTATION_JSON);
 		assertTrue(annotations.size() == 1);
 		
 		ImageAnnotation a = (ImageAnnotation) annotations.get(0);
@@ -67,7 +67,7 @@ public class JSONAnnotationBuilderTest {
 	
 	@Test
 	public void testJSONSerialization() throws IOException {
-		String serialized = JSONAnnotationBuilder.toJSON(Data.newAnnotation()).toString();
+		String serialized = JSONAnnotationHandler.toJSON(Data.newAnnotation()).toString();
 		System.out.println(serialized);
 	}
 
