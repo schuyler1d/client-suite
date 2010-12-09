@@ -96,15 +96,6 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>websitecapture</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.image.WebsiteCaptureServiceImpl</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>websitecapture</servlet-name>
-		<url-pattern>/yuma/captureSite</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
 		<servlet-name>geocoder</servlet-name>
 		<servlet-class>at.ait.dme.yuma.suite.server.map.GeocoderServiceImpl</servlet-class>
 	</servlet>

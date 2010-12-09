@@ -23,9 +23,6 @@
     
     <servlet path='/auth' 
   		class='at.ait.dme.yuma.suite.server.auth.AuthenticationServiceImpl'/>
- 	
-  	<servlet path='/captureSite' 
-  		class='at.ait.dme.yuma.suite.server.image.WebsiteCaptureServiceImpl'/>
   
   	<servlet path='/geocoder' 
   		class='at.ait.dme.yuma.suite.server.map.GeocoderServiceImpl'/>
