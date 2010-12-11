@@ -99,9 +99,9 @@ public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler
 				public void onSuccess(Annotation result) {
 					ImageAnnotationTreeNode treeNode = getAnnotationTreeNode();
 					ImageAnnotation parent = (treeNode == null) ? null : treeNode.getAnnotation();
-					annotationComposite.addAnnotation((ImageAnnotation) result, parent);
 					annotationComposite.hideAnnotationForm(treeNode, false);
 					annotationComposite.disableLoadingImage();
+					annotationComposite.addAnnotation((ImageAnnotation) result, parent);
 				}
 			}
 		);

@@ -356,7 +356,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 			parent.removeItem(annotationNode.getAnnotationTreeItem());
 			annotationNode.getParentAnnotation().removeReply(annotationNode.getAnnotation());
 		}		
-		// imageComposite.hideFragment(annotationNode.getAnnotation());
+		imageComposite.hideFragment(annotationNode.getAnnotation());
 		
 		annotationTree.build(annotations);
 	}

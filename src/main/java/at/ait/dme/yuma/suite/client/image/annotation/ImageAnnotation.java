@@ -22,6 +22,7 @@
 package at.ait.dme.yuma.suite.client.image.annotation;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.client.image.shape.VoidShape;
 
 /**
  * Represents an image annotation with an unique addressable URI as id.
@@ -33,10 +34,10 @@ public class ImageAnnotation extends Annotation {
 		
 	private static final long serialVersionUID = 7807008224822381714L;
 	
-	/**
-	 * The annotated image fragment
-	 */
-	private ImageFragment fragment = new ImageFragment();
+	public ImageAnnotation() {
+		super();
+		setFragment(new ImageFragment(new VoidShape()));
+	}
 	
 	public String toHtml() {
 		StringBuffer buf = new StringBuffer();
@@ -58,10 +59,7 @@ public class ImageAnnotation extends Annotation {
 		
 		if (!super.equals(other))
 			return false;
-		
-		if (!equalsNullable(fragment, ((ImageAnnotation) other).fragment))
-			return false;
-		
+				
 		return true;	
 	}
 

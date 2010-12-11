@@ -75,12 +75,16 @@ public class JSONAnnotationHandler {
 			
 			Type type = Type.valueOf(((String) jsonObj.get(KEY_TYPE)).toUpperCase());
 			if (type == Type.IMAGE) {
-				annotation = new ImageAnnotation();				
-				SVGFragmentHandler svg = new SVGFragmentHandler();
-				try {
-					annotation.setFragment(svg.toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));
-				} catch (IOException e) {
-					logger.warn("Could not parse image fragment: " + e.getMessage());
+				annotation = new ImageAnnotation();		
+				
+				String fragment = (String) jsonObj.get(KEY_FRAGMENT);
+				if ((fragment != null) && (!fragment.isEmpty())){
+					SVGFragmentHandler svg = new SVGFragmentHandler();
+					try {
+						annotation.setFragment(svg.toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));
+					} catch (IOException e) {
+						logger.warn("Could not parse image fragment: " + e.getMessage());
+					}
 				}
 			} else {
 				throw new RuntimeException("Unsupported annotation type: " + type.name());
@@ -90,8 +94,8 @@ public class JSONAnnotationHandler {
 			annotation.setParentId((String) jsonObj.get(KEY_PARENT_ID));
 			annotation.setRootId((String) jsonObj.get(KEY_ROOT_ID));
 			annotation.setObjectId((String) jsonObj.get(KEY_OBJECT_ID));
-			annotation.setCreated(new Date());
-			annotation.setLastModified(new Date());
+			annotation.setCreated(new Date((Long) jsonObj.get(KEY_CREATED)));
+			annotation.setLastModified(new Date((Long) jsonObj.get(KEY_LAST_MODIFIED)));
 			annotation.setCreatedBy((String) jsonObj.get(KEY_CREATED_BY));
 			annotation.setTitle((String) jsonObj.get(KEY_TITLE));
 			annotation.setText((String) jsonObj.get(KEY_TEXT));
@@ -129,8 +133,8 @@ public class JSONAnnotationHandler {
 				JSONObject jsonObj = new JSONObject();
 
 				jsonObj.put(KEY_ID, annotation.getId());
-				jsonObj.put(KEY_PARENT_ID, annotation.getParentId());		
-				jsonObj.put(KEY_ROOT_ID, annotation.getRootId());						
+				jsonObj.put(KEY_PARENT_ID, ""); //annotation.getParentId());		
+				jsonObj.put(KEY_ROOT_ID, ""); // annotation.getRootId());						
 				jsonObj.put(KEY_OBJECT_ID, annotation.getObjectId());						
 				jsonObj.put(KEY_CREATED, annotation.getCreated().getTime());
 				jsonObj.put(KEY_LAST_MODIFIED, annotation.getLastModified().getTime());

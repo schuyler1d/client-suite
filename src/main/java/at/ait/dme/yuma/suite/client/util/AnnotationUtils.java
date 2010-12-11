@@ -65,6 +65,13 @@ public class AnnotationUtils {
 			}
 			
 			at.ait.dme.gwt.openlayers.client.geometry.Polygon poly = at.ait.dme.gwt.openlayers.client.geometry.Polygon.create(points.toArray(new Point[points.size()]));
+			
+			/*
+			System.out.println("Created polygon vfeature:");
+			for (Point p : points) {
+				System.out.println(" " + p.getX() + "/" + p.getY());
+			}
+			*/
 			return VectorFeature.create(poly); //, defaultStyle);
 		} else if (shape instanceof GeoPoint) {
 			// GeoPoint
@@ -83,24 +90,46 @@ public class AnnotationUtils {
 			
 		if (js.startsWith("POLYGON")) {
 			// Construct Polygon shape
-			String[] points = js.substring(9, js.length() - 2).split(",");
+			String[] s = js.substring(9, js.length() - 2).split(",");
 			
-			Polygon poly = new Polygon();
-			poly.setColor(new Color("ff0000"));
-			for (int i=0; i<points.length; i++) {
-				String[] xy = points[i].split(" ");
+			ArrayList<at.ait.dme.yuma.suite.client.image.shape.Point> points = 
+				new ArrayList<at.ait.dme.yuma.suite.client.image.shape.Point>();
+
+			int left = Integer.MAX_VALUE;
+			int top = Integer.MAX_VALUE;
+			for (int i=0; i<s.length; i++) {
+				String[] xy = s[i].split(" ");
 				if (xy.length == 2) {
 					try {
 						double x = Double.parseDouble(xy[0]);
+						if (x < left)
+							left = (int) x;
+						
 						double y = Double.parseDouble(xy[1]);
-						poly.addPoint(new at.ait.dme.yuma.suite.client.image.shape.Point((int)x,(int)y));
+						if (y < top)
+							top = (int) y;
+						
+						points.add(new at.ait.dme.yuma.suite.client.image.shape.Point((int) x, (int) y));
 					} catch (NumberFormatException e) {
 						System.out.println("Error adding point: " + e.getMessage());
 					}
 				}
 			}
-			poly.setLeft(poly.getRelativeLeft());
-			poly.setTop(poly.getRelativeTop());
+
+			Polygon poly = new Polygon();
+			poly.setColor(new Color("ff0000"));
+			poly.setLeft(left);
+			poly.setTop(top);
+			for (at.ait.dme.yuma.suite.client.image.shape.Point p : points) {	
+				poly.addPoint(new at.ait.dme.yuma.suite.client.image.shape.Point(p.getX() - left,p.getY() - top));
+			}
+			
+			/*
+			System.out.println("Created polygon shape: (" + poly.getLeft() + "/" + poly.getTop() +")");
+			for (at.ait.dme.yuma.suite.client.image.shape.Point p : poly.getPoints()) {
+				System.out.println(" " + p.getX() + "/" + p.getY());
+			}
+			*/
 			return poly;
 		} else if (js.startsWith("LINESTRING")) {
 			// Construct Polyline shape

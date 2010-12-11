@@ -258,7 +258,10 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public boolean hasReplies() {
-		return (replies != null && !replies.isEmpty());
+		if (replies == null)
+			return false;
+		
+		return !replies.isEmpty();
 	}
 	
 	@Override
@@ -315,6 +318,9 @@ public abstract class Annotation implements Serializable {
 			return false;
 		
 		if (!equalsNullable(type, a.type))
+			return false;
+		
+		if (!equalsNullable(fragment, a.fragment))
 			return false;
 
 		if (!equalsNullable(scope, a.scope))

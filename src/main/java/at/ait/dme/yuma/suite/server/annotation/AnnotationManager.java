@@ -21,6 +21,7 @@
 
 package at.ait.dme.yuma.suite.server.annotation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -40,6 +41,8 @@ import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedH
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap.EvictionPolicy;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.server.AnnotationService;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
 import at.ait.dme.yuma.suite.server.util.Config;
@@ -194,10 +197,10 @@ public class AnnotationManager implements AnnotationService {
 	public Collection<Annotation> listAnnotations(String objectId, Set<String> shapeTypes)
 		throws AnnotationServiceException {
 		
-		// Collection<Annotation> annotations = new ArrayList<Annotation>(); 
+		Collection<Annotation> annotations = new ArrayList<Annotation>(); 
 		
 		// List all annotations of this object and keep only those that have
-		/* a fragment with a shape of one of the given types
+		// a fragment with a shape of one of the given types
 		for (Annotation a : listAnnotations(objectId)) {
 			if (a.getType() == Type.IMAGE) {
 				ImageFragment fragment = (ImageFragment) a.getFragment();
@@ -206,10 +209,9 @@ public class AnnotationManager implements AnnotationService {
 					annotations.add(a);
 				}
 			}
-		}*/
+		}
 
-		// return annotations;
-		return listAnnotations(objectId);
+		return annotations;
 	}
 	
 	private RESTAnnotationServer getAnnotationServer() {
