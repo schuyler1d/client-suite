@@ -27,7 +27,7 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.client.annotation.SemanticTagGroup;
+import at.ait.dme.yuma.suite.client.annotation.SemanticAmbiguity;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.CancelImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.SaveImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.client.image.annotation.handler.UpdateImageAnnotationClickHandler;
@@ -299,9 +299,9 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 	 * Displays suggested entities that can be linked to the annotation
 	 * @param entities a collection of {@link GroupOfAmbiguousSemanticTags}-s
 	 */
-	public void displaySuggestedLinks(Collection<SemanticTagGroup> entities) {
+	public void displaySuggestedLinks(Collection<SemanticAmbiguity> entities) {
 	    suggestedLinksStack.clear();
-	    for(SemanticTagGroup e : entities) {
+	    for(SemanticAmbiguity e : entities) {
 	        suggestedLinksStack.add(new Label(e.getTitle()));
 	        for(SemanticTag t : e.getAmbiguousTags()) {
 	            if(!this.tags.contains(t)) {

@@ -38,7 +38,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.client.annotation.SemanticTagGroup;
+import at.ait.dme.yuma.suite.client.annotation.SemanticAmbiguity;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationTreeNode;
@@ -142,11 +142,11 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 			public void onKeyDown(KeyDownEvent event) {
 	            if (event.getNativeKeyCode() == ' ' || event.getNativeKeyCode() == KeyCodes.KEY_BACKSPACE) {
 	            	enrichmentService.getTagSuggestions(textArea.getValue(), WHICH_ENRICHMENT_SERVICE, 
-	            			new AsyncCallback<Collection<SemanticTagGroup>>() {
+	            			new AsyncCallback<Collection<SemanticAmbiguity>>() {
 						@Override
-						public void onSuccess(Collection<SemanticTagGroup> result) {
+						public void onSuccess(Collection<SemanticAmbiguity> result) {
 							if (result.size() > 0 && !tagCloud.isVisible()) tagCloud.show();
-							for (SemanticTagGroup group : result) {
+							for (SemanticAmbiguity group : result) {
 								for (SemanticTag tag : group.getAmbiguousTags()) {
 									tagCloud.addTag(tag, TAG_FONT_SIZE, "#FFD77D");
 								}

@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.client.server;
 
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.client.annotation.SemanticTagGroup;
+import at.ait.dme.yuma.suite.client.annotation.SemanticAmbiguity;
 import at.ait.dme.yuma.suite.client.server.exception.SemanticEnrichmentServiceException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -42,6 +42,6 @@ public interface SemanticEnrichmentService extends RemoteService {
 	 */
 	public static final String OPENCALAIS_DBPEDIA_LOOKUP = "openCalaisDBpediaLookup";
 	
-    public Collection<SemanticTagGroup> getTagSuggestions(String text, String service) throws SemanticEnrichmentServiceException;
+    public Collection<SemanticAmbiguity> getTagSuggestions(String text, String service) throws SemanticEnrichmentServiceException;
 
 }

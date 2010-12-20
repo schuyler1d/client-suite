@@ -22,6 +22,7 @@
 package at.ait.dme.yuma.suite.server.annotation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
@@ -86,7 +87,7 @@ public class AnnotationManager implements AnnotationService {
 		try {			
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
-				.createAnnotation(JSONAnnotationHandler.toJSON(annotation).toString());
+				.createAnnotation(JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
 			
 			// Check response
 			if (response.getStatus() != HttpResponseCodes.SC_CREATED)
@@ -116,7 +117,7 @@ public class AnnotationManager implements AnnotationService {
 		try {
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
-				.updateAnnotation(URLEncoder.encode(annotation.getId()), JSONAnnotationHandler.toJSON(annotation).toString());
+				.updateAnnotation(URLEncoder.encode(annotation.getId()), JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
 			
 			// Check response			
 			if(response.getStatus() != HttpResponseCodes.SC_OK)
@@ -177,7 +178,7 @@ public class AnnotationManager implements AnnotationService {
 					throw new AnnotationServiceException(response.getStatus());
 				
 				// Parse the response
-				annotations = JSONAnnotationHandler.toAnnotations(response.getEntity());
+				annotations = JSONAnnotationHandler.parseAnnotations(response.getEntity());
 				
 				// Cache the response
 				annotationCache.putIfAbsent(objectId, annotations);

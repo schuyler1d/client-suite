@@ -30,7 +30,7 @@ import java.util.Collection;
  *
  * @author Rainer Simon
  */
-public class SemanticTagGroup implements Serializable {
+public class SemanticAmbiguity implements Serializable {
 	private static final long serialVersionUID = 5225121871824438123L;
 
 	/**

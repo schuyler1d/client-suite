@@ -34,6 +34,7 @@ import org.json.simple.JSONValue;
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 
@@ -57,12 +58,18 @@ public class JSONAnnotationHandler {
 	private static final String KEY_TYPE = "type";
 	private static final String KEY_FRAGMENT = "fragment";
 	private static final String KEY_SCOPE = "scope";
-	// private static final String KEY_TAGS = "tags";
+	private static final String KEY_TAGS = "tags";
 	private static final String KEY_REPLIES = "replies";
+	
+	private static final String KEY_TAG_URI = "uri";
+	private static final String KEY_TAG_LABEL = "label";
+	private static final String KEY_TAG_DESCRIPTION = "description";
+	private static final String KEY_TAG_LANG = "lang";
+	private static final String KEY_TAG_TYPE = "type";
 
     private static Logger logger = Logger.getLogger(JSONAnnotationHandler.class);
 	
-	public static ArrayList<Annotation> toAnnotations(String json) {
+	public static ArrayList<Annotation> parseAnnotations(String json) {
 		ArrayList<Annotation> annotations = new ArrayList<Annotation>();
 		JSONArray jsonArray=(JSONArray)JSONValue.parse(json);
 		
@@ -107,10 +114,14 @@ public class JSONAnnotationHandler {
 			} else {
 				annotation.setScope(Scope.PUBLIC);
 			}
+			
+			JSONArray jsonTags = (JSONArray) jsonObj.get(KEY_TAGS);
+			if (jsonTags != null)
+				annotation.setTags(parseSemanticTags(jsonTags));
 
 			JSONArray jsonReplies = (JSONArray) jsonObj.get(KEY_REPLIES);
 			if (jsonReplies != null) {
-				ArrayList<Annotation> replies = toAnnotations(jsonReplies.toString());
+				ArrayList<Annotation> replies = parseAnnotations(jsonReplies.toString());
 				annotation.setReplies(replies);
 			}
 			
@@ -118,15 +129,28 @@ public class JSONAnnotationHandler {
 		}
 		return annotations;
 	}
+	
+	public static ArrayList<SemanticTag> parseSemanticTags(JSONArray jsonArray) {
+		ArrayList<SemanticTag> tags = new ArrayList<SemanticTag>();
 		
-	public static JSONArray toJSON(Annotation annotation) throws IOException {
-		List<Annotation> annotations = new ArrayList<Annotation>();
-		annotations.add(annotation);
-		return toJSON(annotations);
+		for (Object obj : jsonArray) {
+			JSONObject jsonObj = (JSONObject) obj;
+			SemanticTag t = new SemanticTag();
+			
+			t.setURI((String) jsonObj.get(KEY_TAG_URI));
+			t.setLabel((String) jsonObj.get(KEY_TAG_LABEL));
+			t.setDescription((String) jsonObj.get(KEY_TAG_DESCRIPTION));
+			t.setLanguage((String) jsonObj.get(KEY_TAG_LANG));
+			t.setType((String) jsonObj.get(KEY_TAG_TYPE));
+			
+			tags.add(t);
+		}
+		
+		return tags;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static JSONArray toJSON(List<Annotation> annotations) throws IOException {
+	public static JSONArray serializeAnnotations(List<Annotation> annotations) throws IOException {
 		JSONArray jsonArray = new JSONArray();
 		if (annotations != null) {
 			for(Annotation annotation : annotations) {
@@ -153,15 +177,33 @@ public class JSONAnnotationHandler {
 
 				jsonObj.put(KEY_SCOPE, annotation.getScope().name());
 				
-				// TODO tags!
-				// if (annotation.hasTags()) 
-				//	jsonObj.put(KEY_TAGS, toJSON(annotation.getTags()));
+				if (annotation.hasTags()) 
+					jsonObj.put(KEY_TAGS, serializeSemanticTags(annotation.getTags()));
 				
 				if (annotation.hasReplies())
-					jsonObj.put(KEY_REPLIES, toJSON(annotation.getReplies()));
+					jsonObj.put(KEY_REPLIES, serializeAnnotations(annotation.getReplies()));
 
 				jsonArray.add(jsonObj);
 			}
+		}
+		
+		return jsonArray;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray serializeSemanticTags(List<SemanticTag> tags) {
+		JSONArray jsonArray = new JSONArray();
+		
+		for (SemanticTag t : tags) {
+			JSONObject jsonObj = new JSONObject();
+			
+			jsonObj.put(KEY_TAG_URI, t.getURI());
+			jsonObj.put(KEY_TAG_LABEL, t.getLabel());
+			jsonObj.put(KEY_TAG_DESCRIPTION, t.getDescription());
+			jsonObj.put(KEY_TAG_LANG, t.getLanguage());
+			jsonObj.put(KEY_TAG_TYPE, t.getType());
+			
+			jsonArray.add(jsonObj);
 		}
 		
 		return jsonArray;

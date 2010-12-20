@@ -23,12 +23,12 @@ package at.ait.dme.yuma.suite.client.server;
 
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.client.annotation.SemanticTagGroup;
+import at.ait.dme.yuma.suite.client.annotation.SemanticAmbiguity;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface SemanticEnrichmentServiceAsync {
     
-    public void getTagSuggestions(String text, String service, AsyncCallback<Collection<SemanticTagGroup>> callback);
+    public void getTagSuggestions(String text, String service, AsyncCallback<Collection<SemanticAmbiguity>> callback);
 
 }

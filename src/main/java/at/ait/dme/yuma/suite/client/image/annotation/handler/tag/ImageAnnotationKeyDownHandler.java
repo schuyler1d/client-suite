@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.client.image.annotation.handler.tag;
 
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.client.annotation.SemanticTagGroup;
+import at.ait.dme.yuma.suite.client.annotation.SemanticAmbiguity;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.StandardImageAnnotationForm;
 import at.ait.dme.yuma.suite.client.server.SemanticEnrichmentService;
@@ -42,7 +42,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
 
     private StandardImageAnnotationForm annotationForm;
     private ImageAnnotationComposite annotationComposite;
-    private Collection<SemanticTagGroup> entities = null;
+    private Collection<SemanticAmbiguity> entities = null;
     private boolean serviceEnabled = true;
     
 	/**
@@ -80,7 +80,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
         SemanticEnrichmentServiceAsync service = (SemanticEnrichmentServiceAsync) 
         	GWT.create(SemanticEnrichmentService.class);
         service.getTagSuggestions(text, WHICH_ENRICHMENT_SERVICE, 
-        		new AsyncCallback<Collection<SemanticTagGroup>>() {
+        		new AsyncCallback<Collection<SemanticAmbiguity>>() {
         	
             public void onFailure(Throwable caught) {
                 // annotationComposite.disableLoadingImage();
@@ -95,7 +95,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
                 }
             }
 
-            public void onSuccess(Collection<SemanticTagGroup> result) {
+            public void onSuccess(Collection<SemanticAmbiguity> result) {
                 entities = result;
                 if(entities != null) {
                     annotationForm.displaySuggestedLinks(entities);

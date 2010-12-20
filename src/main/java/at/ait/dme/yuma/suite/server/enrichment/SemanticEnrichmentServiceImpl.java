@@ -42,7 +42,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.client.annotation.SemanticTagGroup;
+import at.ait.dme.yuma.suite.client.annotation.SemanticAmbiguity;
 import at.ait.dme.yuma.suite.client.server.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.client.server.exception.SemanticEnrichmentServiceException;
 import at.ait.dme.yuma.suite.server.util.Config;
@@ -121,7 +121,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
     }
     
 	@Override
-	public Collection<SemanticTagGroup> getTagSuggestions(String text, String service) 
+	public Collection<SemanticAmbiguity> getTagSuggestions(String text, String service) 
 			throws SemanticEnrichmentServiceException {
 		
 		if (service.equals(UNIVIE_LINK_DISCOVERY_SERVICE)) {
@@ -132,10 +132,10 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 		throw new SemanticEnrichmentServiceException("unsupported semantic enrichment service: " + service);
 	}
 	
-	private Collection<SemanticTagGroup> getTagSuggestionsUniVie(String text) 
+	private Collection<SemanticAmbiguity> getTagSuggestionsUniVie(String text) 
 			throws SemanticEnrichmentServiceException {
 		
-		Collection<SemanticTagGroup> resources = null;
+		Collection<SemanticAmbiguity> resources = null;
         try {
             // call the enrichment service
             ClientResponse<String> response = getUniVieLinkDiscoveryEndpoint().findEntities(text);
@@ -158,7 +158,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
         return resources;
 	}
 	
-	private Collection<SemanticTagGroup> getTagSuggestionsOpenCalaisDBpedia(String text) 
+	private Collection<SemanticAmbiguity> getTagSuggestionsOpenCalaisDBpedia(String text) 
 			throws SemanticEnrichmentServiceException {
 		
 		// First, resolve named entities using OpenCalais
@@ -169,7 +169,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 		
 		// Then, try obtaining links for each entity via DBpediaLookup
 		DBpediaLookupEndpoint dbpedia = getDBpediaLookupEndpoint();
-		ArrayList<SemanticTagGroup> tagSuggestions = new ArrayList<SemanticTagGroup>();
+		ArrayList<SemanticAmbiguity> tagSuggestions = new ArrayList<SemanticAmbiguity>();
 		try {
 			for (String namedEntity : parseOpenCalaisResponse(response.getEntity())) {
 				response = dbpedia.keyWordSearch(namedEntity, "any", "4");
@@ -177,7 +177,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 				if (response.getStatus() != HttpResponseCodes.SC_OK)
 					throw new SemanticEnrichmentServiceException(response.getStatus());
 				
-				SemanticTagGroup ambiguousTags = new SemanticTagGroup(); 
+				SemanticAmbiguity ambiguousTags = new SemanticAmbiguity(); 
 				ambiguousTags.setTitle(namedEntity);
 				ambiguousTags.setTags(parseDBpediaLookupResponse(namedEntity, response.getEntity()));
 				tagSuggestions.add(ambiguousTags);
@@ -188,9 +188,9 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 		return tagSuggestions;
 	}
 
-    private Collection<SemanticTagGroup> parseUniVieResponse(String text) throws Exception {
+    private Collection<SemanticAmbiguity> parseUniVieResponse(String text) throws Exception {
 
-        Collection<SemanticTagGroup> resources = new ArrayList<SemanticTagGroup>();
+        Collection<SemanticAmbiguity> resources = new ArrayList<SemanticAmbiguity>();
 
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = builder.parse(new ByteArrayInputStream(text.getBytes("UTF-8")));
@@ -202,7 +202,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
                 for (int i = 0; i < entities.getLength(); i++) {
                     Node entity = entities.item(i);
                     NodeList entityContent = entity.getChildNodes();
-                    SemanticTagGroup e = new SemanticTagGroup();
+                    SemanticAmbiguity e = new SemanticAmbiguity();
                     resources.add(e);
 
                     for (int j = 0; j < entityContent.getLength(); j++) {

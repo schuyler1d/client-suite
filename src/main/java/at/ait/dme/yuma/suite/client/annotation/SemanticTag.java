@@ -77,8 +77,44 @@ public class SemanticTag implements Serializable {
 		this.uri = uri;
 	}
 	
+	public String getURI() {
+		return uri;
+	}
+	
+	public void setURI(String uri) {
+		this.uri = uri;
+	}
+	
 	public String getLabel() {
 		return label;
+	}
+	
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public String getLanguage() {
+		return lang;
+	}
+	
+	public void setLanguage(String lang) {
+		this.lang = lang;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	public boolean hasAltLabels() {
@@ -92,24 +128,9 @@ public class SemanticTag implements Serializable {
 		return alternativeLabels;
 	}
 	
-	public String getType() {
-		return type;
-	}
-	
-	public String getLang() {
-		return lang;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public String getURI() {
-		return uri;
-	}
-	
 	@Override
 	public boolean equals(Object tag) {
+		// TODO implement this properly!
 		if (!(tag instanceof SemanticTag)) return false; 
 		SemanticTag s = (SemanticTag) tag;
 		return this.uri.equals(s.uri) && this.label.equals(s.label);

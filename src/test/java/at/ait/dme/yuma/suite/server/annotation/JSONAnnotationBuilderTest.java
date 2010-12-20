@@ -23,6 +23,7 @@ package at.ait.dme.yuma.suite.server.annotation;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class JSONAnnotationBuilderTest {
 	
 	@Test
 	public void testJSONParsing() {
-		ArrayList<Annotation> annotations = JSONAnnotationHandler.toAnnotations(Data.ANNOTATION_JSON);
+		ArrayList<Annotation> annotations = JSONAnnotationHandler.parseAnnotations(Data.ANNOTATION_JSON);
 		assertTrue(annotations.size() == 1);
 		
 		ImageAnnotation a = (ImageAnnotation) annotations.get(0);
@@ -67,7 +68,7 @@ public class JSONAnnotationBuilderTest {
 	
 	@Test
 	public void testJSONSerialization() throws IOException {
-		String serialized = JSONAnnotationHandler.toJSON(Data.newAnnotation()).toString();
+		String serialized = JSONAnnotationHandler.serializeAnnotations(Arrays.asList(Data.newAnnotation())).toString();
 		System.out.println(serialized);
 	}
 
