@@ -25,6 +25,7 @@ import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.client.server.exception.GeocoderException;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -34,6 +35,6 @@ public interface GeocoderService extends RemoteService {
 
 	WGS84Coordinate getCoordinate(String query) throws GeocoderException;
 	String getPlacename(String mapUrl, XYCoordinate coordinate) throws GeocoderException;
-	SemanticTag[] getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight) throws GeocoderException;
+	SemanticTag[] getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight) throws GeocoderException, TransformationException;
 	
 }

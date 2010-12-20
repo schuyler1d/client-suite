@@ -50,6 +50,7 @@ import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.client.server.exception.GeocoderException;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 import at.ait.dme.yuma.suite.server.map.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.server.map.transformation.CoordinateTransformation;
@@ -146,7 +147,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	}
 	
 	@Override
-	public SemanticTag[] getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight) throws GeocoderException {
+	public SemanticTag[] getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight) throws GeocoderException, TransformationException {
 		try {
 			// Convert bounding box to geo-coordinates
 			ControlPointManager cpm = new ControlPointManager(getThreadLocalRequest(), mapUrl);
@@ -166,8 +167,11 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	        }
 
 	        return parseGeonamesResponse(s);
-		} catch (Exception e) {
-			throw new GeocoderException(e);
+		} catch (Throwable t) {
+			if (t instanceof TransformationException)
+				throw (TransformationException) t;
+			
+			throw new GeocoderException(t);
 		}
 	}
 	

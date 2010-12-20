@@ -52,6 +52,7 @@ import at.ait.dme.yuma.suite.client.image.shape.Shape;
 import at.ait.dme.yuma.suite.client.map.MapComponent;
 import at.ait.dme.yuma.suite.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.client.server.GeocoderServiceAsync;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 import at.ait.dme.yuma.suite.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.client.tagcloud.TagSelectionListener;
 import at.ait.dme.yuma.suite.client.tagcloud.annotation.TagEnabledAnnotationForm;
@@ -502,8 +503,12 @@ public class AnnotationLayer {
 		    }
 		    
 			public void onFailure(Throwable t) {
-				ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
-				MessageBox.error(errorMessages.error(), errorMessages.geonamesError());
+				if (!(t instanceof TransformationException)) { 
+					// Note: TransformationExceptions happen when a map is 
+					// not geo-referenced yet - ignore this in the GUI
+					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					MessageBox.error(errorMessages.error(), errorMessages.geonamesError());
+				}
 			}
 		});
 	}

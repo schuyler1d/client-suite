@@ -44,9 +44,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 import at.ait.dme.yuma.suite.server.map.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPointManager;
-import at.ait.dme.yuma.suite.server.map.transformation.TransformationException;
 import at.ait.dme.yuma.suite.server.map.transformation.TransformationResult;
 import at.ait.dme.yuma.suite.server.util.Config;
 

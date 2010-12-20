@@ -31,10 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 import at.ait.dme.yuma.suite.server.map.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.server.map.transformation.CoordinateTransformation;
-import at.ait.dme.yuma.suite.server.map.transformation.TransformationException;
 
 /**
  * Servlet for converting a set of shapes (in request query String) to KML.

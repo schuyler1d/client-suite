@@ -27,6 +27,7 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 
 /**
  * Implements an affine transformation that converts between two cartesion

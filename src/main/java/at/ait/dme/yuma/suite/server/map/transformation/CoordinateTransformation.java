@@ -27,6 +27,7 @@ import java.util.Collections;
 
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
+import at.ait.dme.yuma.suite.client.server.exception.TransformationException;
 
 /**
  * Abstract base class for transformations that convert between two
