@@ -1,4 +1,31 @@
 The YUMA Media Annotation Client Suite
 --------------------------------------
 
-Welcome to the future home of the YUMA Media Annotation Client Suite. 
+WARNING: The YUMA Annotation Client Suite is not yet completed. The documentation
+below is PRELIMINARY DEVELOPER DOC! And not yet suitable for end users!
+Please contact rainer.simon@ait.ac.at for further details.
+
+Requirements
+------------
+The YUMA Annotation Client Suite requires Java 1.6 and a Servlet container such as
+Tomcat 6. All configuration parameters are located in the web.xml.
+
+IMPORTANT: the YUMA Annotation Client Suite requires access to a running instance
+of the YUMA Annotation Server!
+
+Quick Start
+-----------
+Check out the YUMA Annotation Server project from 
+
+http://github.com/yuma-annotation/server
+
+Deploy the server on your Servlet container. Alternatively, the Annotation Server
+project includes an embedded Jetty. Start the Server with the "StartAnnotationServer"
+class located in /src/test/java/at/ait/dme/yuma/server/bootstrap. (Refer to the Server
+documentation for further details).
+
+Make sure all local path settings are correct in the Annotation Client Suite's 
+web.xml. 
+
+In Eclipse, you can launch the Client Suite application with the included 'Application.launch'
+launch config.
