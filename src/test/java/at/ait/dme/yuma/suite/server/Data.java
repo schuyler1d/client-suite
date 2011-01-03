@@ -25,7 +25,7 @@ import java.util.Date;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.MediaType;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 
 public class Data {
@@ -68,7 +68,7 @@ public class Data {
 		Annotation a = new ImageAnnotation();
 		a.setParentId(null);
 		a.setRootId(null);
-		a.setObjectId("object-lissabon");
+		a.setObjectUri("object-lissabon");
 		a.setCreated(new Date());
 		a.setLastModified(new Date());
 		a.setCreatedBy("rsimon");
@@ -81,7 +81,7 @@ public class Data {
 				"it is the 19th largest suspension bridge in the world. The upper platform carries " +
 				"six car lanes, the lower platform two train tracks. Until 1974 the bridge was named " +
 				"Salazar Bridge.");
-		a.setType(Type.IMAGE);
+		a.setMediaType(MediaType.IMAGE);
 		a.setFragment(null);
 		a.setScope(Scope.PUBLIC);
 		return a;

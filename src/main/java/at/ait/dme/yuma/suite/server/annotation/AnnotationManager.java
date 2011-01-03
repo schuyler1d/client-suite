@@ -42,7 +42,7 @@ import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedH
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap.EvictionPolicy;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.MediaType;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.client.server.AnnotationService;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
@@ -82,9 +82,9 @@ public class AnnotationManager implements AnnotationService {
 	@Override
 	public Annotation createAnnotation(Annotation annotation)
 			throws AnnotationServiceException {
-		
+				
 		String annotationId = null;
-		try {			
+		try {
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
 				.createAnnotation(JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
@@ -96,7 +96,7 @@ public class AnnotationManager implements AnnotationService {
 			annotationId = response.getEntity();
 			
 			// Remove from cache
-			annotationCache.remove(annotation.getObjectId());
+			annotationCache.remove(annotation.getObjectUri());
 		} catch (AnnotationServiceException e) {
 			logger.error(e.getMessage(), e);
 			throw e;
@@ -125,7 +125,7 @@ public class AnnotationManager implements AnnotationService {
 			annotationId = response.getEntity();
 			
 			// Remove from cache
-			annotationCache.remove(annotation.getObjectId());
+			annotationCache.remove(annotation.getObjectUri());
 		} catch(AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
 			throw ase;
@@ -203,7 +203,7 @@ public class AnnotationManager implements AnnotationService {
 		// List all annotations of this object and keep only those that have
 		// a fragment with a shape of one of the given types
 		for (Annotation a : listAnnotations(objectId)) {
-			if (a.getType() == Type.IMAGE) {
+			if (a.getMediaType() == MediaType.IMAGE) {
 				ImageFragment fragment = (ImageFragment) a.getFragment();
 				if (fragment != null && fragment.getShape() != null && shapeTypes != null &&
 						shapeTypes.contains(fragment.getShape().getClass().getName())) {

@@ -32,7 +32,7 @@ import static org.junit.Assert.assertEquals;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.MediaType;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.server.Data;
 
@@ -47,7 +47,7 @@ public class JSONAnnotationBuilderTest {
 		assertEquals("4sfd4345kvr326546", a.getId());
 		assertEquals(null, a.getParentId());
 		assertEquals(null, a.getRootId());
-		assertEquals("object-lissabon", a.getObjectId());
+		assertEquals("object-lissabon", a.getObjectUri());
 		// created 
 		// lastModified
 		assertEquals("Ponte 25 de Abril", a.getTitle());
@@ -59,7 +59,7 @@ public class JSONAnnotationBuilderTest {
 				"it is the 19th largest suspension bridge in the world. The upper platform carries " +
 				"six car lanes, the lower platform two train tracks. Until 1974 the bridge was named " +
 				"Salazar Bridge.", a.getText());
-		assertEquals(Type.IMAGE, a.getType());
+		assertEquals(MediaType.IMAGE, a.getMediaType());
 		// fragment
 		assertEquals(Scope.PUBLIC, a.getScope());
 		// tags

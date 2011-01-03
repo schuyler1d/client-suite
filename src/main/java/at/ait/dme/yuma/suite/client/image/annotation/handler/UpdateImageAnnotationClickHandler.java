@@ -65,12 +65,12 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 			a.setRootId(node.getAnnotationRootId());
 		}
 
-		a.setObjectId(Application.getImageUrl());
+		a.setObjectUri(Application.getImageUrl());
 		a.setCreatedBy(Application.getUser());
 		a.setTitle(annotationForm.getAnnotationTitle());
 		a.setText(annotationForm.getAnnotationText());
 		a.setScope(annotationForm.getAnnotationScope());
-		a.setType(getAnnotationTreeNode().getAnnotation().getType());
+		a.setMediaType(getAnnotationTreeNode().getAnnotation().getMediaType());
 		a.setTags(annotationForm.getSemanticTags());
 		a.setCreated(getAnnotationTreeNode().getAnnotation().getCreated());
 		a.setLastModified(new Date());

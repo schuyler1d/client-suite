@@ -25,7 +25,7 @@ import java.util.Date;
 
 import at.ait.dme.yuma.suite.client.Application;
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.MediaType;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotationForm;
@@ -72,13 +72,13 @@ public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler
 		// create the new annotation
 		Date timestamp = new Date();
 		ImageAnnotation a = new ImageAnnotation();
-		a.setObjectId(Application.getImageUrl());
+		a.setObjectUri(Application.getImageUrl());
 		a.setParentId(parentId);
 		a.setRootId(rootId);
 		a.setCreated(timestamp);
 		a.setLastModified(timestamp);
 		a.setCreatedBy(Application.getUser());
-		a.setType(Type.IMAGE);
+		a.setMediaType(MediaType.IMAGE);
 		a.setTitle(annotationForm.getAnnotationTitle());
 		a.setText(annotationForm.getAnnotationText());
 		a.setScope(annotationForm.getAnnotationScope());

@@ -46,7 +46,7 @@ public abstract class Annotation implements Serializable {
 	/**
 	 * Type definitionsR
 	 */
-	public enum Type { IMAGE, MAP, AUDIO, VIDEO };
+	public enum MediaType { IMAGE, MAP, AUDIO, VIDEO };
 		
 	/**
 	 * Annotation ID
@@ -64,9 +64,9 @@ public abstract class Annotation implements Serializable {
 	private String rootId;	
 	
 	/**
-	 * The ID of the annotated object (must be resolvable by the annotation frontend)
+	 * The URI of the annotated object (must be resolvable by the annotation frontend)
 	 */
-	private String objectId;
+	private String objectUri;
 	
 	/**
 	 * Creation timestamp
@@ -94,9 +94,9 @@ public abstract class Annotation implements Serializable {
 	private String text;
 	
 	/**
-	 * The annotation type
+	 * The annotation media type
 	 */
-	private Type type;
+	private MediaType mediaType;
 	
 	/**
 	 * The media fragment
@@ -142,12 +142,12 @@ public abstract class Annotation implements Serializable {
 		this.rootId = toNullIfEmpty(rootId);
 	}
 	
-	public String getObjectId() {
-		return objectId;
+	public String getObjectUri() {
+		return objectUri;
 	}
 	
-	public void setObjectId(String objectId) {
-		this.objectId = toNullIfEmpty(objectId);
+	public void setObjectUri(String objectId) {
+		this.objectUri = toNullIfEmpty(objectId);
 	}
 
 	public Date getCreated() {
@@ -190,12 +190,12 @@ public abstract class Annotation implements Serializable {
 		this.text = toNullIfEmpty(text);
 	}		
 	
-	public Type getType() {
-		return type;
+	public MediaType getMediaType() {
+		return mediaType;
 	}
 	
-	public void setType(Type type) {
-		this.type = type;
+	public void setMediaType(MediaType type) {
+		this.mediaType = type;
 	}
 	
 	public MediaFragment getFragment() {
@@ -283,7 +283,7 @@ public abstract class Annotation implements Serializable {
 		if (!equalsNullable(rootId, a.rootId))
 			return false;
 		
-		if (!equalsNullable(objectId, a.objectId))
+		if (!equalsNullable(objectUri, a.objectUri))
 			return false;
 		
 		// Compare creation timestamp w/o milliseconds
@@ -317,7 +317,7 @@ public abstract class Annotation implements Serializable {
 		if (!equalsNullable(text, a.text))
 			return false;
 		
-		if (!equalsNullable(type, a.type))
+		if (!equalsNullable(mediaType, a.mediaType))
 			return false;
 		
 		if (!equalsNullable(fragment, a.fragment))

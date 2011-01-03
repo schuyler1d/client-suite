@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="yuma-client-suite" default="create-war" basedir=".">
+<project name="yuma-suite" default="create-war" basedir=".">
 	
 	<property name="gwt.war.dir" location="war" />
 	<property name="gwt.module.name" value="at.ait.dme.yuma.suite.Application" />

@@ -33,7 +33,7 @@ import org.json.simple.JSONValue;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
 import at.ait.dme.yuma.suite.client.annotation.Annotation.Scope;
-import at.ait.dme.yuma.suite.client.annotation.Annotation.Type;
+import at.ait.dme.yuma.suite.client.annotation.Annotation.MediaType;
 import at.ait.dme.yuma.suite.client.annotation.SemanticTag;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.client.image.annotation.ImageFragment;
@@ -49,13 +49,13 @@ public class JSONAnnotationHandler {
 	private static final String KEY_ID = "id";
 	private static final String KEY_PARENT_ID = "parent-id";
 	private static final String KEY_ROOT_ID = "root-id";
-	private static final String KEY_OBJECT_ID = "object-id";
+	private static final String KEY_OBJECT_URI = "object-uri";
 	private static final String KEY_CREATED = "created";	
 	private static final String KEY_LAST_MODIFIED = "last-modified";
 	private static final String KEY_CREATED_BY = "created-by";
 	private static final String KEY_TITLE = "title";
 	private static final String KEY_TEXT = "text";
-	private static final String KEY_TYPE = "type";
+	private static final String KEY_MEDIA_TYPE = "media-type";
 	private static final String KEY_FRAGMENT = "fragment";
 	private static final String KEY_SCOPE = "scope";
 	private static final String KEY_TAGS = "tags";
@@ -80,8 +80,8 @@ public class JSONAnnotationHandler {
 			JSONObject jsonObj = (JSONObject) obj;
 			Annotation annotation;
 			
-			Type type = Type.valueOf(((String) jsonObj.get(KEY_TYPE)).toUpperCase());
-			if (type == Type.IMAGE) {
+			MediaType type = MediaType.valueOf(((String) jsonObj.get(KEY_MEDIA_TYPE)).toUpperCase());
+			if (type == MediaType.IMAGE) {
 				annotation = new ImageAnnotation();		
 				
 				String fragment = (String) jsonObj.get(KEY_FRAGMENT);
@@ -100,13 +100,13 @@ public class JSONAnnotationHandler {
 			annotation.setId((String) jsonObj.get(KEY_ID));			
 			annotation.setParentId((String) jsonObj.get(KEY_PARENT_ID));
 			annotation.setRootId((String) jsonObj.get(KEY_ROOT_ID));
-			annotation.setObjectId((String) jsonObj.get(KEY_OBJECT_ID));
+			annotation.setObjectUri((String) jsonObj.get(KEY_OBJECT_URI));
 			annotation.setCreated(new Date((Long) jsonObj.get(KEY_CREATED)));
 			annotation.setLastModified(new Date((Long) jsonObj.get(KEY_LAST_MODIFIED)));
 			annotation.setCreatedBy((String) jsonObj.get(KEY_CREATED_BY));
 			annotation.setTitle((String) jsonObj.get(KEY_TITLE));
 			annotation.setText((String) jsonObj.get(KEY_TEXT));
-			annotation.setType(type);
+			annotation.setMediaType(type);
 			
 			String scope = (String) jsonObj.get(KEY_SCOPE);
 			if (scope != null) {
@@ -157,17 +157,17 @@ public class JSONAnnotationHandler {
 				JSONObject jsonObj = new JSONObject();
 
 				jsonObj.put(KEY_ID, annotation.getId());
-				jsonObj.put(KEY_PARENT_ID, ""); //annotation.getParentId());		
-				jsonObj.put(KEY_ROOT_ID, ""); // annotation.getRootId());						
-				jsonObj.put(KEY_OBJECT_ID, annotation.getObjectId());						
+				jsonObj.put(KEY_PARENT_ID, annotation.getParentId());		
+				jsonObj.put(KEY_ROOT_ID, annotation.getRootId());						
+				jsonObj.put(KEY_OBJECT_URI, annotation.getObjectUri());						
 				jsonObj.put(KEY_CREATED, annotation.getCreated().getTime());
 				jsonObj.put(KEY_LAST_MODIFIED, annotation.getLastModified().getTime());
 				jsonObj.put(KEY_CREATED_BY, annotation.getCreatedBy());
 				jsonObj.put(KEY_TITLE, annotation.getTitle());		
 				jsonObj.put(KEY_TEXT, annotation.getText());
-				jsonObj.put(KEY_TYPE, annotation.getType().name());
+				jsonObj.put(KEY_MEDIA_TYPE, annotation.getMediaType().name());
 						
-				if (annotation.getType() == Type.IMAGE) {
+				if (annotation.getMediaType() == MediaType.IMAGE) {
 					ImageAnnotation i = (ImageAnnotation) annotation;
 					if(i.hasFragment()) {		
 						SVGFragmentHandler svg = new SVGFragmentHandler();

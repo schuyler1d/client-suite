@@ -432,7 +432,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 				+ msg.flagSubject()
 				+ "&body="
 				+ msg.flagBody(annotation.getTitle(), baseUrl + "annotate.jsp?objectURL="
-						+ annotation.getObjectId() + "%26flaggedId=" + annotation.getId(), 
+						+ annotation.getObjectUri() + "%26flaggedId=" + annotation.getId(), 
 						Application.getUser());
 	}
 
