@@ -44,10 +44,9 @@ public class JSONAnnotationBuilderTest {
 		assertTrue(annotations.size() == 1);
 		
 		ImageAnnotation a = (ImageAnnotation) annotations.get(0);
-		assertEquals("4sfd4345kvr326546", a.getId());
 		assertEquals(null, a.getParentId());
 		assertEquals(null, a.getRootId());
-		assertEquals("object-lissabon", a.getObjectUri());
+		assertEquals("http://object-lissabon", a.getObjectUri());
 		// created 
 		// lastModified
 		assertEquals("Ponte 25 de Abril", a.getTitle());

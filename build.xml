@@ -21,7 +21,7 @@
 	<property name="report.dir" location="report" />
 	<property name="tiles.dir" value="tiles" />
 		
-	<property name="war.filename" value="yuma.war" />
+	<property name="war.filename" value="yuma-suite.war" />
 
 	<target name="clean">
 		<delete dir="${classes.dir}"/>

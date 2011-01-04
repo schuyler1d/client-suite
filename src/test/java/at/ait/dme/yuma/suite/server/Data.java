@@ -40,7 +40,7 @@ public class Data {
 		  "their similarities and same construction company. With a total length of 2.277 m, it is the 19th largest " +
 		  "suspension bridge in the world. The upper platform carries six car lanes, the lower platform two train tracks. Until " +
 		  "1974 the bridge was named Salazar Bridge.\", " +
-		  "\"scope\" : \"public\" , "+
+		  "\"scope\" : \"PUBLIC\" , "+
 		  "\"last-modified\" : 1224043200000 ,"+
 		  "\"created\" : 1224043200000 , "+
 		  "\"created-by\" : \"rsimon\" , "+
@@ -56,8 +56,8 @@ public class Data {
 			  "</svg:defs>" +
 			"</svg:svg>" +
 		  "\" , "+
-		  "\"type\" : \"image\" , "+
-		  "\"object-id\" : \"object-lissabon\", " +
+		  "\"media-type\" : \"IMAGE\" , "+
+		  "\"object-uri\" : \"http:\\/\\/object-lissabon\", " +
 		  "\"tags\" : [ " +
 		    "{ \"alt-labels\" : { } , \"label\" : \"Lisbon\" , \"type\" : \"place\" , \"relation\" : { \"namespace\" : \"\" , \"property\" : \"spatiallyContains\" } , \"alt-descriptions\" : { } , \"lang\" : \"en\" , \"uri\" : \"http://www.geonames.org/2267057/\"} ," +
 		    "{ \"alt-labels\" : { } , \"label\" : \"Portugal\" , \"type\" : \"place\" , \"relation\" : { \"namespace\" : \"\" , \"property\" : \"spatiallyContains\" } , \"alt-descriptions\" : { } , \"lang\" : \"en\" , \"uri\" : \"http://www.geonames.org/2264397/\"} " +
