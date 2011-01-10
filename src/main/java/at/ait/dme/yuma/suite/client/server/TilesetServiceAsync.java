@@ -19,22 +19,21 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.client.server.exception;
+package at.ait.dme.yuma.suite.client.server;
 
-import java.io.Serializable;
+import at.ait.dme.yuma.suite.client.map.Tileset;
 
-public class WebsiteCaptureException extends Exception implements Serializable{
-	private static final long serialVersionUID = -567019172381169582L;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-	public WebsiteCaptureException() {
-		
-	}
+/**
+ * async interface to the image tiles provider service
+ *
+ * @author Christian Sadilek
+ */
+public interface TilesetServiceAsync {
 	
-	public WebsiteCaptureException(String msg) {
-		super(msg);
-	}
+	public void getTileset(String url, AsyncCallback<Tileset> callback);	
+	public void startOnTheFlyTiler(String imageUrl, AsyncCallback<Void> callback);
+	public void pollOnTheFlyTiler(String imageUrl, AsyncCallback<Tileset> callback);
 	
-	public WebsiteCaptureException(Throwable t) {
-		super(t);
-	}
 }

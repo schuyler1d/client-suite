@@ -40,11 +40,6 @@
 	</context-param>
 	
 	<context-param>
-		<param-name>tiles.generation.command</param-name>
-		<param-value>gdal2tiles -p raster</param-value>
-	</context-param>
-	
-	<context-param>
 		<param-name>map.kml.outlier.threshold</param-name>
 		<param-value>3000</param-value>
 	</context-param>
@@ -151,7 +146,7 @@
 	
 	<servlet>
 		<servlet-name>tileset</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.image.ImageTilesetProviderServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.server.tileset.TilesetServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>

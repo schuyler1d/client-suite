@@ -34,9 +34,9 @@ import at.ait.dme.yuma.suite.client.map.annotation.AnnotationLayer;
 import at.ait.dme.yuma.suite.client.map.annotation.ControlPointLayer;
 import at.ait.dme.yuma.suite.client.map.explore.KMLLayer;
 import at.ait.dme.yuma.suite.client.map.explore.SearchLayer;
-import at.ait.dme.yuma.suite.client.server.ImageTilesetProviderService;
-import at.ait.dme.yuma.suite.client.server.ImageTilesetProviderServiceAsync;
-import at.ait.dme.yuma.suite.client.server.exception.TilesetNotFoundException;
+import at.ait.dme.yuma.suite.client.server.TilesetService;
+import at.ait.dme.yuma.suite.client.server.TilesetServiceAsync;
+import at.ait.dme.yuma.suite.client.server.exception.TilesetNotAvailableException;
 import at.ait.dme.yuma.suite.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.client.tagcloud.annotation.TagEnabledAnnotationForm;
 import at.ait.dme.yuma.suite.client.util.LoadMask;
@@ -86,18 +86,19 @@ public class TiledImageComposite extends ImageComposite {
 	 */
 	private LoadMask loadMask;
 
-	public TiledImageComposite(String imageUrl) {
+	public TiledImageComposite(String mapUrl) {
 		panel = new AbsolutePanel();
 		panel.setSize("100%", "100%");
 		
 		loadMask = new LoadMask("Loading Map...");
 		loadMask.show();
-		requestTiles(imageUrl);
-
+		
+		loadTileset(mapUrl);
+		
 		initWidget(panel); 
         DOM.setStyleAttribute(panel.getElement(), "zIndex", "1");
 	}
-		
+	
 	public void init(final Tileset ts) {
 		loadMask.hide();
 		this.xExtent = ts.getWidth();
@@ -235,18 +236,25 @@ public class TiledImageComposite extends ImageComposite {
 		return new ImageRect(0, 0, xExtent, yExtent);
 	}
 	
-	private void requestTiles(final String url) {
-		final ImageTilesetProviderServiceAsync tileService = (ImageTilesetProviderServiceAsync) GWT
-			.create(ImageTilesetProviderService.class);
+	private void loadTileset(final String url) {
+		final TilesetServiceAsync tileService = (TilesetServiceAsync) GWT
+			.create(TilesetService.class);
 	
-		tileService.retrieveTileset(url, new AsyncCallback<Tileset>() {
-			public void onFailure(Throwable caught) {					
+		tileService.getTileset(url, new AsyncCallback<Tileset>() {
+			
+			public void onFailure(Throwable t) {					
 				try { 
-					throw caught;
-				} catch(TilesetNotFoundException tnfe) {
-					// System.out.println("ts not found");
-					generateTiles(url);
-				} catch (Throwable t) {
+					throw t;
+				} catch (TilesetNotAvailableException e) {
+					if (url.toLowerCase().endsWith("xml")) {
+						// Tileset scheme supported, but URL broken or remote connection down!
+						loadMask.hide();
+						ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+						MessageBox.error(errorMessages.error(), t.getMessage());
+					} else {
+						startOnTheFlyTiler(url);
+					}
+				} catch (Throwable other) {
 					loadMask.hide();
 					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
 					MessageBox.error(errorMessages.error(), t.getMessage());
@@ -259,28 +267,26 @@ public class TiledImageComposite extends ImageComposite {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void generateTiles(final String url) {
+	private void startOnTheFlyTiler(final String url) {
 		loadMask.hide();
 		loadMask = new LoadMask("Generating Tiles...");
 		loadMask.show();
 		
-		final ImageTilesetProviderServiceAsync tileService = (ImageTilesetProviderServiceAsync) GWT
-			.create(ImageTilesetProviderService.class);
+		final TilesetServiceAsync tileService = (TilesetServiceAsync) GWT
+			.create(TilesetService.class);
 
-		tileService.generateTileset(url, new AsyncCallback() {
-			public void onFailure(Throwable caught) {					
-				try { 
-					throw caught;				
-				} catch (Throwable t) {
-					loadMask.hide();
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
-					MessageBox.error(errorMessages.error(), t.getMessage());
-				}
+		tileService.startOnTheFlyTiler(url, new AsyncCallback() {
+
+			public void onFailure(Throwable t) {					
+				loadMask.hide();
+				ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+				MessageBox.error(errorMessages.error(), t.getMessage());
 			}
+			
 			public void onSuccess(Object result) {
 				Timer timer = new Timer() {
 					public void run() {
-						pollForTiles(url, this);									
+						pollOnTheFlyTiler(url, this);									
 					}						
 				};
 				timer.schedule(1000);				
@@ -288,11 +294,11 @@ public class TiledImageComposite extends ImageComposite {
 		});
 	}
 	
-	private void pollForTiles(final String url, final Timer timer) {
-		final ImageTilesetProviderServiceAsync tileService = (ImageTilesetProviderServiceAsync) GWT
-			.create(ImageTilesetProviderService.class);
+	private void pollOnTheFlyTiler(final String url, final Timer timer) {
+		final TilesetServiceAsync tileService = (TilesetServiceAsync) GWT
+			.create(TilesetService.class);
 
-		tileService.pollForTileset(url, new AsyncCallback<Tileset>() {
+		tileService.pollOnTheFlyTiler(url, new AsyncCallback<Tileset>() {
 			public void onFailure(Throwable caught) {					
 				try { 
 					throw caught;				

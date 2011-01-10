@@ -22,18 +22,14 @@
 package at.ait.dme.yuma.suite.server.annotation;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import at.ait.dme.yuma.suite.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.server.AnnotationService;
 import at.ait.dme.yuma.suite.client.server.exception.AnnotationServiceException;
-import at.ait.dme.yuma.suite.server.georeferencer.GeoreferencerUtils;
-import at.ait.dme.yuma.suite.server.map.transformation.ControlPoint;
 import at.ait.dme.yuma.suite.server.util.Config;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -88,15 +84,6 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 		Collection<Annotation> annotations = 
 			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId);
 		
-		// TODO this mess needs to be cleaned up...
-		if (objectId.startsWith("http://georeferencer")) {
-			@SuppressWarnings("unchecked")
-			List<ControlPoint> controlPoints = (List<ControlPoint>) getThreadLocalRequest().getSession().getAttribute("controlPoints");
-			for (ControlPoint p : controlPoints) {
-				annotations.add(GeoreferencerUtils.toAnnotation(p));
-			}
-		}
-		
 		return annotations;
 	}
 	
@@ -105,17 +92,6 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 		throws AnnotationServiceException {		
 		Collection<Annotation> annotations = 
 			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId, shapeTypes);
-		
-		if (objectId.startsWith("http://georeferencer")) {
-			if (shapeTypes.contains(GeoPoint.class.getName())) {
-				@SuppressWarnings("unchecked")
-				List<ControlPoint> controlPoints = (List<ControlPoint>) getThreadLocalRequest().getSession().getAttribute("controlPoints");
-				
-				for (ControlPoint p : controlPoints) {
-					annotations.add(GeoreferencerUtils.toAnnotation(p));
-				}
-			}
-		}
 
 		return annotations;
 	}

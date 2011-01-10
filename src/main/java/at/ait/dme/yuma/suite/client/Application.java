@@ -37,12 +37,8 @@ import at.ait.dme.yuma.suite.client.map.annotation.ControlPointForm;
 import at.ait.dme.yuma.suite.client.map.explore.ExplorationComposite;
 import at.ait.dme.yuma.suite.client.server.AuthenticationService;
 import at.ait.dme.yuma.suite.client.server.AuthenticationServiceAsync;
-import at.ait.dme.yuma.suite.client.server.WebsiteCaptureService;
-import at.ait.dme.yuma.suite.client.server.WebsiteCaptureServiceAsync;
-import at.ait.dme.yuma.suite.client.server.exception.TilesetGenerationException;
-import at.ait.dme.yuma.suite.client.server.exception.TilesetNotFoundException;
+import at.ait.dme.yuma.suite.client.server.exception.TilesetNotAvailableException;
 import at.ait.dme.yuma.suite.client.tagcloud.annotation.TagEnabledAnnotationForm;
-import at.ait.dme.yuma.suite.client.util.LoadMask;
 import at.ait.dme.yuma.suite.client.util.MinMaxWindowPanel;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -95,35 +91,14 @@ public class Application implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		String imageUrl = getRequestParameterValue("objectURL");
-		String htmlUrl = getRequestParameterValue("htmlURL");
 		
 		if (imageUrl != null) {
 			// Standard Web image annotation
 			initApplication(imageUrl);
-		} else if (htmlUrl != null) {
-			// Website annotation
-			final LoadMask loadMask = new LoadMask("Loading...");
-			loadMask.show();
-		
-			WebsiteCaptureServiceAsync captureService = (WebsiteCaptureServiceAsync) GWT
-					.create(WebsiteCaptureService.class);
-			captureService.captureSite(htmlUrl, new AsyncCallback<String>() {
-				public void onFailure(Throwable caught) {
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
-					Window.alert(errorMessages.imageNotFound());
-				}
-
-				public void onSuccess(String imageUrl) {
-					loadMask.hide();
-					initApplication(imageUrl);
-				}
-			});
 		}
 	}
 		
 	private void initApplication(String imageUrl) {
-		showHeader();		
-		
 		showImage(imageUrl); 
 		
 		// the image has to be completely loaded before we can show the annotations
@@ -166,8 +141,8 @@ public class Application implements EntryPoint {
 	 * show the image composite
 	 * 
 	 * @param imageUrl
-	 * @throws TilesetGenerationException 
-	 * @throws TilesetNotFoundException 
+	 * @throws TileGenerationStartedException 
+	 * @throws TilesetNotAvailableException 
 	 */
 	private void showImage(String imageUrl) {
 		if (Application.isInTileMode()) {									
@@ -275,74 +250,6 @@ public class Application implements EntryPoint {
 		tabPanel.add(expComposite, getConstants().tabExploration());
 	}
 
-	/**
-	 * show the header (search field and logo)
-	 */
-	private void showHeader() {
-		if (Application.isInTileMode()) return; 
-			
-		/*
-		final HorizontalPanel hPanel = new HorizontalPanel();
-		
-		//show the search field		
-		final TextBox searchTerm = new TextBox();
-		searchTerm.setStyleName("imageAnnotation-search-term");
-		searchTerm.addKeyDownHandler(new KeyDownHandler() {
-			public void onKeyDown(KeyDownEvent event) {
-				if(event.getNativeKeyCode()==KeyCodes.KEY_ENTER)
-					startSearch(searchTerm.getText());
-			}
-		});
-		hPanel.add(searchTerm);
-		
-		
-		// show the search button
-		Button search = new Button(getConstants().annotationSearch());
-		search.setStyleName("imageAnnotation-search");
-		search.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				startSearch(searchTerm.getText());
-			}	
-		});
-		hPanel.add(search);
-
-		// show the logo
-		String dbName = getDatabaseName();
-		if(dbName==null) dbName = "ait";
-		String logoPath = "images/"+dbName+".gif";
-		final Image logo = new Image(logoPath);
-		// workaround for IE caching issue see 
-		// http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/11851753ba99454d/6079e2e2b9aea4bf
-		DOM.setElementAttribute(logo.getElement(), "src", logoPath);
-		
-		// see also http://code.google.com/p/google-web-toolkit/issues/detail?id=2149
-		if(logo.getWidth()>0) {
-			RootPanel.get().add(hPanel,logo.getWidth()+20,50);			
-		} else {
-			logo.addLoadHandler(new LoadHandler() {
-				public void onLoad(LoadEvent event) {
-					RootPanel.get().add(hPanel,logo.getWidth()+20,50);					
-				}				
-			});
-		}
-		RootPanel.get().add(logo,10,10);
-		*/		
-	}
-	
-	/**
-	 * display the search result composite in a popup panel
-	 * 
-	 * @param searchTerm
-	 *
-	private void startSearch(String searchTerm) {
-		WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(10, 10, 1000, 400);
-		window.setCaption("Search");
-		window.setHideContentOnMove(false);
-		window.setWidget(new ImageAnnotationSearchResultComposite(searchTerm));
-		window.show();
-	}
-	*/
-	
 	/**
 	 * returns the image composite
 	 * 

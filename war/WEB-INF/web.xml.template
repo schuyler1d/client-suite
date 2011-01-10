@@ -160,7 +160,7 @@
 	
 	<servlet>
 		<servlet-name>tileset</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.image.ImageTilesetProviderServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.server.tileset.TilesetServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>

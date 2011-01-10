@@ -39,9 +39,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import at.ait.dme.yuma.suite.client.map.Tileset;
-import at.ait.dme.yuma.suite.client.server.exception.TilesetNotFoundException;
-import at.ait.dme.yuma.suite.server.image.ImageTilesetGenerator;
-import at.ait.dme.yuma.suite.server.image.ImageTilesetProviderServiceImpl;
+import at.ait.dme.yuma.suite.client.server.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.server.tileset.TilesetGenerator;
+import at.ait.dme.yuma.suite.server.tileset.TilesetServiceImpl;
 
 /**
  * tests the image tileset provider service
@@ -94,11 +94,11 @@ public class ImageTilesetProviderTest {
 	
 	@After
 	public void cleanUp() throws Exception {	
-		ImageTilesetProviderServiceImpl itps = new ImageTilesetProviderServiceImpl();
+		TilesetServiceImpl itps = new TilesetServiceImpl();
 		itps.init(null);
 
-		String imageDir = ImageTilesetGenerator.getRootPath() + "/"
-				+ ImageTilesetGenerator.createPathForImage(testImageUrl);
+		String imageDir = TilesetGenerator.getRootPath() + "/"
+				+ TilesetGenerator.createTilesetPath(testImageUrl);
 		deleteDir(new File(imageDir));
 			
 		imageServer.notifyStop();		
@@ -122,20 +122,20 @@ public class ImageTilesetProviderTest {
 	
 	@Test
 	public void testRetrieveTileset() throws Exception {
-		ImageTilesetProviderServiceImpl itps = new ImageTilesetProviderServiceImpl();
+		TilesetServiceImpl itps = new TilesetServiceImpl();
 		itps.init(null);
 		
 		try {
-			itps.retrieveTileset(testImageUrl);
+			itps.getTileset(testImageUrl);
 			fail("expected TilesetNotFoundException");
-		} catch(TilesetNotFoundException expected) {
+		} catch(TilesetNotAvailableException expected) {
 			// expected TilesetNotFoundException
 		}
 		
-		itps.generateTileset(testImageUrl);
+		itps.startOnTheFlyTiler(testImageUrl);
 		
 		Tileset result = null;
-		while((result=itps.pollForTileset(testImageUrl))==null) {
+		while((result=itps.pollOnTheFlyTiler(testImageUrl))==null) {
 			System.out.println(".");
 		}
 		
@@ -144,7 +144,7 @@ public class ImageTilesetProviderTest {
 		assertEquals(result.getWidth(), 1414);
 		assertEquals(result.getHeight(), 1100);				
 		assertEquals(result.getUrl(), "tiles/"+
-				ImageTilesetGenerator.createPathForImage(testImageUrl)+"/");
+				TilesetGenerator.createTilesetPath(testImageUrl)+"/");
 				
 	}
 	
@@ -153,7 +153,7 @@ public class ImageTilesetProviderTest {
 		int threads = 3;
 		final CountDownLatch startGate = new CountDownLatch(1);
 		final CountDownLatch endGate = new CountDownLatch(threads);			
-		final ImageTilesetProviderServiceImpl itps = new ImageTilesetProviderServiceImpl();
+		final TilesetServiceImpl itps = new TilesetServiceImpl();
 		itps.init(null);
 	
 		for (int i = 0; i < threads; i++) {
@@ -164,9 +164,9 @@ public class ImageTilesetProviderTest {
 					try {
 						startGate.await();										
 						try {
-							itps.generateTileset(testImageUrl);
+							itps.startOnTheFlyTiler(testImageUrl);
 							Tileset result = null;
-							while((result=itps.pollForTileset(testImageUrl))==null) {
+							while((result=itps.pollOnTheFlyTiler(testImageUrl))==null) {
 								System.out.println("thread "+index+": polling");
 								Thread.sleep(100*index);
 							}
@@ -176,7 +176,7 @@ public class ImageTilesetProviderTest {
 							assertEquals(result.getWidth(), 1414);
 							assertEquals(result.getHeight(), 1100);				
 							assertEquals(result.getUrl(), "tiles/"+
-									ImageTilesetGenerator.createPathForImage(testImageUrl)+"/");						
+									TilesetGenerator.createTilesetPath(testImageUrl)+"/");						
 						} catch(Throwable t) {
 							failed=true;
 						} finally {

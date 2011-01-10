@@ -48,9 +48,9 @@ import at.ait.dme.yuma.suite.client.image.shape.GeoPoint;
 import at.ait.dme.yuma.suite.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.server.annotation.AnnotationManager;
-import at.ait.dme.yuma.suite.server.image.ImageTilesetGenerator;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPoint;
 import at.ait.dme.yuma.suite.server.map.transformation.ControlPointManager;
+import at.ait.dme.yuma.suite.server.tileset.TilesetGenerator;
 import at.ait.dme.yuma.suite.server.util.Config;
 
 public class ControlPointManagerTest {
@@ -102,7 +102,7 @@ public class ControlPointManagerTest {
 		
 		// read control points from file
 		List<ControlPoint> controlPoints = 
-			readControlPointFile(path+ImageTilesetGenerator.createPathForImage(imageUrl));
+			readControlPointFile(path+TilesetGenerator.createTilesetPath(imageUrl));
 		
 		// store them as annotations
 		for(ControlPoint cp : controlPoints) {

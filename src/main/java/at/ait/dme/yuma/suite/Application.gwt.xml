@@ -37,7 +37,7 @@
   		class='at.ait.dme.yuma.suite.server.map.ToKMLServlet'/>
   		
   	<servlet path='/tileset' 
-  		class='at.ait.dme.yuma.suite.server.image.ImageTilesetProviderServiceImpl'/>
+  		class='at.ait.dme.yuma.suite.server.tileset.TilesetServiceImpl'/>
   		
   	<servlet path='/transformation' 
   		class='at.ait.dme.yuma.suite.server.map.transformation.TransformationServiceImpl'/>	
@@ -55,9 +55,7 @@
   	<extend-property name="locale" values="fr"/>
   	
   	<script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=', {
-	    'dme.arcs.ac.at': 'ABQIAAAAapqr3t_QNx5qoEDwcY3APxQOTUCOOXOy3Y0KbgnegeNBXMKDUBQMks9UTACosFr8F2z3zIu2plEoBA',
 	    'dme.ait.ac.at': 'ABQIAAAAapqr3t_QNx5qoEDwcY3APxSHOYmJ0Gm-4W76tcH6UPz2tSaGORRKM04b8Aeh1YaavSss6bxsoNoZQQ',
-		'62.218.164.175': 'ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BSNXNqvEJUB-F_8FkyqgxCsb4TYehQydJLD993xOqeesxhuC0e8vH7YoQ',
-		'winxp.planets-project.ait.ac.at': 'ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BRCuUnDtqbliiVK4Oyexaohbq-NIxQ8CHdT6FqvJQT9NbRMmLk_K9wT3Q'
+		'62.218.164.175': 'ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BSNXNqvEJUB-F_8FkyqgxCsb4TYehQydJLD993xOqeesxhuC0e8vH7YoQ'
 	  }[window.location.host],'" />	  	
 </module>

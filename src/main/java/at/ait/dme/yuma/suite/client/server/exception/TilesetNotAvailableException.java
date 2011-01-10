@@ -19,27 +19,29 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.client.server;
+package at.ait.dme.yuma.suite.client.server.exception;
 
-import at.ait.dme.yuma.suite.client.server.exception.WebsiteCaptureException;
+import java.io.Serializable;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-
-@RemoteServiceRelativePath("captureSite")
 /**
- * interfact to the website capture service
+ * Thrown by the tileset service when there is no cached tileset available
+ * for the specified URL, or the cached tileset is corrupt for some reason.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-public interface WebsiteCaptureService extends RemoteService{
+public class TilesetNotAvailableException extends Exception implements Serializable {
 
-	/**
-	 * capture the site for the url provided and return a relative url to the created image
-	 * 
-	 * @param url
-	 * @return relative url to the image
-	 * @throws WebsiteCaptureException
-	 */
-	public String captureSite(String url) throws WebsiteCaptureException;
+	private static final long serialVersionUID = 5195817700909626856L;
+
+	public TilesetNotAvailableException() { }
+	
+	public TilesetNotAvailableException(String message) {
+		super(message);
+	}	
+	
+	public TilesetNotAvailableException(Throwable cause) {
+		super(cause);
+	}
+	
 }
