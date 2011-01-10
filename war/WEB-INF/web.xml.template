@@ -11,7 +11,7 @@
 	
 	<context-param>
 		<param-name>authentication.keystore.dir</param-name>
-		<param-value>/opt/tomcat/webapps/yuma/keys</param-value>
+		<param-value>/var/lib/tomcat6/webapps/yuma/keys</param-value>
 	</context-param>
 
 	<context-param>
@@ -31,17 +31,12 @@
 
 	<context-param>
 		<param-name>website.capture.target.path</param-name>
-		<param-value>/opt/tomcat/webapps/yuma/captures</param-value>
+		<param-value>/var/lib/tomcat6/webapps/yuma-suite/captures</param-value>
 	</context-param>
 	
 	<context-param>
 		<param-name>tiles.root.path</param-name>
-		 <param-value>/opt/tomcat/webapps/yuma/tiles</param-value>
-	</context-param>
-	
-	<context-param>
-		<param-name>tiles.generation.command</param-name>
-		<param-value>gdal2tiles -p raster</param-value>
+		 <param-value>/var/lib/tomcat6/webapps/yuma-suite/tiles</param-value>
 	</context-param>
 	
 	<context-param>
