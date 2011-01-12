@@ -170,15 +170,6 @@
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
 		<url-pattern>/yuma/metadata</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>georeferencer</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.georeferencer.LandingPageServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>georeferencer</servlet-name>
-		<url-pattern>/yuma/georeferencer</url-pattern>
-	</servlet-mapping>
 
 	<!--  restrict access to key store -->
 	<security-constraint>

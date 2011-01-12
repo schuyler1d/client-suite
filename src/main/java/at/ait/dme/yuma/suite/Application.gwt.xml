@@ -47,9 +47,6 @@
         
     <servlet path='/metadata' 
         class='at.ait.dme.yuma.suite.server.map.MapMetadataServiceImpl'/>
-        
-  	<servlet path='/georeferencer' 
-  		class='at.ait.dme.yuma.suite.server.georeferencer.LandingPageServlet'/>
  
   	<extend-property name="locale" values="de"/>
   	<extend-property name="locale" values="fr"/>
