@@ -91,7 +91,6 @@ public class YumaImageClient implements EntryPoint {
 	 * load the module and initialize the application
 	 */
 	public void onModuleLoad() {
-		System.out.println("onModuleLoad - image");
 		String imageUrl = getRequestParameterValue("objectURL");
 		
 		if (imageUrl != null) {
