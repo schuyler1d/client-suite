@@ -33,7 +33,7 @@
 		%>
 		<base href="<%=base%>" />							
 					
-		<script language='javascript' src='yuma/yuma.nocache.js'>
+		<script language='javascript' src='image/image.nocache.js'>
 		</script>
 		
 		<script src="js/ait-jsutils.js"></script> 

@@ -3,7 +3,7 @@
 <project name="yuma-suite" default="create-war" basedir=".">
 	
 	<property name="gwt.war.dir" location="war" />
-	<property name="gwt.module.name" value="at.ait.dme.yuma.suite.Application" />
+	<property name="gwt.module.name" value="at.ait.dme.yuma.suite.image.Image" />
 	<property name="root.package" value="at.ait" />
 	
 	<property name="src.dir" location="src/main/java" />

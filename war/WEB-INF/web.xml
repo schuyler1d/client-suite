@@ -65,110 +65,110 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jspServlet</servlet-name>
-		<url-pattern>/yuma/annotate.jsp</url-pattern>
+		<url-pattern>/image/annotate.jsp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>jspServlet</servlet-name>
-		<url-pattern>/yuma/annotate-tiled.jsp</url-pattern>
+		<url-pattern>/image/annotate-tiled.jsp</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>annotation</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.annotation.AnnotationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.annotation.AnnotationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>annotation</servlet-name>
-		<url-pattern>/yuma/annotation</url-pattern>
+		<url-pattern>/image/annotation</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>authentication</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.auth.AuthenticationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.auth.AuthenticationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>authentication</servlet-name>
-		<url-pattern>/yuma/auth</url-pattern>
+		<url-pattern>/image/auth</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>geocoder</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.map.GeocoderServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.map.GeocoderServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>geocoder</servlet-name>
-		<url-pattern>/yuma/geocoder</url-pattern>
+		<url-pattern>/image/geocoder</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>findplace</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.map.FindPlaceServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.map.FindPlaceServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>findplace</servlet-name>
-		<url-pattern>/yuma/findplace</url-pattern>
+		<url-pattern>/image/findplace</url-pattern>
 	</servlet-mapping>
   
     <servlet>
         <servlet-name>semanticenrichment</servlet-name>
-        <servlet-class>at.ait.dme.yuma.suite.server.enrichment.SemanticEnrichmentServiceImpl</servlet-class>
+        <servlet-class>at.ait.dme.yuma.suite.core.server.enrichment.SemanticEnrichmentServiceImpl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>semanticenrichment</servlet-name>
-        <url-pattern>/yuma/semanticenrichment</url-pattern>
+        <url-pattern>/image/semanticenrichment</url-pattern>
     </servlet-mapping>
 
 	<servlet>
 		<servlet-name>annotate</servlet-name>
-		<jsp-file>/yuma/annotate.jsp</jsp-file>
+		<jsp-file>/image/annotate.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>annotate</servlet-name>
-		<url-pattern>/yuma/annotate</url-pattern>
+		<url-pattern>/image/annotate</url-pattern>
 	</servlet-mapping>
 		
 	<servlet>
 		<servlet-name>importkml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.map.KMLConverterServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.map.KMLConverterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>importkml</servlet-name>
-		<url-pattern>/yuma/importkml</url-pattern>
+		<url-pattern>/image/importkml</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>tokml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.map.ToKMLServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.map.ToKMLServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tokml</servlet-name>
-		<url-pattern>/yuma/tokml</url-pattern>
+		<url-pattern>/image/tokml</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>tileset</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.tileset.TilesetServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.tileset.TilesetServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>
-		<url-pattern>/yuma/tileset</url-pattern>
+		<url-pattern>/image/tileset</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.map.transformation.TransformationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.map.transformation.TransformationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<url-pattern>/yuma/transformation</url-pattern>
+		<url-pattern>/image/transformation</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.server.map.MapMetadataServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.core.server.map.MapMetadataServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<url-pattern>/yuma/metadata</url-pattern>
+		<url-pattern>/image/metadata</url-pattern>
 	</servlet-mapping>
 
 	<!--  restrict access to key store -->
