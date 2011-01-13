@@ -5,4 +5,26 @@
 	<inherits name="at.ait.dme.yuma.suite.core.Core" />
        
 	<entry-point class='at.ait.dme.yuma.suite.image.client.YumaImageClient'/>
+
+  	<servlet path='/geocoder' 
+  		class='at.ait.dme.yuma.suite.image.server.map.GeocoderServiceImpl'/>
+  
+  	<servlet path='/findplace' 
+  		class='at.ait.dme.yuma.suite.image.server.map.FindPlaceServiceImpl'/>
+
+  	<servlet path='/importkml' 
+  		class='at.ait.dme.yuma.suite.image.server.map.KMLConverterServlet'/>
+  		
+  	<servlet path='/tokml' 
+  		class='at.ait.dme.yuma.suite.image.server.map.ToKMLServlet'/>
+  		
+  	<servlet path='/tileset' 
+  		class='at.ait.dme.yuma.suite.image.server.tileset.TilesetServiceImpl'/>
+  		
+  	<servlet path='/transformation' 
+  		class='at.ait.dme.yuma.suite.image.server.map.transformation.TransformationServiceImpl'/>
+  			
+    <servlet path='/metadata' 
+        class='at.ait.dme.yuma.suite.image.server.map.MapMetadataServiceImpl'/>
+
 </module>

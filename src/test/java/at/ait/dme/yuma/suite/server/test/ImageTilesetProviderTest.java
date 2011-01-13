@@ -38,10 +38,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import at.ait.dme.yuma.suite.core.client.map.Tileset;
-import at.ait.dme.yuma.suite.core.client.server.exception.TilesetNotAvailableException;
-import at.ait.dme.yuma.suite.core.server.tileset.TilesetGenerator;
-import at.ait.dme.yuma.suite.core.server.tileset.TilesetServiceImpl;
+import at.ait.dme.yuma.suite.image.client.map.Tileset;
+import at.ait.dme.yuma.suite.image.client.server.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.image.server.tileset.TilesetGenerator;
+import at.ait.dme.yuma.suite.image.server.tileset.TilesetServiceImpl;
 
 /**
  * tests the image tileset provider service

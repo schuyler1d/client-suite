@@ -60,7 +60,7 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 	@Override
 	public Annotation createAnnotation(Annotation annotation) 
 			throws AnnotationServiceException {
-		
+
 		return new AnnotationManager(getThreadLocalRequest()).createAnnotation(annotation);
 	}
 
