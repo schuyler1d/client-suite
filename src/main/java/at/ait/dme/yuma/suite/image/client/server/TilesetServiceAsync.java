@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.client.server;
 
-import at.ait.dme.yuma.suite.image.client.map.Tileset;
+import at.ait.dme.yuma.suite.map.client.Tileset;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

@@ -45,8 +45,8 @@ import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationForm;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationTreeNode;
 import at.ait.dme.yuma.suite.image.client.annotation.StandardImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.client.map.annotation.AnnotationLayer;
 import at.ait.dme.yuma.suite.image.client.tagcloud.TagCloud;
+import at.ait.dme.yuma.suite.map.client.annotation.AnnotationLayer;
 
 /**
  * A sub-class of {@link StandardImageAnnotationForm} that works with the {@link AnnotationLayer}'s

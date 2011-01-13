@@ -66,10 +66,7 @@
 	<servlet-mapping>
 		<servlet-name>jspServlet</servlet-name>
 		<url-pattern>/image/annotate.jsp</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>jspServlet</servlet-name>
-		<url-pattern>/image/annotate-tiled.jsp</url-pattern>
+		<url-pattern>/map/annotate.jsp</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -79,6 +76,7 @@
 	<servlet-mapping>
 		<servlet-name>annotation</servlet-name>
 		<url-pattern>/image/annotation</url-pattern>
+		<url-pattern>/map/annotation</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -88,24 +86,25 @@
 	<servlet-mapping>
 		<servlet-name>authentication</servlet-name>
 		<url-pattern>/image/auth</url-pattern>
+		<url-pattern>/map/auth</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>geocoder</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.GeocoderServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.GeocoderServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>geocoder</servlet-name>
-		<url-pattern>/image/geocoder</url-pattern>
+		<url-pattern>/map/geocoder</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>findplace</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.FindPlaceServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.FindPlaceServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>findplace</servlet-name>
-		<url-pattern>/image/findplace</url-pattern>
+		<url-pattern>/map/findplace</url-pattern>
 	</servlet-mapping>
   
     <servlet>
@@ -114,7 +113,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>semanticenrichment</servlet-name>
-        <url-pattern>/image/semanticenrichment</url-pattern>
+        <url-pattern>/map/semanticenrichment</url-pattern>
     </servlet-mapping>
 
 	<servlet>
@@ -124,51 +123,52 @@
 	<servlet-mapping>
 		<servlet-name>annotate</servlet-name>
 		<url-pattern>/image/annotate</url-pattern>
+		<url-pattern>/map/annotate</url-pattern>
 	</servlet-mapping>
 		
 	<servlet>
 		<servlet-name>importkml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.KMLConverterServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.KMLConverterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>importkml</servlet-name>
-		<url-pattern>/image/importkml</url-pattern>
+		<url-pattern>/map/importkml</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>tokml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.ToKMLServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.ToKMLServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tokml</servlet-name>
-		<url-pattern>/image/tokml</url-pattern>
+		<url-pattern>/map/tokml</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>tileset</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.tileset.TilesetServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.tileset.TilesetServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>
-		<url-pattern>/image/tileset</url-pattern>
+		<url-pattern>/map/tileset</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.transformation.TransformationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.transformation.TransformationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<url-pattern>/image/transformation</url-pattern>
+		<url-pattern>/map/transformation</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.MapMetadataServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.MapMetadataServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<url-pattern>/image/metadata</url-pattern>
+		<url-pattern>/map/metadata</url-pattern>
 	</servlet-mapping>
 
 	<!--  restrict access to key store -->

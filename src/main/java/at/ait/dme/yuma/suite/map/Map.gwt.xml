@@ -1,0 +1,30 @@
+<module rename-to="map">
+	<inherits name='com.google.gwt.user.User'/>
+	<inherits name="com.google.gwt.i18n.I18N"/>
+
+	<inherits name="at.ait.dme.yuma.suite.image.Image" />
+       
+	<entry-point class='at.ait.dme.yuma.suite.map.client.YumaMapClient'/>
+
+  	<servlet path='/geocoder' 
+  		class='at.ait.dme.yuma.suite.map.server.geo.GeocoderServiceImpl'/>
+  
+  	<servlet path='/findplace' 
+  		class='at.ait.dme.yuma.suite.map.server.geo.FindPlaceServiceImpl'/>
+
+  	<servlet path='/importkml' 
+  		class='at.ait.dme.yuma.suite.map.server.geo.KMLConverterServlet'/>
+  		
+  	<servlet path='/tokml' 
+  		class='at.ait.dme.yuma.suite.map.server.geo.ToKMLServlet'/>
+  		
+  	<servlet path='/transformation' 
+  		class='at.ait.dme.yuma.suite.map.server.geo.transformation.TransformationServiceImpl'/>
+  			
+    <servlet path='/metadata' 
+        class='at.ait.dme.yuma.suite.map.server.geo.MapMetadataServiceImpl'/>
+        
+	<servlet path='/tileset' 
+  		class='at.ait.dme.yuma.suite.map.server.tileset.TilesetServiceImpl'/>
+        
+</module>

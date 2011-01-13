@@ -23,8 +23,8 @@ package at.ait.dme.yuma.suite.image.client.server;
 
 import java.io.IOException;
 
-import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.image.client.server.exception.FindPlaceException;
+import at.ait.dme.yuma.suite.map.client.annotation.WGS84Coordinate;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

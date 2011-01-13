@@ -24,10 +24,10 @@ package at.ait.dme.yuma.suite.image.client.server;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-import at.ait.dme.yuma.suite.image.client.map.Tileset;
 import at.ait.dme.yuma.suite.image.client.server.exception.TilesetNotAvailableException;
 import at.ait.dme.yuma.suite.image.client.server.exception.TilingException;
 import at.ait.dme.yuma.suite.image.client.server.exception.UnsupportedTileSchemeException;
+import at.ait.dme.yuma.suite.map.client.Tileset;
 
 /**
  * Interface to the tileset provider service.

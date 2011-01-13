@@ -22,10 +22,10 @@
 package at.ait.dme.yuma.suite.image.client.server;
 
 import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.image.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.image.client.server.exception.GeocoderException;
 import at.ait.dme.yuma.suite.image.client.server.exception.TransformationException;
+import at.ait.dme.yuma.suite.map.client.annotation.WGS84Coordinate;
+import at.ait.dme.yuma.suite.map.client.annotation.XYCoordinate;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

@@ -34,13 +34,13 @@ import at.ait.dme.yuma.suite.core.client.util.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.image.client.map.TiledImageComposite;
-import at.ait.dme.yuma.suite.image.client.map.annotation.ControlPointComposite;
-import at.ait.dme.yuma.suite.image.client.map.annotation.ControlPointForm;
-import at.ait.dme.yuma.suite.image.client.map.explore.ExplorationComposite;
 import at.ait.dme.yuma.suite.image.client.server.exception.TilesetNotAvailableException;
 import at.ait.dme.yuma.suite.image.client.shape.ShapeTypeRegistry;
 import at.ait.dme.yuma.suite.image.client.tagcloud.annotation.TagEnabledAnnotationForm;
+import at.ait.dme.yuma.suite.map.client.TiledImageComposite;
+import at.ait.dme.yuma.suite.map.client.annotation.ControlPointComposite;
+import at.ait.dme.yuma.suite.map.client.annotation.ControlPointForm;
+import at.ait.dme.yuma.suite.map.client.explore.ExplorationComposite;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
