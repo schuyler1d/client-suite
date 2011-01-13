@@ -19,46 +19,59 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.client.server;
+package at.ait.dme.yuma.suite.image.server.map.geo.transformation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.image.client.map.annotation.XYCoordinate;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class FindPlaceResponse implements IsSerializable {
+/**
+ * Wraps the result of a control point interpolation.
+ * 
+ * @author Rainer Simon
+ *
+ */
+public class TransformationResult {
 	
 	/**
-	 * Place name
-	 */
-	public String name; 
-	
-	/**
-	 * Place map coordinates (x/y)
+	 * The map image coordinates (X/Y)
 	 */
 	public XYCoordinate xy;
 	
 	/**
-	 * Place geo-coordinates (lat/lon)
+	 * The geographical coordinates (lat/lon)
 	 */
 	public WGS84Coordinate latlon;
 	
 	/**
-	 * Neighbours used for interpolation
+	 * Region name (city, area, etc.) or <code>null</code>
 	 */
-	public List<String> neighbours;
+	public String placename;
 	
-	public FindPlaceResponse() {
-		// Required for GWT serialization
+	/**
+	 * The neighbor control points used for the interpolation
+	 */
+	public List<ControlPoint> neighbors;
+
+	public TransformationResult(XYCoordinate xy, WGS84Coordinate latlon, List<ControlPoint> neighbors) {
+		this(xy, latlon, neighbors, null);
 	}
 	
-	public FindPlaceResponse(String name, XYCoordinate xy, WGS84Coordinate latlon, List<String> neighbours) {
-		this.name = name;
+	public TransformationResult(XYCoordinate xy, WGS84Coordinate latlon, List<ControlPoint> neighbors, String placename) {
 		this.xy = xy;
 		this.latlon = latlon;
-		this.neighbours = neighbours;
+		this.neighbors = neighbors;
+		this.placename = placename;
 	}
 
+	public List<String> getNeighbors() {
+		List<String> result = new ArrayList<String>();
+		for(ControlPoint cp : neighbors) {
+			result.add(cp.getName());
+		}
+		return result;
+	}
 }

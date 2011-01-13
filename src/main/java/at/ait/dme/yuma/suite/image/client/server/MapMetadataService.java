@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.client.server;
 
-import at.ait.dme.yuma.suite.map.client.explore.MapMetadata;
+import at.ait.dme.yuma.suite.image.client.map.explore.MapMetadata;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

@@ -30,7 +30,7 @@ import at.ait.dme.yuma.suite.core.client.util.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.CreateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.DeleteImageAnnotationClickHandler;
-import at.ait.dme.yuma.suite.map.client.annotation.GoogleMapsComposite;
+import at.ait.dme.yuma.suite.image.client.map.annotation.GoogleMapsComposite;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

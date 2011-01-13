@@ -3,6 +3,27 @@
 	<inherits name="com.google.gwt.i18n.I18N"/>
 	
 	<inherits name="at.ait.dme.yuma.suite.core.Core" />
-       
+  
+  	<servlet path='/geocoder' 
+  		class='at.ait.dme.yuma.suite.image.server.map.geo.GeocoderServiceImpl'/>
+  
+  	<servlet path='/findplace' 
+  		class='at.ait.dme.yuma.suite.image.server.map.geo.FindPlaceServiceImpl'/>
+
+  	<servlet path='/importkml' 
+  		class='at.ait.dme.yuma.suite.image.server.map.geo.KMLConverterServlet'/>
+  		
+  	<servlet path='/tokml' 
+  		class='at.ait.dme.yuma.suite.image.server.map.geo.ToKMLServlet'/>
+  		
+  	<servlet path='/tileset' 
+  		class='at.ait.dme.yuma.suite.image.server.map.tileset.TilesetServiceImpl'/>
+  		
+  	<servlet path='/transformation' 
+  		class='at.ait.dme.yuma.suite.image.server.map.geo.transformation.TransformationServiceImpl'/>	
+        
+    <servlet path='/metadata' 
+        class='at.ait.dme.yuma.suite.image.server.map.geo.MapMetadataServiceImpl'/>       
+
 	<entry-point class='at.ait.dme.yuma.suite.image.client.YumaImageClient'/>
 </module>

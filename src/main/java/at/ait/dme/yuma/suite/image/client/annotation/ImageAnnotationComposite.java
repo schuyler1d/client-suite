@@ -47,7 +47,7 @@ import at.ait.dme.yuma.suite.image.client.annotation.handler.CreateImageAnnotati
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.HasImageAnnotationSelectionHandlers;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.map.client.annotation.GoogleMapsComposite;
+import at.ait.dme.yuma.suite.image.client.map.annotation.GoogleMapsComposite;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
