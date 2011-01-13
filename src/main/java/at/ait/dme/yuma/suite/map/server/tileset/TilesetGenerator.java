@@ -34,7 +34,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 
 import at.ait.dme.magicktiler.MagickTiler;
-import at.ait.dme.magicktiler.TMSTiler;
+import at.ait.dme.magicktiler.tms.TMSTiler;
 import at.ait.dme.yuma.suite.image.client.server.exception.TilingException;
 import at.ait.dme.yuma.suite.map.client.Tileset;
 

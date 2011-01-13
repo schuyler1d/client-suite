@@ -26,9 +26,9 @@ import at.ait.dme.gwt.openlayers.client.Map;
 import at.ait.dme.gwt.openlayers.client.Pixel;
 import at.ait.dme.gwt.openlayers.client.event.EventListener;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -89,10 +89,10 @@ public class MapPopup extends PopupPanel {
 
 		this.setWidget(panel);
 		
-		DeferredCommand.addCommand(new Command() {
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 			@Override
 			public void execute() {
-				updatePosition();
+				updatePosition();			
 			}
 		});
 	}

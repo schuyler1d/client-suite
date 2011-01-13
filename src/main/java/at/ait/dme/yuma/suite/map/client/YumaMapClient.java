@@ -93,6 +93,7 @@ public class YumaMapClient implements EntryPoint {
 	 * load the module and initialize the application
 	 */
 	public void onModuleLoad() {
+		System.out.println("onModuleLoad - map");
 		String imageUrl = getRequestParameterValue("objectURL");
 		
 		if (imageUrl != null) {

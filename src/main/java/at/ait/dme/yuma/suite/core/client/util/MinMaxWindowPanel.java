@@ -23,9 +23,9 @@ package at.ait.dme.yuma.suite.core.client.util;
 
 import org.gwt.mosaic.core.client.Rectangle;
 import org.gwt.mosaic.ui.client.Caption;
+import org.gwt.mosaic.ui.client.Caption.CaptionRegion;
 import org.gwt.mosaic.ui.client.ImageButton;
 import org.gwt.mosaic.ui.client.WindowPanel;
-import org.gwt.mosaic.ui.client.Caption.CaptionRegion;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
