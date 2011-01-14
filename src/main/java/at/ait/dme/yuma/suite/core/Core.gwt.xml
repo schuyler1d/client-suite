@@ -10,8 +10,6 @@
  	
  	<inherits name='org.gwt.mosaic.Mosaic'/>
 	<inherits name='org.gwt.mosaic.actions.Actions' />
- 	
- 	<inherits name="at.ait.dme.gwt.openlayers.OpenLayersWrapper"/>
  
   	<extend-property name="locale" values="de"/>
   	<extend-property name="locale" values="fr"/>

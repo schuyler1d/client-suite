@@ -1,6 +1,3 @@
 <module rename-to="imagecore">
-	<inherits name='com.google.gwt.user.User'/>
-	<inherits name="com.google.gwt.i18n.I18N"/>
-	
 	<inherits name="at.ait.dme.yuma.suite.core.Core" />    
 </module>
