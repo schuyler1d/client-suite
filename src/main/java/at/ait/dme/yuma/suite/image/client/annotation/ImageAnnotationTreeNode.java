@@ -24,9 +24,9 @@ package at.ait.dme.yuma.suite.image.client.annotation;
 import org.gwt.mosaic.ui.client.WindowPanel;
 
 import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.annotation.MediaFragment;
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.util.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.CreateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.DeleteImageAnnotationClickHandler;

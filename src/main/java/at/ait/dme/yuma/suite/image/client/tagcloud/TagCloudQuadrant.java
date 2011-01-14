@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.image.client.tagcloud;
 
 import java.util.ArrayList;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.image.client.tagcloud.raphael.AnimationEventHandler;
 import at.ait.dme.yuma.suite.image.client.tagcloud.raphael.Raphael;
 

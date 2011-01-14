@@ -30,9 +30,9 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation.MediaType;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation.Scope;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.core.server.annotation.JSONAnnotationHandler;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.server.Data;

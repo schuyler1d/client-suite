@@ -19,21 +19,31 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.annotation;
+package at.ait.dme.yuma.suite.core.client.gui;
 
-import java.io.Serializable;
-
-import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
- * A base class for all types of media fragments.
- * 
+ * A PopupPanel which implements a simple AJAX 'Loading' indicator
+ * at the center of the screen. 
+ *
  * @author Rainer Simon
  */
-public abstract class MediaFragment implements Serializable, IsSerializable {
-
-	private static final long serialVersionUID = -7282881259431812861L;
-
-	public abstract boolean isVoid();
+public class LoadMask extends PopupPanel {
 	
+	public LoadMask(String label) {
+		this.setStyleName("loadmask");
+
+		FlowPanel inner = new FlowPanel();
+		inner.setStyleName("inner");
+		inner.add(new Image("images/loading.gif"));
+		inner.add(new Label(label));
+		
+		this.setWidget(inner);
+		center();
+	}
+
 }

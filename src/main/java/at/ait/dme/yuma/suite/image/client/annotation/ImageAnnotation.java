@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.client.annotation;
 
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.image.client.shape.VoidShape;
 
 /**

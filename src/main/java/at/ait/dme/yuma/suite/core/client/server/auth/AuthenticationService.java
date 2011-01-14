@@ -19,10 +19,9 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server;
+package at.ait.dme.yuma.suite.core.client.server.auth;
 
 import at.ait.dme.yuma.suite.core.client.User;
-import at.ait.dme.yuma.suite.core.client.server.exception.AuthenticationException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -63,7 +62,7 @@ public interface AuthenticationService extends RemoteService {
 	 * 
 	 * @param authToken
 	 * @return user
-	 * @throws AuthenticationException
+	 * @throws AuthenticationServiceException
 	 */
-	public User authenticate(String authToken, String signature) throws AuthenticationException;
+	public User authenticate(String authToken, String signature) throws AuthenticationServiceException;
 }

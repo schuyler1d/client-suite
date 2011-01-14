@@ -19,22 +19,22 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server.exception;
+package at.ait.dme.yuma.suite.core.client.server.auth;
 
 import java.io.Serializable;
 
-public class AuthenticationException extends Exception implements Serializable {
+public class AuthenticationServiceException extends Exception implements Serializable {
 	private static final long serialVersionUID = 436546556735034687L;
 
-	public AuthenticationException() {
+	public AuthenticationServiceException() {
 		
 	}
 	
-	public AuthenticationException(String message) {
+	public AuthenticationServiceException(String message) {
 		super(message);
 	}	
 	
-	public AuthenticationException(Throwable cause) {
+	public AuthenticationServiceException(Throwable cause) {
 		super(cause);
 	}
 }

@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.image.client.map;
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.util.LoadMask;
+import at.ait.dme.yuma.suite.core.client.gui.LoadMask;
 import at.ait.dme.yuma.suite.image.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.client.ImageRect;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;

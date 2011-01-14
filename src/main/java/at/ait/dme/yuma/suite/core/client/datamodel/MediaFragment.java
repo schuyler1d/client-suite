@@ -19,21 +19,21 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server.exception;
+package at.ait.dme.yuma.suite.core.client.datamodel;
 
 import java.io.Serializable;
 
-public class AnnotationServiceException extends RESTfulServiceException implements Serializable {
-	private static final long serialVersionUID = -1021896871854802248L;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-	public AnnotationServiceException() {
-	}
+/**
+ * A base class for all types of media fragments.
+ * 
+ * @author Rainer Simon
+ */
+public abstract class MediaFragment implements Serializable, IsSerializable {
+
+	private static final long serialVersionUID = -7282881259431812861L;
+
+	public abstract boolean isVoid();
 	
-	public AnnotationServiceException(String message) {
-		super(message);
-	}
-	
-	public AnnotationServiceException(int statusCode) {
-	    super(statusCode);
-	}
 }

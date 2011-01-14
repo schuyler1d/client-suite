@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.util;
+package at.ait.dme.yuma.suite.core.client.gui;
 
 import org.gwt.mosaic.core.client.Rectangle;
 import org.gwt.mosaic.ui.client.Caption;

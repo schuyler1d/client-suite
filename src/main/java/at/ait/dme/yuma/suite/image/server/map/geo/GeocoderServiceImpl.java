@@ -45,7 +45,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.server.util.Config;
 import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.image.client.map.annotation.XYCoordinate;

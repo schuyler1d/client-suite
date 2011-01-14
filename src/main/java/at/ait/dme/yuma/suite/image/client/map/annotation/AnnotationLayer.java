@@ -43,7 +43,7 @@ import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
 import at.ait.dme.gwt.openlayers.client.handler.Handler;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
 import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.util.AnnotationUtils;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;

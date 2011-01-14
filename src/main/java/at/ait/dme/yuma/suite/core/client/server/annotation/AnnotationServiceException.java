@@ -19,31 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.util;
+package at.ait.dme.yuma.suite.core.client.server.annotation;
 
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
+import java.io.Serializable;
 
-/**
- * A PopupPanel which implements a simple AJAX 'Loading' indicator
- * at the center of the screen. 
- *
- * @author Rainer Simon
- */
-public class LoadMask extends PopupPanel {
-	
-	public LoadMask(String label) {
-		this.setStyleName("loadmask");
+import at.ait.dme.yuma.suite.core.client.server.RESTfulServiceException;
 
-		FlowPanel inner = new FlowPanel();
-		inner.setStyleName("inner");
-		inner.add(new Image("images/loading.gif"));
-		inner.add(new Label(label));
-		
-		this.setWidget(inner);
-		center();
+public class AnnotationServiceException extends RESTfulServiceException implements Serializable {
+	private static final long serialVersionUID = -1021896871854802248L;
+
+	public AnnotationServiceException() {
 	}
-
+	
+	public AnnotationServiceException(String message) {
+		super(message);
+	}
+	
+	public AnnotationServiceException(int statusCode) {
+	    super(statusCode);
+	}
 }

@@ -23,10 +23,10 @@ package at.ait.dme.yuma.suite.image.client.annotation.handler.tag;
 
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticAmbiguity;
-import at.ait.dme.yuma.suite.core.client.server.SemanticEnrichmentService;
-import at.ait.dme.yuma.suite.core.client.server.SemanticEnrichmentServiceAsync;
-import at.ait.dme.yuma.suite.core.client.server.exception.SemanticEnrichmentServiceException;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentService;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceException;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.client.annotation.StandardImageAnnotationForm;
 
@@ -42,7 +42,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
 
     private StandardImageAnnotationForm annotationForm;
     private ImageAnnotationComposite annotationComposite;
-    private Collection<SemanticAmbiguity> entities = null;
+    private Collection<SemanticTagSuggestions> entities = null;
     private boolean serviceEnabled = true;
     
 	/**
@@ -80,7 +80,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
         SemanticEnrichmentServiceAsync service = (SemanticEnrichmentServiceAsync) 
         	GWT.create(SemanticEnrichmentService.class);
         service.getTagSuggestions(text, WHICH_ENRICHMENT_SERVICE, 
-        		new AsyncCallback<Collection<SemanticAmbiguity>>() {
+        		new AsyncCallback<Collection<SemanticTagSuggestions>>() {
         	
             public void onFailure(Throwable caught) {
                 // annotationComposite.disableLoadingImage();
@@ -95,7 +95,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
                 }
             }
 
-            public void onSuccess(Collection<SemanticAmbiguity> result) {
+            public void onSuccess(Collection<SemanticTagSuggestions> result) {
                 entities = result;
                 if(entities != null) {
                     annotationForm.displaySuggestedLinks(entities);

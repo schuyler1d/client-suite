@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server.exception;
+package at.ait.dme.yuma.suite.core.client.server;
 
 import java.io.Serializable;
 

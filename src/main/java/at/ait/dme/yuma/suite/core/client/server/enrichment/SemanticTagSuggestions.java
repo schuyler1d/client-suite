@@ -19,18 +19,20 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.annotation;
+package at.ait.dme.yuma.suite.core.client.server.enrichment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 
 /**
  * A group of {@link SemanticTag}s (with a name and type). 
  *
  * @author Rainer Simon
  */
-public class SemanticAmbiguity implements Serializable {
+public class SemanticTagSuggestions implements Serializable {
 	private static final long serialVersionUID = 5225121871824438123L;
 
 	/**

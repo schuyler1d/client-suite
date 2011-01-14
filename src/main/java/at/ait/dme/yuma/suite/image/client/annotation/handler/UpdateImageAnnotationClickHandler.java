@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.image.client.annotation.handler;
 
 import java.util.Date;
 
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationComposite;

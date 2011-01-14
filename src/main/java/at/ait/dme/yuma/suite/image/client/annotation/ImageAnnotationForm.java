@@ -23,8 +23,8 @@ package at.ait.dme.yuma.suite.image.client.annotation;
 
 import java.util.List;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation.Scope;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
 
 import com.google.gwt.user.client.ui.Composite;
 

@@ -44,8 +44,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import at.ait.dme.yuma.suite.core.client.User;
-import at.ait.dme.yuma.suite.core.client.server.AuthenticationService;
-import at.ait.dme.yuma.suite.core.client.server.exception.AuthenticationException;
+import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
+import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceException;
 import at.ait.dme.yuma.suite.core.server.util.Config;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -91,7 +91,7 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements
 	}
 
 	@Override
-	public User authenticate(String authToken, String signature) throws AuthenticationException {		
+	public User authenticate(String authToken, String signature) throws AuthenticationServiceException {		
 		try {
 			User user = authenticateAdmin();
 			if(user!=null) return user;
@@ -132,7 +132,7 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements
 	            }
     		}
             if(!appSignValid)
-            	throw new AuthenticationException("invalid signature");
+            	throw new AuthenticationServiceException("invalid signature");
 			
 			// TODO we bind the user to the session. later when we deactivate
             // anonymous and unsafe access we can check for the user
@@ -141,10 +141,10 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements
     		return user;
 		} catch (GeneralSecurityException gse) {
 			logger.info("failed to generate key", gse);
-			throw new AuthenticationException(gse);
+			throw new AuthenticationServiceException(gse);
 		} catch (Throwable t) {
 			logger.fatal(t.getMessage(), t);
-			throw new AuthenticationException(t);
+			throw new AuthenticationServiceException(t);
 		}
 	}
 

@@ -31,10 +31,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation.MediaType;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation.Scope;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
 

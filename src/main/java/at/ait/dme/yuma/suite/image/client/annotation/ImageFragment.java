@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.client.annotation;
 
-import at.ait.dme.yuma.suite.core.client.annotation.MediaFragment;
+import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.image.client.ImageRect;
 import at.ait.dme.yuma.suite.image.client.shape.Shape;
 import at.ait.dme.yuma.suite.image.client.shape.VoidShape;

@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.client.annotation.handler.tag;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.image.client.annotation.StandardImageAnnotationForm;
 import at.ait.dme.yuma.suite.image.client.annotation.StandardImageAnnotationForm.Checkbox;
 

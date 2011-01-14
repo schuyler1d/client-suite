@@ -19,12 +19,10 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server;
+package at.ait.dme.yuma.suite.core.client.server.enrichment;
 
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticAmbiguity;
-import at.ait.dme.yuma.suite.core.client.server.exception.SemanticEnrichmentServiceException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -42,6 +40,6 @@ public interface SemanticEnrichmentService extends RemoteService {
 	 */
 	public static final String OPENCALAIS_DBPEDIA_LOOKUP = "openCalaisDBpediaLookup";
 	
-    public Collection<SemanticAmbiguity> getTagSuggestions(String text, String service) throws SemanticEnrichmentServiceException;
+    public Collection<SemanticTagSuggestions> getTagSuggestions(String text, String service) throws SemanticEnrichmentServiceException;
 
 }

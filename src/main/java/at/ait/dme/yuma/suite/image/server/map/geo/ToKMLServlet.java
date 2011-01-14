@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import at.ait.dme.yuma.suite.core.client.server.exception.AnnotationServiceException;
+import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.image.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.image.client.server.exception.TransformationException;

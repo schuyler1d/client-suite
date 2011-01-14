@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionEvent;

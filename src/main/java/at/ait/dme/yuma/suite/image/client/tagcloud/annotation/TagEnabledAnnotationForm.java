@@ -37,10 +37,10 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticAmbiguity;
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.server.SemanticEnrichmentService;
-import at.ait.dme.yuma.suite.core.client.server.SemanticEnrichmentServiceAsync;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentService;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
+import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationForm;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationTreeNode;
@@ -142,11 +142,11 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 			public void onKeyDown(KeyDownEvent event) {
 	            if (event.getNativeKeyCode() == ' ' || event.getNativeKeyCode() == KeyCodes.KEY_BACKSPACE) {
 	            	enrichmentService.getTagSuggestions(textArea.getValue(), WHICH_ENRICHMENT_SERVICE, 
-	            			new AsyncCallback<Collection<SemanticAmbiguity>>() {
+	            			new AsyncCallback<Collection<SemanticTagSuggestions>>() {
 						@Override
-						public void onSuccess(Collection<SemanticAmbiguity> result) {
+						public void onSuccess(Collection<SemanticTagSuggestions> result) {
 							if (result.size() > 0 && !tagCloud.isVisible()) tagCloud.show();
-							for (SemanticAmbiguity group : result) {
+							for (SemanticTagSuggestions group : result) {
 								for (SemanticTag tag : group.getAmbiguousTags()) {
 									tagCloud.addTag(tag, TAG_FONT_SIZE, "#FFD77D");
 								}

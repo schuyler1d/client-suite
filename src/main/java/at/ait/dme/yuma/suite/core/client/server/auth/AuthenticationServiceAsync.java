@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server;
+package at.ait.dme.yuma.suite.core.client.server.auth;
 
 import at.ait.dme.yuma.suite.core.client.User;
 

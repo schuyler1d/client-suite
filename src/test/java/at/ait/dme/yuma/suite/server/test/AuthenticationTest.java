@@ -44,7 +44,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import at.ait.dme.yuma.suite.core.client.User;
-import at.ait.dme.yuma.suite.core.client.server.exception.AuthenticationException;
+import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceException;
 import at.ait.dme.yuma.suite.core.server.auth.AuthenticationServiceImpl;
 
 public class AuthenticationTest {
@@ -110,7 +110,7 @@ public class AuthenticationTest {
    		try {
    			as.authenticate(authToken, signature);
    	   		fail("should throw AuthenticationException");
-   		} catch(AuthenticationException ae) {}
+   		} catch(AuthenticationServiceException ae) {}
    		
    		// wrong app name
 		signature = encrypt("{\"app\": \"someotherapp\", \"appSign\": \"csa_"
@@ -118,7 +118,7 @@ public class AuthenticationTest {
    		try {
    			as.authenticate(authToken, signature);
    	   		fail("should throw AuthenticationException");
-   		} catch(AuthenticationException ae) {}
+   		} catch(AuthenticationServiceException ae) {}
    		
    		// wrong user
    		signature = encrypt("{\"app\": \"someapp\", \"appSign\": \"wronguser_"
@@ -126,14 +126,14 @@ public class AuthenticationTest {
    		try {
    			as.authenticate(authToken, signature);
    	   		fail("should throw AuthenticationException");
-   		} catch(AuthenticationException ae) {}
+   		} catch(AuthenticationServiceException ae) {}
    		
    		// wrong signature
    		signature = encrypt("{\"app\": \"someapp\", \"appSign\": \"user_\"}", externalAppPrivateKey);   		
    		try {
    			as.authenticate(authToken, signature);
    	   		fail("should throw AuthenticationException");
-   		} catch(AuthenticationException ae) {}
+   		} catch(AuthenticationServiceException ae) {}
    		
    		// expired timestamp
    		signature = encrypt("{\"app\": \"someapp\", \"appSign\": \"wronguser_"
@@ -141,7 +141,7 @@ public class AuthenticationTest {
    		try {
    			as.authenticate(authToken, signature);
    	   		fail("should throw AuthenticationException");
-   		} catch(AuthenticationException ae) {}   		 
+   		} catch(AuthenticationServiceException ae) {}   		 
 	}
 	
 	@Test
@@ -158,7 +158,7 @@ public class AuthenticationTest {
    		try {
    			as.authenticate(authToken, signature);
    	   		fail("should throw AuthenticationException");
-   		} catch(AuthenticationException ae) {}   			   		
+   		} catch(AuthenticationServiceException ae) {}   			   		
 	}		
 	
 	private String encrypt(String plainText, Key key) throws NoSuchAlgorithmException, 

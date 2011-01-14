@@ -19,12 +19,12 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.server;
+package at.ait.dme.yuma.suite.core.client.server.annotation;
 
 import java.util.Collection;
 import java.util.Set;
 
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

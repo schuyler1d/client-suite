@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.client.server;
 
-import at.ait.dme.yuma.suite.core.client.annotation.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.image.client.map.annotation.XYCoordinate;
 import at.ait.dme.yuma.suite.image.client.server.exception.GeocoderException;

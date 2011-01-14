@@ -24,9 +24,9 @@ package at.ait.dme.yuma.suite.image.client.annotation.handler;
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.server.AnnotationService;
-import at.ait.dme.yuma.suite.core.client.server.AnnotationServiceAsync;
-import at.ait.dme.yuma.suite.core.client.server.exception.RESTfulServiceException;
+import at.ait.dme.yuma.suite.core.client.server.RESTfulServiceException;
+import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.image.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotationComposite;

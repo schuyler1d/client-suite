@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.annotation;
+package at.ait.dme.yuma.suite.core.client.datamodel;
 
 import java.io.Serializable;
 import java.util.ArrayList;

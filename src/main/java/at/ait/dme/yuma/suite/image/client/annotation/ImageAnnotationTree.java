@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.image.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 

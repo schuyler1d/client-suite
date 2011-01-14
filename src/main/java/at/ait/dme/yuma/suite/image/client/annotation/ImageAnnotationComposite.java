@@ -35,11 +35,11 @@ import org.gwt.mosaic.ui.client.layout.HasLayoutManager;
 import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
 import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation;
-import at.ait.dme.yuma.suite.core.client.annotation.Annotation.Scope;
-import at.ait.dme.yuma.suite.core.client.server.AnnotationService;
-import at.ait.dme.yuma.suite.core.client.server.AnnotationServiceAsync;
-import at.ait.dme.yuma.suite.core.client.util.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
+import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.image.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.client.StandardImageComposite;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
