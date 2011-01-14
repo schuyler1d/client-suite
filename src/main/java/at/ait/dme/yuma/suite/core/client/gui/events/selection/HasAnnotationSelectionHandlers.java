@@ -39,5 +39,5 @@ public interface HasAnnotationSelectionHandlers extends HasHandlers {
 	   * @param handler the selection handler
 	   * @return {@link HandlerRegistration} used to remove this handler
 	   */
-	 HandlerRegistration addImageAnnotationSelectionHandler(AnnotationSelectionHandler handler);
+	 HandlerRegistration addAnnotationSelectionHandler(AnnotationSelectionHandler handler);
 }

@@ -74,7 +74,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  * @author Christian Sadilek
  */
-public class StandardImageComposite extends MediaViewer {
+public class ImageViewer extends MediaViewer {
 	private static final int IMAGE_OFFSET_LEFT = 11;
 	private static final int IMAGE_OFFSET_TOP = 10;
 	private static final String PX = "px";
@@ -147,7 +147,7 @@ public class StandardImageComposite extends MediaViewer {
 	 * 
 	 * @param imageUrl
 	 */
-	public StandardImageComposite(String imageUrl) {
+	public ImageViewer(String imageUrl) {
 		// set up the image and the image panel
 		image = new Image(imageUrl);
 		image.addMouseWheelHandler(new MouseWheelHandler() {
@@ -229,7 +229,7 @@ public class StandardImageComposite extends MediaViewer {
 		imagePanel.add(fragment, 5, 55);
 		fragment.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				editAnnotation(null, false);
+				editAnnotation(null);
 			}
 		});
 		DOM.setStyleAttribute(fragment.getElement(), "zIndex", "15");
@@ -391,7 +391,7 @@ public class StandardImageComposite extends MediaViewer {
 	 * @param forceVisible
 	 */
 	@Override
-	public void editAnnotation(Annotation annotation, boolean forceVisible) {
+	public void editAnnotation(Annotation annotation) {
 		ShapePanel fragmentPanel = fragmentPanels.get(annotation);
 		Shape shape = (fragmentPanel == null) ? new Ellipse(100, 100, new Color(0, 0, 255), 2)
 				: fragmentPanel.getShape();
@@ -408,8 +408,7 @@ public class StandardImageComposite extends MediaViewer {
 			activeFragmentControlPanel.show();
 			activeFragmentPanel.setShapeControlPanel(activeFragmentControlPanel);
 		} else {
-			if (!forceVisible)
-				stopEditing();
+			stopEditing();
 		}
 	}
 
@@ -627,7 +626,7 @@ public class StandardImageComposite extends MediaViewer {
 	}
 
 	@Override
-	public MediaFragment getMediaFragment() {
+	public MediaFragment getActiveMediaFragment() {
 		Shape shape = getActiveShape();
 		if(shape==null) return null;
 		

@@ -33,9 +33,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
- * Base class for image composites
+ * Base class for all YUMA media viewers. 
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
 public abstract class MediaViewer extends Composite implements 
 		HasAnnotationSelectionHandlers, HasLoadHandlers {
@@ -43,17 +44,44 @@ public abstract class MediaViewer extends Composite implements
 	final protected HandlerManager handlerManager = new HandlerManager(this);	
 	
 	@Override
-	public HandlerRegistration addImageAnnotationSelectionHandler(
-			AnnotationSelectionHandler handler) {
+	public HandlerRegistration addAnnotationSelectionHandler(AnnotationSelectionHandler handler) {
 		return handlerManager.addHandler(AnnotationSelectionEvent.getType(), handler);
 	}
 	
-	public abstract MediaFragment getMediaFragment();		
-	public abstract void showAnnotation(Annotation annotation);	
+	/**
+	 * Returns the media fragment that is currently active in this media viewer.
+	 * @return the currently active media fragment
+	 */
+	public abstract MediaFragment getActiveMediaFragment();		
+		
+	/**
+	 * Selects or de-selects an annotation in this media viewer
+	 * @param annotation the annotation
+	 * @param selected true for select, false for de-selecet
+	 */
 	public abstract void selectAnnotation(Annotation annotation, boolean selected);
+	
+	/**
+	 * Shows an annotation in this media viewer
+	 * @param annotation the annotation
+	 */
+	public abstract void showAnnotation(Annotation annotation);	
+	
+	/**
+	 * Hides an annotation in this media viewer (by removing it from the GUI)
+	 * @param annotation the annotation
+	 */
 	public abstract void hideAnnotation(Annotation annotation);
 	
-	public abstract void editAnnotation(Annotation annotation, boolean forceVisible);
+	/**
+	 * Starts editing mode for the specified annotation
+	 * @param annotation the annotation
+	 */
+	public abstract void editAnnotation(Annotation annotation);
+	
+	/**
+	 * Stops editing mode (for all annotations)
+	 */
 	public abstract void stopEditing();	
 		
 }

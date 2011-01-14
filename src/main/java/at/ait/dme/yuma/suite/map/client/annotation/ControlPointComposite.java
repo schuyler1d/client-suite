@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
 import at.ait.dme.yuma.suite.core.client.gui.events.CreateClickHandler;
 import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.map.client.TiledImageComposite;
+import at.ait.dme.yuma.suite.map.client.TileBasedImageViewer;
 
 /**
  * Composite used to manage control points
@@ -49,7 +49,7 @@ public class ControlPointComposite extends TreeViewComposite {
 	 */
 	private PushButton createButton;
 
-	public ControlPointComposite(TiledImageComposite imageComposite, 
+	public ControlPointComposite(TileBasedImageViewer imageComposite, 
 			ControlPointForm imageAnnotationForm, Set<String> shapeTypes)   {
 	
 		super(imageComposite, imageAnnotationForm, shapeTypes);

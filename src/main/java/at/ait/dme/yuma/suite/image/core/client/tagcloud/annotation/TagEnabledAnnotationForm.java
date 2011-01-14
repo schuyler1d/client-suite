@@ -45,7 +45,7 @@ import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentSer
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
+import at.ait.dme.yuma.suite.image.core.client.ImageViewer;
 import at.ait.dme.yuma.suite.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.map.client.annotation.AnnotationLayer;
 
@@ -108,7 +108,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 		this.annotationComposite = annotationComposite;
 		this.tagCloud = tagCloud;
 	
-		((StandardImageComposite)annotationComposite.getImageComposite()).setAnnotationForm(this);
+		((ImageViewer)annotationComposite.getImageComposite()).setAnnotationForm(this);
 		
 		if (update && annotationTreeNode.getAnnotation().hasTags()) {
 			for (SemanticTag t : annotationTreeNode.getAnnotation().getTags()) {

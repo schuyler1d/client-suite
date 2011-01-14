@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.map.client.explore;
 
-import at.ait.dme.yuma.suite.map.client.TiledImageComposite;
+import at.ait.dme.yuma.suite.map.client.TileBasedImageViewer;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -58,7 +58,7 @@ public class KMLOverlayPanel extends FlowPanel {
 	private static final String KML_CHINESE_ROADS = "http://dme.ait.ac.at/yuma/kml/prc_roads.kml";
 	private static final String KML_RAINERS_LOCATION = "http://geekvault.no5.at/blogloc/kml/aboutgeo.kml";
 	
-	public KMLOverlayPanel(TiledImageComposite imageComposite) {
+	public KMLOverlayPanel(TileBasedImageViewer imageComposite) {
 		this.kmlLayer = imageComposite.getKMLLayer();
 		setStyleName("explore-KMLOverlay");
 		

@@ -57,7 +57,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
  * 
  * @author Rainer Simon
  */
-public class TiledImageComposite extends MediaViewer {
+public class TileBasedImageViewer extends MediaViewer {
 		
 	/**
 	 * The main GUI panel
@@ -87,7 +87,7 @@ public class TiledImageComposite extends MediaViewer {
 	 */
 	private LoadingPopup loadMask;
 
-	public TiledImageComposite(String mapUrl) {
+	public TileBasedImageViewer(String mapUrl) {
 		panel = new AbsolutePanel();
 		panel.setSize("100%", "100%");
 		
@@ -172,7 +172,7 @@ public class TiledImageComposite extends MediaViewer {
 	}
 	
 	@Override
-	public void editAnnotation(Annotation annotation, boolean forceVisible) {
+	public void editAnnotation(Annotation annotation) {
 		if (lControlPoints.isVisible()) {
 			lControlPoints.showActiveFragmentPanel((ImageAnnotation) annotation, true);
 		} else {
@@ -217,7 +217,7 @@ public class TiledImageComposite extends MediaViewer {
 	}
 
 	@Override
-	public ImageFragment getMediaFragment() {
+	public ImageFragment getActiveMediaFragment() {
 		if (lControlPoints.isVisible()) {
 			return null; //lControlPoints.getActiveShape();
 		} else {

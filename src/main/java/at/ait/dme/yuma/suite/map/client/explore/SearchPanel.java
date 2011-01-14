@@ -26,7 +26,7 @@ import org.gwt.mosaic.ui.client.MessageBox;
 import at.ait.dme.yuma.suite.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.map.client.TiledImageComposite;
+import at.ait.dme.yuma.suite.map.client.TileBasedImageViewer;
 import at.ait.dme.yuma.suite.map.client.server.FindPlaceResponse;
 import at.ait.dme.yuma.suite.map.client.server.FindPlaceService;
 import at.ait.dme.yuma.suite.map.client.server.FindPlaceServiceAsync;
@@ -65,7 +65,7 @@ public class SearchPanel extends FlowPanel {
     	"X/Y: @x@/@y@<br/><br/>" +
 		"Interpolated from: ";
 	
-	public SearchPanel(TiledImageComposite imageComposite) {
+	public SearchPanel(TileBasedImageViewer imageComposite) {
 		this.searchLayer = imageComposite.getSearchLayer();		
 		I18NConstants i18n = YumaImageClient.getConstants();
 		

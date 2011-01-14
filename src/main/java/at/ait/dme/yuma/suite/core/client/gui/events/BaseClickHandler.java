@@ -93,7 +93,7 @@ public abstract class BaseClickHandler implements ClickHandler {
 	 */
 	protected void addFragment(Annotation annotation) {
 		MediaViewer imageComposite=annotationComposite.getImageComposite();
-		MediaFragment fragment = imageComposite.getMediaFragment();
+		MediaFragment fragment = imageComposite.getActiveMediaFragment();
 		if(fragment == null) {
 			// fragment = new MediaFragment(new VoidShape());
 		}

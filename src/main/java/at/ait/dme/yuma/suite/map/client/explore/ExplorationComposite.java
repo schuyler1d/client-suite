@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.map.client.explore;
 
 import at.ait.dme.yuma.suite.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.map.client.TiledImageComposite;
+import at.ait.dme.yuma.suite.map.client.TileBasedImageViewer;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
@@ -50,7 +50,7 @@ public class ExplorationComposite extends Composite {
 	 */
 	private StackLayoutPanel containerPanel;
 	
-	public ExplorationComposite(TiledImageComposite imageComposite) {		
+	public ExplorationComposite(TileBasedImageViewer imageComposite) {		
 		// Container stack panel
 		containerPanel = new StackLayoutPanel(Unit.EM);
 		

@@ -34,7 +34,7 @@ import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectio
 import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceAsync;
-import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
+import at.ait.dme.yuma.suite.image.core.client.ImageViewer;
 import at.ait.dme.yuma.suite.image.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.core.client.shape.ShapeTypeRegistry;
 import at.ait.dme.yuma.suite.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
@@ -141,7 +141,7 @@ public class YumaImageClient implements EntryPoint {
 	 * @throws TilesetNotAvailableException 
 	 */
 	private void showImage(String imageUrl) {
-		imageComposite = new StandardImageComposite(imageUrl);
+		imageComposite = new ImageViewer(imageUrl);
 		// RootPanel.get().add(imageComposite, 10, 80);
 		RootPanel.get().add(imageComposite, 10, 10);
 	}	
@@ -178,10 +178,10 @@ public class YumaImageClient implements EntryPoint {
 
 		annComposite = new TreeViewComposite(
 				imageComposite, 
-				new TagEnabledAnnotationForm(((StandardImageComposite)imageComposite).getTagCloud()),
+				new TagEnabledAnnotationForm(((ImageViewer)imageComposite).getTagCloud()),
 				ShapeTypeRegistry.allTypes());			
 
-		annComposite.addImageAnnotationSelectionHandler(new AnnotationSelectionHandler() {
+		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
 			public void onAnnotationSelection(AnnotationSelectionEvent event) {
 				imageComposite.selectAnnotation(event.getAnnotation(), event.isSelected());

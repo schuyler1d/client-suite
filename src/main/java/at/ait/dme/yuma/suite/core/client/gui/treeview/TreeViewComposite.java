@@ -46,7 +46,7 @@ import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
+import at.ait.dme.yuma.suite.image.core.client.ImageViewer;
 import at.ait.dme.yuma.suite.image.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.map.client.annotation.GoogleMapsComposite;
 
@@ -144,7 +144,7 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 		createTree(shapeTypes);		
 		
 		// Register annotation selection handler on image composite
-		imageComposite.addImageAnnotationSelectionHandler(new AnnotationSelectionHandler() {
+		imageComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
 			public void onAnnotationSelection(AnnotationSelectionEvent event) {
 				final AnnotationTreeNode node = 
@@ -274,17 +274,17 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 				// if we update an existing annotation we first have to remove the
 				// existing fragment and show an active fragment panel instead.
 				if(update && annotationTreeNode.getImageFragment()!=null) {					
-					imageComposite.editAnnotation(annotationTreeNode.getAnnotation(), true);
+					imageComposite.editAnnotation(annotationTreeNode.getAnnotation());
 					imageComposite.hideAnnotation(annotationTreeNode.getAnnotation());
 				} else {
-					imageComposite.editAnnotation(null, true);
+					imageComposite.editAnnotation(null);
 				}
 			}
 		} else {
 			annotateButton.setEnabled(false);
 			annotateFragmentButton.setEnabled(false);
 			annotationFormPanel.add(imageAnnotationForm);
-			if(fragmentAnnotation) imageComposite.editAnnotation(null, true);
+			if(fragmentAnnotation) imageComposite.editAnnotation(null);
 		}
 		
 		layout();
@@ -303,7 +303,7 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 			boolean canceled) {
 	
 		if (!YumaImageClient.isInTileMode())
-			((StandardImageComposite)imageComposite).getTagCloud().fadeoutAndClear();
+			((ImageViewer)imageComposite).getTagCloud().fadeoutAndClear();
 		
 		if(annotationTreeNode==null) {
 			annotationFormPanel.clear();
@@ -446,7 +446,7 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 	}
 
 	@Override
-	public HandlerRegistration addImageAnnotationSelectionHandler(
+	public HandlerRegistration addAnnotationSelectionHandler(
 			AnnotationSelectionHandler handler) {
 		return handlerManager.addHandler(AnnotationSelectionEvent.getType(), handler);
 	}
