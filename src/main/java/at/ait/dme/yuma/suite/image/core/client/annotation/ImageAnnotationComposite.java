@@ -50,13 +50,13 @@ import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.Imag
 import at.ait.dme.yuma.suite.image.core.client.map.annotation.GoogleMapsComposite;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.LocaleInfo;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
@@ -152,12 +152,13 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 				
 				annotationTree.selectAnnotationTreeNode(node, event.isSelected());
 				if(event.isSelected()) {
-					DeferredCommand.addCommand(new Command(){
-						public void execute() { 		
-							scrollPanel.ensureVisible(node.getAnnotationTreeItem());
+					Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+						@Override
+						public void execute() {
+							scrollPanel.ensureVisible(node.getAnnotationTreeItem());		
 						}
 					});
-				} 
+				}			
 			}
 		});
 		
@@ -260,10 +261,12 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		
 		if(annotationTreeNode!=null) {
 			annotationTreeNode.showAnnotationForm(imageAnnotationForm);
-			DeferredCommand.addCommand(new Command(){
-				public void execute() { 
-					scrollPanel.ensureVisible(imageAnnotationForm);
-			    }
+			
+			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+				@Override
+				public void execute() {
+					scrollPanel.ensureVisible(imageAnnotationForm);	
+				}
 			});
 			
 			if(fragmentAnnotation) {
@@ -307,11 +310,12 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 			annotateFragmentButton.setEnabled(true);
 		} else {
 			annotationTreeNode.hideAnnotationForm();
-			DeferredCommand.addCommand(new Command(){
-				public void execute() { 
+			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+				@Override
+				public void execute() {
 					scrollPanel.setScrollPosition(scrollPosition);
 					annotationTree.setSelectedItem(annotationTreeNode.getAnnotationTreeItem());
-			    }
+				}
 			});
 		}
 		

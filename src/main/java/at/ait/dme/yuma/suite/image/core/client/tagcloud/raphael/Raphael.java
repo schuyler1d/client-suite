@@ -54,13 +54,13 @@ public class Raphael extends JavaScriptObject {
 	
 	public final native Rect rect(int x, int y, int width, int height, int cornerRadius, String fill, String stroke, float opacity, MouseEventHandler handler) /*-{
 		return this.rect(x, y, width, height, cornerRadius).attr({fill:fill, stroke:stroke, opacity:opacity}).mouseover(
-			function(event) { handler.@at.ait.dme.yuma.suite.image.client.tagcloud.raphael.MouseEventHandler::onMouseOver(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
+			function(event) { handler.@at.ait.dme.yuma.suite.image.core.client.tagcloud.raphael.MouseEventHandler::onMouseOver(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
 		).mousemove(
-			function(event) { handler.@at.ait.dme.yuma.suite.image.client.tagcloud.raphael.MouseEventHandler::onMouseMove(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
+			function(event) { handler.@at.ait.dme.yuma.suite.image.core.client.tagcloud.raphael.MouseEventHandler::onMouseMove(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
 		).mouseout(
-			function(event) { handler.@at.ait.dme.yuma.suite.image.client.tagcloud.raphael.MouseEventHandler::onMouseOut(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
+			function(event) { handler.@at.ait.dme.yuma.suite.image.core.client.tagcloud.raphael.MouseEventHandler::onMouseOut(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
 		).click(
-			function(event) { handler.@at.ait.dme.yuma.suite.image.client.tagcloud.raphael.MouseEventHandler::onClick(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
+			function(event) { handler.@at.ait.dme.yuma.suite.image.core.client.tagcloud.raphael.MouseEventHandler::onClick(Lcom/google/gwt/dom/client/NativeEvent;)(event); }
 		); 
 	}-*/;
 	

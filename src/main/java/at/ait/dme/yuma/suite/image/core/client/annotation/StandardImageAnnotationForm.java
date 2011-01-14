@@ -34,9 +34,9 @@ import at.ait.dme.yuma.suite.image.core.client.annotation.handler.UpdateImageAnn
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.tag.ImageAnnotationKeyDownHandler;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.tag.SelectImageAnnotationTagClickHandler;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -101,12 +101,12 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 	public void layout() {
 		if (rdPublic != null) {
 			final boolean pub = rdPublic.getValue();
-			final boolean prv = rdPrivate.getValue();
-			DeferredCommand.addCommand(new Command() {
+			final boolean prv = rdPrivate.getValue();	
+			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 				@Override
 				public void execute() {
 					rdPublic.setValue(pub);
-					rdPrivate.setValue(prv);
+					rdPrivate.setValue(prv);			
 				}
 			});
 		}

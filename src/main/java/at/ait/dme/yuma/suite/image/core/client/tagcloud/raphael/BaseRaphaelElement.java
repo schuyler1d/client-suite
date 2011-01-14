@@ -73,7 +73,7 @@ public class BaseRaphaelElement extends JavaScriptObject {
 	public final native void fade(float opacity, int duration, int delay, AnimationEventHandler handler) /*-{
 		this.animate({translate:'0,0'}, delay, function() {
 				this.animate({opacity:opacity}, duration, function() {
-					handler.@at.ait.dme.yuma.suite.image.client.tagcloud.raphael.AnimationEventHandler::onAnimationComplete()();
+					handler.@at.ait.dme.yuma.suite.image.core.client.tagcloud.raphael.AnimationEventHandler::onAnimationComplete()();
 				});
 		});
 	}-*/;

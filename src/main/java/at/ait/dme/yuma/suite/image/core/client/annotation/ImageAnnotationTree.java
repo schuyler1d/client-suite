@@ -31,14 +31,14 @@ import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
@@ -137,9 +137,10 @@ public class ImageAnnotationTree extends Tree {
 		
 		// show the fragment
 		if(annotation.hasFragment()) {
-			DeferredCommand.addCommand(new Command(){
-				public void execute() { 		
-					imageComposite.showFragment(node.getAnnotation());
+			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+				@Override
+				public void execute() {
+					imageComposite.showFragment(node.getAnnotation());	
 				}
 			});
 		}
@@ -177,8 +178,9 @@ public class ImageAnnotationTree extends Tree {
 	public void selectAnnotationTreeNode(final ImageAnnotationTreeNode node, boolean selected) {
 		if(selected) {
 			node.setStyleName("imageAnnotation-selected");
-			DeferredCommand.addCommand(new Command(){
-				public void execute() { 		
+			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+				@Override
+				public void execute() {
 					setSelectedItem(node.getAnnotationTreeItem());
 					ensureSelectedItemVisible();
 				}

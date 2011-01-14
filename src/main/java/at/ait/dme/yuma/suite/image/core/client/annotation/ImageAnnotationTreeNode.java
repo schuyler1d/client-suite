@@ -123,7 +123,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 
 		if (annotation.getCreated() != null) {
 			headerDate.setText("("
-					+ DateTimeFormat.getShortDateTimeFormat().format(annotation.getLastModified())
+					+ DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_SHORT).format(annotation.getLastModified())
 					+ ")");
 			headerDate.setStyleName("imageAnnotation-header-date");
 		}
