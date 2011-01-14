@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.server.util;
+package at.ait.dme.yuma.suite.core.server;
 
 import java.io.IOException;
 import java.io.InputStream;

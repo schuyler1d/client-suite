@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.image.client.annotation;
 
 import org.gwt.mosaic.ui.client.WindowPanel;
 
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
@@ -420,7 +420,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 * @return mailto link
 	 */
 	private String createFlagLink() {
-		ErrorMessages msg = (ErrorMessages) GWT.create(ErrorMessages.class);
+		I18NErrorMessages msg = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 
 		// TODO refactor (just a prototype)!
 		String baseUrl = YumaImageClient.getBaseUrl().replace("image-annotation-frontend",

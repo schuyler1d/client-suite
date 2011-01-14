@@ -34,7 +34,7 @@ import org.gwt.mosaic.ui.client.layout.BorderLayoutData;
 import org.gwt.mosaic.ui.client.layout.HasLayoutManager;
 import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
@@ -371,7 +371,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		imageAnnotationService.listAnnotations(YumaImageClient.getImageUrl(), shapeTypes,
 			new AsyncCallback<Collection<Annotation>>() {
 				public void onFailure(Throwable caught) {
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 					MessageBox.error(errorMessages.error(), errorMessages.failedToReadAnnotations());
 				}
 

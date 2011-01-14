@@ -27,12 +27,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
-import at.ait.dme.yuma.suite.core.client.util.AnnotationUtils;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.image.client.ImageRect;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
+import at.ait.dme.yuma.suite.image.client.map.MapUtils;
 import at.ait.dme.yuma.suite.image.client.server.TransformationService;
 import at.ait.dme.yuma.suite.image.client.server.TransformationServiceAsync;
 import at.ait.dme.yuma.suite.image.client.shape.Point;
@@ -174,7 +174,7 @@ public class GoogleMapsComposite extends Composite {
 		transformationService.transformCoordinates(YumaImageClient.getImageUrl(), xyCoords,
 			new AsyncCallback<List<WGS84Coordinate>>() {
 				public void onFailure(Throwable caught) {
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 					Window.alert(errorMessages.transformationError());
 				}
 
@@ -305,7 +305,7 @@ public class GoogleMapsComposite extends Composite {
 		
 		for (ImageAnnotation annotation : annotations) {
 			if(!annotation.hasFragment()) continue;
-			sb.append(AnnotationUtils.shapeToVectorFeature(((ImageFragment)annotation.getFragment()).getShape()).
+			sb.append(MapUtils.shapeToVectorFeature(((ImageFragment)annotation.getFragment()).getShape()).
 					getGeometry().toString());
 			sb.append("@" + annotation.getTitle() + "@" + annotation.getText());
 			sb.append(";");

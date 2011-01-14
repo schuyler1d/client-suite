@@ -42,14 +42,14 @@ import at.ait.dme.gwt.openlayers.client.event.LayerEventListener;
 import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
 import at.ait.dme.gwt.openlayers.client.handler.Handler;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.util.AnnotationUtils;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.image.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.client.map.MapComponent;
+import at.ait.dme.yuma.suite.image.client.map.MapUtils;
 import at.ait.dme.yuma.suite.image.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.image.client.server.GeocoderServiceAsync;
 import at.ait.dme.yuma.suite.image.client.server.exception.TransformationException;
@@ -407,7 +407,7 @@ public class AnnotationLayer {
 		if(!annotation.hasFragment()) return;
 		
 		if (!fragments.containsKey(annotation)) {
-			VectorFeature f = AnnotationUtils.shapeToVectorFeature(((ImageFragment)annotation.getFragment()).getShape());
+			VectorFeature f = MapUtils.shapeToVectorFeature(((ImageFragment)annotation.getFragment()).getShape());
 			
 			// Add feature to GUI
 			lAnnotations.addFeature(f);
@@ -441,7 +441,7 @@ public class AnnotationLayer {
 	
 	public Shape getActiveShape() {
 		if (editedFeature != null) {
-			return AnnotationUtils.vectorFeatureToShape(editedFeature);
+			return MapUtils.vectorFeatureToShape(editedFeature);
 		} else {
 			return null;
 		}
@@ -460,7 +460,7 @@ public class AnnotationLayer {
 	}
 	
 	public void modifyTagCloud(VectorFeature feature, boolean recenter) {
-		Shape s = AnnotationUtils.vectorFeatureToShape(feature);
+		Shape s = MapUtils.vectorFeatureToShape(feature);
 		
 		LonLat nw = LonLat.create(s.getLeft(), s.getTop() + s.getHeight());
 		LonLat se = LonLat.create(s.getLeft() + s.getWidth(), s.getTop());
@@ -506,7 +506,7 @@ public class AnnotationLayer {
 				if (!(t instanceof TransformationException)) { 
 					// Note: TransformationExceptions happen when a map is 
 					// not geo-referenced yet - ignore this in the GUI
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 					MessageBox.error(errorMessages.error(), errorMessages.geonamesError());
 				}
 			}

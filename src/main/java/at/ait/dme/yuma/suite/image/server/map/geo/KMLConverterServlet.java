@@ -43,7 +43,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import at.ait.dme.yuma.suite.core.server.util.Config;
+import at.ait.dme.yuma.suite.core.server.Config;
 import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.image.client.server.exception.TransformationException;
 import at.ait.dme.yuma.suite.image.server.map.geo.transformation.AffineTransformation;

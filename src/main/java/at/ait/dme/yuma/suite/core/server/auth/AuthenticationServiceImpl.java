@@ -46,7 +46,7 @@ import org.json.simple.JSONValue;
 import at.ait.dme.yuma.suite.core.client.User;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceException;
-import at.ait.dme.yuma.suite.core.server.util.Config;
+import at.ait.dme.yuma.suite.core.server.Config;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

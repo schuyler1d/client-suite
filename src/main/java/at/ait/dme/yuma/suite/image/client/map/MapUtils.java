@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.core.client.util;
+package at.ait.dme.yuma.suite.image.client.map;
 
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ import at.ait.dme.yuma.suite.image.client.shape.Shape;
  *
  * @author Rainer Simon
  */
-public class AnnotationUtils {
+public class MapUtils {
 	
 	public static VectorFeature shapeToVectorFeature(Shape shape) {
 		if (shape instanceof Polyline) {

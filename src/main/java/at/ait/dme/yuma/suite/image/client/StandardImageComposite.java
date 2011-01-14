@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
@@ -124,7 +124,7 @@ public class StandardImageComposite extends ImageComposite {
 	};	
 	private ErrorHandler imageErrorListener = new ErrorHandler() {
 		public void onError(ErrorEvent event) {
-			ErrorMessages errorMessages=(ErrorMessages) GWT.create(ErrorMessages.class);	
+			I18NErrorMessages errorMessages=(I18NErrorMessages) GWT.create(I18NErrorMessages.class);	
 			Window.alert(errorMessages.imageNotFound());				
 		}
 	};

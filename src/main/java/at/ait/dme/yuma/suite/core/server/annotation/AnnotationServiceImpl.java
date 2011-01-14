@@ -30,7 +30,7 @@ import javax.servlet.ServletException;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceException;
-import at.ait.dme.yuma.suite.core.server.util.Config;
+import at.ait.dme.yuma.suite.core.server.Config;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

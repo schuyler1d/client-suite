@@ -25,8 +25,8 @@ import org.gwt.mosaic.ui.client.DecoratedTabLayoutPanel;
 import org.gwt.mosaic.ui.client.TabLayoutPanel;
 import org.gwt.mosaic.ui.client.WindowPanel;
 
-import at.ait.dme.yuma.suite.core.client.ApplicationConstants;
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NConstants;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.User;
 import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
@@ -74,7 +74,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class YumaMapClient implements EntryPoint {
 	private static final String LEMO_COOKIE_NAME = "lemo_user";
 	private static User authenticatedUser = null;
-	private static ApplicationConstants annotationConstants = null;
+	private static I18NConstants annotationConstants = null;
 	
 	private ImageComposite imageComposite = null;
 	
@@ -126,7 +126,7 @@ public class YumaMapClient implements EntryPoint {
 						.create(AuthenticationService.class);
 				authService.authenticate(authToken, appSign, new AsyncCallback<User>() {
 					public void onFailure(Throwable caught) {
-						ErrorMessages errorMessages=(ErrorMessages)GWT.create(ErrorMessages.class);
+						I18NErrorMessages errorMessages=(I18NErrorMessages)GWT.create(I18NErrorMessages.class);
 						Window.alert(errorMessages.failedToAuthenticate());
 						// create non-privileged user to use read-only mode.
 						setAuthenticatedUser(new User());
@@ -404,9 +404,9 @@ public class YumaMapClient implements EntryPoint {
 	 * 
 	 * @return constants
 	 */
-	public static ApplicationConstants getConstants() {
+	public static I18NConstants getConstants() {
 		if(annotationConstants==null)
-			annotationConstants=(ApplicationConstants)GWT.create(ApplicationConstants.class);
+			annotationConstants=(I18NConstants)GWT.create(I18NConstants.class);
 		return annotationConstants;
 	}
 	

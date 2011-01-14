@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.image.client.annotation.handler;
 
 import org.gwt.mosaic.ui.client.MessageBox;
 
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
@@ -46,7 +46,7 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	private ImageAnnotationComposite annotationComposite = null;
 	private ImageAnnotationTreeNode annotationTreeNode = null;
 
-	protected ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+	protected I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 	
 	public ImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
 			ImageAnnotationTreeNode annotationTreeNode) {
@@ -111,7 +111,7 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	 * @param defaultMessage
 	 */
 	protected void handleFailure(Throwable caught, String defaultMessage) {
-		ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+		I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 		try {
 			throw caught;
 		} catch (RESTfulServiceException rse) {

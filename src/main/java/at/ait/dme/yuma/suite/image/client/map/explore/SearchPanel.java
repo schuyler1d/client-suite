@@ -23,8 +23,8 @@ package at.ait.dme.yuma.suite.image.client.map.explore;
 
 import org.gwt.mosaic.ui.client.MessageBox;
 
-import at.ait.dme.yuma.suite.core.client.ApplicationConstants;
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NConstants;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.client.map.TiledImageComposite;
 import at.ait.dme.yuma.suite.image.client.server.FindPlaceResponse;
@@ -67,7 +67,7 @@ public class SearchPanel extends FlowPanel {
 	
 	public SearchPanel(TiledImageComposite imageComposite) {
 		this.searchLayer = imageComposite.getSearchLayer();		
-		ApplicationConstants i18n = YumaImageClient.getConstants();
+		I18NConstants i18n = YumaImageClient.getConstants();
 		
 		HorizontalPanel hPanel = new HorizontalPanel();
 		hPanel.setStyleName("explore-PlaceSearch");
@@ -92,7 +92,7 @@ public class SearchPanel extends FlowPanel {
 			service.findPlace(YumaImageClient.getImageUrl(), searchBox.getValue(), new AsyncCallback<FindPlaceResponse>() {
 				@Override
 				public void onFailure(Throwable t) {
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 					MessageBox.error(errorMessages.error(), t.getMessage());
 				}
 
@@ -110,7 +110,7 @@ public class SearchPanel extends FlowPanel {
 				    	}
 				    	searchLayer.showSearchResultPopup(r.xy.x, r.xy.y, r.name, html.toString());
 			    	} else {
-						ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+						I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 						MessageBox.error(errorMessages.error(), errorMessages.transformationError());
 					}
 				}

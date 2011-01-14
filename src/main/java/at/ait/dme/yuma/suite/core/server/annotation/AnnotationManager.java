@@ -21,6 +21,7 @@
 
 package at.ait.dme.yuma.suite.core.server.annotation;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,8 +47,7 @@ import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceException;
-import at.ait.dme.yuma.suite.core.server.util.Config;
-import at.ait.dme.yuma.suite.core.server.util.URLEncoder;
+import at.ait.dme.yuma.suite.core.server.Config;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
 
 /**
@@ -118,7 +118,7 @@ public class AnnotationManager implements AnnotationService {
 		try {
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
-				.updateAnnotation(URLEncoder.encode(annotation.getId()), JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
+				.updateAnnotation(encode(annotation.getId()), JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
 			
 			// Check response			
 			if(response.getStatus() != HttpResponseCodes.SC_OK)
@@ -144,7 +144,7 @@ public class AnnotationManager implements AnnotationService {
 		try {					
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer().
-				deleteAnnotation(URLEncoder.encode(annotationId));
+				deleteAnnotation(encode(annotationId));
 			
 			// Check response			
 			if(response.getStatus() != HttpResponseCodes.SC_OK &&
@@ -172,7 +172,7 @@ public class AnnotationManager implements AnnotationService {
 				
 				// Call the Annotation Server
 				ClientResponse<String> response=getAnnotationServer().
-					getAnnotationTree(URLEncoder.encode(objectId));	
+					getAnnotationTree(encode(objectId));	
 				
 				// Check response
 				if (response.getStatus() != HttpResponseCodes.SC_OK)
@@ -242,5 +242,10 @@ public class AnnotationManager implements AnnotationService {
 
 		return ProxyFactory.create(RESTAnnotationServer.class, annotationServerBaseUrl,
 				new ApacheHttpClientExecutor(client));
+	}
+	
+	private String encode(String url) throws UnsupportedEncodingException {
+		// yes, this will always be UTF-8.
+		return java.net.URLEncoder.encode(url,"UTF-8").replace("%", "%25");
 	}
 }

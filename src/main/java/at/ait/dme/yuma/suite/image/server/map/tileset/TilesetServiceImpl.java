@@ -37,7 +37,7 @@ import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 
-import at.ait.dme.yuma.suite.core.server.util.Config;
+import at.ait.dme.yuma.suite.core.server.Config;
 import at.ait.dme.yuma.suite.image.client.map.Tileset;
 import at.ait.dme.yuma.suite.image.client.server.TilesetService;
 import at.ait.dme.yuma.suite.image.client.server.exception.TilesetNotAvailableException;

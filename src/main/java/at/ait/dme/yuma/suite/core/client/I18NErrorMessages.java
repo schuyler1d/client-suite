@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.core.client;
 
 import com.google.gwt.i18n.client.Messages;
 
-public interface ErrorMessages extends Messages {
+public interface I18NErrorMessages extends Messages {
 	public String error();
 	public String geonamesError();
 	public String imageNotFound();

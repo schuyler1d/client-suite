@@ -31,8 +31,11 @@ import javax.servlet.ServletException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.httpclient.HttpClient;
 import org.apache.log4j.Logger;
 import org.jboss.resteasy.client.ClientResponse;
+import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.client.core.executors.ApacheHttpClientExecutor;
 import org.jboss.resteasy.util.HttpResponseCodes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -42,7 +45,7 @@ import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceException;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
-import at.ait.dme.yuma.suite.core.server.util.Config;
+import at.ait.dme.yuma.suite.core.server.Config;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -277,21 +280,21 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 	}
 	
     private UniVieLinkDiscoveryEndpoint getUniVieLinkDiscoveryEndpoint() {
-        // HttpClient client = new DefaultHttpClient();
-        return null; // ProxyFactory.create(UniVieLinkDiscoveryEndpoint.class, univieLinkDiscoveryServiceBaseURL,
-        		// new ApacheHttpClientExecutor(client));
+        HttpClient client = new HttpClient();
+        return ProxyFactory.create(UniVieLinkDiscoveryEndpoint.class, univieLinkDiscoveryServiceBaseURL,
+        		new ApacheHttpClientExecutor(client));
 
     }
     
     private OpenCalaisEndpoint getOpenCalaisEndpoint() {
-    	// HttpClient client = new HttpClient();
-        return null; //ProxyFactory.create(OpenCalaisEndpoint.class, OPENCALAIS_API_URL, 
-        		// new ApacheHttpClientExecutor(client)); 
+    	HttpClient client = new HttpClient();
+        return ProxyFactory.create(OpenCalaisEndpoint.class, OPENCALAIS_API_URL, 
+        		new ApacheHttpClientExecutor(client)); 
     }
     
     private DBpediaLookupEndpoint getDBpediaLookupEndpoint() {
-        // HttpClient client = new HttpClient();
-        return null; // ProxyFactory.create(DBpediaLookupEndpoint.class, DBPEDIA_LOOKUP_URL,
-        		// new ApacheHttpClientExecutor(client));
+    	HttpClient client = new HttpClient();
+        return ProxyFactory.create(DBpediaLookupEndpoint.class, DBPEDIA_LOOKUP_URL,
+        		new ApacheHttpClientExecutor(client));
     }
 }

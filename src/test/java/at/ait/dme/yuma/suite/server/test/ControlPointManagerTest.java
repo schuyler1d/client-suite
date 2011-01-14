@@ -41,8 +41,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.server.Config;
 import at.ait.dme.yuma.suite.core.server.annotation.AnnotationManager;
-import at.ait.dme.yuma.suite.core.server.util.Config;
 import at.ait.dme.yuma.suite.image.client.ImageRect;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;

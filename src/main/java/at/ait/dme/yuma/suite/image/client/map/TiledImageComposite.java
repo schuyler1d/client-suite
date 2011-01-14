@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.image.client.map;
 
 import org.gwt.mosaic.ui.client.MessageBox;
 
-import at.ait.dme.yuma.suite.core.client.ErrorMessages;
+import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.gui.LoadMask;
 import at.ait.dme.yuma.suite.image.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.client.ImageRect;
@@ -249,14 +249,14 @@ public class TiledImageComposite extends ImageComposite {
 					if (url.toLowerCase().endsWith("xml")) {
 						// Tileset scheme supported, but URL broken or remote connection down!
 						loadMask.hide();
-						ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+						I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 						MessageBox.error(errorMessages.error(), t.getMessage());
 					} else {
 						startOnTheFlyTiler(url);
 					}
 				} catch (Throwable other) {
 					loadMask.hide();
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 					MessageBox.error(errorMessages.error(), t.getMessage());
 				}
 			}
@@ -279,7 +279,7 @@ public class TiledImageComposite extends ImageComposite {
 
 			public void onFailure(Throwable t) {					
 				loadMask.hide();
-				ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+				I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 				MessageBox.error(errorMessages.error(), t.getMessage());
 			}
 			
@@ -304,7 +304,7 @@ public class TiledImageComposite extends ImageComposite {
 					throw caught;				
 				} catch (Throwable t) {
 					loadMask.hide();
-					ErrorMessages errorMessages = (ErrorMessages) GWT.create(ErrorMessages.class);
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 					MessageBox.error(errorMessages.error(), t.getMessage());
 				}
 			}
