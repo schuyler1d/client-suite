@@ -12,18 +12,6 @@
 	<inherits name='org.gwt.mosaic.actions.Actions' />
  	
  	<inherits name="at.ait.dme.gwt.openlayers.OpenLayersWrapper"/>
-  
-    <servlet path='/annotate.jsp' 
-    	class='org.apache.jasper.servlet.JspServlet' />
-    	
-    <servlet path='/annotation' 
-  		class='at.ait.dme.yuma.suite.core.server.annotation.AnnotationServiceImpl'/>
-    
-    <servlet path='/auth' 
-  		class='at.ait.dme.yuma.suite.core.server.auth.AuthenticationServiceImpl'/>
-  
-    <servlet path='/semanticenrichment' 
-        class='at.ait.dme.yuma.suite.core.server.enrichment.SemanticEnrichmentServiceImpl'/>
  
   	<extend-property name="locale" values="de"/>
   	<extend-property name="locale" values="fr"/>

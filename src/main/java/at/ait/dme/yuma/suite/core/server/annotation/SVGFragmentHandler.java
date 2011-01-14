@@ -36,18 +36,18 @@ import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
-import at.ait.dme.yuma.suite.image.client.ImageRect;
-import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
-import at.ait.dme.yuma.suite.image.client.shape.Color;
-import at.ait.dme.yuma.suite.image.client.shape.Cross;
-import at.ait.dme.yuma.suite.image.client.shape.Ellipse;
-import at.ait.dme.yuma.suite.image.client.shape.GeoPoint;
-import at.ait.dme.yuma.suite.image.client.shape.Line;
-import at.ait.dme.yuma.suite.image.client.shape.Point;
-import at.ait.dme.yuma.suite.image.client.shape.Polygon;
-import at.ait.dme.yuma.suite.image.client.shape.Polyline;
-import at.ait.dme.yuma.suite.image.client.shape.Rectangle;
-import at.ait.dme.yuma.suite.image.client.shape.Shape;
+import at.ait.dme.yuma.suite.image.core.client.ImageRect;
+import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
+import at.ait.dme.yuma.suite.image.core.client.shape.Color;
+import at.ait.dme.yuma.suite.image.core.client.shape.Cross;
+import at.ait.dme.yuma.suite.image.core.client.shape.Ellipse;
+import at.ait.dme.yuma.suite.image.core.client.shape.GeoPoint;
+import at.ait.dme.yuma.suite.image.core.client.shape.Line;
+import at.ait.dme.yuma.suite.image.core.client.shape.Point;
+import at.ait.dme.yuma.suite.image.core.client.shape.Polygon;
+import at.ait.dme.yuma.suite.image.core.client.shape.Polyline;
+import at.ait.dme.yuma.suite.image.core.client.shape.Rectangle;
+import at.ait.dme.yuma.suite.image.core.client.shape.Shape;
 
 public class SVGFragmentHandler {
 	

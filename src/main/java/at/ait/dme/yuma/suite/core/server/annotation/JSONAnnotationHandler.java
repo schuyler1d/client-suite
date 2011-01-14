@@ -35,8 +35,8 @@ import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
+import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
 
 /**
  * Converts annotations to and from JSON.

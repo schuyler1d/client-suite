@@ -43,15 +43,15 @@ import org.junit.Test;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.server.Config;
 import at.ait.dme.yuma.suite.core.server.annotation.AnnotationManager;
-import at.ait.dme.yuma.suite.image.client.ImageRect;
-import at.ait.dme.yuma.suite.image.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.client.annotation.ImageFragment;
-import at.ait.dme.yuma.suite.image.client.map.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.image.client.map.annotation.XYCoordinate;
-import at.ait.dme.yuma.suite.image.client.shape.GeoPoint;
-import at.ait.dme.yuma.suite.image.server.map.geo.transformation.ControlPoint;
-import at.ait.dme.yuma.suite.image.server.map.geo.transformation.ControlPointManager;
-import at.ait.dme.yuma.suite.image.server.map.tileset.TilesetGenerator;
+import at.ait.dme.yuma.suite.image.core.client.ImageRect;
+import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
+import at.ait.dme.yuma.suite.image.core.client.map.annotation.WGS84Coordinate;
+import at.ait.dme.yuma.suite.image.core.client.map.annotation.XYCoordinate;
+import at.ait.dme.yuma.suite.image.core.client.shape.GeoPoint;
+import at.ait.dme.yuma.suite.image.core.server.map.geo.transformation.ControlPoint;
+import at.ait.dme.yuma.suite.image.core.server.map.geo.transformation.ControlPointManager;
+import at.ait.dme.yuma.suite.image.core.server.map.tileset.TilesetGenerator;
 
 public class ControlPointManagerTest {
 

@@ -88,7 +88,7 @@
 	
 	<servlet>
 		<servlet-name>geocoder</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.geo.GeocoderServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.geo.GeocoderServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>geocoder</servlet-name>
@@ -97,7 +97,7 @@
 	
 	<servlet>
 		<servlet-name>findplace</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.geo.FindPlaceServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.geo.FindPlaceServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>findplace</servlet-name>
@@ -124,7 +124,7 @@
 		
 	<servlet>
 		<servlet-name>importkml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.geo.KMLConverterServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.geo.KMLConverterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>importkml</servlet-name>
@@ -133,7 +133,7 @@
 	
 	<servlet>
 		<servlet-name>tokml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.geo.ToKMLServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.geo.ToKMLServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tokml</servlet-name>
@@ -142,7 +142,7 @@
 	
 	<servlet>
 		<servlet-name>tileset</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.tileset.TilesetServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.tileset.TilesetServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>
@@ -151,7 +151,7 @@
 	
 	<servlet>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.geo.transformation.TransformationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.geo.transformation.TransformationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>transformationServiceImpl</servlet-name>
@@ -160,7 +160,7 @@
 	
 	<servlet>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.image.server.map.geo.MapMetadataServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.image.core.server.map.geo.MapMetadataServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
