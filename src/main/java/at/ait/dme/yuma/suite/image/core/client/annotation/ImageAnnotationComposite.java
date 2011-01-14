@@ -40,7 +40,7 @@ import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
-import at.ait.dme.yuma.suite.image.client.EntryPointClass;
+import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CreateImageAnnotationClickHandler;
@@ -185,19 +185,19 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		FlowPanel header = new FlowPanel();
 		
 		// 'Add your Annotation' label
-		Label addAnnotationLabel = new Label(EntryPointClass.getConstants().addAnnotation());
+		Label addAnnotationLabel = new Label(YumaImageClient.getConstants().addAnnotation());
 		addAnnotationLabel.setStyleName("imageAnnotation-add-annotation");
 		header.add(addAnnotationLabel);
 		
 		// 'Help' link
 		HTML help = new HTML("<a target=\"_blank\" href=\"userguide_" + 
 				LocaleInfo.getCurrentLocale().getLocaleName()+".html\">" + 
-				EntryPointClass.getConstants().help() + "</a>" );
+				YumaImageClient.getConstants().help() + "</a>" );
 		help.setStyleName("imageAnnotation-help");
 		header.add(help);		
 		
 		// Instructions text
-		Label addAnnotationHint = new Label(EntryPointClass.getConstants().addAnnotationHint()); 
+		Label addAnnotationHint = new Label(YumaImageClient.getConstants().addAnnotationHint()); 
 		addAnnotationHint.setStyleName("imageAnnotation-add-annotation-hint");
 		header.add(addAnnotationHint);
 		
@@ -206,23 +206,23 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		
 		// 'Annotate' button
 		annotateButton.setStyleName("imageAnnotation-button");
-		annotateButton.setText(EntryPointClass.getConstants().actionCreate());	
+		annotateButton.setText(YumaImageClient.getConstants().actionCreate());	
 		annotateButton.addClickHandler(
 				new CreateImageAnnotationClickHandler(this,null,false,false));
-		annotateButton.setEnabled(!EntryPointClass.getUser().isEmpty());
+		annotateButton.setEnabled(!YumaImageClient.getUser().isEmpty());
 		buttons.add(annotateButton);
 		
 		// 'Annotate Fragment' button
 		annotateFragmentButton.setStyleName("imageAnnotation-button");
-		annotateFragmentButton.setText(EntryPointClass.getConstants().actionCreateFragment());
+		annotateFragmentButton.setText(YumaImageClient.getConstants().actionCreateFragment());
 		annotateFragmentButton.addClickHandler(
 				new CreateImageAnnotationClickHandler(this,null,true,false));		
-		annotateFragmentButton.setEnabled(!EntryPointClass.getUser().isEmpty());
+		annotateFragmentButton.setEnabled(!YumaImageClient.getUser().isEmpty());
 		buttons.add(annotateFragmentButton);
 		
 		// 'Show on Map' button
 		showOnMapButton.setStyleName("imageAnnotation-button");
-		showOnMapButton.setText(EntryPointClass.getConstants().actionShowOnMap());
+		showOnMapButton.setText(YumaImageClient.getConstants().actionShowOnMap());
 		showOnMapButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(550, 300, 500, 300);
@@ -232,7 +232,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 				window.show();
 			}			
 		});			
-		showOnMapButton.setVisible(EntryPointClass.getBbox()!=null||EntryPointClass.isInTileMode());
+		showOnMapButton.setVisible(YumaImageClient.getBbox()!=null||YumaImageClient.isInTileMode());
 		buttons.add(showOnMapButton);	
 		
 		header.add(buttons);	
@@ -298,7 +298,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	public void hideAnnotationForm(final ImageAnnotationTreeNode annotationTreeNode, 
 			boolean canceled) {
 	
-		if (!EntryPointClass.isInTileMode())
+		if (!YumaImageClient.isInTileMode())
 			((StandardImageComposite)imageComposite).getTagCloud().fadeoutAndClear();
 		
 		if(annotationTreeNode==null) {
@@ -368,7 +368,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		AnnotationServiceAsync imageAnnotationService = (AnnotationServiceAsync) GWT
 				.create(AnnotationService.class);
 
-		imageAnnotationService.listAnnotations(EntryPointClass.getImageUrl(), shapeTypes,
+		imageAnnotationService.listAnnotations(YumaImageClient.getImageUrl(), shapeTypes,
 			new AsyncCallback<Collection<Annotation>>() {
 				public void onFailure(Throwable caught) {
 					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
@@ -379,7 +379,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 					// remove annotations the user is not allowed to see
 					for(Annotation annotation : foundAnnotations) { 
 						if(annotation.getScope() == Scope.PRIVATE && 
-								!EntryPointClass.isAuthenticatedUser(annotation.getCreatedBy()))
+								!YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy()))
 							continue;
 						annotations.add((ImageAnnotation) annotation);
 
@@ -434,7 +434,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 */
 	public void setSize(int width, int height) {
 		if(height<15) return;
-		if (EntryPointClass.getUserAgent().contains("firefox")) height = height - 2;
+		if (YumaImageClient.getUserAgent().contains("firefox")) height = height - 2;
 		this.setSize(new Integer(width).toString(), new Integer(height).toString());
 		scrollPanel.setSize(new Integer(width).toString(), new Integer(
 				Math.max(0, height-150)).toString());		

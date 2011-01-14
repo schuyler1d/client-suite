@@ -27,7 +27,7 @@ import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
-import at.ait.dme.yuma.suite.image.client.EntryPointClass;
+import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CreateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.DeleteImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.map.annotation.GoogleMapsComposite;
@@ -134,7 +134,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 			headerPanel.add(fragment);
 		}
 
-		if (annotation.hasFragment() && (EntryPointClass.getBbox() != null || EntryPointClass.isInTileMode())) {
+		if (annotation.hasFragment() && (YumaImageClient.getBbox() != null || YumaImageClient.isInTileMode())) {
 			mapAnnotation.setStyleName("imageAnnotation-header-map");
 			mapAnnotation.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
@@ -163,8 +163,8 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 		ratePlus.setStyleName("imageAnnotation-header-rate-image-plus");
 		annotationRatePanel.add(ratePlus);
 		
-		if(EntryPointClass.getFlaggedId()!=null && 
-				EntryPointClass.getFlaggedId().equals(annotation.getId())) {
+		if(YumaImageClient.getFlaggedId()!=null && 
+				YumaImageClient.getFlaggedId().equals(annotation.getId())) {
 			flag.setStyleName("imageAnnotation-header-flag-red-image");
 			flagged=true;
 		} else {
@@ -218,34 +218,34 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 */
 	public void addActions(ImageAnnotationComposite annotationComposite) {
 		// add reply action
-		actionReply.setText(EntryPointClass.getConstants().actionReply());
+		actionReply.setText(YumaImageClient.getConstants().actionReply());
 		actionReply.setStyleName("imageAnnotation-action");
 		actionReply.addClickHandler(
 				new CreateImageAnnotationClickHandler(annotationComposite, this, false, false));
-		actionReply.setEnabled(EntryPointClass.getUser() != null);
+		actionReply.setEnabled(YumaImageClient.getUser() != null);
 		annotationActionsPanel.add(actionReply);
 
 		// add reply w/ fragment action
-		actionReplyFragment.setText(EntryPointClass.getConstants().actionReplyFragment());
+		actionReplyFragment.setText(YumaImageClient.getConstants().actionReplyFragment());
 		actionReplyFragment.setStyleName("imageAnnotation-action");
 		actionReplyFragment.addClickHandler(
 				new CreateImageAnnotationClickHandler(annotationComposite, this, true, false));
-		actionReplyFragment.setEnabled(EntryPointClass.getUser() != null);
+		actionReplyFragment.setEnabled(YumaImageClient.getUser() != null);
 		annotationActionsPanel.add(actionReplyFragment);
 
 		// add edit action
-		actionEdit.setText(EntryPointClass.getConstants().actionEdit());
+		actionEdit.setText(YumaImageClient.getConstants().actionEdit());
 		actionEdit.setStyleName("imageAnnotation-action");
-		actionEdit.setEnabled(EntryPointClass.isAuthenticatedUser(annotation.getCreatedBy())
+		actionEdit.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		actionEdit.addClickHandler(new CreateImageAnnotationClickHandler(annotationComposite, this,
 				annotation.hasFragment(), true));
 		annotationActionsPanel.add(actionEdit);
 
 		// add delete action
-		actionDelete.setText(EntryPointClass.getConstants().actionDelete());
+		actionDelete.setText(YumaImageClient.getConstants().actionDelete());
 		actionDelete.setStyleName("imageAnnotation-action");
-		actionDelete.setEnabled(EntryPointClass.isAuthenticatedUser(annotation.getCreatedBy())
+		actionDelete.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		actionDelete.addClickHandler(
 				new DeleteImageAnnotationClickHandler(annotationComposite, this));
@@ -423,7 +423,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 		I18NErrorMessages msg = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 
 		// TODO refactor (just a prototype)!
-		String baseUrl = EntryPointClass.getBaseUrl().replace("image-annotation-frontend",
+		String baseUrl = YumaImageClient.getBaseUrl().replace("image-annotation-frontend",
 				"image-annotation-frontend-admin");
 
 		return "mailto:"
@@ -433,7 +433,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 				+ "&body="
 				+ msg.flagBody(annotation.getTitle(), baseUrl + "annotate.jsp?objectURL="
 						+ annotation.getObjectUri() + "%26flaggedId=" + annotation.getId(), 
-						EntryPointClass.getUser());
+						YumaImageClient.getUser());
 	}
 
 	@Override

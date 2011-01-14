@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
-import at.ait.dme.yuma.suite.image.client.EntryPointClass;
+import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.ImageRect;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
@@ -99,8 +99,8 @@ public class GoogleMapsComposite extends Composite {
 		createMapOverlays();
 		compositePanel.add(map);
 		
-		if(EntryPointClass.isInTileMode()) {
-			Anchor kmlLink = new Anchor(EntryPointClass.getConstants().kmlExport(), createKmlLink());
+		if(YumaImageClient.isInTileMode()) {
+			Anchor kmlLink = new Anchor(YumaImageClient.getConstants().kmlExport(), createKmlLink());
 			kmlLink.setStyleName("mapAnnotation-kml");
 			compositePanel.add(kmlLink, 10, 240);
 		}
@@ -112,7 +112,7 @@ public class GoogleMapsComposite extends Composite {
 	 * one for the north east and one for the south west.
 	 */
 	private void parseBoundingBox() {
-		String bBox = EntryPointClass.getBbox();
+		String bBox = YumaImageClient.getBbox();
 		if(bBox==null) return;
 		
 		bBox=bBox.replaceAll("[\\[\\]]", "");
@@ -171,7 +171,7 @@ public class GoogleMapsComposite extends Composite {
 		TransformationServiceAsync transformationService = (TransformationServiceAsync) GWT
 				.create(TransformationService.class);
 		
-		transformationService.transformCoordinates(EntryPointClass.getImageUrl(), xyCoords,
+		transformationService.transformCoordinates(YumaImageClient.getImageUrl(), xyCoords,
 			new AsyncCallback<List<WGS84Coordinate>>() {
 				public void onFailure(Throwable caught) {
 					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
@@ -231,7 +231,7 @@ public class GoogleMapsComposite extends Composite {
 			// add the center as last point to avoid an extra transformation call
 			xyCoordinates.add(getCenter((ImageFragment) annotation.getFragment()));
 		
-			if(EntryPointClass.getBbox()!=null) {
+			if(YumaImageClient.getBbox()!=null) {
 				coords = transformPoints(annotation, xyCoordinates);
 				if(coords!=null) drawOverlay(coords, annotation);
 			} else {
@@ -300,7 +300,7 @@ public class GoogleMapsComposite extends Composite {
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append("yuma/tokml?url="); 
-		sb.append(EntryPointClass.getImageUrl());
+		sb.append(YumaImageClient.getImageUrl());
 		sb.append("&a=");
 		
 		for (ImageAnnotation annotation : annotations) {

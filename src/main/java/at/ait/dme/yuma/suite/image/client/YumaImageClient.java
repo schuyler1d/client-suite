@@ -71,21 +71,21 @@ import com.google.gwt.user.client.ui.RootPanel;
  *  
  * @author Christian Sadilek, Rainer Simon
  */
-public class EntryPointClass implements EntryPoint {
+public class YumaImageClient implements EntryPoint {
 	private static final String LEMO_COOKIE_NAME = "lemo_user";
 	private static User authenticatedUser = null;
 	private static I18NConstants annotationConstants = null;
 	
 	private ImageComposite imageComposite = null;
 	
-	public EntryPointClass() {}
+	public YumaImageClient() {}
 
 	/**
 	 * only used by unit tests to create an image composite w/o an annotation composite
 	 * 
 	 * @param imageUrl
 	 */
-	public EntryPointClass(String imageUrl) {
+	public YumaImageClient(String imageUrl) {
 		showImage(imageUrl);
 	}
 	
@@ -148,7 +148,7 @@ public class EntryPointClass implements EntryPoint {
 	 * @throws TilesetNotAvailableException 
 	 */
 	private void showImage(String imageUrl) {
-		if (EntryPointClass.isInTileMode()) {									
+		if (YumaImageClient.isInTileMode()) {									
 			imageComposite = new TiledImageComposite(imageUrl);
 			RootPanel.get().add(imageComposite, 0, 0);
 		} else {
@@ -177,7 +177,7 @@ public class EntryPointClass implements EntryPoint {
 		TabLayoutPanel tabPanel = new DecoratedTabLayoutPanel();
 		tabPanel.setPadding(0);
 		showAnnotationsTab(tabPanel);
-		if(EntryPointClass.isInTileMode()) {
+		if(YumaImageClient.isInTileMode()) {
 			showGeoReferencingTab(tabPanel);
 			showExplorationTab(tabPanel);
 			tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {

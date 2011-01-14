@@ -27,7 +27,7 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
-import at.ait.dme.yuma.suite.image.client.EntryPointClass;
+import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CancelImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.SaveImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.UpdateImageAnnotationClickHandler;
@@ -123,14 +123,14 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 			ImageAnnotationTreeNode annotationTreeNode) {
 		
 		HorizontalPanel titlePanel = new HorizontalPanel();
-		Label titleLabel = new Label(EntryPointClass.getConstants().annotationTitle());
+		Label titleLabel = new Label(YumaImageClient.getConstants().annotationTitle());
 		titleLabel.setStyleName("imageAnnotation-form-label");
 		titleTextBox.setStyleName("imageAnnotation-form-title");
 		// in case of an update
 		if(update) titleTextBox.setText(annotationTreeNode.getTitle());
 		//in case of an reply
 		if(!update&&annotationTreeNode!=null)
-			titleTextBox.setText(EntryPointClass.getConstants().annotationReplyTitlePrefix()+
+			titleTextBox.setText(YumaImageClient.getConstants().annotationReplyTitlePrefix()+
 					annotationTreeNode.getTitle());
 	
 		titlePanel.add(titleLabel);		
@@ -143,7 +143,7 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 			ImageAnnotationTreeNode annotationTreeNode, ImageAnnotationComposite annotationComposite) {
 		
 		HorizontalPanel textPanel = new HorizontalPanel();
-		Label textLabel = new Label(EntryPointClass.getConstants().annotationText());
+		Label textLabel = new Label(YumaImageClient.getConstants().annotationText());
 		textLabel.setStyleName("imageAnnotation-form-label");		
 		textArea.setStyleName("imageAnnotation-form-text");
 		if(update) textArea.setText(annotationTreeNode.getText());
@@ -165,9 +165,9 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 	    HorizontalPanel radioPanel = new HorizontalPanel();
         radioPanel.add(scopeLabel);
         radioPanel.add(rdPublic = new RadioButton(SCOPE_RADIO_GROUP_NAME,
-                " " + EntryPointClass.getConstants().publicScope()));
+                " " + YumaImageClient.getConstants().publicScope()));
         radioPanel.add(rdPrivate = new RadioButton(SCOPE_RADIO_GROUP_NAME,
-                " " + EntryPointClass.getConstants().privateScope()));
+                " " + YumaImageClient.getConstants().privateScope()));
         rdPublic.setStyleName("imageAnnotation-form-radiobutton");
         rdPrivate.setStyleName("imageAnnotation-form-radiobutton");     
         		
@@ -182,7 +182,7 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 	protected Panel createLinksPanel(boolean update, ImageAnnotationTreeNode annotationTreeNode) {
 
 	    HorizontalPanel linksPanel = new HorizontalPanel();
-	    Label linksLabel = new Label(EntryPointClass.getConstants().annotationLinks());
+	    Label linksLabel = new Label(YumaImageClient.getConstants().annotationLinks());
 	    linksLabel.setStyleName("imageAnnotation-form-label");      
         linksPanel.add(linksLabel);
 	    
@@ -205,7 +205,7 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 	protected Panel createSemanticLinksPanel(boolean update, ImageAnnotationTreeNode annotationTreeNode) {
 
         HorizontalPanel linksPanel = new HorizontalPanel();
-        Label linksLabel = new Label(EntryPointClass.getConstants().annotationSuggestedLinks());
+        Label linksLabel = new Label(YumaImageClient.getConstants().annotationSuggestedLinks());
         linksLabel.setStyleName("imageAnnotation-form-label");      
         linksPanel.add(linksLabel);
         
@@ -227,7 +227,7 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 			ImageAnnotationComposite annotationComposite) {
 		
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
-		PushButton saveButton = new PushButton(EntryPointClass.getConstants().actionSave());
+		PushButton saveButton = new PushButton(YumaImageClient.getConstants().actionSave());
 		if(update) {
 			saveButton.addClickHandler(new UpdateImageAnnotationClickHandler(annotationComposite, 
 					annotationTreeNode, this));
@@ -238,7 +238,7 @@ public class StandardImageAnnotationForm extends ImageAnnotationForm {
 		saveButton.setStyleName("imageAnnotation-form-button");
 		buttonsPanel.add(saveButton);
 		
-		PushButton cancelButton = new PushButton(EntryPointClass.getConstants().actionCancel());
+		PushButton cancelButton = new PushButton(YumaImageClient.getConstants().actionCancel());
 		cancelButton.setStyleName("imageAnnotation-form-button");
 		cancelButton.addClickHandler(new CancelImageAnnotationClickHandler(annotationComposite,
 				annotationTreeNode));

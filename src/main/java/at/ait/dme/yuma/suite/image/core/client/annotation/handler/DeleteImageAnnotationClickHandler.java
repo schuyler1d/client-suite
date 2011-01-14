@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
 
-import at.ait.dme.yuma.suite.image.client.EntryPointClass;
+import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
 
@@ -46,7 +46,7 @@ public class DeleteImageAnnotationClickHandler extends ImageAnnotationClickHandl
 		annotationComposite.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
 		
-		EntryPointClass.authenticateAs(getAnnotationTreeNode().getAnnotation().getCreatedBy());
+		YumaImageClient.authenticateAs(getAnnotationTreeNode().getAnnotation().getCreatedBy());
 		
 		getImageAnnotationService().deleteAnnotation(getAnnotationTreeNode().getAnnotationId(),
 			new AsyncCallback<Void>() {

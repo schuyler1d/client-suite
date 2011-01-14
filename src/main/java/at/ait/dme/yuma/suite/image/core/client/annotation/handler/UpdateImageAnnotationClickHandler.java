@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
 import java.util.Date;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.image.client.EntryPointClass;
+import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationForm;
@@ -65,8 +65,8 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 			a.setRootId(node.getAnnotationRootId());
 		}
 
-		a.setObjectUri(EntryPointClass.getImageUrl());
-		a.setCreatedBy(EntryPointClass.getUser());
+		a.setObjectUri(YumaImageClient.getImageUrl());
+		a.setCreatedBy(YumaImageClient.getUser());
 		a.setTitle(annotationForm.getAnnotationTitle());
 		a.setText(annotationForm.getAnnotationText());
 		a.setScope(annotationForm.getAnnotationScope());
