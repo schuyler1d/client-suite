@@ -70,7 +70,7 @@
 	
 	<servlet>
 		<servlet-name>annotation</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.core.server.annotation.AnnotationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>annotation</servlet-name>
@@ -79,7 +79,7 @@
 
 	<servlet>
 		<servlet-name>authentication</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.core.server.auth.AuthenticationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.core.server.auth.AuthenticationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>authentication</servlet-name>
@@ -88,7 +88,7 @@
 	
 	<servlet>
 		<servlet-name>geocoder</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.GeocoderServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.geo.GeocoderServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>geocoder</servlet-name>
@@ -97,7 +97,7 @@
 	
 	<servlet>
 		<servlet-name>findplace</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.FindPlaceServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.geo.FindPlaceServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>findplace</servlet-name>
@@ -106,7 +106,7 @@
   
     <servlet>
         <servlet-name>semanticenrichment</servlet-name>
-        <servlet-class>at.ait.dme.yuma.suite.core.server.enrichment.SemanticEnrichmentServiceImpl</servlet-class>
+        <servlet-class>at.ait.dme.yuma.suite.apps.core.server.enrichment.SemanticEnrichmentServiceImpl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>semanticenrichment</servlet-name>
@@ -124,7 +124,7 @@
 		
 	<servlet>
 		<servlet-name>importkml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.KMLConverterServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.geo.KMLConverterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>importkml</servlet-name>
@@ -133,7 +133,7 @@
 	
 	<servlet>
 		<servlet-name>tokml</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.ToKMLServlet</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.geo.ToKMLServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tokml</servlet-name>
@@ -142,7 +142,7 @@
 	
 	<servlet>
 		<servlet-name>tileset</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.tileset.TilesetServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.tileset.TilesetServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>
@@ -151,7 +151,7 @@
 	
 	<servlet>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.transformation.TransformationServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.geo.transformation.TransformationServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>transformationServiceImpl</servlet-name>
@@ -160,12 +160,26 @@
 	
 	<servlet>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<servlet-class>at.ait.dme.yuma.suite.map.server.geo.MapMetadataServiceImpl</servlet-class>
+		<servlet-class>at.ait.dme.yuma.suite.apps.map.server.geo.MapMetadataServiceImpl</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
 		<url-pattern>/metadata</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+		<filter-name>wicket.pages</filter-name>
+ 		<filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
+		<init-param>
+			<param-name>applicationClassName</param-name>
+			<param-value>at.ait.dme.yuma.suite.framework.WicketApplication</param-value>
+ 		</init-param>
+ 	</filter>
+ 	
+	<filter-mapping>
+		<filter-name>wicket.pages</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!--  restrict access to key store -->
 	<security-constraint>

@@ -1,4 +1,0 @@
-<module rename-to="image">
-	<inherits name="at.ait.dme.yuma.suite.image.core.ImageCore" />    
-	<entry-point class='at.ait.dme.yuma.suite.image.client.YumaImageClient'/>
-</module>

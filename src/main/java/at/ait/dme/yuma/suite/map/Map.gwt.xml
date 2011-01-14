@@ -1,4 +1,0 @@
-<module rename-to="core">
-	<inherits name="at.ait.dme.yuma.suite.core.Core" />  
- 	<inherits name="at.ait.dme.gwt.openlayers.OpenLayersWrapper"/>	
-</module>

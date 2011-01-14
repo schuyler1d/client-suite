@@ -1,0 +1,3 @@
+<module rename-to="yumaImageCore">
+	<inherits name="at.ait.dme.yuma.suite.apps.core.Core" />    
+</module>

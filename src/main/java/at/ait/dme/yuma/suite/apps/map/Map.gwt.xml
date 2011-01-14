@@ -1,0 +1,4 @@
+<module rename-to="yumaMap">
+	<inherits name="at.ait.dme.yuma.suite.apps.core.Core" />  
+ 	<inherits name="at.ait.dme.gwt.openlayers.OpenLayersWrapper"/>	
+</module>

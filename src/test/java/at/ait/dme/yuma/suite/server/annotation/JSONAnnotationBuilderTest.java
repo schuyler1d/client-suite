@@ -30,11 +30,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.MediaType;
-import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.core.server.annotation.JSONAnnotationHandler;
-import at.ait.dme.yuma.suite.image.core.client.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
+import at.ait.dme.yuma.suite.apps.core.server.annotation.JSONAnnotationHandler;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.server.Data;
 
 public class JSONAnnotationBuilderTest {
