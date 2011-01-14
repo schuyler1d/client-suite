@@ -32,9 +32,9 @@ import com.google.gwt.user.client.ui.PopupPanel;
  *
  * @author Rainer Simon
  */
-public class LoadMask extends PopupPanel {
+public class LoadingPopup extends PopupPanel {
 	
-	public LoadMask(String label) {
+	public LoadingPopup(String label) {
 		this.setStyleName("loadmask");
 
 		FlowPanel inner = new FlowPanel();

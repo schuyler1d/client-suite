@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler.tag;
+package at.ait.dme.yuma.suite.core.client.gui.events.tag;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.image.core.client.annotation.StandardImageAnnotationForm;

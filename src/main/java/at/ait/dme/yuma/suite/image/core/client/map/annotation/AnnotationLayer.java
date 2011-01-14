@@ -44,10 +44,10 @@ import at.ait.dme.gwt.openlayers.client.handler.Handler;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.core.client.map.MapComponent;
 import at.ait.dme.yuma.suite.image.core.client.map.MapUtils;
 import at.ait.dme.yuma.suite.image.core.client.server.GeocoderService;
@@ -255,7 +255,7 @@ public class AnnotationLayer {
 				if (!isExternalHilight) { // Ignore if select was triggered externally from the annotation tree panel
 					ImageAnnotation annotation = findByVectorFeature(feature);
 					if (annotation != null) {
-						if (handlerManager != null) handlerManager.fireEvent(new ImageAnnotationSelectionEvent(annotation, true));
+						if (handlerManager != null) handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, true));
 					}
 				} else {
 					isExternalHilight = false; // Reset for next event
@@ -270,7 +270,7 @@ public class AnnotationLayer {
 				if (!isExternalHilight) { // Ignore if select was triggered externally from the annotation tree panel
 					ImageAnnotation annotation = findByVectorFeature(feature);
 					if (annotation != null) {
-						if (handlerManager != null) handlerManager.fireEvent(new ImageAnnotationSelectionEvent(annotation, false));
+						if (handlerManager != null) handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, false));
 					}
 				} else {
 					isExternalHilight = false; // Reset for next event

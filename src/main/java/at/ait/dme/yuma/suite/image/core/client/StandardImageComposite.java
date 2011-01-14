@@ -30,10 +30,13 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.core.client.shape.Color;
 import at.ait.dme.yuma.suite.image.core.client.shape.Ellipse;
 import at.ait.dme.yuma.suite.image.core.client.shape.Shape;
@@ -73,7 +76,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  * @author Christian Sadilek
  */
-public class StandardImageComposite extends ImageComposite {
+public class StandardImageComposite extends AnnotationEnabledMediaViewer {
 	private static final int IMAGE_OFFSET_LEFT = 11;
 	private static final int IMAGE_OFFSET_TOP = 10;
 	private static final String PX = "px";
@@ -175,7 +178,7 @@ public class StandardImageComposite extends ImageComposite {
 	 * called by the load listener to initialize the widget after the image was
 	 * loaded.
 	 * 
-	 * @see ImageComposite.LoadListener
+	 * @see AnnotationEnabledMediaViewer.LoadListener
 	 */
 	private void init() {
 		originalImageHeight = image.getHeight();
@@ -203,7 +206,7 @@ public class StandardImageComposite extends ImageComposite {
 				Collection<ImageAnnotation> annotations = new ArrayList<ImageAnnotation>();
 				annotations.addAll(fragmentPanels.keySet());
 				for (ImageAnnotation annotation : annotations) {
-					showFragment(annotation);
+					showAnnotation(annotation);
 				}
 			}
 		});
@@ -228,7 +231,7 @@ public class StandardImageComposite extends ImageComposite {
 		imagePanel.add(fragment, 5, 55);
 		fragment.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				showActiveFragmentPanel(null, false);
+				editAnnotation(null, false);
 			}
 		});
 		DOM.setStyleAttribute(fragment.getElement(), "zIndex", "15");
@@ -287,7 +290,6 @@ public class StandardImageComposite extends ImageComposite {
 		return tagCloud;
 	}
 	
-	@Override
 	public void setAnnotationForm(TagEnabledAnnotationForm annotationForm) {
 		this.annotationForm = annotationForm;
 	}
@@ -299,7 +301,7 @@ public class StandardImageComposite extends ImageComposite {
 	 * @param image annotation
 	 */
 	@Override
-	public void showFragment(final ImageAnnotation annotation) {
+	public void showAnnotation(final Annotation annotation) {
 		if(!annotation.hasFragment()) return;
 		ImageFragment fragment = (ImageFragment) annotation.getFragment();
 		
@@ -308,13 +310,13 @@ public class StandardImageComposite extends ImageComposite {
 
 		// if the fragment is already displayed we have to remove it
 		if (fragmentPanels.containsKey(annotation)) {
-			hideFragment(annotation);
+			hideAnnotation(annotation);
 		}
 
 		// create a new fragment panel
 		final ShapePanel fragmentPanel = new ShapePanel(imagePanel, shape, false, false);
 		imagePanel.add(fragmentPanel, shape.getLeft(), shape.getTop());
-		fragmentPanels.put(annotation, fragmentPanel);
+		fragmentPanels.put((ImageAnnotation) annotation, fragmentPanel);
 		setFragmentZIndices();
 
 		// change zoom level of fragment to fit the current zoom level of the image
@@ -328,13 +330,13 @@ public class StandardImageComposite extends ImageComposite {
 		fragmentPanel.getDragPanel().addMouseOverHandler(new MouseOverHandler() {
 			public void onMouseOver(MouseOverEvent event) {
 				fragmentPanel.markSelected(true);
-				handlerManager.fireEvent(new ImageAnnotationSelectionEvent(annotation, true));
+				handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, true));
 			}
 		});
 		fragmentPanel.getDragPanel().addMouseOutHandler(new MouseOutHandler() {			
 			public void onMouseOut(MouseOutEvent event) {
 				fragmentPanel.markSelected(false);
-				handlerManager.fireEvent(new ImageAnnotationSelectionEvent(annotation, false));
+				handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, false));
 			}
 		});
 	}
@@ -343,7 +345,7 @@ public class StandardImageComposite extends ImageComposite {
 	 * marks a fragment as selected or deselected
 	 */
 	@Override
-	public void selectFragment(ImageAnnotation annotation, boolean selected) {
+	public void selectAnnotation(Annotation annotation, boolean selected) {
 		ShapePanel fragmentPanel = fragmentPanels.get(annotation);
 		if(fragmentPanel!=null)
 			fragmentPanel.markSelected(selected);
@@ -377,7 +379,7 @@ public class StandardImageComposite extends ImageComposite {
 	 * @param node
 	 */
 	@Override
-	public void hideFragment(ImageAnnotation annotation) {
+	public void hideAnnotation(Annotation annotation) {
 		ShapePanel fragmentPanel = fragmentPanels.remove(annotation);
 		if (fragmentPanel != null) {
 			imagePanel.remove(fragmentPanel);
@@ -391,7 +393,7 @@ public class StandardImageComposite extends ImageComposite {
 	 * @param forceVisible
 	 */
 	@Override
-	public void showActiveFragmentPanel(ImageAnnotation annotation, boolean forceVisible) {
+	public void editAnnotation(Annotation annotation, boolean forceVisible) {
 		ShapePanel fragmentPanel = fragmentPanels.get(annotation);
 		Shape shape = (fragmentPanel == null) ? new Ellipse(100, 100, new Color(0, 0, 255), 2)
 				: fragmentPanel.getShape();
@@ -409,7 +411,7 @@ public class StandardImageComposite extends ImageComposite {
 			activeFragmentPanel.setShapeControlPanel(activeFragmentControlPanel);
 		} else {
 			if (!forceVisible)
-				hideActiveFragmentPanel();
+				stopEditing();
 		}
 	}
 
@@ -417,7 +419,7 @@ public class StandardImageComposite extends ImageComposite {
 	 * hide the active fragment
 	 */
 	@Override
-	public void hideActiveFragmentPanel() {
+	public void stopEditing() {
 		if (activeFragmentControlPanel != null) {
 			imagePanel.remove(activeFragmentControlPanel.getShapePanel());
 			activeFragmentControlPanel.hide();
@@ -450,7 +452,7 @@ public class StandardImageComposite extends ImageComposite {
 		annotations.addAll(fragmentPanels.keySet());
 		for (ImageAnnotation annotation : annotations) {
 			// redraws the fragment an adapts the zoom level
-			showFragment(annotation);
+			showAnnotation(annotation);
 		}
 		
 		if (activeFragmentPanel != null && !activeFragmentPanel.isDrawing()) {
@@ -557,7 +559,6 @@ public class StandardImageComposite extends ImageComposite {
 	 * 
 	 * @return image rect
 	 */
-	@Override
 	public ImageRect getImageRect() {
 		return new ImageRect(imagePanel.getWidgetLeft(image) - 1,
 				imagePanel.getWidgetTop(image) - 1, image.getWidth(), image.getHeight());
@@ -568,7 +569,6 @@ public class StandardImageComposite extends ImageComposite {
 	 * 
 	 * @return image rect
 	 */
-	@Override
 	public ImageRect getVisibleRect() {
 		return new ImageRect(0, 0, imagePanel.getOffsetWidth(), imagePanel.getOffsetHeight());
 	}
@@ -606,7 +606,6 @@ public class StandardImageComposite extends ImageComposite {
 	 * 
 	 * @return shape
 	 */
-	@Override
 	public Shape getActiveShape() {
 		if (activeFragmentControlPanel == null)
 			return null;
@@ -627,6 +626,14 @@ public class StandardImageComposite extends ImageComposite {
 		}
 		
 		return hr;		
+	}
+
+	@Override
+	public MediaFragment getMediaFragment() {
+		Shape shape = getActiveShape();
+		if(shape==null) return null;
+		
+		return new ImageFragment(getVisibleRect(), getImageRect(), getActiveShape());
 	}
 	
 }

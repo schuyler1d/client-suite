@@ -19,9 +19,9 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection;
+package at.ait.dme.yuma.suite.core.client.gui.events.selection;
 
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -30,34 +30,34 @@ import com.google.gwt.event.shared.GwtEvent;
  * 
  * @author Christian Sadilek 
  */
-public class ImageAnnotationSelectionEvent extends GwtEvent<ImageAnnotationSelectionHandler> {
+public class AnnotationSelectionEvent extends GwtEvent<AnnotationSelectionHandler> {
 
-	private static final Type<ImageAnnotationSelectionHandler> TYPE = 
-		new Type<ImageAnnotationSelectionHandler>();
+	private static final Type<AnnotationSelectionHandler> TYPE = 
+		new Type<AnnotationSelectionHandler>();
 	 
-	private ImageAnnotation annotation;
+	private Annotation annotation;
 	private boolean selected;
 		
-	public ImageAnnotationSelectionEvent(ImageAnnotation annotation, boolean selected) {
+	public AnnotationSelectionEvent(Annotation annotation, boolean selected) {
 		this.annotation=annotation;
 		this.selected=selected;
 	}
 	
 	@Override
-	protected void dispatch(ImageAnnotationSelectionHandler handler) {
+	protected void dispatch(AnnotationSelectionHandler handler) {
 		handler.onAnnotationSelection(this);
 	}
 
 	@Override
-	public Type<ImageAnnotationSelectionHandler> getAssociatedType() {
+	public Type<AnnotationSelectionHandler> getAssociatedType() {
 		return TYPE;
 	}
 	
-	public static Type<ImageAnnotationSelectionHandler> getType() {
+	public static Type<AnnotationSelectionHandler> getType() {
 		return TYPE;
 	}
 
-	public ImageAnnotation getAnnotation() {
+	public Annotation getAnnotation() {
 		return annotation;
 	}
 

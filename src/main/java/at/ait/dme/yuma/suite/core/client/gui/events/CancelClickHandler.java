@@ -19,10 +19,10 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
+package at.ait.dme.yuma.suite.core.client.gui.events;
 
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 
@@ -31,14 +31,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
  * 
  * @author Christian Sadilek
  */
-public class CancelImageAnnotationClickHandler extends ImageAnnotationClickHandler {
+public class CancelClickHandler extends BaseClickHandler {
 	
-	public CancelImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode) {
+	public CancelClickHandler(TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode) {
 		super(annotationComposite, annotationTreeNode);
 	}
 		
 	public void onClick(ClickEvent event) {
-		getAnnotationComposite().hideAnnotationForm(getAnnotationTreeNode(),true);	
+		getTreeViewComposite().hideAnnotationForm(getAnnotationTreeNode(),true);	
 	}	
 }

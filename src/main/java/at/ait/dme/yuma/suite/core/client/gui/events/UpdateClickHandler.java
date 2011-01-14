@@ -19,16 +19,16 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
+package at.ait.dme.yuma.suite.core.client.gui.events;
 
 import java.util.Date;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -39,26 +39,26 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * 
  * @author Christian Sadilek
  */
-public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandler {
+public class UpdateClickHandler extends BaseClickHandler {
 	// reference to the annotation form to retrieve title and text 
-	private ImageAnnotationForm annotationForm;
+	private AnnotationEditForm annotationForm;
 	
-	public UpdateImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode, ImageAnnotationForm annotationForm) {
+	public UpdateClickHandler(TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode, AnnotationEditForm annotationForm) {
 		
 		super(annotationComposite, annotationTreeNode);
 		this.annotationForm = annotationForm;
 	}		
 	
 	public void onClick(ClickEvent event) {
-		final ImageAnnotationComposite annotationComposite=getAnnotationComposite();
+		final TreeViewComposite annotationComposite=getTreeViewComposite();
 		annotationComposite.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
 
 		// create a new annotation
 		ImageAnnotation a = new ImageAnnotation();
 	
-		ImageAnnotationTreeNode node = getAnnotationTreeNode();
+		AnnotationTreeNode node = getAnnotationTreeNode();
 		if (node != null) {
 			a.setId(node.getAnnotationId());
 			a.setParentId(node.getParentAnnotationId());
@@ -79,7 +79,7 @@ public class UpdateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 		addFragment(a);
 		
 		// update the annotation on the server
-		getImageAnnotationService().updateAnnotation(a,
+		getAnnotationService().updateAnnotation(a,
 			new AsyncCallback<Annotation>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToSaveAnnotation());				

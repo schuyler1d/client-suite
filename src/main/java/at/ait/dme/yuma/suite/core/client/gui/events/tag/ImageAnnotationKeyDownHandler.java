@@ -19,15 +19,15 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler.tag;
+package at.ait.dme.yuma.suite.core.client.gui.events.tag;
 
 import java.util.Collection;
 
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceException;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.StandardImageAnnotationForm;
 
 import com.google.gwt.core.client.GWT;
@@ -41,7 +41,7 @@ import com.google.gwt.user.client.ui.TextArea;
 public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
 
     private StandardImageAnnotationForm annotationForm;
-    private ImageAnnotationComposite annotationComposite;
+    private TreeViewComposite annotationComposite;
     private Collection<SemanticTagSuggestions> entities = null;
     private boolean serviceEnabled = true;
     
@@ -53,7 +53,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
 
 
     public ImageAnnotationKeyDownHandler(StandardImageAnnotationForm form, 
-    		ImageAnnotationComposite annotationComposite) {
+    		TreeViewComposite annotationComposite) {
         this.annotationForm = form;
         this.annotationComposite = annotationComposite;
     }

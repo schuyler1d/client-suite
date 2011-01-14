@@ -38,12 +38,13 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
+import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.StandardImageAnnotationForm;
 import at.ait.dme.yuma.suite.image.core.client.map.annotation.AnnotationLayer;
 import at.ait.dme.yuma.suite.image.core.client.tagcloud.TagCloud;
@@ -70,7 +71,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	/**
 	 * Reference to the annotationComposite
 	 */
-	private ImageAnnotationComposite annotationComposite;
+	private TreeViewComposite annotationComposite;
 	
 	/**
 	 * The FlowPanel displaying the current tags  
@@ -98,8 +99,8 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 		this.tagCloud = tagCloud;
 	}
 	
-	public TagEnabledAnnotationForm(ImageAnnotationComposite annotationComposite,
-			TagCloud tagCloud, ImageAnnotationTreeNode annotationTreeNode,
+	public TagEnabledAnnotationForm(TreeViewComposite annotationComposite,
+			TagCloud tagCloud, AnnotationTreeNode annotationTreeNode,
 			boolean fragmentAnnotation, boolean update) {
 	
 		super(annotationComposite, annotationTreeNode, fragmentAnnotation, update);
@@ -107,7 +108,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 		this.annotationComposite = annotationComposite;
 		this.tagCloud = tagCloud;
 	
-		annotationComposite.getImageComposite().setAnnotationForm(this);
+		((StandardImageComposite)annotationComposite.getImageComposite()).setAnnotationForm(this);
 		
 		if (update && annotationTreeNode.getAnnotation().hasTags()) {
 			for (SemanticTag t : annotationTreeNode.getAnnotation().getTags()) {
@@ -117,26 +118,26 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	}
 	
 	@Override
-	public ImageAnnotationForm createNew(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode, boolean fragmentAnnotation, boolean update) {
+	public AnnotationEditForm createNew(TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode, boolean fragmentAnnotation, boolean update) {
 		return new TagEnabledAnnotationForm(annotationComposite, tagCloud, annotationTreeNode,
 				fragmentAnnotation, update);
 	}
 	
 	@Override
-	protected Panel createLinksPanel(boolean update, ImageAnnotationTreeNode annotationTreeNode) {
+	protected Panel createLinksPanel(boolean update, AnnotationTreeNode annotationTreeNode) {
 		tagPanel = new FlowPanel();
 		tagPanel.setStyleName("imageAnnotation-taglist");
 		return tagPanel;
 	}
 	
 	@Override
-	protected Panel createSemanticLinksPanel(boolean update, ImageAnnotationTreeNode annotationTreeNode) {
+	protected Panel createSemanticLinksPanel(boolean update, AnnotationTreeNode annotationTreeNode) {
 		return new FlowPanel();
 	}
 	
 	@Override
-	protected KeyDownHandler createKeyDownHandler(ImageAnnotationComposite annotationComposite) {
+	protected KeyDownHandler createKeyDownHandler(TreeViewComposite annotationComposite) {
 		return new KeyDownHandler() {
 			@Override
 			public void onKeyDown(KeyDownEvent event) {

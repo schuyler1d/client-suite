@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation;
+package at.ait.dme.yuma.suite.core.client.gui.treeview;
 
 import java.util.List;
 
@@ -33,11 +33,11 @@ import com.google.gwt.user.client.ui.Composite;
  * 
  * @author Christian Sadilek
  */
-public abstract class ImageAnnotationForm extends Composite {
+public abstract class AnnotationEditForm extends Composite {
 	
-	public abstract ImageAnnotationForm createNew(
-			ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode, 
+	public abstract AnnotationEditForm createNew(
+			TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode, 
 			boolean fragmentAnnotation, 
 			boolean update);
 	

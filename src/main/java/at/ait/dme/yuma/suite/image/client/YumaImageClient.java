@@ -28,14 +28,14 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 import at.ait.dme.yuma.suite.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.User;
-import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionHandler;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceAsync;
-import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
+import at.ait.dme.yuma.suite.image.core.client.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.image.core.client.map.TiledImageComposite;
 import at.ait.dme.yuma.suite.image.core.client.map.annotation.ControlPointComposite;
 import at.ait.dme.yuma.suite.image.core.client.map.annotation.ControlPointForm;
@@ -76,7 +76,7 @@ public class YumaImageClient implements EntryPoint {
 	private static User authenticatedUser = null;
 	private static I18NConstants annotationConstants = null;
 	
-	private ImageComposite imageComposite = null;
+	private AnnotationEnabledMediaViewer imageComposite = null;
 	
 	public YumaImageClient() {}
 
@@ -206,17 +206,17 @@ public class YumaImageClient implements EntryPoint {
 	 * @param tabPanel
 	 */
 	private void showAnnotationsTab(TabLayoutPanel tabPanel) {
-		ImageAnnotationComposite annComposite;
+		TreeViewComposite annComposite;
 
-		annComposite = new ImageAnnotationComposite(
+		annComposite = new TreeViewComposite(
 				imageComposite, 
-				new TagEnabledAnnotationForm(imageComposite.getTagCloud()),
+				new TagEnabledAnnotationForm(((StandardImageComposite)imageComposite).getTagCloud()),
 				ShapeTypeRegistry.allTypes());			
 
-		annComposite.addImageAnnotationSelectionHandler(new ImageAnnotationSelectionHandler() {
+		annComposite.addImageAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
-			public void onAnnotationSelection(ImageAnnotationSelectionEvent event) {
-				imageComposite.selectFragment(event.getAnnotation(), event.isSelected());
+			public void onAnnotationSelection(AnnotationSelectionEvent event) {
+				imageComposite.selectAnnotation(event.getAnnotation(), event.isSelected());
 			}
 		});
 		tabPanel.add(annComposite, getConstants().tabAnnotations());
@@ -228,15 +228,15 @@ public class YumaImageClient implements EntryPoint {
 	 * @param tabPanel
 	 */
 	private void showGeoReferencingTab(TabLayoutPanel tabPanel) {
-		ImageAnnotationComposite geoRefComposite = new ControlPointComposite(
+		TreeViewComposite geoRefComposite = new ControlPointComposite(
 				(TiledImageComposite)imageComposite, 
 				new ControlPointForm(((TiledImageComposite)imageComposite).getControlPointLayer()), 
 				ShapeTypeRegistry.geoTypes());
 		
-		geoRefComposite.addImageAnnotationSelectionHandler(new ImageAnnotationSelectionHandler() {
+		geoRefComposite.addImageAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
-			public void onAnnotationSelection(ImageAnnotationSelectionEvent event) {
-				imageComposite.selectFragment(event.getAnnotation(), event.isSelected());
+			public void onAnnotationSelection(AnnotationSelectionEvent event) {
+				imageComposite.selectAnnotation(event.getAnnotation(), event.isSelected());
 			}
 		});
 				
@@ -258,7 +258,7 @@ public class YumaImageClient implements EntryPoint {
 	 * 
 	 * @return image composite
 	 */
-	public ImageComposite getImageComposite() {
+	public AnnotationEnabledMediaViewer getImageComposite() {
 		return imageComposite;
 	}
 

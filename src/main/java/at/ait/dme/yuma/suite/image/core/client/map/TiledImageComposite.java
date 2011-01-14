@@ -24,8 +24,9 @@ package at.ait.dme.yuma.suite.image.core.client.map;
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
-import at.ait.dme.yuma.suite.core.client.gui.LoadMask;
-import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.LoadingPopup;
 import at.ait.dme.yuma.suite.image.core.client.ImageRect;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
@@ -56,7 +57,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
  * 
  * @author Rainer Simon
  */
-public class TiledImageComposite extends ImageComposite {
+public class TiledImageComposite extends AnnotationEnabledMediaViewer {
 		
 	/**
 	 * The main GUI panel
@@ -84,13 +85,13 @@ public class TiledImageComposite extends ImageComposite {
 	/**
 	 * 'Loading' popup
 	 */
-	private LoadMask loadMask;
+	private LoadingPopup loadMask;
 
 	public TiledImageComposite(String mapUrl) {
 		panel = new AbsolutePanel();
 		panel.setSize("100%", "100%");
 		
-		loadMask = new LoadMask("Loading Map...");
+		loadMask = new LoadingPopup("Loading Map...");
 		loadMask.show();
 		
 		loadTileset(mapUrl);
@@ -146,12 +147,10 @@ public class TiledImageComposite extends ImageComposite {
 		return lSearch;
 	}
 	
-	@Override
 	public TagCloud getTagCloud() {
 		return lAnnotation.getTagCloud();
 	}
 	
-	@Override
 	public void setAnnotationForm(TagEnabledAnnotationForm annotationForm) {
 		lAnnotation.setAnnotationForm(annotationForm);
 	}
@@ -173,16 +172,16 @@ public class TiledImageComposite extends ImageComposite {
 	}
 	
 	@Override
-	public void showActiveFragmentPanel(ImageAnnotation annotation, boolean forceVisible) {
+	public void editAnnotation(Annotation annotation, boolean forceVisible) {
 		if (lControlPoints.isVisible()) {
-			lControlPoints.showActiveFragmentPanel(annotation, true);
+			lControlPoints.showActiveFragmentPanel((ImageAnnotation) annotation, true);
 		} else {
-			lAnnotation.showActiveFragmentPanel(annotation, true);
+			lAnnotation.showActiveFragmentPanel((ImageAnnotation) annotation, true);
 		}
 	}
 	
 	@Override
-	public void hideActiveFragmentPanel() {
+	public void stopEditing() {
 		if (lControlPoints.isVisible()) {
 			lControlPoints.hideActiveFragmentPanel();
 		} else {
@@ -191,51 +190,41 @@ public class TiledImageComposite extends ImageComposite {
 	}
 
 	@Override
-	public void selectFragment(ImageAnnotation annotation, boolean selected) {
+	public void selectAnnotation(Annotation annotation, boolean selected) {
 		if (annotation.getFragment() != null && ((ImageFragment) annotation.getFragment()).getShape() instanceof GeoPoint) {
-			lControlPoints.selectFragment(annotation, selected);
+			lControlPoints.selectFragment((ImageAnnotation) annotation, selected);
 		} else {
-			lAnnotation.selectFragment(annotation, selected);
+			lAnnotation.selectFragment((ImageAnnotation) annotation, selected);
 		}
 	}
 	
 	@Override
-	public void showFragment(ImageAnnotation annotation) {
+	public void showAnnotation(Annotation annotation) {
 		if (((ImageFragment)annotation.getFragment()).getShape() instanceof GeoPoint) {
-			lControlPoints.showFragment(annotation);
+			lControlPoints.showFragment((ImageAnnotation) annotation);
 		} else {
-			lAnnotation.showFragment(annotation);
+			lAnnotation.showFragment((ImageAnnotation) annotation);
 		}
 	}
 	
 	@Override
-	public void hideFragment(ImageAnnotation annotation) {
+	public void hideAnnotation(Annotation annotation) {
 		if (((ImageFragment)annotation.getFragment()).getShape() instanceof GeoPoint) {
-			lControlPoints.hideFragment(annotation);
+			lControlPoints.hideFragment((ImageAnnotation) annotation);
 		} else {
-			lAnnotation.hideFragment(annotation);
+			lAnnotation.hideFragment((ImageAnnotation) annotation);
 		}
 	}
 
 	@Override
-	public Shape getActiveShape() {
+	public ImageFragment getMediaFragment() {
 		if (lControlPoints.isVisible()) {
-			return lControlPoints.getActiveShape();
+			return null; //lControlPoints.getActiveShape();
 		} else {
-			return lAnnotation.getActiveShape();
+			return null; // lAnnotation.getActiveShape();
 		}
 	}
-	
-	@Override
-	public ImageRect getVisibleRect() {
-		return getImageRect();
-	}
-
-	@Override
-	public ImageRect getImageRect() {
-		return new ImageRect(0, 0, xExtent, yExtent);
-	}
-	
+		
 	private void loadTileset(final String url) {
 		final TilesetServiceAsync tileService = (TilesetServiceAsync) GWT
 			.create(TilesetService.class);
@@ -269,7 +258,7 @@ public class TiledImageComposite extends ImageComposite {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void startOnTheFlyTiler(final String url) {
 		loadMask.hide();
-		loadMask = new LoadMask("Generating Tiles...");
+		loadMask = new LoadingPopup("Generating Tiles...");
 		loadMask.show();
 		
 		final TilesetServiceAsync tileService = (TilesetServiceAsync) GWT

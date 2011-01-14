@@ -19,20 +19,19 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
+package at.ait.dme.yuma.suite.core.client.gui.events;
 
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
+import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.core.client.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
-import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
-import at.ait.dme.yuma.suite.image.core.client.shape.VoidShape;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -42,14 +41,15 @@ import com.google.gwt.event.dom.client.ClickHandler;
  * 
  * @author Christian Sadilek
  */
-public abstract class ImageAnnotationClickHandler implements ClickHandler {
-	private ImageAnnotationComposite annotationComposite = null;
-	private ImageAnnotationTreeNode annotationTreeNode = null;
+public abstract class BaseClickHandler implements ClickHandler {
+	
+	private TreeViewComposite annotationComposite = null;
+	
+	private AnnotationTreeNode annotationTreeNode = null;
 
 	protected I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 	
-	public ImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode) {
+	public BaseClickHandler(TreeViewComposite annotationComposite, AnnotationTreeNode annotationTreeNode) {
 		this.annotationComposite=annotationComposite;
 		this.annotationTreeNode=annotationTreeNode;
 	}
@@ -60,7 +60,7 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	 * 
 	 * @return image annotation tree node
 	 */
-	protected ImageAnnotationTreeNode getAnnotationTreeNode() {
+	protected AnnotationTreeNode getAnnotationTreeNode() {
 		return annotationTreeNode;
 	}
 
@@ -70,7 +70,7 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	 * 
 	 * @return image annotation composite
 	 */
-	protected ImageAnnotationComposite getAnnotationComposite() {
+	protected TreeViewComposite getTreeViewComposite() {
 		return annotationComposite;
 	}
 		
@@ -80,10 +80,10 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	 *  
 	 * @return ImageAnnotationServiceAsync reference to the image annotation service
 	 */
-	protected AnnotationServiceAsync getImageAnnotationService() {
-		AnnotationServiceAsync imageAnnotationService = 
+	protected AnnotationServiceAsync getAnnotationService() {
+		AnnotationServiceAsync annotationService = 
 			(AnnotationServiceAsync) GWT.create(AnnotationService.class);
-		return imageAnnotationService;
+		return annotationService;
 	}
 	
 	/**
@@ -91,16 +91,11 @@ public abstract class ImageAnnotationClickHandler implements ClickHandler {
 	 * 
 	 * @param annotation
 	 */
-	protected void addFragment(ImageAnnotation annotation) {
-		ImageComposite imageComposite=annotationComposite.getImageComposite();
-		ImageFragment fragment = null;
-		if(imageComposite.getActiveShape()!=null) {
-			fragment = new ImageFragment(
-					imageComposite.getVisibleRect(),					
-					imageComposite.getImageRect(),
-					imageComposite.getActiveShape());
-		} else {
-			fragment = new ImageFragment(new VoidShape());
+	protected void addFragment(Annotation annotation) {
+		AnnotationEnabledMediaViewer imageComposite=annotationComposite.getImageComposite();
+		MediaFragment fragment = imageComposite.getMediaFragment();
+		if(fragment == null) {
+			// fragment = new MediaFragment(new VoidShape());
 		}
 		annotation.setFragment(fragment);
 	}

@@ -19,18 +19,25 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection;
+package at.ait.dme.yuma.suite.core.client.gui.events.selection;
 
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
 /**
- *
- * Handler for {@link ImageAnnotationSelectionEvent} events.
+ * A widget that implements this interface provides registration for
+ * {@link AnnotationSelectionHandler} instances.
  * 
  * @author Christian Sadilek
  */
-public interface ImageAnnotationSelectionHandler extends EventHandler {
-
-	public void onAnnotationSelection(ImageAnnotationSelectionEvent event);
+public interface HasAnnotationSelectionHandlers extends HasHandlers {
+	
+	  /**
+	   * Adds a {@link AnnotationSelectionEvent} handler.
+	   * 
+	   * @param handler the selection handler
+	   * @return {@link HandlerRegistration} used to remove this handler
+	   */
+	 HandlerRegistration addImageAnnotationSelectionHandler(AnnotationSelectionHandler handler);
 }

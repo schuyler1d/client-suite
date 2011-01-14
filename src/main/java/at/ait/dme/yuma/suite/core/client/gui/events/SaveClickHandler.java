@@ -19,17 +19,17 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
+package at.ait.dme.yuma.suite.core.client.gui.events;
 
 import java.util.Date;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -40,24 +40,24 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * 
  * @author Christian Sadilek
  */
-public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler {
+public class SaveClickHandler extends BaseClickHandler {
 
 	// reference to the annotation form to retrieve title and text 
-	private ImageAnnotationForm annotationForm;
+	private AnnotationEditForm annotationForm;
 	
-	public SaveImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode, ImageAnnotationForm annotationForm) {
+	public SaveClickHandler(TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode, AnnotationEditForm annotationForm) {
 		
 		super(annotationComposite, annotationTreeNode);
 		this.annotationForm = annotationForm;
 	}		
 	
 	public void onClick(ClickEvent event) {
-		final ImageAnnotationComposite annotationComposite=getAnnotationComposite();
+		final TreeViewComposite annotationComposite=getTreeViewComposite();
 		annotationComposite.enableLoadingImage();		
 		((FocusWidget)event.getSource()).setEnabled(false);
 
-		ImageAnnotationTreeNode annotationTreeNode = getAnnotationTreeNode();
+		AnnotationTreeNode annotationTreeNode = getAnnotationTreeNode();
 		String parentId = null, rootId = null;
 
 		// check if the new annotation is a reply
@@ -88,7 +88,7 @@ public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler
 		addFragment(a);
 		
 		// now save the annotation
-		getImageAnnotationService().createAnnotation(a,
+		getAnnotationService().createAnnotation(a,
 			new AsyncCallback<Annotation>() {
 			
 				public void onFailure(Throwable caught) {
@@ -97,11 +97,11 @@ public class SaveImageAnnotationClickHandler extends ImageAnnotationClickHandler
 
 				// on success add the annotation to the tree
 				public void onSuccess(Annotation result) {
-					ImageAnnotationTreeNode treeNode = getAnnotationTreeNode();
-					ImageAnnotation parent = (treeNode == null) ? null : treeNode.getAnnotation();
+					AnnotationTreeNode treeNode = getAnnotationTreeNode();
+					Annotation parent = (treeNode == null) ? null : treeNode.getAnnotation();
 					annotationComposite.hideAnnotationForm(treeNode, false);
 					annotationComposite.disableLoadingImage();
-					annotationComposite.addAnnotation((ImageAnnotation) result, parent);
+					annotationComposite.addAnnotation(result, parent);
 				}
 			}
 		);

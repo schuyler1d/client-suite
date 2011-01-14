@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation;
+package at.ait.dme.yuma.suite.core.client.gui.treeview;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,16 +37,17 @@ import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.events.CreateClickHandler;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionHandler;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.HasAnnotationSelectionHandlers;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
+import at.ait.dme.yuma.suite.image.core.client.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CreateImageAnnotationClickHandler;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.HasImageAnnotationSelectionHandlers;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionHandler;
+import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.map.annotation.GoogleMapsComposite;
 
 import com.google.gwt.core.client.GWT;
@@ -77,8 +78,8 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  * @author Christian Sadilek
  */
-public class ImageAnnotationComposite extends Composite implements HasLayoutManager, 
-	HasImageAnnotationSelectionHandlers {
+public class TreeViewComposite extends Composite implements HasLayoutManager, 
+	HasAnnotationSelectionHandlers {
 	
 	// this panel's handler manager 
 	final protected HandlerManager handlerManager = new HandlerManager(this);	
@@ -99,10 +100,10 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 
 	// panel for the annotation form
 	protected LayoutPanel annotationFormPanel = new LayoutPanel();	
-	private ImageAnnotationForm imageAnnotationForm = null;
+	private AnnotationEditForm imageAnnotationForm = null;
 	
 	// the annotation tree
-	private ImageAnnotationTree annotationTree;
+	private AnnotationTree annotationTree;
 
 	// the shape types of this tree's annotations
 	private Set<String> shapeTypes = null;	
@@ -113,10 +114,10 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	private PushButton showOnMapButton = new PushButton();
 	
 	// all currently displayed annotations
-	private List<ImageAnnotation> annotations = new ArrayList<ImageAnnotation>();
+	private List<Annotation> annotations = new ArrayList<Annotation>();
 	
 	// reference to the image composite
-	private ImageComposite imageComposite = null;
+	private AnnotationEnabledMediaViewer imageComposite = null;
 	
 	/**
 	 * the image annotation composite constructor. needs an image composite
@@ -124,8 +125,8 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 * 
 	 * @param imageComposite
 	 */
-	public ImageAnnotationComposite(ImageComposite imageComposite, 
-			ImageAnnotationForm imageAnnotationForm, Set<String> shapeTypes) {	
+	public TreeViewComposite(AnnotationEnabledMediaViewer imageComposite, 
+			AnnotationEditForm imageAnnotationForm, Set<String> shapeTypes) {	
 		this.imageComposite = imageComposite;
 		this.imageAnnotationForm = imageAnnotationForm;
 		this.shapeTypes = shapeTypes;
@@ -143,10 +144,10 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		createTree(shapeTypes);		
 		
 		// Register annotation selection handler on image composite
-		imageComposite.addImageAnnotationSelectionHandler(new ImageAnnotationSelectionHandler() {
+		imageComposite.addImageAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
-			public void onAnnotationSelection(ImageAnnotationSelectionEvent event) {
-				final ImageAnnotationTreeNode node = 
+			public void onAnnotationSelection(AnnotationSelectionEvent event) {
+				final AnnotationTreeNode node = 
 					annotationTree.getAnnotationNode(event.getAnnotation());
 				if(node==null) return;
 				
@@ -209,7 +210,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		annotateButton.setStyleName("imageAnnotation-button");
 		annotateButton.setText(YumaImageClient.getConstants().actionCreate());	
 		annotateButton.addClickHandler(
-				new CreateImageAnnotationClickHandler(this,null,false,false));
+				new CreateClickHandler(this,null,false,false));
 		annotateButton.setEnabled(!YumaImageClient.getUser().isEmpty());
 		buttons.add(annotateButton);
 		
@@ -217,11 +218,11 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 		annotateFragmentButton.setStyleName("imageAnnotation-button");
 		annotateFragmentButton.setText(YumaImageClient.getConstants().actionCreateFragment());
 		annotateFragmentButton.addClickHandler(
-				new CreateImageAnnotationClickHandler(this,null,true,false));		
+				new CreateClickHandler(this,null,true,false));		
 		annotateFragmentButton.setEnabled(!YumaImageClient.getUser().isEmpty());
 		buttons.add(annotateFragmentButton);
 		
-		// 'Show on Map' button
+		/* 'Show on Map' button
 		showOnMapButton.setStyleName("imageAnnotation-button");
 		showOnMapButton.setText(YumaImageClient.getConstants().actionShowOnMap());
 		showOnMapButton.addClickHandler(new ClickHandler() {
@@ -234,7 +235,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 			}			
 		});			
 		showOnMapButton.setVisible(YumaImageClient.getBbox()!=null||YumaImageClient.isInTileMode());
-		buttons.add(showOnMapButton);	
+		buttons.add(showOnMapButton);	*/
 		
 		header.add(buttons);	
 		header.add(annotationFormPanel);
@@ -251,7 +252,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 * @param fragmentAnnotation true if annotation has a fragment, otherwise false
 	 * @param update true if the user updates an existing annotation, otherwise false
 	 */
-	public void showAnnotationForm(final ImageAnnotationTreeNode annotationTreeNode, 
+	public void showAnnotationForm(final AnnotationTreeNode annotationTreeNode, 
 			boolean fragmentAnnotation, boolean update) {					
 
 		imageAnnotationForm=imageAnnotationForm.createNew(this, annotationTreeNode, 
@@ -273,17 +274,17 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 				// if we update an existing annotation we first have to remove the
 				// existing fragment and show an active fragment panel instead.
 				if(update && annotationTreeNode.getImageFragment()!=null) {					
-					imageComposite.showActiveFragmentPanel(annotationTreeNode.getAnnotation(), true);
-					imageComposite.hideFragment(annotationTreeNode.getAnnotation());
+					imageComposite.editAnnotation(annotationTreeNode.getAnnotation(), true);
+					imageComposite.hideAnnotation(annotationTreeNode.getAnnotation());
 				} else {
-					imageComposite.showActiveFragmentPanel(null, true);
+					imageComposite.editAnnotation(null, true);
 				}
 			}
 		} else {
 			annotateButton.setEnabled(false);
 			annotateFragmentButton.setEnabled(false);
 			annotationFormPanel.add(imageAnnotationForm);
-			if(fragmentAnnotation) imageComposite.showActiveFragmentPanel(null, true);
+			if(fragmentAnnotation) imageComposite.editAnnotation(null, true);
 		}
 		
 		layout();
@@ -296,9 +297,9 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 *  
 	 *  @param annotationTreeNode
 	 * 	@param canceled true if the user canceled the operation, otherwise false
-	 *  @see #showAnnotationForm(ImageAnnotationTreeNode, boolean, boolean)
+	 *  @see #showAnnotationForm(AnnotationTreeNode, boolean, boolean)
 	 */
-	public void hideAnnotationForm(final ImageAnnotationTreeNode annotationTreeNode, 
+	public void hideAnnotationForm(final AnnotationTreeNode annotationTreeNode, 
 			boolean canceled) {
 	
 		if (!YumaImageClient.isInTileMode())
@@ -319,10 +320,10 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 			});
 		}
 		
-		imageComposite.hideActiveFragmentPanel();
+		imageComposite.stopEditing();
 		if(canceled && annotationTreeNode != null && 
 				annotationTreeNode.getImageFragment()!=null) { 
-			imageComposite.showFragment(annotationTreeNode.getAnnotation());
+			imageComposite.showAnnotation(annotationTreeNode.getAnnotation());
 		}
 
 		layout();
@@ -334,8 +335,8 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 * @param annotation
 	 * @param parent
 	 */
-	public void addAnnotation(ImageAnnotation annotation, ImageAnnotation parent) {
-		if(annotations==null) annotations = new ArrayList<ImageAnnotation>();
+	public void addAnnotation(Annotation annotation, Annotation parent) {
+		if(annotations==null) annotations = new ArrayList<Annotation>();
 		
 		if(parent!=null) {
 			parent.addReply(annotation);
@@ -351,7 +352,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 * 
 	 * @param annotationNode
 	 */
-	public void removeAnnotation(ImageAnnotationTreeNode annotationNode) {
+	public void removeAnnotation(AnnotationTreeNode annotationNode) {
 		TreeItem parent = annotationNode.getAnnotationTreeItem().getParentItem();
 		if(parent == null) {
 			annotationTree.removeItem(annotationNode.getAnnotationTreeItem());
@@ -360,7 +361,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 			parent.removeItem(annotationNode.getAnnotationTreeItem());
 			annotationNode.getParentAnnotation().removeReply(annotationNode.getAnnotation());
 		}		
-		imageComposite.hideFragment(annotationNode.getAnnotation());
+		imageComposite.hideAnnotation(annotationNode.getAnnotation());
 		
 		annotationTree.build(annotations);
 	}
@@ -389,8 +390,8 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 
 					}
 
-					annotationTree = new ImageAnnotationTree(annotations, handlerManager,
-							imageComposite, ImageAnnotationComposite.this);
+					annotationTree = new AnnotationTree(annotations, handlerManager,
+							imageComposite, TreeViewComposite.this);
 					
 					scrollPanel.add(annotationTree);
 				
@@ -429,7 +430,7 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 	 * 
 	 * @return image composite
 	 */
-	public ImageComposite getImageComposite() {
+	public AnnotationEnabledMediaViewer getImageComposite() {
 		return imageComposite;
 	}
 
@@ -446,8 +447,8 @@ public class ImageAnnotationComposite extends Composite implements HasLayoutMana
 
 	@Override
 	public HandlerRegistration addImageAnnotationSelectionHandler(
-			ImageAnnotationSelectionHandler handler) {
-		return handlerManager.addHandler(ImageAnnotationSelectionEvent.getType(), handler);
+			AnnotationSelectionHandler handler) {
+		return handlerManager.addHandler(AnnotationSelectionEvent.getType(), handler);
 	}
 
 	@Override

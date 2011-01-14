@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation;
+package at.ait.dme.yuma.suite.core.client.gui.treeview;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -47,19 +47,22 @@ import com.google.gwt.user.client.ui.TreeItem;
  * A tree widget displaying an annotation thread.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-public class ImageAnnotationTree extends Tree {
+public class AnnotationTree extends Tree {
 	
-	// map an annotation to its node
-    private Map<ImageAnnotation, ImageAnnotationTreeNode> annotationNodes = new HashMap<ImageAnnotation, ImageAnnotationTreeNode>();
+    private Map<Annotation, AnnotationTreeNode> annotationNodes = new HashMap<Annotation, AnnotationTreeNode>();
 	
     private HandlerManager handlerManager;	
-    private ImageComposite imageComposite;
-    private ImageAnnotationComposite annotationComposite;
+    
+    private AnnotationEnabledMediaViewer imageComposite;
+    
+    private TreeViewComposite annotationComposite;
 
-    public ImageAnnotationTree(List<ImageAnnotation> annotations, 
-    		HandlerManager handlerManager, ImageComposite imageComposite, 
-    		ImageAnnotationComposite annotationComposite) {
+    public AnnotationTree(List<Annotation> annotations, 
+    		HandlerManager handlerManager, AnnotationEnabledMediaViewer imageComposite, 
+    		TreeViewComposite annotationComposite) {
+    	
     	this.handlerManager = handlerManager;
     	this.imageComposite = imageComposite;
     	this.annotationComposite = annotationComposite;
@@ -89,18 +92,18 @@ public class ImageAnnotationTree extends Tree {
 	 * 
 	 * @param annotations
 	 */
-	public void build(List<ImageAnnotation> annotations) {
+	public void build(List<Annotation> annotations) {
 		removeItems();	
 		setVisible(false);
 
 		// sort the annotations descending by creation date		
-		Collections.sort(annotations, new Comparator<ImageAnnotation>() {
-			public int compare(ImageAnnotation o1, ImageAnnotation o2) {
+		Collections.sort(annotations, new Comparator<Annotation>() {
+			public int compare(Annotation o1, Annotation o2) {
 				return o2.getCreated().compareTo(o1.getCreated());
 			}					
 		});
 		
-		for(ImageAnnotation annotation : annotations) {
+		for(Annotation annotation : annotations) {
 			addAnnotation(annotation, null, null);
 		}
 		
@@ -114,23 +117,23 @@ public class ImageAnnotationTree extends Tree {
 	 * @param parentAnnotation
 	 * @param parent
 	 */
-	private void addAnnotation(final ImageAnnotation annotation, ImageAnnotation parentAnnotation,
+	private void addAnnotation(final Annotation annotation, Annotation parentAnnotation,
 			TreeItem parent) {		
 			
 		// create the tree node
-		final ImageAnnotationTreeNode node = 
-			new ImageAnnotationTreeNode(annotationComposite, annotation, parentAnnotation);		
+		final AnnotationTreeNode node = 
+			new AnnotationTreeNode(annotationComposite, annotation, parentAnnotation);		
 		node.setAnnotationTreeItem((parent==null)?this.addItem(node):parent.addItem(node));
 		node.addMouseOutHandler(new MouseOutHandler() {
 			public void onMouseOut(MouseOutEvent event) {
 				node.setStyleName("imageAnnotation");
-				handlerManager.fireEvent(new ImageAnnotationSelectionEvent(annotation, false));
+				handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, false));
 			}
 		});
 		node.addMouseOverHandler(new MouseOverHandler() {
 			public void onMouseOver(MouseOverEvent event) {
 				node.setStyleName("imageAnnotation-selected");
-				handlerManager.fireEvent(new ImageAnnotationSelectionEvent(annotation, true));
+				handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, true));
 			}
 		});
 		annotationNodes.put(annotation, node);
@@ -140,7 +143,7 @@ public class ImageAnnotationTree extends Tree {
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 				@Override
 				public void execute() {
-					imageComposite.showFragment(node.getAnnotation());	
+					imageComposite.showAnnotation(node.getAnnotation());	
 				}
 			});
 		}
@@ -159,12 +162,12 @@ public class ImageAnnotationTree extends Tree {
 			});
 			// add replies to the tree
 			for(Annotation reply : replies) {
-				addAnnotation((ImageAnnotation) reply, annotation, node.getAnnotationTreeItem());				
+				addAnnotation(reply, annotation, node.getAnnotationTreeItem());				
 			}			
 		}
 	}
 	
-    public ImageAnnotationTreeNode getAnnotationNode(ImageAnnotation annotation) {
+    public AnnotationTreeNode getAnnotationNode(Annotation annotation) {
     	return annotationNodes.get(annotation);
     }
     
@@ -175,7 +178,7 @@ public class ImageAnnotationTree extends Tree {
 		super.removeItems();
 	}
 
-	public void selectAnnotationTreeNode(final ImageAnnotationTreeNode node, boolean selected) {
+	public void selectAnnotationTreeNode(final AnnotationTreeNode node, boolean selected) {
 		if(selected) {
 			node.setStyleName("imageAnnotation-selected");
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {

@@ -31,9 +31,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
+import at.ait.dme.yuma.suite.core.client.gui.events.CreateClickHandler;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CreateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.map.TiledImageComposite;
 
 /**
@@ -42,7 +42,7 @@ import at.ait.dme.yuma.suite.image.core.client.map.TiledImageComposite;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class ControlPointComposite extends ImageAnnotationComposite {
+public class ControlPointComposite extends TreeViewComposite {
 	
 	/**
 	 * 'Create control point' button
@@ -83,7 +83,7 @@ public class ControlPointComposite extends ImageAnnotationComposite {
 		// 'Create Control Point' button
 		createButton = new PushButton(YumaImageClient.getConstants().actionCreateCP());
 		createButton.setStyleName("imageAnnotation-button");
-		createButton.addClickHandler(new CreateImageAnnotationClickHandler(this,null,false,false));
+		createButton.addClickHandler(new CreateClickHandler(this,null,false,false));
 		createButton.setEnabled(!YumaImageClient.getUser().isEmpty());
 		buttons.add(createButton);
 		

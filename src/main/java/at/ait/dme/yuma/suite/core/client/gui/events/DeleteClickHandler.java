@@ -19,11 +19,11 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
+package at.ait.dme.yuma.suite.core.client.gui.events;
 
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -34,21 +34,21 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * 
  * @author Christian Sadilek
  */
-public class DeleteImageAnnotationClickHandler extends ImageAnnotationClickHandler {
+public class DeleteClickHandler extends BaseClickHandler {
 	
-	public DeleteImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode) {
+	public DeleteClickHandler(TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode) {
 		super(annotationComposite, annotationTreeNode);
 	}
 	
 	public void onClick(ClickEvent event) {
-		final ImageAnnotationComposite annotationComposite=getAnnotationComposite();
+		final TreeViewComposite annotationComposite=getTreeViewComposite();
 		annotationComposite.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
 		
 		YumaImageClient.authenticateAs(getAnnotationTreeNode().getAnnotation().getCreatedBy());
 		
-		getImageAnnotationService().deleteAnnotation(getAnnotationTreeNode().getAnnotationId(),
+		getAnnotationService().deleteAnnotation(getAnnotationTreeNode().getAnnotationId(),
 			new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToDeleteAnnotation());

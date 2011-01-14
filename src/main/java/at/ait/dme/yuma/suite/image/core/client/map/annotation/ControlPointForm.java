@@ -24,17 +24,18 @@ package at.ait.dme.yuma.suite.image.core.client.map.annotation;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
+import at.ait.dme.yuma.suite.core.client.gui.events.CancelClickHandler;
+import at.ait.dme.yuma.suite.core.client.gui.events.SaveClickHandler;
+import at.ait.dme.yuma.suite.core.client.gui.events.UpdateClickHandler;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CancelImageAnnotationClickHandler;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.SaveImageAnnotationClickHandler;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.UpdateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.image.core.client.server.GeocoderServiceAsync;
 import at.ait.dme.yuma.suite.image.core.client.shape.GeoPoint;
@@ -54,7 +55,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * 
  * @author Rainer Simon
  */
-public class ControlPointForm extends ImageAnnotationForm {
+public class ControlPointForm extends AnnotationEditForm {
 	
 	/**
 	 * Place name
@@ -81,7 +82,7 @@ public class ControlPointForm extends ImageAnnotationForm {
 		this.controlPointLayer = controlPointLayer;
 	}
 	
-	public ControlPointForm(ImageAnnotationComposite annotationComposite, ControlPointLayer controlPointLayer, ImageAnnotationTreeNode annotationTreeNode,
+	public ControlPointForm(TreeViewComposite annotationComposite, ControlPointLayer controlPointLayer, AnnotationTreeNode annotationTreeNode,
 			boolean fragmentAnnotation,	boolean update) {
 		// Reference to control point layer
 		this.controlPointLayer = controlPointLayer;
@@ -143,7 +144,7 @@ public class ControlPointForm extends ImageAnnotationForm {
 		xyPanel.add(xy);
 	
 		if (update) {
-			ImageAnnotation annotation = annotationTreeNode.getAnnotation();
+			Annotation annotation = annotationTreeNode.getAnnotation();
 			placeName.setText(annotation.getTitle());
 			GeoPoint p = (GeoPoint) ((ImageFragment)annotation.getFragment()).getShape();
 			lon.setText(Double.toString(p.getLng()));
@@ -164,23 +165,23 @@ public class ControlPointForm extends ImageAnnotationForm {
 		
 		controlPointLayer.setControlPointForm(this);
 		if (update) {
-			controlPointLayer.showActiveFragmentPanel(annotationTreeNode.getAnnotation(), false);
+			controlPointLayer.showActiveFragmentPanel((ImageAnnotation) annotationTreeNode.getAnnotation(), false);
 		} else {
 			controlPointLayer.showActiveFragmentPanel(null, false);
 		}
 	}
 	
 	private HorizontalPanel createButtonsPanel(boolean update, 
-			ImageAnnotationTreeNode annotationTreeNode, 
-			ImageAnnotationComposite annotationComposite) {
+			AnnotationTreeNode annotationTreeNode, 
+			TreeViewComposite annotationComposite) {
 		
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
 		PushButton saveButton = new PushButton(YumaImageClient.getConstants().actionSave());
 		if(update) {
-			saveButton.addClickHandler(new UpdateImageAnnotationClickHandler(annotationComposite, 
+			saveButton.addClickHandler(new UpdateClickHandler(annotationComposite, 
 					annotationTreeNode, this));
 		} else {
-			saveButton.addClickHandler(new SaveImageAnnotationClickHandler(annotationComposite, 
+			saveButton.addClickHandler(new SaveClickHandler(annotationComposite, 
 					annotationTreeNode, this));
 		}
 		saveButton.setStyleName("imageAnnotation-form-button");
@@ -188,7 +189,7 @@ public class ControlPointForm extends ImageAnnotationForm {
 		
 		PushButton cancelButton = new PushButton(YumaImageClient.getConstants().actionCancel());
 		cancelButton.setStyleName("imageAnnotation-form-button");
-		cancelButton.addClickHandler(new CancelImageAnnotationClickHandler(annotationComposite,
+		cancelButton.addClickHandler(new CancelClickHandler(annotationComposite,
 				annotationTreeNode));
 		buttonsPanel.add(cancelButton);
 		
@@ -196,9 +197,9 @@ public class ControlPointForm extends ImageAnnotationForm {
 	}
 	
 	@Override
-	public ImageAnnotationForm createNew(
-			ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode,
+	public AnnotationEditForm createNew(
+			TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode,
 			boolean fragmentAnnotation, boolean update) {
 		
 		ControlPointForm newInstance = new ControlPointForm(annotationComposite, controlPointLayer,

@@ -19,22 +19,17 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation;
-
-import org.gwt.mosaic.ui.client.WindowPanel;
+package at.ait.dme.yuma.suite.core.client.gui.treeview;
 
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.core.client.gui.events.CreateClickHandler;
+import at.ait.dme.yuma.suite.core.client.gui.events.DeleteClickHandler;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CreateImageAnnotationClickHandler;
-import at.ait.dme.yuma.suite.image.core.client.annotation.handler.DeleteImageAnnotationClickHandler;
-import at.ait.dme.yuma.suite.image.core.client.map.annotation.GoogleMapsComposite;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
@@ -60,15 +55,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHandlers,
-		HasMouseOverHandlers {
+public class AnnotationTreeNode extends Composite 
+		implements HasMouseOutHandlers, HasMouseOverHandlers {
 	
-	private ImageAnnotation annotation;
-	private ImageAnnotation parentAnnotation;
+	private Annotation annotation;
+	private Annotation parentAnnotation;
 	private TreeItem annotationTreeItem;
 
 	private VerticalPanel annotationPanel = new VerticalPanel();
-	private ImageAnnotationForm annotationForm = null;
+	private AnnotationEditForm annotationForm = null;
 
 	private HorizontalPanel headerPanel = new HorizontalPanel();
 	private Label headerUser = new Label();
@@ -81,7 +76,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	private Image flag = new Image("images/empty.gif");
 	private Image fragment = new Image("images/empty.gif");
 	private Image privateAnnotation = new Image("images/empty.gif");
-	private Image mapAnnotation = new Image("images/empty.gif");
+	// private Image mapAnnotation = new Image("images/empty.gif");
 
 	private HorizontalPanel annotationActionsPanel = new HorizontalPanel();
 	private PushButton actionReply = new PushButton();
@@ -94,8 +89,8 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 
 	private boolean flagged = false;
 
-	public ImageAnnotationTreeNode(ImageAnnotationComposite annotationComposite,
-			ImageAnnotation annotation, ImageAnnotation parentAnnotation) {
+	public AnnotationTreeNode(TreeViewComposite annotationComposite,
+			Annotation annotation, Annotation parentAnnotation) {
 		initWidget(annotationPanel);
 
 		this.annotation = annotation;
@@ -112,7 +107,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	public void addHeader() {
 		headerPanel.setStyleName("imageAnnotation-header");
 
-		if (annotation.getScope() == ImageAnnotation.Scope.PRIVATE) {
+		if (annotation.getScope() == Annotation.Scope.PRIVATE) {
 			privateAnnotation.setStyleName("imageAnnotation-private-annotation-image");
 			headerPanel.add(privateAnnotation);
 		}
@@ -134,6 +129,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 			headerPanel.add(fragment);
 		}
 
+		/*
 		if (annotation.hasFragment() && (YumaImageClient.getBbox() != null || YumaImageClient.isInTileMode())) {
 			mapAnnotation.setStyleName("imageAnnotation-header-map");
 			mapAnnotation.addClickHandler(new ClickHandler() {
@@ -145,6 +141,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 			});
 			headerPanel.add(mapAnnotation);
 		}
+		*/
 
 		// rate information not yet implemented
 		/*
@@ -216,12 +213,12 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	/**
 	 * add the action buttons
 	 */
-	public void addActions(ImageAnnotationComposite annotationComposite) {
+	public void addActions(TreeViewComposite annotationComposite) {
 		// add reply action
 		actionReply.setText(YumaImageClient.getConstants().actionReply());
 		actionReply.setStyleName("imageAnnotation-action");
 		actionReply.addClickHandler(
-				new CreateImageAnnotationClickHandler(annotationComposite, this, false, false));
+				new CreateClickHandler(annotationComposite, this, false, false));
 		actionReply.setEnabled(YumaImageClient.getUser() != null);
 		annotationActionsPanel.add(actionReply);
 
@@ -229,7 +226,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 		actionReplyFragment.setText(YumaImageClient.getConstants().actionReplyFragment());
 		actionReplyFragment.setStyleName("imageAnnotation-action");
 		actionReplyFragment.addClickHandler(
-				new CreateImageAnnotationClickHandler(annotationComposite, this, true, false));
+				new CreateClickHandler(annotationComposite, this, true, false));
 		actionReplyFragment.setEnabled(YumaImageClient.getUser() != null);
 		annotationActionsPanel.add(actionReplyFragment);
 
@@ -238,7 +235,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 		actionEdit.setStyleName("imageAnnotation-action");
 		actionEdit.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
-		actionEdit.addClickHandler(new CreateImageAnnotationClickHandler(annotationComposite, this,
+		actionEdit.addClickHandler(new CreateClickHandler(annotationComposite, this,
 				annotation.hasFragment(), true));
 		annotationActionsPanel.add(actionEdit);
 
@@ -248,7 +245,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 		actionDelete.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		actionDelete.addClickHandler(
-				new DeleteImageAnnotationClickHandler(annotationComposite, this));
+				new DeleteClickHandler(annotationComposite, this));
 		annotationActionsPanel.add(actionDelete);
 
 		annotationActionsPanel.setStyleName("imageAnnotation-actions");
@@ -274,7 +271,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 * 
 	 * @param annotationForm
 	 */
-	public void showAnnotationForm(ImageAnnotationForm annotationForm) {
+	public void showAnnotationForm(AnnotationEditForm annotationForm) {
 		this.annotationForm = annotationForm;
 		annotationPanel.add(annotationForm);
 		actionReply.setEnabled(false);
@@ -297,7 +294,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 * 
 	 * @return image annotation
 	 */
-	public ImageAnnotation getAnnotation() {
+	public Annotation getAnnotation() {
 		return annotation;
 	}
 
@@ -324,7 +321,7 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 * 
 	 * @return image annotation
 	 */
-	public ImageAnnotation getParentAnnotation() {
+	public Annotation getParentAnnotation() {
 		return parentAnnotation;
 	}
 
@@ -388,12 +385,12 @@ public class ImageAnnotationTreeNode extends Composite implements HasMouseOutHan
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof ImageAnnotationTreeNode))
+		if (!(obj instanceof AnnotationTreeNode))
 			return false;
 		if (this == obj)
 			return true;
 
-		ImageAnnotationTreeNode node = (ImageAnnotationTreeNode) obj;
+		AnnotationTreeNode node = (AnnotationTreeNode) obj;
 		return annotation.equals(node.getAnnotation());
 	}
 

@@ -19,10 +19,10 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client.annotation.handler;
+package at.ait.dme.yuma.suite.core.client.gui.events;
 
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationTreeNode;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
+import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 
@@ -31,7 +31,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
  * 
  * @author Christian Sadilek
  */
-public class CreateImageAnnotationClickHandler extends ImageAnnotationClickHandler {
+public class CreateClickHandler extends BaseClickHandler {
 	/**
 	 * indicates if the annotation has a fragment
 	 */
@@ -42,8 +42,8 @@ public class CreateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 	 */
 	private boolean update;
 	
-	public CreateImageAnnotationClickHandler(ImageAnnotationComposite annotationComposite,
-			ImageAnnotationTreeNode annotationTreeNode, boolean fragmentAnnotation, 
+	public CreateClickHandler(TreeViewComposite annotationComposite,
+			AnnotationTreeNode annotationTreeNode, boolean fragmentAnnotation, 
 			boolean update) {
 		super(annotationComposite, annotationTreeNode);
 		this.fragmentAnnotation = fragmentAnnotation;
@@ -51,7 +51,7 @@ public class CreateImageAnnotationClickHandler extends ImageAnnotationClickHandl
 	}
 	
 	public void onClick(ClickEvent event) {
-		getAnnotationComposite().showAnnotationForm(getAnnotationTreeNode(),fragmentAnnotation, 
+		getTreeViewComposite().showAnnotationForm(getAnnotationTreeNode(),fragmentAnnotation, 
 				update);
 	}	
 }
