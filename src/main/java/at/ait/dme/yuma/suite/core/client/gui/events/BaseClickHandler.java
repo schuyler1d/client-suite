@@ -26,7 +26,7 @@ import org.gwt.mosaic.ui.client.MessageBox;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
-import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.core.client.server.RESTfulServiceException;
@@ -92,7 +92,7 @@ public abstract class BaseClickHandler implements ClickHandler {
 	 * @param annotation
 	 */
 	protected void addFragment(Annotation annotation) {
-		AnnotationEnabledMediaViewer imageComposite=annotationComposite.getImageComposite();
+		MediaViewer imageComposite=annotationComposite.getImageComposite();
 		MediaFragment fragment = imageComposite.getMediaFragment();
 		if(fragment == null) {
 			// fragment = new MediaFragment(new VoidShape());

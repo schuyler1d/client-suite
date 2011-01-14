@@ -44,10 +44,10 @@ import at.ait.dme.yuma.suite.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
 import at.ait.dme.yuma.suite.core.client.server.enrichment.SemanticTagSuggestions;
+import at.ait.dme.yuma.suite.image.core.client.StandardImageAnnotationForm;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.StandardImageAnnotationForm;
-import at.ait.dme.yuma.suite.image.core.client.map.annotation.AnnotationLayer;
 import at.ait.dme.yuma.suite.image.core.client.tagcloud.TagCloud;
+import at.ait.dme.yuma.suite.map.client.annotation.AnnotationLayer;
 
 /**
  * A sub-class of {@link StandardImageAnnotationForm} that works with the {@link AnnotationLayer}'s

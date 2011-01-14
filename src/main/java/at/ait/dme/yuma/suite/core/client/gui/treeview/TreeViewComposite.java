@@ -37,7 +37,7 @@ import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.core.client.gui.events.CreateClickHandler;
 import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionHandler;
@@ -45,10 +45,10 @@ import at.ait.dme.yuma.suite.core.client.gui.events.selection.HasAnnotationSelec
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.core.client.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.image.core.client.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.map.annotation.GoogleMapsComposite;
+import at.ait.dme.yuma.suite.image.core.client.gui.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.map.client.annotation.GoogleMapsComposite;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
@@ -117,7 +117,7 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 	private List<Annotation> annotations = new ArrayList<Annotation>();
 	
 	// reference to the image composite
-	private AnnotationEnabledMediaViewer imageComposite = null;
+	private MediaViewer imageComposite = null;
 	
 	/**
 	 * the image annotation composite constructor. needs an image composite
@@ -125,7 +125,7 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 	 * 
 	 * @param imageComposite
 	 */
-	public TreeViewComposite(AnnotationEnabledMediaViewer imageComposite, 
+	public TreeViewComposite(MediaViewer imageComposite, 
 			AnnotationEditForm imageAnnotationForm, Set<String> shapeTypes) {	
 		this.imageComposite = imageComposite;
 		this.imageAnnotationForm = imageAnnotationForm;
@@ -430,7 +430,7 @@ public class TreeViewComposite extends Composite implements HasLayoutManager,
 	 * 
 	 * @return image composite
 	 */
-	public AnnotationEnabledMediaViewer getImageComposite() {
+	public MediaViewer getImageComposite() {
 		return imageComposite;
 	}
 

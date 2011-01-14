@@ -33,10 +33,8 @@ import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
-import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.image.core.client.shape.Color;
 import at.ait.dme.yuma.suite.image.core.client.shape.Ellipse;
 import at.ait.dme.yuma.suite.image.core.client.shape.Shape;
@@ -76,7 +74,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  * @author Christian Sadilek
  */
-public class StandardImageComposite extends AnnotationEnabledMediaViewer {
+public class StandardImageComposite extends MediaViewer {
 	private static final int IMAGE_OFFSET_LEFT = 11;
 	private static final int IMAGE_OFFSET_TOP = 10;
 	private static final String PX = "px";
@@ -178,7 +176,7 @@ public class StandardImageComposite extends AnnotationEnabledMediaViewer {
 	 * called by the load listener to initialize the widget after the image was
 	 * loaded.
 	 * 
-	 * @see AnnotationEnabledMediaViewer.LoadListener
+	 * @see MediaViewer.LoadListener
 	 */
 	private void init() {
 		originalImageHeight = image.getHeight();

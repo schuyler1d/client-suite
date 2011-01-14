@@ -28,19 +28,14 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 import at.ait.dme.yuma.suite.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.User;
-import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.core.client.gui.treeview.TreeViewComposite;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceAsync;
-import at.ait.dme.yuma.suite.image.core.client.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.map.TiledImageComposite;
-import at.ait.dme.yuma.suite.image.core.client.map.annotation.ControlPointComposite;
-import at.ait.dme.yuma.suite.image.core.client.map.annotation.ControlPointForm;
-import at.ait.dme.yuma.suite.image.core.client.map.explore.ExplorationComposite;
-import at.ait.dme.yuma.suite.image.core.client.server.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.image.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.image.core.client.shape.ShapeTypeRegistry;
 import at.ait.dme.yuma.suite.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 
@@ -50,8 +45,6 @@ import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.i18n.client.Dictionary;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
@@ -76,7 +69,7 @@ public class YumaImageClient implements EntryPoint {
 	private static User authenticatedUser = null;
 	private static I18NConstants annotationConstants = null;
 	
-	private AnnotationEnabledMediaViewer imageComposite = null;
+	private MediaViewer imageComposite = null;
 	
 	public YumaImageClient() {}
 
@@ -148,14 +141,9 @@ public class YumaImageClient implements EntryPoint {
 	 * @throws TilesetNotAvailableException 
 	 */
 	private void showImage(String imageUrl) {
-		if (YumaImageClient.isInTileMode()) {									
-			imageComposite = new TiledImageComposite(imageUrl);
-			RootPanel.get().add(imageComposite, 0, 0);
-		} else {
-			imageComposite = new StandardImageComposite(imageUrl);
-			// RootPanel.get().add(imageComposite, 10, 80);
-			RootPanel.get().add(imageComposite, 10, 10);
-		}
+		imageComposite = new StandardImageComposite(imageUrl);
+		// RootPanel.get().add(imageComposite, 10, 80);
+		RootPanel.get().add(imageComposite, 10, 10);
 	}	
 
 	/**
@@ -177,26 +165,6 @@ public class YumaImageClient implements EntryPoint {
 		TabLayoutPanel tabPanel = new DecoratedTabLayoutPanel();
 		tabPanel.setPadding(0);
 		showAnnotationsTab(tabPanel);
-		if(YumaImageClient.isInTileMode()) {
-			showGeoReferencingTab(tabPanel);
-			showExplorationTab(tabPanel);
-			tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
-				
-				TiledImageComposite tic = (TiledImageComposite) imageComposite;
-				@Override
-				public void onSelection(SelectionEvent<Integer> event) {
-					if (event.getSelectedItem().intValue() == 0) {
-						// Annotations tab
-						tic.showAnnotationLayer();
-					} else if (event.getSelectedItem().intValue() == 1) {
-						// Georeferencing tab
-						tic.showControlPointLayer();
-					} else if (event.getSelectedItem().intValue() == 2) {
-						// Exploration tab
-					}
-				}
-			});
-		}
 		window.setWidget(tabPanel);
 	}
 	
@@ -223,42 +191,11 @@ public class YumaImageClient implements EntryPoint {
 	}
 	
 	/**
-	 * show georeferencing tab
-	 * 
-	 * @param tabPanel
-	 */
-	private void showGeoReferencingTab(TabLayoutPanel tabPanel) {
-		TreeViewComposite geoRefComposite = new ControlPointComposite(
-				(TiledImageComposite)imageComposite, 
-				new ControlPointForm(((TiledImageComposite)imageComposite).getControlPointLayer()), 
-				ShapeTypeRegistry.geoTypes());
-		
-		geoRefComposite.addImageAnnotationSelectionHandler(new AnnotationSelectionHandler() {
-			@Override
-			public void onAnnotationSelection(AnnotationSelectionEvent event) {
-				imageComposite.selectAnnotation(event.getAnnotation(), event.isSelected());
-			}
-		});
-				
-		tabPanel.add(geoRefComposite, getConstants().tabGeoReferencing());
-	}
-	
-	/**
-	 * show exploration tab
-	 * 
-	 * @param tabPanel
-	 */
-	private void showExplorationTab(TabLayoutPanel tabPanel) {
-		ExplorationComposite expComposite = new ExplorationComposite((TiledImageComposite)imageComposite);
-		tabPanel.add(expComposite, getConstants().tabExploration());
-	}
-
-	/**
 	 * returns the image composite
 	 * 
 	 * @return image composite
 	 */
-	public AnnotationEnabledMediaViewer getImageComposite() {
+	public MediaViewer getImageComposite() {
 		return imageComposite;
 	}
 

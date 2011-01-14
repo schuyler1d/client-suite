@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.core.client.gui.AnnotationEnabledMediaViewer;
+import at.ait.dme.yuma.suite.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.core.client.gui.events.selection.AnnotationSelectionEvent;
 
 import com.google.gwt.core.client.Scheduler;
@@ -55,12 +55,12 @@ public class AnnotationTree extends Tree {
 	
     private HandlerManager handlerManager;	
     
-    private AnnotationEnabledMediaViewer imageComposite;
+    private MediaViewer imageComposite;
     
     private TreeViewComposite annotationComposite;
 
     public AnnotationTree(List<Annotation> annotations, 
-    		HandlerManager handlerManager, AnnotationEnabledMediaViewer imageComposite, 
+    		HandlerManager handlerManager, MediaViewer imageComposite, 
     		TreeViewComposite annotationComposite) {
     	
     	this.handlerManager = handlerManager;

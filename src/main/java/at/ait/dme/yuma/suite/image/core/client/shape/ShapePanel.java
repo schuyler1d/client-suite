@@ -28,8 +28,8 @@ import org.gwtwidgets.client.style.Color;
 import org.gwtwidgets.client.style.Coords;
 import org.gwtwidgets.client.wrap.JsGraphicsPanel;
 
-import at.ait.dme.yuma.suite.image.core.client.dnd.Resizable;
-import at.ait.dme.yuma.suite.image.core.client.dnd.ResizeDragController;
+import at.ait.dme.yuma.suite.image.core.client.gui.dnd.Resizable;
+import at.ait.dme.yuma.suite.image.core.client.gui.dnd.ResizeDragController;
 import at.ait.dme.yuma.suite.image.core.client.shape.handler.PolygonDrawMouseHandler;
 import at.ait.dme.yuma.suite.image.core.client.shape.handler.PolylineDrawMouseHandler;
 import at.ait.dme.yuma.suite.image.core.client.shape.handler.ShapeMouseListenerAdapter;

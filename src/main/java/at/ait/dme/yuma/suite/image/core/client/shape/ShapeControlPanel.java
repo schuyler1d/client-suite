@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.image.core.client.shape;
 
-import at.ait.dme.yuma.suite.image.core.client.colorpicker.ColorPicker;
+import at.ait.dme.yuma.suite.image.core.client.gui.colorpicker.ColorPicker;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
