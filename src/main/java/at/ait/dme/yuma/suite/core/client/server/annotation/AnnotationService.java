@@ -35,7 +35,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-@RemoteServiceRelativePath("annotation")
+@RemoteServiceRelativePath("../annotation")
 public interface AnnotationService extends RemoteService {
 	
 	/**

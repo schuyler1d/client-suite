@@ -39,7 +39,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * 
  * @author Christian Sadilek
  */
-@RemoteServiceRelativePath("auth")
+@RemoteServiceRelativePath("../auth")
 public interface AuthenticationService extends RemoteService {
 
 	/**

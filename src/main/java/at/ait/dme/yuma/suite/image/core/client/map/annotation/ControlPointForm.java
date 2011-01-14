@@ -26,7 +26,7 @@ import java.util.List;
 
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.image.core.client.YumaImageClient;
+import at.ait.dme.yuma.suite.image.client.EntryPointClass;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationForm;
@@ -175,7 +175,7 @@ public class ControlPointForm extends ImageAnnotationForm {
 			ImageAnnotationComposite annotationComposite) {
 		
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
-		PushButton saveButton = new PushButton(YumaImageClient.getConstants().actionSave());
+		PushButton saveButton = new PushButton(EntryPointClass.getConstants().actionSave());
 		if(update) {
 			saveButton.addClickHandler(new UpdateImageAnnotationClickHandler(annotationComposite, 
 					annotationTreeNode, this));
@@ -186,7 +186,7 @@ public class ControlPointForm extends ImageAnnotationForm {
 		saveButton.setStyleName("imageAnnotation-form-button");
 		buttonsPanel.add(saveButton);
 		
-		PushButton cancelButton = new PushButton(YumaImageClient.getConstants().actionCancel());
+		PushButton cancelButton = new PushButton(EntryPointClass.getConstants().actionCancel());
 		cancelButton.setStyleName("imageAnnotation-form-button");
 		cancelButton.addClickHandler(new CancelImageAnnotationClickHandler(annotationComposite,
 				annotationTreeNode));

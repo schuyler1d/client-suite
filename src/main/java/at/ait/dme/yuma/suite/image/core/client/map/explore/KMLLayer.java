@@ -26,7 +26,7 @@ import at.ait.dme.gwt.openlayers.client.Style;
 import at.ait.dme.gwt.openlayers.client.StyleMap;
 import at.ait.dme.gwt.openlayers.client.controls.SelectFeature;
 import at.ait.dme.gwt.openlayers.client.layers.KML;
-import at.ait.dme.yuma.suite.image.core.client.YumaImageClient;
+import at.ait.dme.yuma.suite.image.client.EntryPointClass;
 import at.ait.dme.yuma.suite.image.core.client.map.MapComponent;
 
 /**
@@ -76,7 +76,7 @@ public class KMLLayer {
 	}
 	
 	public void showKml(String url) {
-		String kmlUrl = KML_IMPORT_BASE_URL + "?map=" + YumaImageClient.getImageUrl() + "&kml=" + url;
+		String kmlUrl = KML_IMPORT_BASE_URL + "?map=" + EntryPointClass.getImageUrl() + "&kml=" + url;
 
 		// Destroy previous KML, if any
 		if (lKML != null) {

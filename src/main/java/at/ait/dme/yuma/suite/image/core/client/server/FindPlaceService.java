@@ -29,7 +29,7 @@ import at.ait.dme.yuma.suite.image.core.client.server.exception.FindPlaceExcepti
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("findplace")
+@RemoteServiceRelativePath("../findplace")
 public interface FindPlaceService extends RemoteService {
 
 	/**

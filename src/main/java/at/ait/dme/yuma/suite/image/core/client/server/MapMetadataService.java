@@ -31,7 +31,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * 
  * @author Rainer Simon
  */
-@RemoteServiceRelativePath("metadata")
+@RemoteServiceRelativePath("../metadata")
 public interface MapMetadataService extends RemoteService {
 	
 	public MapMetadata getMetadata(String url);

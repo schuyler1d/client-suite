@@ -30,7 +30,7 @@ import at.ait.dme.yuma.suite.image.core.client.server.exception.TransformationEx
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("geocoder")
+@RemoteServiceRelativePath("../geocoder")
 public interface GeocoderService extends RemoteService {
 
 	WGS84Coordinate getCoordinate(String query) throws GeocoderException;

@@ -44,7 +44,7 @@ import at.ait.dme.gwt.openlayers.client.handler.Handler;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
 import at.ait.dme.yuma.suite.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.image.core.client.YumaImageClient;
+import at.ait.dme.yuma.suite.image.client.EntryPointClass;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotation;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageFragment;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
@@ -478,7 +478,7 @@ public class AnnotationLayer {
 	
 	private void addGeonamesSuggestions(Bounds bbox) {
 		GeocoderServiceAsync service = (GeocoderServiceAsync) GWT.create(GeocoderService.class);
-		service.getTags(YumaImageClient.getImageUrl(), new XYCoordinate((int)bbox.getLeft(), (int)bbox.getBottom()), new XYCoordinate((int)bbox.getRight(), (int)bbox.getTop()), new AsyncCallback<SemanticTag[]>(){
+		service.getTags(EntryPointClass.getImageUrl(), new XYCoordinate((int)bbox.getLeft(), (int)bbox.getBottom()), new XYCoordinate((int)bbox.getRight(), (int)bbox.getTop()), new AsyncCallback<SemanticTag[]>(){
 		    public void onSuccess(SemanticTag[] tags) {
 	    		// 1. Remove all tags from the tag cloud which are NOT in this list
 		    	for (int i=0; i<tags.length; i++) {

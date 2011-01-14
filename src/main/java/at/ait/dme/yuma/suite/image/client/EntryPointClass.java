@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.image.core.client;
+package at.ait.dme.yuma.suite.image.client;
 
 import org.gwt.mosaic.ui.client.DecoratedTabLayoutPanel;
 import org.gwt.mosaic.ui.client.TabLayoutPanel;
@@ -31,6 +31,8 @@ import at.ait.dme.yuma.suite.core.client.User;
 import at.ait.dme.yuma.suite.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationService;
 import at.ait.dme.yuma.suite.core.client.server.auth.AuthenticationServiceAsync;
+import at.ait.dme.yuma.suite.image.core.client.ImageComposite;
+import at.ait.dme.yuma.suite.image.core.client.StandardImageComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.selection.ImageAnnotationSelectionHandler;
@@ -69,21 +71,21 @@ import com.google.gwt.user.client.ui.RootPanel;
  *  
  * @author Christian Sadilek, Rainer Simon
  */
-public class YumaImageClient implements EntryPoint {
+public class EntryPointClass implements EntryPoint {
 	private static final String LEMO_COOKIE_NAME = "lemo_user";
 	private static User authenticatedUser = null;
 	private static I18NConstants annotationConstants = null;
 	
 	private ImageComposite imageComposite = null;
 	
-	public YumaImageClient() {}
+	public EntryPointClass() {}
 
 	/**
 	 * only used by unit tests to create an image composite w/o an annotation composite
 	 * 
 	 * @param imageUrl
 	 */
-	public YumaImageClient(String imageUrl) {
+	public EntryPointClass(String imageUrl) {
 		showImage(imageUrl);
 	}
 	
@@ -146,7 +148,7 @@ public class YumaImageClient implements EntryPoint {
 	 * @throws TilesetNotAvailableException 
 	 */
 	private void showImage(String imageUrl) {
-		if (YumaImageClient.isInTileMode()) {									
+		if (EntryPointClass.isInTileMode()) {									
 			imageComposite = new TiledImageComposite(imageUrl);
 			RootPanel.get().add(imageComposite, 0, 0);
 		} else {
@@ -175,7 +177,7 @@ public class YumaImageClient implements EntryPoint {
 		TabLayoutPanel tabPanel = new DecoratedTabLayoutPanel();
 		tabPanel.setPadding(0);
 		showAnnotationsTab(tabPanel);
-		if(YumaImageClient.isInTileMode()) {
+		if(EntryPointClass.isInTileMode()) {
 			showGeoReferencingTab(tabPanel);
 			showExplorationTab(tabPanel);
 			tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {

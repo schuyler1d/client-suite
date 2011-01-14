@@ -27,7 +27,7 @@ import java.util.Collection;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("semanticenrichment")
+@RemoteServiceRelativePath("../enrichment")
 public interface SemanticEnrichmentService extends RemoteService {
     
 	/**

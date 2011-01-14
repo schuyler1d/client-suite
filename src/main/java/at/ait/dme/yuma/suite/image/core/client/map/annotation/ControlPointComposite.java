@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
-import at.ait.dme.yuma.suite.image.core.client.YumaImageClient;
+import at.ait.dme.yuma.suite.image.client.EntryPointClass;
 import at.ait.dme.yuma.suite.image.core.client.annotation.ImageAnnotationComposite;
 import at.ait.dme.yuma.suite.image.core.client.annotation.handler.CreateImageAnnotationClickHandler;
 import at.ait.dme.yuma.suite.image.core.client.map.TiledImageComposite;
@@ -61,19 +61,19 @@ public class ControlPointComposite extends ImageAnnotationComposite {
 		FlowPanel header = new FlowPanel();
 		
 		// 'Help geo-Reference' label
-		Label addAnnotationLabel = new Label(YumaImageClient.getConstants().helpGeoreference());
+		Label addAnnotationLabel = new Label(EntryPointClass.getConstants().helpGeoreference());
 		addAnnotationLabel.setStyleName("imageAnnotation-add-annotation");
 		header.add(addAnnotationLabel);
 		
 		// 'Help' link
 		HTML help = new HTML("<a target=\"_blank\" href=\"userguide_" + 
 				LocaleInfo.getCurrentLocale().getLocaleName()+".html\">" + 
-				YumaImageClient.getConstants().help() + "</a>" );
+				EntryPointClass.getConstants().help() + "</a>" );
 		help.setStyleName("imageAnnotation-help");
 		header.add(help);		
 		
 		// Instructions text
-		Label addAnnotationHint = new Label(YumaImageClient.getConstants().helpGeoreferenceHint()); 
+		Label addAnnotationHint = new Label(EntryPointClass.getConstants().helpGeoreferenceHint()); 
 		addAnnotationHint.setStyleName("imageAnnotation-add-annotation-hint");
 		header.add(addAnnotationHint);
 		
@@ -81,13 +81,13 @@ public class ControlPointComposite extends ImageAnnotationComposite {
 		HorizontalPanel buttons = new HorizontalPanel();
 		
 		// 'Create Control Point' button
-		createButton = new PushButton(YumaImageClient.getConstants().actionCreateCP());
+		createButton = new PushButton(EntryPointClass.getConstants().actionCreateCP());
 		createButton.setStyleName("imageAnnotation-button");
 		createButton.addClickHandler(new CreateImageAnnotationClickHandler(this,null,false,false));
-		createButton.setEnabled(!YumaImageClient.getUser().isEmpty());
+		createButton.setEnabled(!EntryPointClass.getUser().isEmpty());
 		buttons.add(createButton);
 		
-		if (YumaImageClient.getImageUrl().startsWith("http://georeferencer"))
+		if (EntryPointClass.getImageUrl().startsWith("http://georeferencer"))
 			createButton.setEnabled(false);
 		
 		header.add(buttons);

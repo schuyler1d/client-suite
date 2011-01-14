@@ -35,7 +35,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * 
  * @author Christian Sadilek
  */
-@RemoteServiceRelativePath("transformation")
+@RemoteServiceRelativePath("../transformation")
 public interface TransformationService extends RemoteService {
 
 	/**

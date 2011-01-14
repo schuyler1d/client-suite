@@ -35,7 +35,7 @@ import at.ait.dme.yuma.suite.image.core.client.server.exception.UnsupportedTileS
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-@RemoteServiceRelativePath("tileset")
+@RemoteServiceRelativePath("../tileset")
 public interface TilesetService extends RemoteService {
 
 	/**

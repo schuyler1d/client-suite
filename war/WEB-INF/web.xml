@@ -65,7 +65,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jspServlet</servlet-name>
-		<url-pattern>/image/annotate.jsp</url-pattern>
+		<url-pattern>/annotate.jsp</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -74,7 +74,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>annotation</servlet-name>
-		<url-pattern>/image/annotation</url-pattern>
+		<url-pattern>/annotation</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -83,7 +83,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>authentication</servlet-name>
-		<url-pattern>/image/auth</url-pattern>
+		<url-pattern>/auth</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -92,7 +92,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>geocoder</servlet-name>
-		<url-pattern>/image/geocoder</url-pattern>
+		<url-pattern>/geocoder</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -101,7 +101,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>findplace</servlet-name>
-		<url-pattern>/image/findplace</url-pattern>
+		<url-pattern>/findplace</url-pattern>
 	</servlet-mapping>
   
     <servlet>
@@ -110,16 +110,16 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>semanticenrichment</servlet-name>
-        <url-pattern>/image/semanticenrichment</url-pattern>
+        <url-pattern>/enrichment</url-pattern>
     </servlet-mapping>
 
 	<servlet>
 		<servlet-name>annotate</servlet-name>
-		<jsp-file>/image/annotate.jsp</jsp-file>
+		<jsp-file>/annotate.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>annotate</servlet-name>
-		<url-pattern>/image/annotate</url-pattern>
+		<url-pattern>/annotate</url-pattern>
 	</servlet-mapping>
 		
 	<servlet>
@@ -128,7 +128,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>importkml</servlet-name>
-		<url-pattern>/image/importkml</url-pattern>
+		<url-pattern>/importkml</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -137,7 +137,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tokml</servlet-name>
-		<url-pattern>/image/tokml</url-pattern>
+		<url-pattern>/tokml</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -146,7 +146,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>tileset</servlet-name>
-		<url-pattern>/image/tileset</url-pattern>
+		<url-pattern>/tileset</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -155,7 +155,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>transformationServiceImpl</servlet-name>
-		<url-pattern>/image/transformation</url-pattern>
+		<url-pattern>/transformation</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -164,7 +164,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>mapMetadataServiceImpl</servlet-name>
-		<url-pattern>/image/metadata</url-pattern>
+		<url-pattern>/metadata</url-pattern>
 	</servlet-mapping>
 
 	<!--  restrict access to key store -->
