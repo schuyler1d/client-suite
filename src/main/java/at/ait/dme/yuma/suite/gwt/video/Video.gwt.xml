@@ -1,4 +1,0 @@
-<module rename-to="<yumaVideo">
-	<inherits name="at.ait.dme.yuma.suite.core.Core" />                  
-	<entry-point class='at.ait.dme.yuma.suite.apps.video.client.YumaVideoClient'/>
-</module>

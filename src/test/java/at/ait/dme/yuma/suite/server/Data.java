@@ -23,10 +23,10 @@ package at.ait.dme.yuma.suite.server;
 
 import java.util.Date;
 
-import at.ait.dme.yuma.suite.gwt.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.gwt.core.client.datamodel.Annotation.MediaType;
-import at.ait.dme.yuma.suite.gwt.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.gwt.image.core.client.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 
 public class Data {
 	
