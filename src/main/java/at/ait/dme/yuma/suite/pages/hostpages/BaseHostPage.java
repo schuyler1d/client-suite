@@ -21,6 +21,8 @@
 
 package at.ait.dme.yuma.suite.pages.hostpages;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebPage;
@@ -35,10 +37,26 @@ public abstract class BaseHostPage extends WebPage {
 		String user = parameters.getString("user");
 		String objectURI = parameters.getString("objectURI");
 		
-		String dictionary = "var parameters = {\n" +
-							"objectURL:	\"" + objectURI + "\",\n" +
-							"imageURL:	\"" + objectURI + "\",\n" +
-							"user:	\"" + user + "\" }\n";
+		HttpServletRequest request = getWebRequestCycle().getWebRequest().getHttpServletRequest();
+		String baseURL = 
+			request.getScheme()+ "://" + 
+			request.getServerName()+ ":" + request.getServerPort();
+		
+		if (request.getContextPath() != null && request.getContextPath().length()!=0) {
+			baseURL += request.getContextPath();
+		} else if (request.getPathInfo() != null && request.getPathInfo().length()!=0) {
+			int lastSlashPos = request.getPathInfo().lastIndexOf("/");
+			if(lastSlashPos>0)
+				baseURL += request.getPathInfo().substring(0,lastSlashPos);
+		}
+		baseURL+="/";
+		
+		String dictionary = "\nvar parameters = {\n" +
+							"  objectURL: \"" + objectURI + "\",\n" +
+							"  imageURL:  \"" + objectURI + "\",\n" +
+							"  baseURL:   \"" + baseURL + "\", \n" +
+							"  user:      \"" + user + "\"\n" + 
+							"}\n";
 		
 		add(new Label("dictionary", dictionary).setEscapeModelStrings(false));
     }; 
