@@ -22,7 +22,7 @@
 	
 	<context-param>
 		<param-name>tiles.root.path</param-name>
-		 <param-value>C:/Workspaces/Yuma/client-suite/war/tiles</param-value>
+		 <param-value>C:/Workspaces/Yuma/client-suite/src/main/webapp/tilesets</param-value>
 	</context-param>
 	
 	<context-param>

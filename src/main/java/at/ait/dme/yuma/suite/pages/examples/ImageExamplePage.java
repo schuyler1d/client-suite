@@ -28,22 +28,12 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
-import org.apache.wicket.protocol.http.WebApplication;
-
-import at.ait.dme.yuma.suite.AnnotationSuite;
 
 public class ImageExamplePage extends BaseExamplePage {
-	
-	private String gwtCodesvr = "";
 	
 	public ImageExamplePage(final PageParameters parameters) {
 		super("YUMA Image Annotation - Examples", parameters);
 		
-		// Make sure gwt.codesvr attribute is forwarded in development mode
-		if (AnnotationSuite.get().getConfigurationType()
-				.equals(WebApplication.DEVELOPMENT))
-			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
-	
 		List<ImageExampleLink> links = new ArrayList<ImageExampleLink>();
 		links.add(new ImageExampleLink(
 				"Perth",

@@ -21,14 +21,43 @@
 
 package at.ait.dme.yuma.suite.pages.examples;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.wicket.PageParameters;
+import org.apache.wicket.markup.html.link.ExternalLink;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 
 public class MapExamplePage extends BaseExamplePage {
 	
 	public MapExamplePage(final PageParameters parameters) {
 		super("YUMA Map Annotation - Examples", parameters);
-		// http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg
-		// TODO add 'gwt.codesvr' query param - but only in Wicket debug mode!
+		
+		List<MapExampleLink> links = new ArrayList<MapExampleLink>();
+		links.add(new MapExampleLink(
+				"Map of Upper Austria",
+				"/map?user=csa1980&objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
+		));
+		
+		add(new ListView<MapExampleLink>("links", links) {
+			private static final long serialVersionUID = 2565049376850724577L;
+
+			@Override
+			protected void populateItem(ListItem<MapExampleLink> item) {
+				MapExampleLink link = item.getModelObject();
+				item.add(new ExternalLink("link", link.href, link.label));
+			}
+		});
+	}
+	
+	private class MapExampleLink {
+		private String label, href;
+		
+		MapExampleLink(String label, String href) {
+			this.label = label;
+			this.href = href + gwtCodesvr;
+		}	
 	}
 
 }

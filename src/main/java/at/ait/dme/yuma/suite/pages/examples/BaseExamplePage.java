@@ -24,11 +24,22 @@ package at.ait.dme.yuma.suite.pages.examples;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.protocol.http.WebApplication;
+
+import at.ait.dme.yuma.suite.AnnotationSuite;
 
 public abstract class BaseExamplePage extends WebPage {
 
+	protected String gwtCodesvr = "";
+	
 	public BaseExamplePage(String title, final PageParameters parameters) {
-		add(new Label("title", title));			
+		add(new Label("title", title));
+		add(new Label("header", title));
+		
+		// Make sure gwt.codesvr attribute is forwarded in development mode
+		if (AnnotationSuite.get().getConfigurationType()
+				.equals(WebApplication.DEVELOPMENT))
+			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
 	}
 	
 }
