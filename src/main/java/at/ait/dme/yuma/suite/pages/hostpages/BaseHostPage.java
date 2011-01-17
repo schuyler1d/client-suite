@@ -28,16 +28,12 @@ import org.apache.wicket.markup.html.basic.Label;
 
 public abstract class BaseHostPage extends WebPage {
 	
-	protected String user;
-	
-	protected String objectURI;
-	
 	public BaseHostPage(String title, String js, final PageParameters parameters) {
 		add(new Label("title", title));	
 		add(JavascriptPackageResource.getHeaderContribution(js));
 
-		user = parameters.getString("user");
-		objectURI = parameters.getString("objectURI");
+		String user = parameters.getString("user");
+		String objectURI = parameters.getString("objectURI");
 		
 		String dictionary = "var parameters = {\n" +
 							"objectURL:	\"" + objectURI + "\",\n" +

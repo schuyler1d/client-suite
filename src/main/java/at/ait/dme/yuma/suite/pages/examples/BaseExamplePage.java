@@ -21,6 +21,14 @@
 
 package at.ait.dme.yuma.suite.pages.examples;
 
-public class BaseExamplePage {
+import org.apache.wicket.PageParameters;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
 
+public abstract class BaseExamplePage extends WebPage {
+
+	public BaseExamplePage(String title, final PageParameters parameters) {
+		add(new Label("title", title));			
+	}
+	
 }

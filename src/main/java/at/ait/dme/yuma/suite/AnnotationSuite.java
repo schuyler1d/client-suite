@@ -24,6 +24,7 @@ package at.ait.dme.yuma.suite;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import at.ait.dme.yuma.suite.pages.examples.ImageExamplePage;
 import at.ait.dme.yuma.suite.pages.hostpages.ImageHostPage;
 import at.ait.dme.yuma.suite.pages.hostpages.MapHostPage;
 
@@ -31,6 +32,8 @@ public class AnnotationSuite extends WebApplication {
     
 	public AnnotationSuite() {
 		this.mountBookmarkablePage("image", ImageHostPage.class);
+		this.mountBookmarkablePage("image/examples", ImageExamplePage.class);
+		
 		this.mountBookmarkablePage("map", MapHostPage.class);
 	}
 	

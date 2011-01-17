@@ -27,6 +27,8 @@ public class ImageHostPage extends BaseHostPage {
 	
 	public ImageHostPage(final PageParameters parameters) {
 		super("YUMA Image", "yuma.image/yuma.image.nocache.js", parameters);
+		
+		// TODO redirect to 'examples' if params are insufficient
 	}
 
 }
