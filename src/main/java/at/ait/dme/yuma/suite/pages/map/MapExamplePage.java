@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.pages.examples;
+package at.ait.dme.yuma.suite.pages.map;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,32 +29,34 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
-public class ImageExamplePage extends BaseExamplePage {
-	
-	public ImageExamplePage(final PageParameters parameters) {
-		super("YUMA Image Annotation - Examples", parameters);
-		
-		List<ImageExampleLink> links = new ArrayList<ImageExampleLink>();
-		links.add(new ImageExampleLink(
-				"Perth",
-				"/image?user=csa1980&objectURI=http://www.destination360.com/australia-south-pacific/australia/images/s/australia-perth.jpg"
-		));
+import at.ait.dme.yuma.suite.pages.BaseExamplePage;
 
-		add(new ListView<ImageExampleLink>("links", links) {
+public class MapExamplePage extends BaseExamplePage {
+	
+	public MapExamplePage(final PageParameters parameters) {
+		super("YUMA Map Annotation - Examples", parameters);
+		
+		List<MapExampleLink> links = new ArrayList<MapExampleLink>();
+		links.add(new MapExampleLink(
+				"Map of Upper Austria",
+				"/map?user=csa1980&objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
+		));
+		
+		add(new ListView<MapExampleLink>("links", links) {
 			private static final long serialVersionUID = 2565049376850724577L;
 
 			@Override
-			protected void populateItem(ListItem<ImageExampleLink> item) {
-				ImageExampleLink link = item.getModelObject();
+			protected void populateItem(ListItem<MapExampleLink> item) {
+				MapExampleLink link = item.getModelObject();
 				item.add(new ExternalLink("link", link.href, link.label));
 			}
 		});
 	}
 	
-	private class ImageExampleLink {
+	private class MapExampleLink {
 		private String label, href;
 		
-		ImageExampleLink(String label, String href) {
+		MapExampleLink(String label, String href) {
 			this.label = label;
 			this.href = href + gwtCodesvr;
 		}	

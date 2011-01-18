@@ -24,10 +24,10 @@ package at.ait.dme.yuma.suite;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import at.ait.dme.yuma.suite.pages.examples.ImageExamplePage;
-import at.ait.dme.yuma.suite.pages.examples.MapExamplePage;
-import at.ait.dme.yuma.suite.pages.hostpages.ImageHostPage;
-import at.ait.dme.yuma.suite.pages.hostpages.MapHostPage;
+import at.ait.dme.yuma.suite.pages.image.ImageExamplePage;
+import at.ait.dme.yuma.suite.pages.image.ImageHostPage;
+import at.ait.dme.yuma.suite.pages.map.MapExamplePage;
+import at.ait.dme.yuma.suite.pages.map.MapHostPage;
 
 public class AnnotationSuite extends WebApplication {    
     

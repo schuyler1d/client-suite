@@ -19,21 +19,27 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.pages.hostpages;
+package at.ait.dme.yuma.suite.pages;
 
 import org.apache.wicket.PageParameters;
-import org.apache.wicket.markup.html.JavascriptPackageResource;
+import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.protocol.http.WebApplication;
 
-public class MapHostPage extends BaseHostPage {
+import at.ait.dme.yuma.suite.AnnotationSuite;
+
+public abstract class BaseExamplePage extends WebPage {
+
+	protected String gwtCodesvr = "";
 	
-	public MapHostPage(final PageParameters parameters) {
-		super("YUMA Map", "yuma.map/yuma.map.nocache.js", parameters);	
+	public BaseExamplePage(String title, final PageParameters parameters) {
+		add(new Label("title", title));
+		add(new Label("header", title));
 		
-		// Add required JS libaries
-		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
-		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));
-		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));
-		add(JavascriptPackageResource.getHeaderContribution("js/ait-jsutils.js"));
+		// Make sure gwt.codesvr attribute is forwarded in development mode
+		if (AnnotationSuite.get().getConfigurationType()
+				.equals(WebApplication.DEVELOPMENT))
+			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
 	}
-
+	
 }

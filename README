@@ -5,6 +5,10 @@ WARNING: The YUMA Annotation Client Suite is not yet completed. The documentatio
 below is PRELIMINARY DEVELOPER DOC! And not yet suitable for end users!
 Please contact rainer.simon@ait.ac.at for further details.
 
+MORE WARNING: The YUMA client suite was massively restructured recently. That means 
+there may still be bugs lurking in various places. Also, the ANT build is currently
+outdated and will not work yet!
+
 Requirements
 ------------
 The YUMA Annotation Client Suite requires Java 1.6 and a Servlet container such as

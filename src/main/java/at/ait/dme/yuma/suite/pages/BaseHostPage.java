@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.pages.hostpages;
+package at.ait.dme.yuma.suite.pages;
 
 import javax.servlet.http.HttpServletRequest;
 

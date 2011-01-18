@@ -19,21 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.pages.hostpages;
+package at.ait.dme.yuma.suite.pages.map;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 
-public class ImageHostPage extends BaseHostPage {
+import at.ait.dme.yuma.suite.pages.BaseHostPage;
+
+public class MapHostPage extends BaseHostPage {
 	
-	public ImageHostPage(final PageParameters parameters) {
-		super("YUMA Image", "yuma.image/yuma.image.nocache.js", parameters);
+	public MapHostPage(final PageParameters parameters) {
+		super("YUMA Map", "yuma.map/yuma.map.nocache.js", parameters);	
 		
 		// Add required JS libaries
 		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
-		add(JavascriptPackageResource.getHeaderContribution("js/wz_jsgraphics.js"));		
-		
-		// TODO redirect to 'examples' if params are insufficient
+		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));
+		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));
+		add(JavascriptPackageResource.getHeaderContribution("js/ait-jsutils.js"));
 	}
 
 }

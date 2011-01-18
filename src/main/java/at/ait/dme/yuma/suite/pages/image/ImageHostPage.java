@@ -19,27 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.pages.examples;
+package at.ait.dme.yuma.suite.pages.image;
 
 import org.apache.wicket.PageParameters;
-import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.markup.html.JavascriptPackageResource;
 
-import at.ait.dme.yuma.suite.AnnotationSuite;
+import at.ait.dme.yuma.suite.pages.BaseHostPage;
 
-public abstract class BaseExamplePage extends WebPage {
-
-	protected String gwtCodesvr = "";
+public class ImageHostPage extends BaseHostPage {
 	
-	public BaseExamplePage(String title, final PageParameters parameters) {
-		add(new Label("title", title));
-		add(new Label("header", title));
+	public ImageHostPage(final PageParameters parameters) {
+		super("YUMA Image", "yuma.image/yuma.image.nocache.js", parameters);
 		
-		// Make sure gwt.codesvr attribute is forwarded in development mode
-		if (AnnotationSuite.get().getConfigurationType()
-				.equals(WebApplication.DEVELOPMENT))
-			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
+		// Add required JS libaries
+		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
+		add(JavascriptPackageResource.getHeaderContribution("js/wz_jsgraphics.js"));		
+		
+		// TODO redirect to 'examples' if params are insufficient
 	}
-	
+
 }
