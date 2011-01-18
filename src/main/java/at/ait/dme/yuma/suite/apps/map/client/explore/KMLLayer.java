@@ -26,8 +26,8 @@ import at.ait.dme.gwt.openlayers.client.Style;
 import at.ait.dme.gwt.openlayers.client.StyleMap;
 import at.ait.dme.gwt.openlayers.client.controls.SelectFeature;
 import at.ait.dme.gwt.openlayers.client.layers.KML;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
-import at.ait.dme.yuma.suite.apps.map.client.YumaMapClient;
 
 /**
  * Implements functionality to load KML vector data through the server-side
@@ -76,7 +76,7 @@ public class KMLLayer {
 	}
 	
 	public void showKml(String url) {
-		String kmlUrl = KML_IMPORT_BASE_URL + "?map=" + YumaMapClient.getImageUrl() + "&kml=" + url;
+		String kmlUrl = KML_IMPORT_BASE_URL + "?map=" + YUMACoreProperties.getObjectURI() + "&kml=" + url;
 
 		// Destroy previous KML, if any
 		if (lKML != null) {

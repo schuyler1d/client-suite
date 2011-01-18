@@ -181,4 +181,5 @@ public class User implements Serializable {
 		if(permissions==null) permissions = new ArrayList<String>();
 		permissions.add(permission);
 	}
+	
 }

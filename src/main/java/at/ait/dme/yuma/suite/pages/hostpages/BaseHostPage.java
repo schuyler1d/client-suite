@@ -52,8 +52,7 @@ public abstract class BaseHostPage extends WebPage {
 		baseURL+="/";
 		
 		String dictionary = "\nvar parameters = {\n" +
-							"  objectURL: \"" + objectURI + "\",\n" +
-							"  imageURL:  \"" + objectURI + "\",\n" +
+							"  objectURI: \"" + objectURI + "\",\n" +
 							"  baseURL:   \"" + baseURL + "\", \n" +
 							"  user:      \"" + user + "\"\n" + 
 							"}\n";

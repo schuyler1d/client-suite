@@ -27,6 +27,7 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.User;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionHandler;
@@ -49,8 +50,6 @@ import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.i18n.client.Dictionary;
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -89,9 +88,8 @@ public class YumaMapClient implements EntryPoint {
 	/**
 	 * load the module and initialize the application
 	 */
-	public void onModuleLoad() {
-		String imageUrl = getRequestParameterValue("objectURL");		
-		initApplication(imageUrl);
+	public void onModuleLoad() {	
+		initApplication(YUMACoreProperties.getObjectURI());
 	}
 		
 	private void initApplication(String imageUrl) {
@@ -103,16 +101,16 @@ public class YumaMapClient implements EntryPoint {
 			public void onLoad(LoadEvent events) {
 				// first we authenticate the user by either using the provided
 				// user name or the secure authentication token.	
-				String userName = getRequestParameterValue("user");
+				String userName = YUMACoreProperties.getUser();
 				if(userName!=null&&!userName.trim().isEmpty()) {
 					// TODO deactivate this if you ever go into production					
-					setAuthenticatedUser(new User(userName));
+					// setAuthenticatedUser(new User(userName));
 					showAnnotations();
 					return;
 				}
 				
-				String authToken = getRequestParameterValue("authToken");
-				String appSign = getRequestParameterValue("appSign");
+				String authToken = ""; //getRequestParameterValue("authToken");
+				String appSign = ""; //getRequestParameterValue("appSign");
 				
 				AuthenticationServiceAsync authService = (AuthenticationServiceAsync) GWT
 						.create(AuthenticationService.class);
@@ -121,11 +119,11 @@ public class YumaMapClient implements EntryPoint {
 						I18NErrorMessages errorMessages=(I18NErrorMessages)GWT.create(I18NErrorMessages.class);
 						Window.alert(errorMessages.failedToAuthenticate());
 						// create non-privileged user to use read-only mode.
-						setAuthenticatedUser(new User());
+						// setAuthenticatedUser(new User());
 						showAnnotations();
 					}
 					public void onSuccess(User user) {
-						setAuthenticatedUser(user);						 
+						// setAuthenticatedUser(user);						 
 						showAnnotations();
 					}
 				});					
@@ -208,7 +206,7 @@ public class YumaMapClient implements EntryPoint {
 				imageComposite.selectAnnotation(event.getAnnotation(), event.isSelected());
 			}
 		});
-		tabPanel.add(annComposite, getConstants().tabAnnotations());
+		tabPanel.add(annComposite, YUMACoreProperties.getConstants().tabAnnotations());
 	}
 	
 	/**
@@ -229,7 +227,7 @@ public class YumaMapClient implements EntryPoint {
 			}
 		});
 				
-		tabPanel.add(geoRefComposite, getConstants().tabGeoReferencing());
+		tabPanel.add(geoRefComposite, YUMACoreProperties.getConstants().tabGeoReferencing());
 	}
 	
 	/**
@@ -239,7 +237,7 @@ public class YumaMapClient implements EntryPoint {
 	 */
 	private void showExplorationTab(TabLayoutPanel tabPanel) {
 		ExplorationComposite expComposite = new ExplorationComposite((TileBasedImageViewer)imageComposite);
-		tabPanel.add(expComposite, getConstants().tabExploration());
+		tabPanel.add(expComposite, YUMACoreProperties.getConstants().tabExploration());
 	}
 		
 	/**
@@ -252,165 +250,10 @@ public class YumaMapClient implements EntryPoint {
 	}
 
 	/**
-	 * returns a request parameter. the initial request parameters provided to the 
-	 * entry point are stored as javascript variables and are therefore accessible 
-	 * through the dictionary. see also annotate.jsp.
-	 * 
-	 * @param parameterName
-	 * @return parameter value
-	 */
-	private static String getRequestParameterValue(String parameterName) {
-		String parameterValue;
-		try {
-			Dictionary parameters = Dictionary.getDictionary("parameters");
-			parameterValue = parameters.get(parameterName);
-			if (parameterValue.equals("null"))
-				parameterValue = null;
-		} catch (Exception e) {
-			return null;
-		}
-		return parameterValue;
-	}
-	
-	/**
-	 * returns the provided name of the user 
-	 * 
-	 * @return user name
-	 */
-	public static String getUser() {
-		String userName = authenticatedUser.getName();
-		if(!userName.equalsIgnoreCase(Cookies.getCookie(LEMO_COOKIE_NAME))) {
-			Cookies.setCookie(LEMO_COOKIE_NAME, userName, null, null, "/", false);
-		}
-		return userName;
-	}
-	
-	/**
-	 * set the authenticated user and create a cookie
-	 * 
-	 * @param user
-	 */
-	public static void setAuthenticatedUser(User user) {
-		Cookies.setCookie(LEMO_COOKIE_NAME, user.getName(), null, null, "/", false);				
-		authenticatedUser = user;
-	}
-	
-	/**
-	 * check if the given user is the currently authenticated user
-	 * 
-	 * @param user
-	 * @return true if user is authenticated, otherwise false
-	 */
-	public static boolean isAuthenticatedUser(String user) {
-		if(user==null || getUser()==null) return false;			
-		return getUser().equalsIgnoreCase(user) || authenticatedUser.isAdmin();
-	}
-	
-	/**
-	 * authenticate admin user as user provided
-	 * 
-	 * @param user
-	 */
-	public static void authenticateAs(String user) {
-		if(authenticatedUser.isAdmin()) {
-			Cookies.setCookie(LEMO_COOKIE_NAME, user, null, null, "/", false);							
-		}
-	}
-	
-	/**
-	 * return the url to the image
-	 * 
-	 * @return image url
-	 */
-	public static String getImageUrl() {
-		String objectUrl=getRequestParameterValue("objectURL");
-		if(objectUrl==null)
-			objectUrl=getRequestParameterValue("imageURL");
-		if(objectUrl==null)
-			objectUrl=getRequestParameterValue("htmlURL");
-		
-		return objectUrl;
-	}
-	
-	/**
-	 * return the flagged id used in admin mode
-	 * 
-	 * @return annotation id
-	 */
-	public static String getFlaggedId() {
-		return getRequestParameterValue("flaggedId");
-	}
-	
-	/**
-	 * returns the optional provided id of an external object that
-	 * the annotated image is linked to.
-	 * 
-	 * @return id of the external object
-	 */
-	public static String getExternalObjectId() {
-		return getRequestParameterValue("id");
-	}
-	
-	/**
-	 * returns the provided name of the database to use
-	 * 
-	 * @return database name
-	 */
-	public static String getDatabaseName() {
-		return getRequestParameterValue("db");	
-	}
-
-	/**
-	 * returns the base URL
-	 * 
-	 * @return base URL
-	 */
-	public static String getBaseUrl() {
-		return getRequestParameterValue("baseURL");	
-	}
-	
-	/**
-	 * returns the bounding box 
-	 * 
-	 * @return base URL
-	 */
-	public static String getBbox() {
-		return getRequestParameterValue("bbox");	
-	}
-	
-	/**
-	 * check for tile mode
-	 * 
-	 * @return true if in tile mode, otherwise false
-	 */
-	public static boolean isInTileMode() {
-		return (getRequestParameterValue("tileView") != null);
-		
-	}
-	/**
-	 * returns the internationalized constants of this app
-	 * 
-	 * @return constants
-	 */
-	public static I18NConstants getConstants() {
-		if(annotationConstants==null)
-			annotationConstants=(I18NConstants)GWT.create(I18NConstants.class);
-		return annotationConstants;
-	}
-	
-	/**
 	 * reload the application
 	 */
 	public static native void reload() /*-{
      	$wnd.location.reload();
   	}-*/;
-	
-	/**
-	 * ideally you should never need this
-	 * 
-	 * @return user agent string
-	 */
-	public static native String getUserAgent() /*-{
-		return navigator.userAgent.toLowerCase();
-	}-*/;
+
 }

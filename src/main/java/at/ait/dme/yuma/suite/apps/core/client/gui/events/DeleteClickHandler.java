@@ -23,7 +23,6 @@ package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -46,7 +45,7 @@ public class DeleteClickHandler extends BaseClickHandler {
 		annotationComposite.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
 		
-		YumaImageClient.authenticateAs(getAnnotationTreeNode().getAnnotation().getCreatedBy());
+		// YumaImageClient.authenticateAs(getAnnotationTreeNode().getAnnotation().getCreatedBy());
 		
 		getAnnotationService().deleteAnnotation(getAnnotationTreeNode().getAnnotationId(),
 			new AsyncCallback<Void>() {

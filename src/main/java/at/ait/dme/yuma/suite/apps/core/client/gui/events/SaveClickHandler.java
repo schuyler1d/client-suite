@@ -23,12 +23,12 @@ package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
 import java.util.Date;
 
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -72,12 +72,12 @@ public class SaveClickHandler extends BaseClickHandler {
 		// create the new annotation
 		Date timestamp = new Date();
 		ImageAnnotation a = new ImageAnnotation();
-		a.setObjectUri(YumaImageClient.getImageUrl());
+		a.setObjectUri(YUMACoreProperties.getObjectURI());
 		a.setParentId(parentId);
 		a.setRootId(rootId);
 		a.setCreated(timestamp);
 		a.setLastModified(timestamp);
-		a.setCreatedBy(YumaImageClient.getUser());
+		a.setCreatedBy(YUMACoreProperties.getUser());
 		a.setMediaType(MediaType.IMAGE);
 		a.setTitle(annotationForm.getAnnotationTitle());
 		a.setText(annotationForm.getAnnotationText());

@@ -25,7 +25,7 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 import at.ait.dme.yuma.suite.apps.map.client.server.FindPlaceResponse;
 import at.ait.dme.yuma.suite.apps.map.client.server.FindPlaceService;
@@ -67,7 +67,7 @@ public class SearchPanel extends FlowPanel {
 	
 	public SearchPanel(TileBasedImageViewer imageComposite) {
 		this.searchLayer = imageComposite.getSearchLayer();		
-		I18NConstants i18n = YumaImageClient.getConstants();
+		I18NConstants i18n = YUMACoreProperties.getConstants();
 		
 		HorizontalPanel hPanel = new HorizontalPanel();
 		hPanel.setStyleName("explore-PlaceSearch");
@@ -89,7 +89,7 @@ public class SearchPanel extends FlowPanel {
 	private void doAsyncGeocoding() {
 		FindPlaceServiceAsync service = (FindPlaceServiceAsync) GWT.create(FindPlaceService.class);
 		if (searchBox.getValue().trim().length() > 0) {
-			service.findPlace(YumaImageClient.getImageUrl(), searchBox.getValue(), new AsyncCallback<FindPlaceResponse>() {
+			service.findPlace(YUMACoreProperties.getObjectURI(), searchBox.getValue(), new AsyncCallback<FindPlaceResponse>() {
 				@Override
 				public void onFailure(Throwable t) {
 					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);

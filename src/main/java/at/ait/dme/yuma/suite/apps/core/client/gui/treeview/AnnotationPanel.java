@@ -34,8 +34,8 @@ import org.gwt.mosaic.ui.client.layout.HasLayoutManager;
 import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.CreateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
@@ -43,9 +43,6 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSel
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.HasAnnotationSelectionHandlers;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceAsync;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageViewer;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
@@ -106,7 +103,7 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 	// action buttons
 	private PushButton annotateButton = new PushButton();
 	private PushButton annotateFragmentButton = new PushButton();
-	private PushButton showOnMapButton = new PushButton();
+	// private PushButton showOnMapButton = new PushButton();
 	
 	// all currently displayed annotations
 	private List<Annotation> annotations = new ArrayList<Annotation>();
@@ -182,19 +179,19 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 		FlowPanel header = new FlowPanel();
 		
 		// 'Add your Annotation' label
-		Label addAnnotationLabel = new Label(YumaImageClient.getConstants().addAnnotation());
+		Label addAnnotationLabel = new Label(YUMACoreProperties.getConstants().addAnnotation());
 		addAnnotationLabel.setStyleName("imageAnnotation-add-annotation");
 		header.add(addAnnotationLabel);
 		
 		// 'Help' link
 		HTML help = new HTML("<a target=\"_blank\" href=\"userguide_" + 
 				LocaleInfo.getCurrentLocale().getLocaleName()+".html\">" + 
-				YumaImageClient.getConstants().help() + "</a>" );
+				YUMACoreProperties.getConstants().help() + "</a>" );
 		help.setStyleName("imageAnnotation-help");
 		header.add(help);		
 		
 		// Instructions text
-		Label addAnnotationHint = new Label(YumaImageClient.getConstants().addAnnotationHint()); 
+		Label addAnnotationHint = new Label(YUMACoreProperties.getConstants().addAnnotationHint()); 
 		addAnnotationHint.setStyleName("imageAnnotation-add-annotation-hint");
 		header.add(addAnnotationHint);
 		
@@ -203,18 +200,18 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 		
 		// 'Annotate' button
 		annotateButton.setStyleName("imageAnnotation-button");
-		annotateButton.setText(YumaImageClient.getConstants().actionCreate());	
+		annotateButton.setText(YUMACoreProperties.getConstants().actionCreate());	
 		annotateButton.addClickHandler(
 				new CreateClickHandler(this,null,false,false));
-		annotateButton.setEnabled(!YumaImageClient.getUser().isEmpty());
+		annotateButton.setEnabled(!YUMACoreProperties.getUser().isEmpty());
 		buttons.add(annotateButton);
 		
 		// 'Annotate Fragment' button
 		annotateFragmentButton.setStyleName("imageAnnotation-button");
-		annotateFragmentButton.setText(YumaImageClient.getConstants().actionCreateFragment());
+		annotateFragmentButton.setText(YUMACoreProperties.getConstants().actionCreateFragment());
 		annotateFragmentButton.addClickHandler(
 				new CreateClickHandler(this,null,true,false));		
-		annotateFragmentButton.setEnabled(!YumaImageClient.getUser().isEmpty());
+		annotateFragmentButton.setEnabled(!YUMACoreProperties.getUser().isEmpty());
 		buttons.add(annotateFragmentButton);
 		
 		/* 'Show on Map' button
@@ -296,9 +293,11 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 	 */
 	public void hideAnnotationForm(final AnnotationTreeNode annotationTreeNode, 
 			boolean canceled) {
-	
+
+		/*
 		if (!YumaImageClient.isInTileMode())
 			((ImageViewer)imageComposite).getTagCloud().fadeoutAndClear();
+		*/
 		
 		if(annotationTreeNode==null) {
 			annotationFormPanel.clear();
@@ -368,7 +367,7 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 		AnnotationServiceAsync imageAnnotationService = (AnnotationServiceAsync) GWT
 				.create(AnnotationService.class);
 
-		imageAnnotationService.listAnnotations(YumaImageClient.getImageUrl(), shapeTypes,
+		imageAnnotationService.listAnnotations(YUMACoreProperties.getObjectURI(), shapeTypes,
 			new AsyncCallback<Collection<Annotation>>() {
 				public void onFailure(Throwable caught) {
 					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
@@ -376,14 +375,18 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 				}
 
 				public void onSuccess(Collection<Annotation> foundAnnotations) {
-					// remove annotations the user is not allowed to see
+					// Note: this will now be handled in the server.
+					// No private annotations will delivered to the client!
+					/* remove annotations the user is not allowed to see
 					for(Annotation annotation : foundAnnotations) { 
-						if(annotation.getScope() == Scope.PRIVATE && 
+						if (annotation.getScope() == Scope.PRIVATE && 
 								!YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy()))
 							continue;
-						annotations.add((ImageAnnotation) annotation);
+						annotations.add(annotation);
 
 					}
+					*/
+					annotations.addAll(foundAnnotations);
 
 					annotationTree = new AnnotationTree(annotations, handlerManager,
 							imageComposite, AnnotationPanel.this);
@@ -434,7 +437,7 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 	 */
 	public void setSize(int width, int height) {
 		if(height<15) return;
-		if (YumaImageClient.getUserAgent().contains("firefox")) height = height - 2;
+		if (YUMACoreProperties.getUserAgent().contains("firefox")) height = height - 2;
 		this.setSize(new Integer(width).toString(), new Integer(height).toString());
 		scrollPanel.setSize(new Integer(width).toString(), new Integer(
 				Math.max(0, height-150)).toString());		

@@ -23,11 +23,11 @@ package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
 import java.util.Date;
 
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -65,8 +65,8 @@ public class UpdateClickHandler extends BaseClickHandler {
 			a.setRootId(node.getAnnotationRootId());
 		}
 
-		a.setObjectUri(YumaImageClient.getImageUrl());
-		a.setCreatedBy(YumaImageClient.getUser());
+		a.setObjectUri(YUMACoreProperties.getObjectURI());
+		a.setCreatedBy(YUMACoreProperties.getUser());
 		a.setTitle(annotationForm.getAnnotationTitle());
 		a.setText(annotationForm.getAnnotationText());
 		a.setScope(annotationForm.getAnnotationScope());

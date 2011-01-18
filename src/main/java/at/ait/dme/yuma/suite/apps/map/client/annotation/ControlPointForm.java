@@ -24,6 +24,7 @@ package at.ait.dme.yuma.suite.apps.map.client.annotation;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
@@ -36,7 +37,6 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
-import at.ait.dme.yuma.suite.apps.map.client.YumaMapClient;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderServiceAsync;
 
@@ -176,7 +176,7 @@ public class ControlPointForm extends AnnotationEditForm {
 			AnnotationPanel annotationComposite) {
 		
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
-		PushButton saveButton = new PushButton(YumaMapClient.getConstants().actionSave());
+		PushButton saveButton = new PushButton(YUMACoreProperties.getConstants().actionSave());
 		if(update) {
 			saveButton.addClickHandler(new UpdateClickHandler(annotationComposite, 
 					annotationTreeNode, this));
@@ -187,7 +187,7 @@ public class ControlPointForm extends AnnotationEditForm {
 		saveButton.setStyleName("imageAnnotation-form-button");
 		buttonsPanel.add(saveButton);
 		
-		PushButton cancelButton = new PushButton(YumaMapClient.getConstants().actionCancel());
+		PushButton cancelButton = new PushButton(YUMACoreProperties.getConstants().actionCancel());
 		cancelButton.setStyleName("imageAnnotation-form-button");
 		cancelButton.addClickHandler(new CancelClickHandler(annotationComposite,
 				annotationTreeNode));

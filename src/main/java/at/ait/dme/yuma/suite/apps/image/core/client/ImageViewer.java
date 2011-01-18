@@ -42,6 +42,7 @@ import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapeControlPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapePanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagSelectionListener;
+import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.HasTagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;
@@ -74,7 +75,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  * @author Christian Sadilek
  */
-public class ImageViewer extends MediaViewer {
+public class ImageViewer extends MediaViewer implements HasTagCloud {
 	private static final int IMAGE_OFFSET_LEFT = 11;
 	private static final int IMAGE_OFFSET_TOP = 10;
 	private static final String PX = "px";
@@ -288,8 +289,9 @@ public class ImageViewer extends MediaViewer {
 		return tagCloud;
 	}
 	
-	public void setAnnotationForm(TagEnabledAnnotationForm annotationForm) {
-		this.annotationForm = annotationForm;
+	@Override
+	public void setAnnotationEditForm(TagEnabledAnnotationForm editForm) {
+		this.annotationForm = editForm;
 	}
 	
 	/**
@@ -632,5 +634,5 @@ public class ImageViewer extends MediaViewer {
 		
 		return new ImageFragment(getVisibleRect(), getImageRect(), getActiveShape());
 	}
-	
+
 }

@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.apps.map.client.explore;
 
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 
 import com.google.gwt.dom.client.Style.Unit;
@@ -54,10 +54,10 @@ public class ExplorationComposite extends Composite {
 		// Container stack panel
 		containerPanel = new StackLayoutPanel(Unit.EM);
 		
-		I18NConstants i18n = YumaImageClient.getConstants();
+		I18NConstants i18n = YUMACoreProperties.getConstants();
 		
 		// Map metadata
-		String metadataURL = YumaImageClient.getImageUrl().substring(0, YumaImageClient.getImageUrl().lastIndexOf(".") + 1) + XML;
+		String metadataURL = YUMACoreProperties.getObjectURI().substring(0, YUMACoreProperties.getObjectURI().lastIndexOf(".") + 1) + XML;
 		containerPanel.add(new MapMetaDataPanel(metadataURL), i18n.aboutThisMap(), 3);
 		
 		// Search panel

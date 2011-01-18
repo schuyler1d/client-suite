@@ -75,7 +75,7 @@ public class TilesetGenerator {
 	
 			FileReader reader = new FileReader(new File(tilesDir + "/tilemapresource.xml"));
 			return new TileschemeParser()
-				.parseTMSDescriptor("tiles/" + createTilesetPath(url) + "/", reader);
+				.parseTMSDescriptor("tilesets/" + createTilesetPath(url) + "/", reader);
 		} catch (Throwable t) {
 			logger.fatal(t.getMessage(), t);
 			throw new TilingException(t);

@@ -22,12 +22,12 @@
 package at.ait.dme.yuma.suite.apps.core.client.gui.treeview;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.CreateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.DeleteClickHandler;
-import at.ait.dme.yuma.suite.apps.image.client.YumaImageClient;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
@@ -160,13 +160,15 @@ public class AnnotationTreeNode extends Composite
 		ratePlus.setStyleName("imageAnnotation-header-rate-image-plus");
 		annotationRatePanel.add(ratePlus);
 		
+		/*
 		if(YumaImageClient.getFlaggedId()!=null && 
 				YumaImageClient.getFlaggedId().equals(annotation.getId())) {
 			flag.setStyleName("imageAnnotation-header-flag-red-image");
 			flagged=true;
 		} else {
+		*/
 			flag.setStyleName("imageAnnotation-header-flag-blue-image");
-		}
+		// }
 		Anchor flagAnchor = new Anchor();
 		flagAnchor.setHref(createFlagLink());
 		flagAnchor.setTarget("_blank");
@@ -215,34 +217,39 @@ public class AnnotationTreeNode extends Composite
 	 */
 	public void addActions(AnnotationPanel annotationComposite) {
 		// add reply action
-		actionReply.setText(YumaImageClient.getConstants().actionReply());
+		actionReply.setText(YUMACoreProperties.getConstants().actionReply());
 		actionReply.setStyleName("imageAnnotation-action");
 		actionReply.addClickHandler(
 				new CreateClickHandler(annotationComposite, this, false, false));
-		actionReply.setEnabled(YumaImageClient.getUser() != null);
+		actionReply.setEnabled(YUMACoreProperties.getUser() != null);
 		annotationActionsPanel.add(actionReply);
 
 		// add reply w/ fragment action
-		actionReplyFragment.setText(YumaImageClient.getConstants().actionReplyFragment());
+		actionReplyFragment.setText(YUMACoreProperties.getConstants().actionReplyFragment());
 		actionReplyFragment.setStyleName("imageAnnotation-action");
 		actionReplyFragment.addClickHandler(
 				new CreateClickHandler(annotationComposite, this, true, false));
-		actionReplyFragment.setEnabled(YumaImageClient.getUser() != null);
+		actionReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
 		annotationActionsPanel.add(actionReplyFragment);
 
 		// add edit action
-		actionEdit.setText(YumaImageClient.getConstants().actionEdit());
+		actionEdit.setText(YUMACoreProperties.getConstants().actionEdit());
 		actionEdit.setStyleName("imageAnnotation-action");
-		actionEdit.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
-				&& !annotation.hasReplies());
+		// actionEdit.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
+		// 		&& !annotation.hasReplies());
+		actionEdit.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+		 		&& !annotation.hasReplies());
+		
 		actionEdit.addClickHandler(new CreateClickHandler(annotationComposite, this,
 				annotation.hasFragment(), true));
 		annotationActionsPanel.add(actionEdit);
 
 		// add delete action
-		actionDelete.setText(YumaImageClient.getConstants().actionDelete());
+		actionDelete.setText(YUMACoreProperties.getConstants().actionDelete());
 		actionDelete.setStyleName("imageAnnotation-action");
-		actionDelete.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
+		// actionDelete.setEnabled(YumaImageClient.isAuthenticatedUser(annotation.getCreatedBy())
+		//		&& !annotation.hasReplies());
+		actionDelete.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		actionDelete.addClickHandler(
 				new DeleteClickHandler(annotationComposite, this));
@@ -420,7 +427,7 @@ public class AnnotationTreeNode extends Composite
 		I18NErrorMessages msg = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 
 		// TODO refactor (just a prototype)!
-		String baseUrl = YumaImageClient.getBaseUrl().replace("image-annotation-frontend",
+		String baseUrl = YUMACoreProperties.getBaseUrl().replace("image-annotation-frontend",
 				"image-annotation-frontend-admin");
 
 		return "mailto:"
@@ -430,7 +437,7 @@ public class AnnotationTreeNode extends Composite
 				+ "&body="
 				+ msg.flagBody(annotation.getTitle(), baseUrl + "annotate.jsp?objectURL="
 						+ annotation.getObjectUri() + "%26flaggedId=" + annotation.getId(), 
-						YumaImageClient.getUser());
+						YUMACoreProperties.getUser());
 	}
 
 	@Override

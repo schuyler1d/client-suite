@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageRect;
@@ -36,7 +37,6 @@ import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polygon;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polyline;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
 import at.ait.dme.yuma.suite.apps.map.client.MapUtils;
-import at.ait.dme.yuma.suite.apps.map.client.YumaMapClient;
 import at.ait.dme.yuma.suite.apps.map.client.server.TransformationService;
 import at.ait.dme.yuma.suite.apps.map.client.server.TransformationServiceAsync;
 
@@ -86,7 +86,7 @@ public class GoogleMapsComposite extends Composite {
 		
 	private void showMap() {
 		initWidget(compositePanel);
-		parseBoundingBox();		
+
 		this.setStyleName("mapAnnotation-composite");
 		
 		// show GMap
@@ -99,30 +99,10 @@ public class GoogleMapsComposite extends Composite {
 		createMapOverlays();
 		compositePanel.add(map);
 		
-		if(YumaMapClient.isInTileMode()) {
-			Anchor kmlLink = new Anchor(YumaMapClient.getConstants().kmlExport(), createKmlLink());
-			kmlLink.setStyleName("mapAnnotation-kml");
-			compositePanel.add(kmlLink, 10, 240);
-		}
+		Anchor kmlLink = new Anchor(YUMACoreProperties.getConstants().kmlExport(), createKmlLink());
+		kmlLink.setStyleName("mapAnnotation-kml");
+		compositePanel.add(kmlLink, 10, 240);
 		
-	}
-	
-	/**
-	 * parse the bounding box into 2 instances of LatLng. 
-	 * one for the north east and one for the south west.
-	 */
-	private void parseBoundingBox() {
-		String bBox = YumaMapClient.getBbox();
-		if(bBox==null) return;
-		
-		bBox=bBox.replaceAll("[\\[\\]]", "");
-		String[] coords=bBox.split(",");
-		
-		if(coords.length!=4) return;
-		mapNorthEast = LatLng.newInstance(Double.parseDouble(coords[0]), 
-				Double.parseDouble(coords[1]));
-		mapSouthWest = LatLng.newInstance(Double.parseDouble(coords[2]), 
-				Double.parseDouble(coords[3]));
 	}
 	
 	/**
@@ -171,7 +151,7 @@ public class GoogleMapsComposite extends Composite {
 		TransformationServiceAsync transformationService = (TransformationServiceAsync) GWT
 				.create(TransformationService.class);
 		
-		transformationService.transformCoordinates(YumaMapClient.getImageUrl(), xyCoords,
+		transformationService.transformCoordinates(YUMACoreProperties.getObjectURI(), xyCoords,
 			new AsyncCallback<List<WGS84Coordinate>>() {
 				public void onFailure(Throwable caught) {
 					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
@@ -231,10 +211,7 @@ public class GoogleMapsComposite extends Composite {
 			// add the center as last point to avoid an extra transformation call
 			xyCoordinates.add(getCenter((ImageFragment) annotation.getFragment()));
 		
-			if(YumaMapClient.getBbox()!=null) {
-				coords = transformPoints(annotation, xyCoordinates);
-				if(coords!=null) drawOverlay(coords, annotation);
-			} else {
+
 				// in case we don't have a bounding box we need to contact the server to do a
 				// transformation based on control points. to avoid unnecessary server calls,
 				// we collect the coordinates of all annotations and use a single server call.
@@ -242,7 +219,7 @@ public class GoogleMapsComposite extends Composite {
 				// corresponding annotation.
 				allXyCoordinates.addAll(xyCoordinates);
 				coordinatesCount.put(annotation, xyCoordinates.size());
-			}
+			
 		}
 		if(!allXyCoordinates.isEmpty())
 			transformPoints(allXyCoordinates);
@@ -300,7 +277,7 @@ public class GoogleMapsComposite extends Composite {
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append("yuma/tokml?url="); 
-		sb.append(YumaMapClient.getImageUrl());
+		sb.append(YUMACoreProperties.getObjectURI());
 		sb.append("&a=");
 		
 		for (ImageAnnotation annotation : annotations) {

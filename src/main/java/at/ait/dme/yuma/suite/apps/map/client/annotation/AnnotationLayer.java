@@ -43,6 +43,7 @@ import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
 import at.ait.dme.gwt.openlayers.client.handler.Handler;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
@@ -53,7 +54,6 @@ import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagSelectionListene
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
 import at.ait.dme.yuma.suite.apps.map.client.MapUtils;
-import at.ait.dme.yuma.suite.apps.map.client.YumaMapClient;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderServiceAsync;
 import at.ait.dme.yuma.suite.apps.map.client.server.exception.TransformationException;
@@ -478,7 +478,7 @@ public class AnnotationLayer {
 	
 	private void addGeonamesSuggestions(Bounds bbox) {
 		GeocoderServiceAsync service = (GeocoderServiceAsync) GWT.create(GeocoderService.class);
-		service.getTags(YumaMapClient.getImageUrl(), new XYCoordinate((int)bbox.getLeft(), (int)bbox.getBottom()), new XYCoordinate((int)bbox.getRight(), (int)bbox.getTop()), new AsyncCallback<SemanticTag[]>(){
+		service.getTags(YUMACoreProperties.getObjectURI(), new XYCoordinate((int)bbox.getLeft(), (int)bbox.getBottom()), new XYCoordinate((int)bbox.getRight(), (int)bbox.getTop()), new AsyncCallback<SemanticTag[]>(){
 		    public void onSuccess(SemanticTag[] tags) {
 	    		// 1. Remove all tags from the tag cloud which are NOT in this list
 		    	for (int i=0; i<tags.length; i++) {
