@@ -31,7 +31,6 @@ import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageRect;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Point;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polygon;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polyline;
@@ -70,9 +69,6 @@ public class GoogleMapsComposite extends Composite {
 	private Map<ImageAnnotation, Integer> coordinatesCount = 
 		new LinkedHashMap<ImageAnnotation, Integer>();
 	
-	private LatLng mapNorthEast = null;
-	private LatLng mapSouthWest = null;
-	
 	public GoogleMapsComposite(ImageAnnotation annotation) {
 		annotations = new ArrayList<ImageAnnotation>();
 		annotations.add(annotation);
@@ -104,42 +100,6 @@ public class GoogleMapsComposite extends Composite {
 		compositePanel.add(kmlLink, 10, 240);
 		
 	}
-	
-	/**
-	 * transform a list of points from pixels to LatLng
-	 * 
-	 * @param imageRect
-	 * @param XYCoordinate
-	 * @return latitude and longitude
-	 */
-	private List<LatLng> transformPoints(final ImageAnnotation annotation, List<XYCoordinate> xyCoords) {
-		List<LatLng> coords = new ArrayList<LatLng>();
-		for(XYCoordinate xyCoord : xyCoords) {
-			coords.add(transformPoint(annotation, xyCoord));
-		}
-		return coords;
-	}
-	
-	/**
-	 * transform a point from pixels to LatLng using the provided bounding box
-	 * 
-	 * @param imageRect
-	 * @param xyCoord
-	 * @return latlng
-	 */
-	private LatLng transformPoint(ImageAnnotation annotation, XYCoordinate xyCoord) {
-		ImageRect imageRect = ((ImageFragment)annotation.getFragment()).getImageRect();
-		float xRatio =  ((float)imageRect.getWidth() / (xyCoord.x - imageRect.getLeft()));
-		float yRatio =  ((float)imageRect.getHeight() / (xyCoord.y - imageRect.getTop()));
-	
-		double lat = mapNorthEast.getLatitude() - 
-			((mapNorthEast.getLatitude() - mapSouthWest.getLatitude()) / yRatio);
-		double lng = mapSouthWest.getLongitude() + 
-			((mapNorthEast.getLongitude() - mapSouthWest.getLongitude()) / xRatio);
-		
-		return LatLng.newInstance(lat, lng);
-	}
-	
 	
 	/**
 	 * transform a list of points from pixels to LatLng using the transformation service, in case
@@ -182,7 +142,6 @@ public class GoogleMapsComposite extends Composite {
 	 * create the map overlays for the provided annotations
 	 */
 	private void createMapOverlays() {
-		List<LatLng> coords = null;
 		List<XYCoordinate> allXyCoordinates = new ArrayList<XYCoordinate>();
 		
 		for(ImageAnnotation annotation : annotations) {
