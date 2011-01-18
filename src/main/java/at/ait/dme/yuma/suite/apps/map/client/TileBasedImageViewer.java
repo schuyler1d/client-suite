@@ -29,7 +29,9 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.LoadingPopup;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageRect;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.HasTagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
@@ -220,10 +222,17 @@ public class TileBasedImageViewer extends MediaViewer implements HasTagCloud {
 	public ImageFragment getActiveMediaFragment() {
 		// TODO fix this!!
 		if (lControlPoints.isVisible()) {
-			return null; //lControlPoints.getActiveShape();
+			return toImageFragment(lControlPoints.getActiveShape());
 		} else {
-			return null; // lAnnotation.getActiveShape();
+			return toImageFragment(lAnnotation.getActiveShape());
 		}
+	}
+	
+	private ImageFragment toImageFragment(Shape shape) {		
+		return new ImageFragment(
+				new ImageRect(0, 0, xExtent, yExtent), 
+				new ImageRect(0, 0, xExtent, yExtent), 
+				shape);
 	}
 		
 	private void loadTileset(final String url) {
