@@ -220,7 +220,6 @@ public class TileBasedImageViewer extends MediaViewer implements HasTagCloud {
 
 	@Override
 	public ImageFragment getActiveMediaFragment() {
-		// TODO fix this!!
 		if (lControlPoints.isVisible()) {
 			return toImageFragment(lControlPoints.getActiveShape());
 		} else {
@@ -228,7 +227,10 @@ public class TileBasedImageViewer extends MediaViewer implements HasTagCloud {
 		}
 	}
 	
-	private ImageFragment toImageFragment(Shape shape) {		
+	private ImageFragment toImageFragment(Shape shape) {
+		if (shape == null)
+			return null;
+		
 		return new ImageFragment(
 				new ImageRect(0, 0, xExtent, yExtent), 
 				new ImageRect(0, 0, xExtent, yExtent), 

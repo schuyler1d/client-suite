@@ -39,7 +39,7 @@ public class LoadingPopup extends PopupPanel {
 
 		FlowPanel inner = new FlowPanel();
 		inner.setStyleName("inner");
-		inner.add(new Image("images/loading.gif"));
+		inner.add(new Image("images/ajax-loader-large.gif"));
 		inner.add(new Label(label));
 		
 		this.setWidget(inner);

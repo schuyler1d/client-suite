@@ -52,8 +52,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -79,12 +77,8 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 	// the container panel for all GUI elements
 	private LayoutPanel containerPanel = new LayoutPanel(new BorderLayout());
 	
-	// the parent panel for the loading and scrollpanel
-	private DeckPanel deckPanel = new DeckPanel();
-	
 	// panel for displaying the loading icon
-	private DockPanel loadingPanel = new DockPanel();
-	private Image loadingImage = new Image("images/loading.gif");
+	private Image loadingImage = new Image("images/ajax-loader-small.gif");
 
 	// the scroll panel
 	private ScrollPanel scrollPanel = new ScrollPanel();	
@@ -126,12 +120,7 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 		// Container panel for annotation tree & controls
 		containerPanel.setStyleName("imageAnnotation-composite");
 		containerPanel.add(createHeader(), new BorderLayoutData(BorderLayout.Region.NORTH));
-		
-		// 'Loading' panel
-		loadingPanel.setHorizontalAlignment(DockPanel.ALIGN_CENTER);
-		loadingPanel.setVerticalAlignment(DockPanel.ALIGN_MIDDLE);
-		loadingPanel.add(loadingImage, DockPanel.CENTER);
-		
+
 		// Annotation tree
 		createTree(shapeTypes);		
 		
@@ -154,13 +143,11 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 				}			
 			}
 		});
-		
-		deckPanel.add(loadingPanel);
-		deckPanel.add(scrollPanel);
 
+		loadingImage.setStyleName("imageAnnotation-loading");
 		enableLoadingImage();
 
-		containerPanel.add(deckPanel);
+		containerPanel.add(scrollPanel);
 		initWidget(containerPanel);
 	}
 	
@@ -182,6 +169,9 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 		Label addAnnotationLabel = new Label(YUMACoreProperties.getConstants().addAnnotation());
 		addAnnotationLabel.setStyleName("imageAnnotation-add-annotation");
 		header.add(addAnnotationLabel);
+		
+		// 'Loading' animation
+		header.add(loadingImage);
 		
 		// 'Help' link
 		HTML help = new HTML("<a target=\"_blank\" href=\"userguide_" + 
@@ -413,14 +403,14 @@ public class AnnotationPanel extends Composite implements HasLayoutManager,
 	 * show the loading image
 	 */
 	public void enableLoadingImage() {
-		deckPanel.showWidget(0);
+		loadingImage.setVisible(true);
 	}
 	
 	/**
 	 * hide the loading image
 	 */
 	public void disableLoadingImage() {
-		deckPanel.showWidget(1);
+		loadingImage.setVisible(false);
 	}
 	
 	/**
