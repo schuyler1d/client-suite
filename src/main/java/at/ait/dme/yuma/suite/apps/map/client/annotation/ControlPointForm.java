@@ -25,8 +25,8 @@ import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
@@ -48,7 +48,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * 
  * @author Rainer Simon
  */
-public class ControlPointForm extends NewAnnotationEditForm {
+public class ControlPointForm extends AnnotationEditForm {
 	
 	/**
 	 * Place name
@@ -75,7 +75,7 @@ public class ControlPointForm extends NewAnnotationEditForm {
 		this.controlPointLayer = controlPointLayer;
 	}
 	
-	public ControlPointForm(NewAnnotationPanel panel, Annotation annotation, ControlPointLayer controlPointLayer) {
+	public ControlPointForm(AnnotationPanel panel, Annotation annotation, ControlPointLayer controlPointLayer) {
 		// Reference to control point layer
 		this.controlPointLayer = controlPointLayer;
 		
@@ -162,7 +162,7 @@ public class ControlPointForm extends NewAnnotationEditForm {
 		}
 	}
 	
-	private HorizontalPanel createButtonsPanel(NewAnnotationPanel panel, Annotation annotation) {
+	private HorizontalPanel createButtonsPanel(AnnotationPanel panel, Annotation annotation) {
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
 		
 		PushButton saveButton = new PushButton(YUMACoreProperties.getConstants().actionSave());
@@ -190,7 +190,7 @@ public class ControlPointForm extends NewAnnotationEditForm {
 	}
 	
 	@Override
-	public NewAnnotationEditForm newInstance(NewAnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent) {
 		return new ControlPointForm(panel, annotation, controlPointLayer);
 	}
 	

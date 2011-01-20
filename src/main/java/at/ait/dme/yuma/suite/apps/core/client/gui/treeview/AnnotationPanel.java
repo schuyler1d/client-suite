@@ -64,7 +64,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class NewAnnotationPanel extends Composite
+public class AnnotationPanel extends Composite
 	implements HasLayoutManager, HasAnnotationSelectionHandlers {
 	
 	/**
@@ -97,12 +97,12 @@ public class NewAnnotationPanel extends Composite
 	/**
 	 * The annotation edit form
 	 */
-	private NewAnnotationEditForm editForm = null;
+	private AnnotationEditForm editForm = null;
 	
 	/**
 	 * The annotation tree
 	 */
-	private NewAnnotationTree annotationTree;
+	private AnnotationTree annotationTree;
 	
 	/**
 	 * 'Annotate' buttons
@@ -115,14 +115,14 @@ public class NewAnnotationPanel extends Composite
 	 */
 	private MediaViewer mediaViewer = null;
 
-	public NewAnnotationPanel(MediaViewer mediaViewer, NewAnnotationEditForm editForm) {	
+	public AnnotationPanel(MediaViewer mediaViewer, AnnotationEditForm editForm) {	
 		this.mediaViewer = mediaViewer;
 		this.editForm = editForm;
 		
 		containerPanel.setStyleName("imageAnnotation-composite");
 		containerPanel.add(createHeader(), new BorderLayoutData(BorderLayout.Region.NORTH));
 
-		annotationTree = new NewAnnotationTree(this, handlerManager);
+		annotationTree = new AnnotationTree(this, handlerManager);
 		loadAnnotations();		
 		
 		/*
@@ -238,12 +238,12 @@ public class NewAnnotationPanel extends Composite
 			if(showFragmentEditor)
 				mediaViewer.editAnnotation(null);	
 		} else {
-			if (parent == null) {
-				// Update at root level
-				annotationTree.showAnnotationEditForm(annotation, editForm);
+			if (annotation == null) {
+				// Reply
+				annotationTree.showAnnotationEditForm(parent, editForm);
 			} else {
-				// Update at child level
-				annotationTree.showAnnotationEditForm(parent, editForm);				
+				// Update
+				annotationTree.showAnnotationEditForm(annotation, editForm);
 			}
 				
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -344,13 +344,14 @@ public class NewAnnotationPanel extends Composite
 			});	
 	}
 	
-	/**
-	 * refresh the annotation tree
-	 */
-	public void refreshTree() {
+	public void reload() {
 		enableLoadingImage();
 		annotationTree.removeItems();
 		loadAnnotations();
+	}
+
+	public void refresh() {
+		annotationTree.refresh();
 	}
 	
 	/**

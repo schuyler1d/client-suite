@@ -24,18 +24,23 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class NewAnnotationTreeNode extends Composite 
+public class AnnotationTreeNode extends Composite 
 	implements HasMouseOutHandlers, HasMouseOverHandlers {
 	
 	/**
 	 * Reference to the annotation panel
 	 */
-	protected NewAnnotationPanel panel;
+	protected AnnotationPanel panel;
 	
 	/**
 	 * The annotation
 	 */
 	protected Annotation annotation;
+	
+	/**
+	 * The parent annotation (if any)
+	 */
+	protected Annotation parent;
 	
 	/**
 	 * The parent node of this annotation tree node
@@ -48,13 +53,21 @@ public class NewAnnotationTreeNode extends Composite
 	private VerticalPanel container = new VerticalPanel();
 	
 	/**
+	 * Buttons
+	 */
+	private PushButton btnReply;
+	private PushButton btnReplyFragment;
+	private PushButton btnEdit;
+	
+	/**
 	 * This node's edit form
 	 */
-	private NewAnnotationEditForm editForm;
+	private AnnotationEditForm editForm;
 
-	public NewAnnotationTreeNode(NewAnnotationPanel panel, Annotation annotation) {
+	public AnnotationTreeNode(AnnotationPanel panel, Annotation annotation, Annotation parent) {
 		this.panel = panel;
 		this.annotation = annotation;
+		this.parent = parent;
 		container.add(createHeader());
 		
 		Label title = new Label(annotation.getTitle());
@@ -80,7 +93,6 @@ public class NewAnnotationTreeNode extends Composite
 		}
 
 		container.add(createActions());
-		
 		initWidget(container);
 		deselect();
 	}
@@ -105,23 +117,23 @@ public class NewAnnotationTreeNode extends Composite
 	protected Panel createActions() {
 		HorizontalPanel actionsPanel = new HorizontalPanel();
 		
-		PushButton btnReply = new PushButton(YUMACoreProperties.getConstants().actionReply());
+		btnReply = new PushButton(YUMACoreProperties.getConstants().actionReply());
 		btnReply.setStyleName("imageAnnotation-action");
 		btnReply.addClickHandler(new AnnotateClickHandler(panel, null, annotation, false));
 		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
 		actionsPanel.add(btnReply);
 
-		PushButton btnReplyFragment = new PushButton(YUMACoreProperties.getConstants().actionReplyFragment());
+		btnReplyFragment = new PushButton(YUMACoreProperties.getConstants().actionReplyFragment());
 		btnReplyFragment.setStyleName("imageAnnotation-action");
 		btnReplyFragment.addClickHandler(new AnnotateClickHandler(panel, null, annotation, true));
 		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
 		actionsPanel.add(btnReplyFragment);
 
-		PushButton btnEdit = new PushButton(YUMACoreProperties.getConstants().actionEdit());
+		btnEdit = new PushButton(YUMACoreProperties.getConstants().actionEdit());
 		btnEdit.setStyleName("imageAnnotation-action");
 		btnEdit.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
-		btnEdit.addClickHandler(new AnnotateClickHandler(panel, annotation, null, annotation.hasFragment()));
+		btnEdit.addClickHandler(new AnnotateClickHandler(panel, annotation, parent, annotation.hasFragment()));
 		actionsPanel.add(btnEdit);
 
 		PushButton btnDelete = new PushButton(YUMACoreProperties.getConstants().actionDelete());
@@ -136,19 +148,19 @@ public class NewAnnotationTreeNode extends Composite
 		return actionsPanel;
 	}
 	
-	public void showAnnotationForm(NewAnnotationEditForm editForm) {
+	public void showAnnotationForm(AnnotationEditForm editForm) {
 		this.editForm = editForm;
 		container.add(editForm);
-		// actionReply.setEnabled(false);
-		// actionReplyFragment.setEnabled(false);
-		// actionEdit.setEnabled(false);
+		btnReply.setEnabled(false);
+		btnReplyFragment.setEnabled(false);
+		btnEdit.setEnabled(false);
 	}
 
 	public void hideAnnotationForm() {
 		this.editForm.setVisible(false);
-		// actionReply.setEnabled(true);
-		// actionReplyFragment.setEnabled(true);
-		// actionEdit.setEnabled(true);
+		btnReply.setEnabled(true);
+		btnReplyFragment.setEnabled(true);
+		btnEdit.setEnabled(true);
 	}
 	
 	public Annotation getAnnotation() {
@@ -173,13 +185,13 @@ public class NewAnnotationTreeNode extends Composite
 	
 	@Override
 	public boolean equals(Object other) {
-		if (!(other instanceof NewAnnotationTreeNode))
+		if (!(other instanceof AnnotationTreeNode))
 			return false;
 		
 		if (this == other)
 			return true;
 
-		NewAnnotationTreeNode node = (NewAnnotationTreeNode) other;
+		AnnotationTreeNode node = (AnnotationTreeNode) other;
 		return annotation.equals(node.getAnnotation());
 	}
 

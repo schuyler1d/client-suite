@@ -1,5 +1,6 @@
 package at.ait.dme.yuma.suite.apps.core.client.gui.treeview;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -21,17 +22,17 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 
-public class NewAnnotationTree extends Tree {
+public class AnnotationTree extends Tree {
 	
-	private NewAnnotationPanel panel;
+	private AnnotationPanel panel;
 	
     private HandlerManager handlerManager;	
     
-    private Map<Annotation, NewAnnotationTreeNode> nodes = new HashMap<Annotation, NewAnnotationTreeNode>();
-    
+    private Map<Annotation, AnnotationTreeNode> nodes = new HashMap<Annotation, AnnotationTreeNode>();
     private Map<TreeItem, Annotation> annotations = new HashMap<TreeItem, Annotation>();
+    private List<Annotation> rootAnnotations = new ArrayList<Annotation>();
     
-    public NewAnnotationTree(NewAnnotationPanel panel, HandlerManager handlerManager) {
+    public AnnotationTree(AnnotationPanel panel, HandlerManager handlerManager) {
     	this.panel = panel;
     	this.handlerManager = handlerManager;
     	this.setStyleName("imageAnnotation-tree");
@@ -54,18 +55,18 @@ public class NewAnnotationTree extends Tree {
 	}
 	
 	public void appendChild(Annotation parent, Annotation child) {
-		NewAnnotationTreeNode parentNode = getParentNode(parent);
-		NewAnnotationTreeNode childNode = new NewAnnotationTreeNode(panel, child);
+		parent.addReply(child);
+		AnnotationTreeNode parentNode = nodes.get(parent);
+		AnnotationTreeNode childNode = new AnnotationTreeNode(panel, child, parent);
 		addAnnotation(childNode, parentNode);
 	}
-	
+
 	public void addAnnotation(Annotation annotation) {
-		NewAnnotationTreeNode annotationNode = new NewAnnotationTreeNode(panel, annotation);	
-		NewAnnotationTreeNode parentNode = getParentNode(annotation);
-		addAnnotation(annotationNode, parentNode);
+		addAnnotation(new AnnotationTreeNode(panel, annotation, null), null);
+		rootAnnotations.add(annotation);
 	}
 	
-	public void addAnnotation(final NewAnnotationTreeNode annotation, NewAnnotationTreeNode parent) {
+	private void addAnnotation(final AnnotationTreeNode annotation, AnnotationTreeNode parent) {
 		TreeItem treeItem;
 		if (parent == null) {
 			treeItem = this.insertItem(0, annotation);
@@ -94,7 +95,7 @@ public class NewAnnotationTree extends Tree {
 			List<Annotation> replies = sort(annotation.getAnnotation().getReplies());
 			
 			for(Annotation reply : replies) {
-				NewAnnotationTreeNode node = new NewAnnotationTreeNode(panel, reply);	
+				AnnotationTreeNode node = new AnnotationTreeNode(panel, reply, annotation.getAnnotation());	
 				addAnnotation(node, annotation);				
 			}			
 		}
@@ -104,15 +105,42 @@ public class NewAnnotationTree extends Tree {
 	}
 	
 	public void removeAnnotation(Annotation annotation) {
-		this.remove(nodes.get(annotation));
+		Annotation parent = getParentAnnotation(annotation);
+		if (parent != null)
+			parent.removeReply(annotation);
+		
+		AnnotationTreeNode node = nodes.get(annotation);
+		nodes.remove(annotation);
+		annotations.remove(node.getTreeItem());
+		rootAnnotations.remove(annotation);
+		this.remove(node);
 	}
 	
-	public void showAnnotationEditForm(Annotation annotation, NewAnnotationEditForm editForm) {		
+	public void showAnnotationEditForm(Annotation annotation, AnnotationEditForm editForm) {		
 		nodes.get(annotation).showAnnotationForm(editForm);
 	}
 	
 	public void hideAnnotationEditForm(Annotation annotation) {
 		nodes.get(annotation).hideAnnotationForm();
+	}
+	
+	public void refresh() {
+		nodes.clear();
+		annotations.clear();
+		super.clear();
+		
+		final List<Annotation> toAdd = rootAnnotations; 
+		rootAnnotations = new ArrayList<Annotation>();
+		
+		Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+			@Override
+			public void execute() {
+				for (Annotation a : toAdd) {
+					addAnnotation(a);
+				}	
+				toAdd.clear();
+			}
+		});
 	}
 	
 	private List<Annotation> sort(List<Annotation> annotations) {
@@ -125,7 +153,7 @@ public class NewAnnotationTree extends Tree {
 	}
 	
 	public void selectAnnotation(Annotation annotation, boolean selected) {
-		final NewAnnotationTreeNode node = nodes.get(annotation);
+		final AnnotationTreeNode node = nodes.get(annotation);
 		if(selected) {
 			node.select();
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -140,15 +168,8 @@ public class NewAnnotationTree extends Tree {
 		}
 	}
 	
-	private NewAnnotationTreeNode getParentNode(Annotation annotation) {
-		if (annotation == null)
-			return null;
-		
-		return nodes.get(annotation);
-	}
-	
 	public Annotation getParentAnnotation(Annotation annotation) {		
-		NewAnnotationTreeNode node = getParentNode(annotation);
+		AnnotationTreeNode node = nodes.get(annotation);
 		if (node == null)
 			return null;
 		
@@ -163,6 +184,7 @@ public class NewAnnotationTree extends Tree {
 	public void removeItems() {
 		nodes.clear();
 		annotations.clear();
+		rootAnnotations.clear();
 		super.removeItems();
 	}
 

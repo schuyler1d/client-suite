@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.events;
 
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.server.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.apps.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
 import at.ait.dme.yuma.suite.apps.core.client.server.enrichment.SemanticEnrichmentServiceException;
@@ -41,7 +41,7 @@ import com.google.gwt.user.client.ui.TextArea;
 public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
 
     private StandardImageAnnotationForm annotationForm;
-    private NewAnnotationPanel annotationComposite;
+    private AnnotationPanel annotationComposite;
     private Collection<SemanticTagSuggestions> entities = null;
     private boolean serviceEnabled = true;
     
@@ -53,7 +53,7 @@ public class ImageAnnotationKeyDownHandler implements KeyDownHandler {
 
 
     public ImageAnnotationKeyDownHandler(StandardImageAnnotationForm form, 
-    		NewAnnotationPanel annotationComposite) {
+    		AnnotationPanel annotationComposite) {
         this.annotationForm = form;
         this.annotationComposite = annotationComposite;
     }

@@ -25,8 +25,8 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceAsync;
@@ -44,7 +44,7 @@ public abstract class AbstractClickHandler implements ClickHandler {
 	/**
 	 * Reference to the annotation panel
 	 */
-	protected NewAnnotationPanel panel;
+	protected AnnotationPanel panel;
 	
 	/**
 	 * Reference to the original annotation (if any)
@@ -54,15 +54,15 @@ public abstract class AbstractClickHandler implements ClickHandler {
 	/**
 	 * Reference to the annotation edit form
 	 */
-	protected NewAnnotationEditForm editForm;
+	protected AnnotationEditForm editForm;
 	
 	/**
 	 * Error messages
 	 */
 	protected I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 	
-	public AbstractClickHandler(NewAnnotationPanel panel,
-			Annotation annotation, NewAnnotationEditForm editForm) {
+	public AbstractClickHandler(AnnotationPanel panel,
+			Annotation annotation, AnnotationEditForm editForm) {
 		this.panel = panel;
 		this.annotation = annotation;
 		this.editForm = editForm;
@@ -87,10 +87,10 @@ public abstract class AbstractClickHandler implements ClickHandler {
 		I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 		try {
 			throw caught;
-		} catch (RESTfulServiceException rse) {
-			if(rse.isConflict()) {
+		} catch (RESTfulServiceException e) {
+			if(e.isConflict()) {
 				MessageBox.error(errorMessages.error(), errorMessages.annotationConflict());
-				panel.refreshTree();								
+				panel.reload();								
 			} else {
 				MessageBox.error(errorMessages.error(), defaultMessage);
 			}

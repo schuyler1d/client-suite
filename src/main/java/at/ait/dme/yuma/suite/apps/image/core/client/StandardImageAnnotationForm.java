@@ -33,8 +33,8 @@ import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.CancelClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.SaveClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.UpdateClickHandler;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -54,7 +54,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author Manuel Gay
  * @author Rainer Simon
  */
-public class StandardImageAnnotationForm extends NewAnnotationEditForm {
+public class StandardImageAnnotationForm extends AnnotationEditForm {
 	
 	public class Checkbox extends com.google.gwt.user.client.ui.CheckBox {
 	    
@@ -83,7 +83,7 @@ public class StandardImageAnnotationForm extends NewAnnotationEditForm {
     	super();
     }
     
-	public StandardImageAnnotationForm(NewAnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public StandardImageAnnotationForm(AnnotationPanel panel, Annotation annotation, Annotation parent) {
 		super(panel, annotation, parent);
     	formPanel.setStyleName("imageAnnotation-form");		
 		formPanel.add(createTitlePanel());
@@ -95,7 +95,7 @@ public class StandardImageAnnotationForm extends NewAnnotationEditForm {
 	}
 	
 	@Override
-	public NewAnnotationEditForm newInstance(NewAnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent) {
 		return new StandardImageAnnotationForm(panel, annotation, parent);
 	}
 
@@ -207,7 +207,7 @@ public class StandardImageAnnotationForm extends NewAnnotationEditForm {
 		if (annotation == null) {
 			btnSave.addClickHandler(new SaveClickHandler(panel, parent, this));	
 		} else {
-			btnSave.addClickHandler(new UpdateClickHandler(panel, annotation, this));
+			btnSave.addClickHandler(new UpdateClickHandler(panel, parent, annotation, this));
 		}
 		buttonsPanel.add(btnSave);
 		

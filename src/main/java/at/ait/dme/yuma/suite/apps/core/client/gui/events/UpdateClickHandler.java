@@ -22,8 +22,8 @@
 package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -36,9 +36,13 @@ import com.google.gwt.user.client.ui.FocusWidget;
  */
 public class UpdateClickHandler extends AbstractClickHandler {
 
-	public UpdateClickHandler(NewAnnotationPanel panel,
-			Annotation annotation, NewAnnotationEditForm editForm) {
+	private Annotation parent;
+	
+	public UpdateClickHandler(AnnotationPanel panel, Annotation parent,
+			Annotation annotation, AnnotationEditForm editForm) {
+		
 		super(panel, annotation,editForm);
+		this.parent = parent;
 	}
 	
 	public void onClick(ClickEvent event) {
@@ -52,9 +56,10 @@ public class UpdateClickHandler extends AbstractClickHandler {
 				}
 
 				public void onSuccess(Annotation result) {
-					panel.removeAnnotation(annotation);
 					panel.stopEditing(annotation, false);
-					panel.addAnnotation(result);
+					panel.removeAnnotation(annotation);
+					panel.appendChild(parent, result);
+					panel.refresh();
 					panel.disableLoadingImage();
 				}
 			}

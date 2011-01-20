@@ -32,12 +32,12 @@ import com.google.gwt.user.client.ui.Composite;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public abstract class NewAnnotationEditForm extends Composite {
+public abstract class AnnotationEditForm extends Composite {
 	
 	/**
 	 * Reference to the annotation panel
 	 */
-	protected NewAnnotationPanel panel = null;
+	protected AnnotationPanel panel = null;
 	
 	/**
 	 * The annotation to edit or null, if new annotation
@@ -49,15 +49,15 @@ public abstract class NewAnnotationEditForm extends Composite {
 	 */
 	protected Annotation parent = null;
 
-	public NewAnnotationEditForm() { }
+	public AnnotationEditForm() { }
 
-	public NewAnnotationEditForm(NewAnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationEditForm(AnnotationPanel panel, Annotation annotation, Annotation parent) {
 		this.panel = panel;
 		this.annotation = annotation;
 		this.parent = parent;
 	}
 	
-	public abstract NewAnnotationEditForm newInstance(NewAnnotationPanel panel, Annotation annotation, Annotation parent);
+	public abstract AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent);
 	
 	public abstract void layout();
 

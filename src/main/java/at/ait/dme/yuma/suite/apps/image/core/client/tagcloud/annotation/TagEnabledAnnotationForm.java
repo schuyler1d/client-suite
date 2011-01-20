@@ -29,8 +29,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.StandardImageAnnotationForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.AnnotationLayer;
@@ -52,7 +52,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	/**
 	 * Reference to the annotationComposite
 	 */
-	private NewAnnotationPanel panel;
+	private AnnotationPanel panel;
 	
 	/**
 	 * The FlowPanel displaying the current tags  
@@ -69,7 +69,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 		this.tagCloud = tagCloud;
 	}
 	
-	public TagEnabledAnnotationForm(NewAnnotationPanel panel,
+	public TagEnabledAnnotationForm(AnnotationPanel panel,
 			Annotation annotation, Annotation parent, TagCloud tagCloud) {
 	
 		super(panel, annotation, parent);
@@ -87,7 +87,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	}
 	
 	@Override
-	public NewAnnotationEditForm newInstance(NewAnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent) {
 		return new TagEnabledAnnotationForm(panel, annotation, parent, tagCloud);
 	}
 	

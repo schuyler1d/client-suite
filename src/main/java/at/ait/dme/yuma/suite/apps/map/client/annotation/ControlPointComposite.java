@@ -32,7 +32,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 
 /**
@@ -41,7 +41,7 @@ import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class ControlPointComposite extends NewAnnotationPanel {
+public class ControlPointComposite extends AnnotationPanel {
 	
 	/**
 	 * 'Create control point' button

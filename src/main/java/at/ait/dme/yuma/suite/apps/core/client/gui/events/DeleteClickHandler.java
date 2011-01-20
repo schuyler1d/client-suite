@@ -22,7 +22,7 @@
 package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.FocusWidget;
  */
 public class DeleteClickHandler extends AbstractClickHandler {
 
-	public DeleteClickHandler(NewAnnotationPanel panel, Annotation annotation) {
+	public DeleteClickHandler(AnnotationPanel panel, Annotation annotation) {
 		super(panel, annotation, null);
 	}
 	
@@ -51,6 +51,7 @@ public class DeleteClickHandler extends AbstractClickHandler {
 
 				public void onSuccess(Void result) {
 					panel.removeAnnotation(annotation);
+					panel.refresh();
 					panel.disableLoadingImage();
 				}
 			});
