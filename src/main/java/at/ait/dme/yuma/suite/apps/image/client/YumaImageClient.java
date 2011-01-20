@@ -31,12 +31,11 @@ import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthenticationService;
 import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthenticationServiceAsync;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageViewer;
 import at.ait.dme.yuma.suite.apps.image.core.client.gui.MinMaxWindowPanel;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapeTypeRegistry;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -173,12 +172,12 @@ public class YumaImageClient implements EntryPoint {
 	 * @param tabPanel
 	 */
 	private void showAnnotationsTab(TabLayoutPanel tabPanel) {
-		AnnotationPanel annComposite;
+		NewAnnotationPanel annComposite;
 
-		annComposite = new AnnotationPanel(
+		annComposite = new NewAnnotationPanel(
 				imageComposite, 
-				new TagEnabledAnnotationForm(((ImageViewer)imageComposite).getTagCloud()),
-				ShapeTypeRegistry.allTypes());			
+				new TagEnabledAnnotationForm(((ImageViewer)imageComposite).getTagCloud()));
+				// ShapeTypeRegistry.allTypes());			
 
 		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override

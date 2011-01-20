@@ -53,7 +53,7 @@ public interface AnnotationService extends RemoteService {
 	 * @return the updated annotation's ID
 	 * @throws AnnotationServiceException if anything goes wrong
 	 */
-	public Annotation updateAnnotation(Annotation annotation) 
+	public Annotation updateAnnotation(String id, Annotation annotation) 
 		throws AnnotationServiceException;
 
 	/**

@@ -25,10 +25,8 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.MediaFragment;
-import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceAsync;
@@ -41,64 +39,44 @@ import com.google.gwt.event.dom.client.ClickHandler;
  * 
  * @author Christian Sadilek
  */
-public abstract class BaseClickHandler implements ClickHandler {
+public abstract class AbstractClickHandler implements ClickHandler {
 	
-	private AnnotationPanel annotationComposite = null;
+	/**
+	 * Reference to the annotation panel
+	 */
+	protected NewAnnotationPanel panel;
 	
-	private AnnotationTreeNode annotationTreeNode = null;
-
+	/**
+	 * Reference to the original annotation (if any)
+	 */
+	protected Annotation annotation;
+	
+	/**
+	 * Reference to the annotation edit form
+	 */
+	protected NewAnnotationEditForm editForm;
+	
+	/**
+	 * Error messages
+	 */
 	protected I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 	
-	public BaseClickHandler(AnnotationPanel annotationComposite, AnnotationTreeNode annotationTreeNode) {
-		this.annotationComposite=annotationComposite;
-		this.annotationTreeNode=annotationTreeNode;
-	}
-	
-	/**
-	 * returns the corresponding tree node (the tree node on which
-	 * the button was clicked).
-	 * 
-	 * @return image annotation tree node
-	 */
-	protected AnnotationTreeNode getAnnotationTreeNode() {
-		return annotationTreeNode;
-	}
-
-	/**
-	 * returns the annotation composite. used to add and remove tree nodes
-	 * and to update the annotation tree.
-	 * 
-	 * @return image annotation composite
-	 */
-	protected AnnotationPanel getTreeViewComposite() {
-		return annotationComposite;
+	public AbstractClickHandler(NewAnnotationPanel panel,
+			Annotation annotation, NewAnnotationEditForm editForm) {
+		this.panel = panel;
+		this.annotation = annotation;
+		this.editForm = editForm;
 	}
 		
 	/**
-	 * returns a reference to the image annotation service used by all click
+	 * Returns a reference to the annotation service used by all click
 	 * listeners to create/update/delete annotations.
-	 *  
-	 * @return ImageAnnotationServiceAsync reference to the image annotation service
+	 * @return AnnotationServiceAsync the annotation service
 	 */
 	protected AnnotationServiceAsync getAnnotationService() {
-		AnnotationServiceAsync annotationService = 
-			(AnnotationServiceAsync) GWT.create(AnnotationService.class);
-		return annotationService;
+		return (AnnotationServiceAsync) GWT.create(AnnotationService.class);
 	}
 	
-	/**
-	 * add the active fragment to the given annotation
-	 * 
-	 * @param annotation
-	 */
-	protected void addFragment(Annotation annotation) {
-		MediaViewer imageComposite=annotationComposite.getImageComposite();
-		MediaFragment fragment = imageComposite.getActiveMediaFragment();
-		if(fragment == null) {
-			// fragment = new MediaFragment(new VoidShape());
-		}
-		annotation.setFragment(fragment);
-	}
 	/**
 	 * handle failures. in case of a conflict reload the application. 
 	 * 
@@ -112,7 +90,7 @@ public abstract class BaseClickHandler implements ClickHandler {
 		} catch (RESTfulServiceException rse) {
 			if(rse.isConflict()) {
 				MessageBox.error(errorMessages.error(), errorMessages.annotationConflict());
-				annotationComposite.refreshTree();								
+				panel.refreshTree();								
 			} else {
 				MessageBox.error(errorMessages.error(), defaultMessage);
 			}

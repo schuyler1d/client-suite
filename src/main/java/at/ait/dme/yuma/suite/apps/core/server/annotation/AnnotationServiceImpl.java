@@ -65,10 +65,10 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 	}
 
 	@Override
-	public Annotation updateAnnotation(Annotation annotation) 
+	public Annotation updateAnnotation(String id, Annotation annotation) 
 			throws AnnotationServiceException {
 
-		return new AnnotationManager(getThreadLocalRequest()).updateAnnotation(annotation);
+		return new AnnotationManager(getThreadLocalRequest()).updateAnnotation(id, annotation);
 	}
 	
 	@Override

@@ -21,8 +21,8 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,29 +33,25 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * 
  * @author Christian Sadilek
  */
-public class DeleteClickHandler extends BaseClickHandler {
-	
-	public DeleteClickHandler(AnnotationPanel annotationComposite,
-			AnnotationTreeNode annotationTreeNode) {
-		super(annotationComposite, annotationTreeNode);
+public class DeleteClickHandler extends AbstractClickHandler {
+
+	public DeleteClickHandler(NewAnnotationPanel panel, Annotation annotation) {
+		super(panel, annotation, null);
 	}
 	
 	public void onClick(ClickEvent event) {
-		final AnnotationPanel annotationComposite=getTreeViewComposite();
-		annotationComposite.enableLoadingImage();				
+		panel.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
-		
-		// YumaImageClient.authenticateAs(getAnnotationTreeNode().getAnnotation().getCreatedBy());
-		
-		getAnnotationService().deleteAnnotation(getAnnotationTreeNode().getAnnotationId(),
+
+		getAnnotationService().deleteAnnotation(annotation.getId(),
 			new AsyncCallback<Void>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToDeleteAnnotation());
 				}
 
 				public void onSuccess(Void result) {
-					annotationComposite.removeAnnotation(getAnnotationTreeNode());
-					annotationComposite.disableLoadingImage();
+					panel.removeAnnotation(annotation);
+					panel.disableLoadingImage();
 				}
 			});
 	}	

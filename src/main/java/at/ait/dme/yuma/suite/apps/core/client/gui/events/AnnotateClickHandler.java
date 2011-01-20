@@ -27,18 +27,26 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 /**
- * click listener to hide the annotation form 
+ * click listener to show the annotation form for annotation creation and update
  * 
  * @author Christian Sadilek
  */
-public class CancelClickHandler extends AbstractClickHandler {
+public class AnnotateClickHandler extends AbstractClickHandler {
 	
-	public CancelClickHandler(NewAnnotationPanel panel, Annotation annotation) {
+	private Annotation parent;
+	
+	private boolean showFragmentEditor;
+	
+	public AnnotateClickHandler(NewAnnotationPanel panel, Annotation annotation,
+			Annotation parent, boolean showFragmentEditor) {
+
 		super(panel, annotation, null);
+		this.parent = parent;
+		this.showFragmentEditor = showFragmentEditor;
 	}
-		
+	
 	public void onClick(ClickEvent event) {
-		panel.stopEditing(annotation, true);	
-	}	
+		panel.editAnnotation(annotation, parent, showFragmentEditor);
+	}
 	
 }

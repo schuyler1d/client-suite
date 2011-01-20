@@ -21,14 +21,9 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
-import java.util.Date;
-
-import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -39,62 +34,28 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * 
  * @author Christian Sadilek
  */
-public class UpdateClickHandler extends BaseClickHandler {
-	// reference to the annotation form to retrieve title and text 
-	private AnnotationEditForm annotationForm;
-	
-	public UpdateClickHandler(AnnotationPanel annotationComposite,
-			AnnotationTreeNode annotationTreeNode, AnnotationEditForm annotationForm) {
-		
-		super(annotationComposite, annotationTreeNode);
-		this.annotationForm = annotationForm;
-	}		
+public class UpdateClickHandler extends AbstractClickHandler {
+
+	public UpdateClickHandler(NewAnnotationPanel panel,
+			Annotation annotation, NewAnnotationEditForm editForm) {
+		super(panel, annotation,editForm);
+	}
 	
 	public void onClick(ClickEvent event) {
-		final AnnotationPanel annotationComposite=getTreeViewComposite();
-		annotationComposite.enableLoadingImage();				
+		panel.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
-
-		// create a new annotation
-		ImageAnnotation a = new ImageAnnotation();
 	
-		AnnotationTreeNode node = getAnnotationTreeNode();
-		if (node != null) {
-			a.setId(node.getAnnotationId());
-			a.setParentId(node.getParentAnnotationId());
-			a.setRootId(node.getAnnotationRootId());
-		}
-
-		a.setObjectUri(YUMACoreProperties.getObjectURI());
-		a.setCreatedBy(YUMACoreProperties.getUser());
-		a.setTitle(annotationForm.getAnnotationTitle());
-		a.setText(annotationForm.getAnnotationText());
-		a.setScope(annotationForm.getAnnotationScope());
-		a.setMediaType(getAnnotationTreeNode().getAnnotation().getMediaType());
-		a.setTags(annotationForm.getSemanticTags());
-		a.setCreated(getAnnotationTreeNode().getAnnotation().getCreated());
-		a.setLastModified(new Date());
-		
-		// create the fragment if necessary
-		addFragment(a);
-		
-		// update the annotation on the server
-		getAnnotationService().updateAnnotation(a,
+		getAnnotationService().updateAnnotation(annotation.getId(), editForm.getAnnotation(),
 			new AsyncCallback<Annotation>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToSaveAnnotation());				
 				}
 
-				// on success update the annotation in the tree
 				public void onSuccess(Annotation result) {
-					if (getAnnotationTreeNode() != null)
-						result.setReplies(getAnnotationTreeNode().getAnnotation().getReplies());
-
-					annotationComposite.removeAnnotation(getAnnotationTreeNode());
-					annotationComposite.addAnnotation((ImageAnnotation) result, getAnnotationTreeNode().
-							getParentAnnotation());
-					annotationComposite.hideAnnotationForm(getAnnotationTreeNode(), false);
-					annotationComposite.disableLoadingImage();
+					panel.removeAnnotation(annotation);
+					panel.stopEditing(annotation, false);
+					panel.addAnnotation(result);
+					panel.disableLoadingImage();
 				}
 			}
 		);

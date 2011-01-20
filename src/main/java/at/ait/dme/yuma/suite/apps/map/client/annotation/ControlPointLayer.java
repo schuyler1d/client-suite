@@ -139,7 +139,7 @@ public class ControlPointLayer extends AnnotationLayer {
 		if (editedFeature != null) {
 			Point p = (Point) editedFeature.getGeometry();
 			return new GeoPoint(
-					controlPointForm.getAnnotationTitle(),
+					controlPointForm.getAnnotation().getTitle(),
 					Integer.valueOf((int)p.getX()), 
 					Integer.valueOf((int)p.getY()), 
 					controlPointForm.getLat(),

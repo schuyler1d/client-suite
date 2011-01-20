@@ -111,19 +111,19 @@ public class AnnotationManager implements AnnotationService {
 	}
 	
 	@Override
-	public Annotation updateAnnotation(Annotation annotation) 
+	public Annotation updateAnnotation(String id, Annotation annotation) 
 			throws AnnotationServiceException {
 		
-		String annotationId = null;
+		String newId;
 		try {
 			// Call the Annotation Server
 			ClientResponse<String> response = getAnnotationServer()
-				.updateAnnotation(encode(annotation.getId()), JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
+				.updateAnnotation(encode(id), JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
 			
 			// Check response			
 			if(response.getStatus() != HttpResponseCodes.SC_OK)
 				throw new AnnotationServiceException(response.getStatus());	
-			annotationId = response.getEntity();
+			newId = response.getEntity();
 			
 			// Remove from cache
 			annotationCache.remove(annotation.getObjectUri());
@@ -135,7 +135,7 @@ public class AnnotationManager implements AnnotationService {
 			throw new AnnotationServiceException(e.getMessage());
 		} 
 		
-		annotation.setId(annotationId);
+		annotation.setId(newId);
 		return annotation;
 	}
 	

@@ -40,7 +40,7 @@ public interface AnnotationServiceAsync {
 	public void createAnnotation(Annotation annotation, 
 			AsyncCallback<Annotation> callback);
 
-	public void updateAnnotation(Annotation annotation, 
+	public void updateAnnotation(String id, Annotation annotation, 
 			AsyncCallback<Annotation> callback);
 
 	public void deleteAnnotation(String annotationId, 

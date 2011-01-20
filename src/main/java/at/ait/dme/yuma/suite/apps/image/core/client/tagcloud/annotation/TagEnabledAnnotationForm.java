@@ -21,29 +21,16 @@
 
 package at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation;
 
-import java.util.ArrayList;
-
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.InlineHTML;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.server.enrichment.SemanticEnrichmentService;
-import at.ait.dme.yuma.suite.apps.core.client.server.enrichment.SemanticEnrichmentServiceAsync;
-import at.ait.dme.yuma.suite.apps.core.client.server.enrichment.SemanticTagSuggestions;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.StandardImageAnnotationForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.AnnotationLayer;
@@ -58,11 +45,6 @@ import at.ait.dme.yuma.suite.apps.map.client.annotation.AnnotationLayer;
 public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	
 	/**
-	 * Tag font size
-	 */
-	private static final int TAG_FONT_SIZE= 24;
-	
-	/**
 	 * Reference to the tag cloud
 	 */
 	private TagCloud tagCloud;
@@ -70,7 +52,7 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	/**
 	 * Reference to the annotationComposite
 	 */
-	private AnnotationPanel annotationComposite;
+	private NewAnnotationPanel panel;
 	
 	/**
 	 * The FlowPanel displaying the current tags  
@@ -81,87 +63,33 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 	 * The tags for this annotation
 	 */
 	public HashMap<SemanticTag, Widget> tags = new HashMap<SemanticTag, Widget>(); 
-	
-	/**
-	 * Semantic enrichment service
-	 */
-	private SemanticEnrichmentServiceAsync enrichmentService = 
-		(SemanticEnrichmentServiceAsync) GWT.create(SemanticEnrichmentService.class);
-	
-	/**
-	 * Enrichment service type constant
-	 */
-	private static final String WHICH_ENRICHMENT_SERVICE = 
-		SemanticEnrichmentService.OPENCALAIS_DBPEDIA_LOOKUP; 
 
 	public TagEnabledAnnotationForm(TagCloud tagCloud) {
+		super();
 		this.tagCloud = tagCloud;
 	}
 	
-	public TagEnabledAnnotationForm(AnnotationPanel annotationComposite,
-			TagCloud tagCloud, AnnotationTreeNode annotationTreeNode,
-			boolean fragmentAnnotation, boolean update) {
+	public TagEnabledAnnotationForm(NewAnnotationPanel panel,
+			Annotation annotation, Annotation parent, TagCloud tagCloud) {
 	
-		super(annotationComposite, annotationTreeNode, fragmentAnnotation, update);
+		super(panel, annotation, parent);
 		
-		this.annotationComposite = annotationComposite;
+		this.panel = panel;
 		this.tagCloud = tagCloud;
 	
-		((HasTagCloud)annotationComposite.getImageComposite()).setAnnotationEditForm(this);
+		((HasTagCloud) panel.getMediaViewer()).setAnnotationEditForm(this);
 		
-		if (update && annotationTreeNode.getAnnotation().hasTags()) {
-			for (SemanticTag t : annotationTreeNode.getAnnotation().getTags()) {
+		if (annotation != null && annotation.hasTags()) {
+			for (SemanticTag t : annotation.getTags()) {
 				addTag(t);
 			}
 		}
 	}
 	
 	@Override
-	public AnnotationEditForm createNew(AnnotationPanel annotationComposite,
-			AnnotationTreeNode annotationTreeNode, boolean fragmentAnnotation, boolean update) {
-		return new TagEnabledAnnotationForm(annotationComposite, tagCloud, annotationTreeNode,
-				fragmentAnnotation, update);
+	public NewAnnotationEditForm newInstance(NewAnnotationPanel panel, Annotation annotation, Annotation parent) {
+		return new TagEnabledAnnotationForm(panel, annotation, parent, tagCloud);
 	}
-	
-	@Override
-	protected Panel createLinksPanel(boolean update, AnnotationTreeNode annotationTreeNode) {
-		tagPanel = new FlowPanel();
-		tagPanel.setStyleName("imageAnnotation-taglist");
-		return tagPanel;
-	}
-	
-	@Override
-	protected Panel createSemanticLinksPanel(boolean update, AnnotationTreeNode annotationTreeNode) {
-		return new FlowPanel();
-	}
-	
-	@Override
-	protected KeyDownHandler createKeyDownHandler(AnnotationPanel annotationComposite) {
-		return new KeyDownHandler() {
-			@Override
-			public void onKeyDown(KeyDownEvent event) {
-	            if (event.getNativeKeyCode() == ' ' || event.getNativeKeyCode() == KeyCodes.KEY_BACKSPACE) {
-	            	enrichmentService.getTagSuggestions(textArea.getValue(), WHICH_ENRICHMENT_SERVICE, 
-	            			new AsyncCallback<Collection<SemanticTagSuggestions>>() {
-						@Override
-						public void onSuccess(Collection<SemanticTagSuggestions> result) {
-							if (result.size() > 0 && !tagCloud.isVisible()) tagCloud.show();
-							for (SemanticTagSuggestions group : result) {
-								for (SemanticTag tag : group.getAmbiguousTags()) {
-									tagCloud.addTag(tag, TAG_FONT_SIZE, "#FFD77D");
-								}
-							}
-						}
-						
-						@Override
-						public void onFailure(Throwable t) {
-							// Do nothing...
-						}
-					});
-	            }
-			}
-		};
-	}	
 	
 	@Override
 	public void addTag(SemanticTag tag) {
@@ -172,19 +100,14 @@ public class TagEnabledAnnotationForm extends StandardImageAnnotationForm {
 		);
 		tagPanel.add(span);
 		tags.put(tag, span);
-		annotationComposite.layout();
+		panel.layout();
 	}
 	
 	@Override
 	public void removeTag(SemanticTag tag) {
 		tagPanel.remove(tags.get(tag));
 		tags.remove(tag);
-		annotationComposite.layout();
-	}
-	
-	@Override
-	public List<SemanticTag> getSemanticTags() {
-	    return new ArrayList<SemanticTag>(tags.keySet());
+		panel.layout();
 	}
 
 }

@@ -32,8 +32,7 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.gui.events.CreateClickHandler;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.NewAnnotationPanel;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 
 /**
@@ -42,7 +41,7 @@ import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class ControlPointComposite extends AnnotationPanel {
+public class ControlPointComposite extends NewAnnotationPanel {
 	
 	/**
 	 * 'Create control point' button
@@ -52,7 +51,7 @@ public class ControlPointComposite extends AnnotationPanel {
 	public ControlPointComposite(TileBasedImageViewer imageComposite, 
 			ControlPointForm imageAnnotationForm, Set<String> shapeTypes)   {
 	
-		super(imageComposite, imageAnnotationForm, shapeTypes);
+		super(imageComposite, imageAnnotationForm); //, shapeTypes);
 	}
 
 	@Override
@@ -83,7 +82,7 @@ public class ControlPointComposite extends AnnotationPanel {
 		// 'Create Control Point' button
 		createButton = new PushButton(YUMACoreProperties.getConstants().actionCreateCP());
 		createButton.setStyleName("imageAnnotation-button");
-		createButton.addClickHandler(new CreateClickHandler(this,null,false,false));
+		// createButton.addClickHandler(new CreateClickHandler(this,null,false,false));
 		createButton.setEnabled(!YUMACoreProperties.getUser().isEmpty());
 		buttons.add(createButton);
 		
@@ -93,7 +92,7 @@ public class ControlPointComposite extends AnnotationPanel {
 		header.add(buttons);
 		
 		// Placeholder for the annotation form 
-		header.add(annotationFormPanel);
+		header.add(editFormPanel);
 		
 		return header;
 	}
