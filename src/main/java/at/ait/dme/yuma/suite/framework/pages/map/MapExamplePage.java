@@ -39,7 +39,7 @@ public class MapExamplePage extends BaseExamplePage {
 		List<MapExampleLink> links = new ArrayList<MapExampleLink>();
 		links.add(new MapExampleLink(
 				"Map of Upper Austria",
-				"map?user=csa1980&objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
+				"../map?user=csa1980&objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
 		));
 		
 		add(new ListView<MapExampleLink>("links", links) {
