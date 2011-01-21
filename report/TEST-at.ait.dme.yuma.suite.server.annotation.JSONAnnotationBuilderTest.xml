@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="n309ssdt04" name="at.ait.dme.yuma.suite.server.annotation.JSONAnnotationBuilderTest" tests="2" time="0.172" timestamp="2011-01-21T14:18:24">
+  <properties>
+    <property name="java.vendor" value="Sun Microsystems Inc."></property>
+    <property name="sun.java.launcher" value="SUN_STANDARD"></property>
+    <property name="eclipse.pdebuild.templates" value="/C:/Eclipse-3.6/plugins/org.eclipse.pde.build_3.6.1.R36x_v20100823/templates/"></property>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"></property>
+    <property name="os.name" value="Windows XP"></property>
+    <property name="sun.boot.class.path" value="C:\Programme\Java\jdk1.6.0_14\jre\lib\resources.jar;C:\Programme\Java\jdk1.6.0_14\jre\lib\rt.jar;C:\Programme\Java\jdk1.6.0_14\jre\lib\sunrsasign.jar;C:\Programme\Java\jdk1.6.0_14\jre\lib\jsse.jar;C:\Programme\Java\jdk1.6.0_14\jre\lib\jce.jar;C:\Programme\Java\jdk1.6.0_14\jre\lib\charsets.jar;C:\Programme\Java\jdk1.6.0_14\jre\classes"></property>
+    <property name="sun.desktop" value="windows"></property>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="ant.home" value="C:\Ant"></property>
+    <property name="java.runtime.version" value="1.6.0_14-b08"></property>
+    <property name="user.name" value="SimonR"></property>
+    <property name="image.module.name" value="at.ait.dme.yuma.suite.apps.image.Image"></property>
+    <property name="test.resources.dir" value="C:\Workspaces\Yuma\client-suite\src\test\resources"></property>
+    <property name="gwt.war.dir" value="C:\Workspaces\Yuma\client-suite\src\main\webapp"></property>
+    <property name="user.language" value="de"></property>
+    <property name="sun.boot.library.path" value="C:\Programme\Java\jdk1.6.0_14\jre\bin"></property>
+    <property name="compile.lib.dir" value="C:\Workspaces\Yuma\client-suite\lib"></property>
+    <property name="ant.project.name" value="yuma-suite"></property>
+    <property name="java.version" value="1.6.0_14"></property>
+    <property name="user.timezone" value=""></property>
+    <property name="sun.arch.data.model" value="32"></property>
+    <property name="java.endorsed.dirs" value="C:\Programme\Java\jdk1.6.0_14\jre\lib\endorsed"></property>
+    <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"></property>
+    <property name="sun.jnu.encoding" value="Cp1252"></property>
+    <property name="file.encoding.pkg" value="sun.io"></property>
+    <property name="file.separator" value="\"></property>
+    <property name="java.specification.name" value="Java Platform API Specification"></property>
+    <property name="classes.dir" value="C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\classes"></property>
+    <property name="java.class.version" value="50.0"></property>
+    <property name="user.country" value="AT"></property>
+    <property name="java.home" value="C:\Programme\Java\jdk1.6.0_14\jre"></property>
+    <property name="license" value="/*
+ * Copyright 2008-2010 Austrian Institute of Technology
+ *
+ * Licensed under the EUPL, Version 1.1 or - as soon they
+ * will be approved by the European Commission - subsequent
+ * versions of the EUPL (the &quot;Licence&quot;);
+ * you may not use this work except in compliance with the
+ * Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * http://ec.europa.eu/idabc/eupl
+ *
+ * Unless required by applicable law or agreed to in
+ * writing, software distributed under the Licence is
+ * distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied.
+ * See the Licence for the specific language governing
+ * permissions and limitations under the Licence.
+ */"></property>
+    <property name="java.vm.info" value="mixed mode"></property>
+    <property name="ant.file" value="C:\Workspaces\Yuma\client-suite\build.xml"></property>
+    <property name="os.version" value="5.1"></property>
+    <property name="deploy.lib.dir" value="C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib"></property>
+    <property name="path.separator" value=";"></property>
+    <property name="java.vm.version" value="14.0-b16"></property>
+    <property name="web.inf.dir" value="C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF"></property>
+    <property name="report.dir" value="C:\Workspaces\Yuma\client-suite\report"></property>
+    <property name="user.variant" value=""></property>
+    <property name="map.module.name" value="at.ait.dme.yuma.suite.apps.map.Map"></property>
+    <property name="ant.library.dir" value="C:\Ant\lib"></property>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"></property>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"></property>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"></property>
+    <property name="eclipse.pdebuild.scripts" value="/C:/Eclipse-3.6/plugins/org.eclipse.pde.build_3.6.1.R36x_v20100823/scripts/"></property>
+    <property name="user.home" value="C:\Dokumente und Einstellungen\SimonR"></property>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."></property>
+    <property name="test.dir" value="C:\Workspaces\Yuma\client-suite\src\test\java"></property>
+    <property name="java.library.path" value="C:\Programme\Java\jdk1.6.0_14\jre\bin;.;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Programme/Java/jre6/bin/client;C:/Programme/Java/jre6/bin;C:/Programme/Java/jre6/lib/i386;C:\Programme\MiKTeX 2.9\miktex\bin;C:\Ruby192\bin;C:\Programme\ImageMagick-6.6.3-Q8;c:\programme\graphicsmagick-1.3.12-q8;C:\Programme\ImageMagick-6.6.3-Q16;c:\grails-1.3.3\bin;C:\Programme\MiKTeX 2.8\miktex\bin;C:\Programme\CollabNet Subversion Client;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;http://s3mail.d03.arc.local;C:\Programme\SysInternals;C:\Programme\TreeSize;C:\Programme\Intel\DMIX;C:\Programme\NTRU Cryptosystems\NTRU TCG Software Stack\bin\;C:\Programme\Wave Systems Corp\Gemalto\Access Client\v5\;C:\Programme\Intel\WiFi\bin\;C:\Programme\QuickTime\QTSystem\;C:\PlanetsIF\Siard2Dist;C:\PlanetsIF\ConvMdb;C:\apache-maven-2.2.1\bin;C:\Qt\4.5.3\bin;C:\Qt\4.5.3\lib;C:\MinGW\bin;C:\Programme\GnuWin32\bin;C:\OSGeo4W\apps\gdal-16\bin;C:\Downloads\cdrtools;C:\play-1.1;C:\Sun\SDK\jdk\bin;C:\Ant\bin;"></property>
+    <property name="java.vendor.url" value="http://java.sun.com/"></property>
+    <property name="ant.file.yuma-suite" value="C:\Workspaces\Yuma\client-suite\build.xml"></property>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."></property>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"></property>
+    <property name="java.class.path" value="C:\Workspaces\Yuma\client-suite\src\main\java;C:\Workspaces\Yuma\client-suite\src\test\java;C:\Workspaces\Yuma\client-suite\src\test\resources;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\classes;C:\Workspaces\Yuma\client-suite\lib\gwt-beans-binding-0.3.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-dev.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-dnd-3.0.0.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-maps.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-mosaic-0.4.0-rc4.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-openlayers-wrapper.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-user.jar;C:\Workspaces\Yuma\client-suite\lib\gwt-widgets-0.2.0.jar;C:\Workspaces\Yuma\client-suite\lib\gwtx-1.5.4-SNAPSHOT.jar;C:\Workspaces\Yuma\client-suite\lib\junit-4.4.jar;C:\Workspaces\Yuma\client-suite\lib\webserver-1.3.3.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\clhm-20090616.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\commons-httpclient-3.1.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\gwt-servlet.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\im4java-1.1.0.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\jaxrs-api-2.0.1.GA.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\jdom.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\json_simple-1.1.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\log4j-1.2.15.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\magicktiler-lib-0.9.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\resteasy-jaxrs-2.0.1.GA.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\slf4j-api-1.6.1.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\slf4j-log4j12-1.6.1.jar;C:\Workspaces\Yuma\client-suite\src\main\webapp\WEB-INF\lib\wicket-1.4.14.jar;C:\Workspaces\Yuma\client-suite;C:\Programme\Java\jre6\lib\ext\QTJava.zip;C:\Programme\Sun Microsystems\Java Advanced Imaging 1.1.3\lib;C:\Ant\lib\ant-launcher.jar;C:\Ant\lib\ant.jar;C:\Ant\lib\ant-junit.jar"></property>
+    <property name="ant.version" value="Apache Ant version 1.7.1 compiled on June 27 2008"></property>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"></property>
+    <property name="java.vm.specification.version" value="1.0"></property>
+    <property name="sun.cpu.endian" value="little"></property>
+    <property name="sun.os.patch.level" value="Service Pack 3"></property>
+    <property name="eclipse.pdebuild.home" value="/C:/Eclipse-3.6/plugins/org.eclipse.pde.build_3.6.1.R36x_v20100823/./"></property>
+    <property name="java.io.tmpdir" value="C:\DOKUME~1\SimonR\LOKALE~1\Temp\"></property>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"></property>
+    <property name="src.resources.dir" value="C:\Workspaces\Yuma\client-suite\src\main\resources"></property>
+    <property name="os.arch" value="x86"></property>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"></property>
+    <property name="java.ext.dirs" value="C:\Programme\Java\jdk1.6.0_14\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"></property>
+    <property name="user.dir" value="C:\Workspaces\Yuma\client-suite"></property>
+    <property name="line.separator" value="
+"></property>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"></property>
+    <property name="basedir" value="C:\Workspaces\Yuma\client-suite"></property>
+    <property name="ant.java.version" value="1.6"></property>
+    <property name="war.filename" value="yuma-suite.war"></property>
+    <property name="ant.core.lib" value="C:\Ant\lib\ant.jar"></property>
+    <property name="file.encoding" value="Cp1252"></property>
+    <property name="java.specification.version" value="1.6"></property>
+    <property name="src.dir" value="C:\Workspaces\Yuma\client-suite\src\main\java"></property>
+  </properties>
+  <testcase classname="at.ait.dme.yuma.suite.server.annotation.JSONAnnotationBuilderTest" name="testJSONParsing" time="0.109"></testcase>
+  <testcase classname="at.ait.dme.yuma.suite.server.annotation.JSONAnnotationBuilderTest" name="testJSONSerialization" time="0.0"></testcase>
+  <system-out><![CDATA[[{"id":null,"root-id":null,"parent-id":null,"text":"The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, capital of Portugal, to the municipality of Almada on the left bank of the Tagus river. It was inaugurated on August 6, 1966 and a train platform was added in 1999. It is often compared to the Golden Gate Bridge in San Francisco, USA, due to their similarities and same construction company. With a total length of 2.277 m, it is the 19th largest suspension bridge in the world. The upper platform carries six car lanes, the lower platform two train tracks. Until 1974 the bridge was named Salazar Bridge.","title":"Ponte 25 de Abril","scope":"PUBLIC","last-modified":1295619504263,"created":1295619504263,"created-by":"rsimon","media-type":"IMAGE","object-uri":"object-lissabon"}]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

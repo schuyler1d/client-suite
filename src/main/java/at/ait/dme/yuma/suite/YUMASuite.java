@@ -27,10 +27,10 @@ import org.apache.wicket.Response;
 import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import at.ait.dme.yuma.suite.pages.image.ImageExamplePage;
-import at.ait.dme.yuma.suite.pages.image.ImageHostPage;
-import at.ait.dme.yuma.suite.pages.map.MapExamplePage;
-import at.ait.dme.yuma.suite.pages.map.MapHostPage;
+import at.ait.dme.yuma.suite.framework.pages.image.ImageExamplePage;
+import at.ait.dme.yuma.suite.framework.pages.image.ImageHostPage;
+import at.ait.dme.yuma.suite.framework.pages.map.MapExamplePage;
+import at.ait.dme.yuma.suite.framework.pages.map.MapHostPage;
 
 public class YUMASuite extends WebApplication {    
     

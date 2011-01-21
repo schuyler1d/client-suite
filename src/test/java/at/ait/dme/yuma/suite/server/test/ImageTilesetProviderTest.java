@@ -143,7 +143,7 @@ public class ImageTilesetProviderTest {
 		assertEquals(result.getZoomLevels(), 4);
 		assertEquals(result.getWidth(), 1414);
 		assertEquals(result.getHeight(), 1100);				
-		assertEquals(result.getUrl(), "tiles/"+
+		assertEquals(result.getUrl(), "tilesets/"+
 				TilesetGenerator.createTilesetPath(testImageUrl)+"/");
 				
 	}
@@ -175,7 +175,7 @@ public class ImageTilesetProviderTest {
 							assertEquals(result.getZoomLevels(), 4);
 							assertEquals(result.getWidth(), 1414);
 							assertEquals(result.getHeight(), 1100);				
-							assertEquals(result.getUrl(), "tiles/"+
+							assertEquals(result.getUrl(), "tilesets/"+
 									TilesetGenerator.createTilesetPath(testImageUrl)+"/");						
 						} catch(Throwable t) {
 							failed=true;

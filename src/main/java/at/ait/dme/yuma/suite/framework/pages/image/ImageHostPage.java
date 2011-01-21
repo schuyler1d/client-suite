@@ -19,35 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite;
+package at.ait.dme.yuma.suite.framework.pages.image;
 
-import org.apache.wicket.Request;
-import org.apache.wicket.Session;
-import org.apache.wicket.protocol.http.WebSession;
+import org.apache.wicket.PageParameters;
+import org.apache.wicket.markup.html.JavascriptPackageResource;
 
-import at.ait.dme.yuma.suite.apps.core.client.User;
+import at.ait.dme.yuma.suite.framework.pages.BaseHostPage;
 
-public final class YUMAWebSession extends WebSession {
+public class ImageHostPage extends BaseHostPage {
 	
-	private static final long serialVersionUID = -70708036400304230L;
-
-	private User user;
-
-	public YUMAWebSession(Request request) {
-		super(request);
+	public ImageHostPage(final PageParameters parameters) {
+		super("YUMA Image", "yuma.image/yuma.image.nocache.js", parameters);
+		
+		// Add required JS libaries
+		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
+		add(JavascriptPackageResource.getHeaderContribution("js/wz_jsgraphics.js"));		
+		
+		// TODO redirect to 'examples' if params are insufficient
 	}
 
-	public final User getUser() {
-		return user;
-	}
-
-	public final void setUser(User user) {
-		this.user = user;
-		this.bind();
-	}
-
-	public static YUMAWebSession get() {
-		return (YUMAWebSession) Session.get();
-	}
-	
 }
