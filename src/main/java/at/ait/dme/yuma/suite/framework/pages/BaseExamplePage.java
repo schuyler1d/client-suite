@@ -38,7 +38,8 @@ public abstract class BaseExamplePage extends WebPage {
 		
 		// Make sure gwt.codesvr attribute is forwarded in development mode
 		if (YUMASuite.get().getConfigurationType()
-				.equals(WebApplication.DEVELOPMENT))
+				.equals(WebApplication.DEVELOPMENT) && !parameters.getString("gwt.codesvr").isEmpty())
+			
 			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
 	}
 	
