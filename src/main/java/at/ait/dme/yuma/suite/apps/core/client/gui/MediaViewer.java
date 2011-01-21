@@ -26,6 +26,7 @@ import at.ait.dme.yuma.suite.apps.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.HasAnnotationSelectionHandlers;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 
 import com.google.gwt.event.dom.client.HasLoadHandlers;
 import com.google.gwt.event.shared.HandlerManager;
@@ -78,6 +79,13 @@ public abstract class MediaViewer extends Composite implements
 	 * @param annotation the annotation
 	 */
 	public abstract void editAnnotation(Annotation annotation);
+	
+	/**
+	 * Sets a reference to the edit form, so that the media viewer can update
+	 * the form during editing
+	 * @param editForm the edit form
+	 */
+	public abstract void setAnnotationEditForm(AnnotationEditForm editForm);
 	
 	/**
 	 * Stops editing mode (for all annotations)

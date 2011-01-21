@@ -47,11 +47,11 @@ import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagSelectionListener;
-import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
 import at.ait.dme.yuma.suite.apps.map.client.MapUtils;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderService;
@@ -98,7 +98,7 @@ public class AnnotationLayer {
 	/**
 	 * Reference to the Annotation Form
 	 */
-	private TagEnabledAnnotationForm annotationForm;
+	private ImageAnnotationEditForm annotationForm;
 	
 	/**
 	 * OpenLayers vector layers
@@ -472,7 +472,7 @@ public class AnnotationLayer {
 		addGeonamesSuggestions(Bounds.create(nw.getLon(), se.getLat(), se.getLon(), nw.getLat()));
 	}
 	
-	public void setAnnotationForm(TagEnabledAnnotationForm annotationForm) {
+	public void setAnnotationForm(ImageAnnotationEditForm annotationForm) {
 		this.annotationForm = annotationForm;
 	}
 	

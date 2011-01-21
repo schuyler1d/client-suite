@@ -155,12 +155,7 @@ public class ControlPointForm extends AnnotationEditForm {
 		form.setStyleName("imageAnnotation-form");		
 		initWidget(form);
 		
-		controlPointLayer.setControlPointForm(this);
-		if (annotation != null) {
-			controlPointLayer.showActiveFragmentPanel(((ImageAnnotation)annotation.getAnnotation()), false);
-		} else {
-			controlPointLayer.showActiveFragmentPanel(null, false);
-		}
+		controlPointLayer.showActiveFragmentPanel(((ImageAnnotation)annotation.getAnnotation()), false);
 	}
 	
 	private HorizontalPanel createButtonsPanel(AnnotationPanel panel, Annotation annotation) {

@@ -27,14 +27,14 @@ import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.LoadingPopup;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageRect;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
-import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.HasTagCloud;
-import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.AnnotationLayer;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.ControlPointLayer;
 import at.ait.dme.yuma.suite.apps.map.client.explore.KMLLayer;
@@ -58,7 +58,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
  * 
  * @author Rainer Simon
  */
-public class TileBasedImageViewer extends MediaViewer implements HasTagCloud {
+public class TileBasedImageViewer extends MediaViewer {
 		
 	/**
 	 * The main GUI panel
@@ -153,8 +153,8 @@ public class TileBasedImageViewer extends MediaViewer implements HasTagCloud {
 	}
 	
 	@Override 
-	public void setAnnotationEditForm(TagEnabledAnnotationForm annotationForm) {
-		lAnnotation.setAnnotationForm(annotationForm);
+	public void setAnnotationEditForm(AnnotationEditForm editForm) {
+		lAnnotation.setAnnotationForm((ImageAnnotationEditForm) editForm);
 	}
 	
 	public void showAnnotationLayer() {

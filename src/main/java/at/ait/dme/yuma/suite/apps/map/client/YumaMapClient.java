@@ -34,9 +34,9 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSel
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthService;
 import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthServiceAsync;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.gui.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapeTypeRegistry;
-import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.ControlPointComposite;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.ControlPointForm;
@@ -142,8 +142,9 @@ public class YumaMapClient implements EntryPoint {
 		AnnotationPanel annComposite;
 
 		annComposite = new AnnotationPanel(mapViewer, 
-				new TagEnabledAnnotationForm(((TileBasedImageViewer)mapViewer).getTagCloud(), MediaType.MAP));
-				// ShapeTypeRegistry.allTypes());			
+				new ImageAnnotationEditForm(
+						MediaType.MAP,
+						((TileBasedImageViewer)mapViewer).getTagCloud()));			
 
 		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override

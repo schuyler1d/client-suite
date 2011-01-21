@@ -35,6 +35,7 @@ import at.ait.dme.yuma.suite.apps.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Color;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Ellipse;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
@@ -42,8 +43,6 @@ import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapeControlPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapePanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagSelectionListener;
-import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.HasTagCloud;
-import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.annotation.TagEnabledAnnotationForm;
 
 import com.allen_sauer.gwt.dnd.client.DragContext;
 import com.allen_sauer.gwt.dnd.client.PickupDragController;
@@ -75,7 +74,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  * 
  * @author Christian Sadilek
  */
-public class ImageViewer extends MediaViewer implements HasTagCloud {
+public class ImageViewer extends MediaViewer {
 	private static final int IMAGE_OFFSET_LEFT = 11;
 	private static final int IMAGE_OFFSET_TOP = 10;
 	private static final String PX = "px";
@@ -141,7 +140,7 @@ public class ImageViewer extends MediaViewer implements HasTagCloud {
 	/**
 	 * Reference to the Annotation Form
 	 */
-	private TagEnabledAnnotationForm annotationForm;
+	private AnnotationEditForm editForm;
 	
 	/**
 	 * constructs a new image composite for the provided image url.
@@ -274,11 +273,11 @@ public class ImageViewer extends MediaViewer implements HasTagCloud {
 			tagCloud = new TagCloud(initialImageWidth, initialImageHeight, RootPanel.getBodyElement(), new TagSelectionListener() {
 				@Override
 				public void onTagSelected(SemanticTag tag, boolean selected) {
-					if (annotationForm != null) {
+					if (editForm != null) {
 						if (selected) {
-							annotationForm.addTag(tag);
+							editForm.addTag(tag);
 						} else {
-							annotationForm.removeTag(tag);
+							editForm.removeTag(tag);
 						}
 					}
 				}
@@ -290,8 +289,8 @@ public class ImageViewer extends MediaViewer implements HasTagCloud {
 	}
 	
 	@Override
-	public void setAnnotationEditForm(TagEnabledAnnotationForm editForm) {
-		this.annotationForm = editForm;
+	public void setAnnotationEditForm(AnnotationEditForm editForm) {
+		this.editForm = editForm;
 	}
 	
 	/**

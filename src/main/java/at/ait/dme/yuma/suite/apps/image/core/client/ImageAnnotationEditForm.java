@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.apps.image.core.client;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
 
 import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
@@ -37,10 +37,13 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.events.UpdateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.PushButton;
@@ -48,51 +51,55 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
- * form to create and update annotations
+ * Image-specific sub-class of the AnnotationEdit form.
  * 
  * @author Christian Sadilek
- * @author Manuel Gay
  * @author Rainer Simon
  */
-public class StandardImageAnnotationForm extends AnnotationEditForm {
-	
-	public class Checkbox extends com.google.gwt.user.client.ui.CheckBox {
-	    
-	    private Object resource;
-
-	    public Object getResource() {
-	        return resource;
-	    }
-
-	    public void setResource(Object resource) {
-	        this.resource = resource;
-	    }
-	}
+public class ImageAnnotationEditForm extends AnnotationEditForm {
 	
 	private static final String SCOPE_RADIO_GROUP_NAME = "scope";
 	
 	private VerticalPanel formPanel = new VerticalPanel();
+
 	private TextBox titleTextBox = new TextBox();	
-	protected TextArea textArea = new TextArea();
+	private TextArea textArea = new TextArea();
+	
 	private RadioButton rdPublic, rdPrivate = null;
 
-	private List<SemanticTag> tags = new ArrayList<SemanticTag>();
-    private VerticalPanel linksStack;
+	public HashMap<SemanticTag, Widget> tags = new HashMap<SemanticTag, Widget>(); 
+	
+	private FlowPanel tagPanel;
     
-    protected MediaType mediaType;
+    private MediaType mediaType;
+    
+	private TagCloud tagCloud;
 
-    public StandardImageAnnotationForm(MediaType mediaType) {
+    public ImageAnnotationEditForm(MediaType mediaType, TagCloud tagCloud) {
     	super();
+    	
     	this.mediaType = mediaType;
+    	this.tagCloud = tagCloud;
     }
     
-	public StandardImageAnnotationForm(AnnotationPanel panel, AnnotationTreeNode annotation, 
-			AnnotationTreeNode parent, MediaType mediaType) {
+	public ImageAnnotationEditForm(AnnotationPanel panel, 
+			AnnotationTreeNode annotation, AnnotationTreeNode parent,
+			MediaType mediaType, TagCloud tagCloud) {
 		
 		super(panel, annotation, parent);
+		
 		this.mediaType = mediaType;
+		this.tagCloud = tagCloud;
+		
+		panel.getMediaViewer().setAnnotationEditForm(this);
+		if (annotation != null && annotation.getAnnotation().hasTags()) {
+			for (SemanticTag t : annotation.getAnnotation().getTags()) {
+				addTag(t);
+			}
+		}
 		
     	formPanel.setStyleName("imageAnnotation-form");		
 		formPanel.add(createTitlePanel());
@@ -107,7 +114,7 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 	public AnnotationEditForm newInstance(AnnotationPanel panel, AnnotationTreeNode annotation,
 			AnnotationTreeNode parent) {
 		
-		return new StandardImageAnnotationForm(panel, annotation, parent, mediaType);
+		return new ImageAnnotationEditForm(panel, annotation, parent, mediaType, tagCloud);
 	}
 
 	/**
@@ -196,10 +203,6 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 	    Label linksLabel = new Label(YUMACoreProperties.getConstants().annotationLinks());
 	    linksLabel.setStyleName("imageAnnotation-form-label");      
         linksPanel.add(linksLabel);
-	    
-        linksStack = new VerticalPanel();
-        linksStack.setStyleName("imageAnnotation-form-links");
-        linksPanel.add(linksStack);
         
         if(annotation != null && annotation.getAnnotation().hasTags()) {
             for(SemanticTag t: annotation.getAnnotation().getTags()) {
@@ -268,20 +271,29 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 			a.setScope(Scope.PRIVATE);
 		}
 		
-		a.setTags(tags);
+		a.setTags(new ArrayList<SemanticTag>(tags.keySet()));
 		a.setFragment(panel.getMediaViewer().getActiveMediaFragment());		
 		
 		return a;
 	}
 	
 	@Override
-	public void addTag(SemanticTag t) {
-	    this.tags.add(t);
+	public void addTag(SemanticTag tag) {
+		InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""
+				+ tag.getURI() + "\" title=\"" 
+				+ tag.getDescription() + "\">" 
+				+ tag.getLabel() + "</a>"
+		);
+		tagPanel.add(span);
+		tags.put(tag, span);
+		panel.layout();
 	}
 	
 	@Override
-	public void removeTag(SemanticTag t) {
-	    this.tags.remove(t);
+	public void removeTag(SemanticTag tag) {
+		tagPanel.remove(tags.get(tag));
+		tags.remove(tag);
+		panel.layout();
 	}
 
 }
