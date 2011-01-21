@@ -34,7 +34,7 @@ import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.core.server.annotation.JSONAnnotationHandler;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
 import at.ait.dme.yuma.suite.server.Data;
 
 public class JSONAnnotationBuilderTest {

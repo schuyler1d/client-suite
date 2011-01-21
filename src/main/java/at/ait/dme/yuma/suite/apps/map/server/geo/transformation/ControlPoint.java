@@ -21,9 +21,9 @@
 
 package at.ait.dme.yuma.suite.apps.map.server.geo.transformation;
 
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.WGS84Coordinate;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.XYCoordinate;
 

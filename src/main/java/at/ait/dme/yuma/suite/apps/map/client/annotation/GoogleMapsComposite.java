@@ -29,12 +29,12 @@ import java.util.Map;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Point;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polygon;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polyline;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Polygon;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Polyline;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Shape;
 import at.ait.dme.yuma.suite.apps.map.client.MapUtils;
 import at.ait.dme.yuma.suite.apps.map.client.server.TransformationService;
 import at.ait.dme.yuma.suite.apps.map.client.server.TransformationServiceAsync;

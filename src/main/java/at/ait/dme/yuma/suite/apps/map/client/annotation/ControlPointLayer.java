@@ -32,10 +32,10 @@ import at.ait.dme.gwt.openlayers.client.controls.DragFeature;
 import at.ait.dme.gwt.openlayers.client.event.DragCompleteListener;
 import at.ait.dme.gwt.openlayers.client.geometry.Point;
 import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Shape;
 import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
 
 /**

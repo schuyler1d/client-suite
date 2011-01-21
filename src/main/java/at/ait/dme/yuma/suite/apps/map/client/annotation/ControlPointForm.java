@@ -25,12 +25,12 @@ import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderService;
 import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderServiceAsync;
 

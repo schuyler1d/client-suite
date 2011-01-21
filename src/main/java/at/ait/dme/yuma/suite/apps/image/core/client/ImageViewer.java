@@ -30,17 +30,20 @@ import java.util.List;
 import java.util.Map;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.MediaFragment;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Color;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Ellipse;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapeControlPanel;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.ShapePanel;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageRect;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Color;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Ellipse;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Shape;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.ShapeControlPanel;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.ShapePanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagSelectionListener;
 

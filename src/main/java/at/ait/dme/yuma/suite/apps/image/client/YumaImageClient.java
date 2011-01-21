@@ -25,18 +25,18 @@ import org.gwt.mosaic.ui.client.DecoratedTabLayoutPanel;
 import org.gwt.mosaic.ui.client.TabLayoutPanel;
 import org.gwt.mosaic.ui.client.WindowPanel;
 
+import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
-import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthService;
 import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthServiceAsync;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageViewer;
-import at.ait.dme.yuma.suite.apps.image.core.client.gui.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEditForm;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

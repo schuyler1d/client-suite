@@ -32,8 +32,8 @@ import javax.servlet.http.HttpServletRequest;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationManager;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
 
 /**
  * Provides map control points

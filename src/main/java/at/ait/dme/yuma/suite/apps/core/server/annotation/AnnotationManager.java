@@ -48,7 +48,7 @@ import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
 
 /**
  * This class contains all actions on annotations.

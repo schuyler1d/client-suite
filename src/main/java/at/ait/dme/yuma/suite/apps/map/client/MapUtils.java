@@ -26,11 +26,11 @@ import java.util.ArrayList;
 import at.ait.dme.gwt.openlayers.client.geometry.LineString;
 import at.ait.dme.gwt.openlayers.client.geometry.Point;
 import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Color;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polygon;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Polyline;
-import at.ait.dme.yuma.suite.apps.image.core.client.shape.Shape;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Color;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Polygon;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Polyline;
+import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Shape;
 
 /**
  * Utility methods for converting between annotation shapes and OpenLayers
@@ -46,7 +46,7 @@ public class MapUtils {
 		if (shape instanceof Polyline) {
 			// Linestring or Point
 			ArrayList<Point> points = new ArrayList<Point>();
-			for (at.ait.dme.yuma.suite.apps.image.core.client.shape.Point p :  ((Polyline) shape).getPoints()) {
+			for (at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point p :  ((Polyline) shape).getPoints()) {
 				points.add(Point.create(p.getX() + shape.getLeft(), p.getY() + shape.getTop()));
 			}
 			
@@ -60,7 +60,7 @@ public class MapUtils {
 		} else if (shape instanceof Polygon) {
 			// Polygon
 			ArrayList<Point> points = new ArrayList<Point>();			
-			for (at.ait.dme.yuma.suite.apps.image.core.client.shape.Point p :  ((Polygon) shape).getPoints()) {
+			for (at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point p :  ((Polygon) shape).getPoints()) {
 				points.add(Point.create(p.getX() + shape.getLeft(), p.getY() + shape.getTop()));
 			}
 			
@@ -92,8 +92,8 @@ public class MapUtils {
 			// Construct Polygon shape
 			String[] s = js.substring(9, js.length() - 2).split(",");
 			
-			ArrayList<at.ait.dme.yuma.suite.apps.image.core.client.shape.Point> points = 
-				new ArrayList<at.ait.dme.yuma.suite.apps.image.core.client.shape.Point>();
+			ArrayList<at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point> points = 
+				new ArrayList<at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point>();
 
 			int left = Integer.MAX_VALUE;
 			int top = Integer.MAX_VALUE;
@@ -109,7 +109,7 @@ public class MapUtils {
 						if (y < top)
 							top = (int) y;
 						
-						points.add(new at.ait.dme.yuma.suite.apps.image.core.client.shape.Point((int) x, (int) y));
+						points.add(new at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point((int) x, (int) y));
 					} catch (NumberFormatException e) {
 						System.out.println("Error adding point: " + e.getMessage());
 					}
@@ -120,8 +120,8 @@ public class MapUtils {
 			poly.setColor(new Color("ff0000"));
 			poly.setLeft(left);
 			poly.setTop(top);
-			for (at.ait.dme.yuma.suite.apps.image.core.client.shape.Point p : points) {	
-				poly.addPoint(new at.ait.dme.yuma.suite.apps.image.core.client.shape.Point(p.getX() - left,p.getY() - top));
+			for (at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point p : points) {	
+				poly.addPoint(new at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point(p.getX() - left,p.getY() - top));
 			}
 			
 			/*
@@ -143,7 +143,7 @@ public class MapUtils {
 					try {
 						double x = Double.parseDouble(xy[0]);
 						double y = Double.parseDouble(xy[1]);
-						pline.addPoint(new at.ait.dme.yuma.suite.apps.image.core.client.shape.Point((int)x,(int)y));
+						pline.addPoint(new at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point((int)x,(int)y));
 					} catch (NumberFormatException e) {
 						System.out.println("Error adding point: " + e.getMessage());
 					}
@@ -162,7 +162,7 @@ public class MapUtils {
 					
 					Polyline pline = new Polyline();
 					pline.setColor(new Color("ff0000"));
-					pline.addPoint(new at.ait.dme.yuma.suite.apps.image.core.client.shape.Point((int)x,(int)y));
+					pline.addPoint(new at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point((int)x,(int)y));
 					pline.setLeft(pline.getRelativeLeft());
 					pline.setTop(pline.getRelativeTop());
 					return pline;
