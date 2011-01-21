@@ -26,7 +26,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.protocol.http.WebApplication;
 
-import at.ait.dme.yuma.suite.AnnotationSuite;
+import at.ait.dme.yuma.suite.YUMASuite;
 
 public abstract class BaseExamplePage extends WebPage {
 
@@ -37,7 +37,7 @@ public abstract class BaseExamplePage extends WebPage {
 		add(new Label("header", title));
 		
 		// Make sure gwt.codesvr attribute is forwarded in development mode
-		if (AnnotationSuite.get().getConfigurationType()
+		if (YUMASuite.get().getConfigurationType()
 				.equals(WebApplication.DEVELOPMENT))
 			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
 	}

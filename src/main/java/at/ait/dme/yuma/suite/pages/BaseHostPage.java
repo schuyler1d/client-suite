@@ -28,15 +28,16 @@ import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 
+import at.ait.dme.yuma.suite.YUMAWebSession;
+import at.ait.dme.yuma.suite.apps.core.client.User;
+
 public abstract class BaseHostPage extends WebPage {
 	
 	public BaseHostPage(String title, String js, final PageParameters parameters) {
 		add(new Label("title", title));	
 		add(JavascriptPackageResource.getHeaderContribution(js));
 
-		String user = parameters.getString("user");
-		String objectURI = parameters.getString("objectURI");
-		
+		// Base URL
 		HttpServletRequest request = getWebRequestCycle().getWebRequest().getHttpServletRequest();
 		String baseURL = 
 			request.getScheme()+ "://" + 
@@ -51,10 +52,13 @@ public abstract class BaseHostPage extends WebPage {
 		}
 		baseURL+="/";
 		
+		// User
+		String user = parameters.getString("user");
+		YUMAWebSession.get().setUser(new User(user));
+		
 		String dictionary = "\nvar parameters = {\n" +
-							"  objectURI: \"" + objectURI + "\",\n" +
+							"  objectURI: \"" + parameters.getString("objectURI") + "\",\n" +
 							"  baseURL:   \"" + baseURL + "\", \n" +
-							"  user:      \"" + user + "\"\n" + 
 							"}\n";
 		
 		add(new Label("dictionary", dictionary).setEscapeModelStrings(false));

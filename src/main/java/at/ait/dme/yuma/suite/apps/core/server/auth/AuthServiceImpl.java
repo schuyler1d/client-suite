@@ -19,22 +19,21 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.server.auth;
+package at.ait.dme.yuma.suite.apps.core.server.auth;
 
-import java.io.Serializable;
+import at.ait.dme.yuma.suite.YUMAWebSession;
+import at.ait.dme.yuma.suite.apps.core.client.User;
+import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthService;
 
-public class AuthenticationServiceException extends Exception implements Serializable {
-	private static final long serialVersionUID = 436546556735034687L;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-	public AuthenticationServiceException() {
-		
+public class AuthServiceImpl extends RemoteServiceServlet implements AuthService {
+
+	private static final long serialVersionUID = -3607603963872144162L;
+
+	@Override
+	public User getUser() {	
+		return YUMAWebSession.get().getUser();
 	}
-	
-	public AuthenticationServiceException(String message) {
-		super(message);
-	}	
-	
-	public AuthenticationServiceException(Throwable cause) {
-		super(cause);
-	}
+
 }

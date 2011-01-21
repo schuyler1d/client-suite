@@ -22,164 +22,89 @@
 package at.ait.dme.yuma.suite.apps.core.client;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
- * represents a user of the image annotation service as part
- * of the prototypical authentication service. we won't create
- * separate entities for role and permissions at the moment.
+ * A simple user object.
  * 
- * @author Christian Sadilek
- * @see AuthenticationService
+ * @author Rainer Simon
  */
 public class User implements Serializable {
-	private static final long serialVersionUID = -6599850969311474363L;
 
-	private String name = "";
-	private String password = null;
-	private String app = null;
+	private static final long serialVersionUID = -6027774847347220416L;
 	
-	private boolean admin;
+	/**
+	 * Screen name of the anonymous user
+	 */
+	private static final String ANONYMOUS_NAME = "guest";
 	
-	private Collection<String> roles = null;	
-	private Collection<String> permissions = null;
+	/**
+	 * An anonymous user
+	 */
+	public static final User ANONYMOUS = new User(null);
+	
+	/**
+	 * The user 'singleton' user for this GWT app
+	 */
+	private static User instance = null;
+
+	/**
+	 * The username
+	 */
+	private String username = null;
+	
+	/**
+	 * The user's Gravatar hash (if any)
+	 */
+	private String gravatarHash = null;
+	
+	/**
+	 * A URI for this user (if any)
+	 */
+	private String uri = null;
 	
 	public User() {}
 	
-	public User(String name) {
-		this.name = name;
+	public User(String username) {
+		this.username = username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
-	public User(String name, boolean admin) {
-		this(name);
-		this.admin = admin;
+	public String getUsername() {
+		if (username == null)
+			return ANONYMOUS_NAME;
+		
+		return username;
+	}
+
+	public void setGravatarHash(String gravatarHash) {
+		this.gravatarHash = gravatarHash;
+	}
+
+	public String getGravatarHash() {
+		return gravatarHash;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+
+	public String getUri() {
+		return uri;
 	}
 	
-	public User(String name, String password, boolean admin) {
-		this(name, admin);
-		this.password = password;
+	public boolean isAnonymous() {
+		return username == null;
 	}
-
-	public User(String name, String password, String app, boolean admin) {
-		this(name, password, admin);
-		this.app = app;
-	}
-
-	public User(String name, String password, boolean admin, 
-			Collection<String> roles, Collection<String> permissions) {
-		this(name, password, admin);
-		this.roles = roles;
-		this.permissions = permissions;
-	}
-
-	/**
-	 * returns the name of the user
-	 * 
-	 * @return user name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * sets the name of the user
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * returns the users' password in plain text!
-	 * 
-	 * @return password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * sets the password
-	 * 
-	 * @param password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * returns the application that hosts this user or null if it is
-	 * an internal user.
-	 * 
-	 * @return user
-	 */
-	public String getApp() {
-		return app;
-	}
-
-	/**
-	 * sets the application that hosts the user
-	 * 
-	 * @param app
-	 */
-	public void setApp(String app) {
-		this.app = app;
-	}	
 	
-	/**	 
-	 * @return true if the user is an administrator, otherwise false
-	 */
-	public boolean isAdmin() {
-		return admin;
+	public static void set(User user) {
+		instance = user;
 	}
-
-	/**
-	 * sets the admin flag of the user
-	 * 
-	 * @param admin
-	 */
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
-	/**
-	 * returns the roles of the user
-	 * 
-	 * @return roles
-	 */
-	public Collection<String> getRoles() {
-		return roles;
-	}
-
-	/**
-	 * adds the role
-	 * 
-	 * @param role
-	 */
-	public void addRole(String role) {
-		if(roles==null) roles = new ArrayList<String>();
-		roles.add(role);					
-	}
-
-	/**
-	 * returns the permissions of the user
-	 * 
-	 * @return permissions
-	 */
-	public Collection<String> getPermissions() {
-		return permissions;
-	}
-
-	/**
-	 * adds the permissions
-	 * 
-	 * @param permission
-	 */
-	public void addPermission(String permission) {
-		if(permissions==null) permissions = new ArrayList<String>();
-		permissions.add(permission);
+	
+	public static User get() {
+		return instance;
 	}
 	
 }

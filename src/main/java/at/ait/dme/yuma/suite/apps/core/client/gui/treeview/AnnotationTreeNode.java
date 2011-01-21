@@ -1,5 +1,6 @@
 package at.ait.dme.yuma.suite.apps.core.client.gui.treeview;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
@@ -121,25 +122,25 @@ public class AnnotationTreeNode extends Composite
 		btnReply = new PushButton(YUMACoreProperties.getConstants().actionReply());
 		btnReply.setStyleName("imageAnnotation-action");
 		btnReply.addClickHandler(new AnnotateClickHandler(panel, null, this, false));
-		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
+		btnReply.setEnabled(!User.get().isAnonymous());
 		actionsPanel.add(btnReply);
 
 		btnReplyFragment = new PushButton(YUMACoreProperties.getConstants().actionReplyFragment());
 		btnReplyFragment.setStyleName("imageAnnotation-action");
 		btnReplyFragment.addClickHandler(new AnnotateClickHandler(panel, null, this, true));
-		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
+		btnReplyFragment.setEnabled(!User.get().isAnonymous());
 		actionsPanel.add(btnReplyFragment);
 
 		btnEdit = new PushButton(YUMACoreProperties.getConstants().actionEdit());
 		btnEdit.setStyleName("imageAnnotation-action");
-		btnEdit.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+		btnEdit.setEnabled(User.get().getUsername().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		btnEdit.addClickHandler(new AnnotateClickHandler(panel, this, parent, annotation.hasFragment()));
 		actionsPanel.add(btnEdit);
 
 		btnDelete = new PushButton(YUMACoreProperties.getConstants().actionDelete());
 		btnDelete.setStyleName("imageAnnotation-action");
-		btnDelete.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+		btnDelete.setEnabled(User.get().getUsername().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		btnDelete.addClickHandler(
 				new DeleteClickHandler(panel, this, parent));
@@ -159,18 +160,18 @@ public class AnnotationTreeNode extends Composite
 
 	public void hideAnnotationForm() {
 		this.editForm.setVisible(false);
-		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
-		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
+		btnReply.setEnabled(!User.get().isAnonymous());
+		btnReplyFragment.setEnabled(!User.get().isAnonymous());
 		btnEdit.setEnabled(true);
 	}
 	
 	public void refresh() {
 		deselect();
-		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
-		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
-		btnEdit.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+		btnReply.setEnabled(!User.get().isAnonymous());
+		btnReplyFragment.setEnabled(!User.get().isAnonymous());
+		btnEdit.setEnabled(User.get().getUsername().equals(annotation.getCreatedBy())
 			&& !annotation.hasReplies());
-		btnDelete.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+		btnDelete.setEnabled(User.get().getUsername().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 	}
 	

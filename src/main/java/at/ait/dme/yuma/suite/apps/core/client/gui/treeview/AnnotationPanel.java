@@ -31,6 +31,7 @@ import org.gwt.mosaic.ui.client.layout.HasLayoutManager;
 import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
@@ -196,7 +197,7 @@ public class AnnotationPanel extends Composite
 		annotateButton.setText(YUMACoreProperties.getConstants().actionCreate());
 		annotateButton.addClickHandler(
 				new AnnotateClickHandler(this, null, null, false));
-		annotateButton.setEnabled(!YUMACoreProperties.getUser().isEmpty());
+		annotateButton.setEnabled(!User.get().isAnonymous());
 		buttons.add(annotateButton);
 		
 		// 'Annotate Fragment' button
@@ -204,7 +205,7 @@ public class AnnotationPanel extends Composite
 		annotateFragmentButton.setText(YUMACoreProperties.getConstants().actionCreateFragment());
 		annotateFragmentButton.addClickHandler(
 				new AnnotateClickHandler(this, null, null, true));
-		annotateFragmentButton.setEnabled(!YUMACoreProperties.getUser().isEmpty());
+		annotateFragmentButton.setEnabled(!User.get().isAnonymous());
 		buttons.add(annotateFragmentButton);
 		
 		/* 'Show on Map' button

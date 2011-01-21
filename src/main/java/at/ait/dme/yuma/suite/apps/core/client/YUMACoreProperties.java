@@ -15,10 +15,6 @@ public class YUMACoreProperties {
 		return getValue("baseURL");	
 	}
 	
-	public static String getUser() {
-		return getValue("user");
-	}
-	
 	public static I18NConstants getConstants() {
 		if (annotationConstants == null)
 			annotationConstants = (I18NConstants) GWT.create(I18NConstants.class);

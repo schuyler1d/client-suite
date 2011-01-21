@@ -22,6 +22,9 @@
 package at.ait.dme.yuma.suite;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Request;
+import org.apache.wicket.Response;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 
 import at.ait.dme.yuma.suite.pages.image.ImageExamplePage;
@@ -29,18 +32,24 @@ import at.ait.dme.yuma.suite.pages.image.ImageHostPage;
 import at.ait.dme.yuma.suite.pages.map.MapExamplePage;
 import at.ait.dme.yuma.suite.pages.map.MapHostPage;
 
-public class AnnotationSuite extends WebApplication {    
+public class YUMASuite extends WebApplication {    
     
-	public AnnotationSuite() {
+	public YUMASuite() {
 		this.mountBookmarkablePage("image", ImageHostPage.class);
 		this.mountBookmarkablePage("image/examples", ImageExamplePage.class);
 		
 		this.mountBookmarkablePage("map", MapHostPage.class);
 		this.mountBookmarkablePage("map/examples", MapExamplePage.class);
 	}
-	
+
+	@Override
 	public Class<? extends Page> getHomePage() {
 		return ImageHostPage.class;
+	}
+	
+	@Override
+	public final Session newSession(Request request, Response response) {
+		return new YUMAWebSession(request);
 	}
 
 }

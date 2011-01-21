@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
@@ -83,7 +84,7 @@ public class ControlPointComposite extends AnnotationPanel {
 		createButton = new PushButton(YUMACoreProperties.getConstants().actionCreateCP());
 		createButton.setStyleName("imageAnnotation-button");
 		// createButton.addClickHandler(new CreateClickHandler(this,null,false,false));
-		createButton.setEnabled(!YUMACoreProperties.getUser().isEmpty());
+		createButton.setEnabled(!User.get().isAnonymous());
 		buttons.add(createButton);
 		
 		if (YUMACoreProperties.getObjectURI().startsWith("http://georeferencer"))

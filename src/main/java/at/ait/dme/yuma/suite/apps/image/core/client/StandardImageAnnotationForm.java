@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
@@ -256,7 +257,7 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 		}
 		
 		a.setLastModified(timestamp);
-		a.setCreatedBy(YUMACoreProperties.getUser());
+		a.setCreatedBy(User.get().getUsername());
 		a.setMediaType(mediaType);
 		a.setTitle(titleTextBox.getText());
 		a.setText(textArea.getText());
