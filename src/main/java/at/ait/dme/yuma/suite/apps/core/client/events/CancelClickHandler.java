@@ -38,7 +38,7 @@ public class CancelClickHandler extends AbstractClickHandler {
 	}
 		
 	public void onClick(ClickEvent event) {
-		panel.stopEditing(annotation, true);	
+		panel.stopEditing(annotation, null, true);	
 	}	
 	
 }

@@ -99,7 +99,7 @@ public class YumaMapClient implements EntryPoint {
 
 	private void showAnnotations() {
 		// Create a floating window
-		final WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(500, 50, 430, 600);
+		final WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(500, 50, 430, 500);
 		window.show();
 		window.addCloseHandler(new CloseHandler<PopupPanel>() {
 			@Override
@@ -174,10 +174,6 @@ public class YumaMapClient implements EntryPoint {
 	private void showExplorationTab(TabLayoutPanel tabPanel) {
 		ExplorationComposite expComposite = new ExplorationComposite((TileBasedImageViewer)mapViewer);
 		tabPanel.add(expComposite, YUMACoreProperties.getConstants().tabExploration());
-	}
-		
-	public MediaViewer getImageComposite() {
-		return mapViewer;
 	}
 
 	public static native void reload() /*-{

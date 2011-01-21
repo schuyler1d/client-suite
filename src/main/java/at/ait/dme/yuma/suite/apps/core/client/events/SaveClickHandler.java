@@ -55,7 +55,7 @@ public class SaveClickHandler extends AbstractClickHandler {
 				}
 
 				public void onSuccess(Annotation result) {
-					panel.stopEditing(parent, false);
+					panel.stopEditing(parent, result, false);
 					panel.appendChild(parent, result);
 					if (parent != null)
 						parent.refresh();

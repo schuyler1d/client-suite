@@ -91,7 +91,7 @@ public class YumaImageClient implements EntryPoint {
 
 	private void showAnnotations() {
 		// Create a floating window
-		final WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(500, 50, 430, 600);
+		final WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(500, 50, 430, 500);
 		window.show();
 		window.addCloseHandler(new CloseHandler<PopupPanel>() {
 			@Override
@@ -124,10 +124,6 @@ public class YumaImageClient implements EntryPoint {
 			}
 		});
 		tabPanel.add(annComposite, YUMACoreProperties.getConstants().tabAnnotations());
-	}
-
-	public MediaViewer getImageComposite() {
-		return imageViewer;
 	}
 
 	public static native void reload() /*-{

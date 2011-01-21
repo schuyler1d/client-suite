@@ -91,7 +91,6 @@ public class AnnotationPanel extends Composite
 
 	/**
 	 * Panel for the annotation edit form
-	 * TODO is this really needed?
 	 */
 	protected LayoutPanel editFormPanel = new LayoutPanel();
 	
@@ -126,26 +125,12 @@ public class AnnotationPanel extends Composite
 		annotationTree = new AnnotationTree(this, handlerManager);
 		loadAnnotations();		
 		
-		/*
 		mediaViewer.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
-			public void onAnnotationSelection(AnnotationSelectionEvent event) {
-				final NewAnnotationTreeNode node = 
-					annotationTree.getAnnotationNode(event.getAnnotation());
-				if(node==null) return;
-				
-				annotationTree.selectAnnotationTreeNode(node, event.isSelected());
-				if(event.isSelected()) {
-					Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-						@Override
-						public void execute() {
-							scrollPanel.ensureVisible(node.getAnnotationTreeItem());		
-						}
-					});
-				}			
+			public void onAnnotationSelection(AnnotationSelectionEvent event) {				
+				annotationTree.selectAnnotation(event.getAnnotation(), event.isSelected());			
 			}
 		});
-		*/
 
 		loadingImage.setStyleName("imageAnnotation-loading");
 		enableLoadingImage();
@@ -245,6 +230,10 @@ public class AnnotationPanel extends Composite
 			} else {
 				// Update
 				annotationTree.showAnnotationEditForm(annotation, editForm);
+				if (showFragmentEditor) {
+					mediaViewer.editAnnotation(annotation.getAnnotation());
+					mediaViewer.hideAnnotation(annotation.getAnnotation());
+				}
 			}
 				
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -253,17 +242,6 @@ public class AnnotationPanel extends Composite
 					scrollPanel.ensureVisible(editForm);	
 				}
 			});
-			
-			if(showFragmentEditor) {
-				// if we update an existing annotation we first have to remove the
-				/* existing fragment and show an active fragment panel instead.
-				if(update && annotationTreeNode.getImageFragment()!=null) {					
-					mediaViewer.editAnnotation(annotationTreeNode.getAnnotation());
-					mediaViewer.hideAnnotation(annotationTreeNode.getAnnotation());
-				} else {
-					mediaViewer.editAnnotation(null);
-				}*/
-			}
 		}
 		layout();
 	}
@@ -277,11 +255,11 @@ public class AnnotationPanel extends Composite
 	 * 	@param canceled true if the user canceled the operation, otherwise false
 	 *  @see #showAnnotationForm(AnnotationTreeNode, boolean, boolean)
 	 */
-	public void stopEditing(AnnotationTreeNode annotation, boolean canceled) {
-		if (annotation == null) {
+	public void stopEditing(AnnotationTreeNode parent, Annotation created, boolean canceled) {
+		if (parent == null) {
 			editFormPanel.clear();
 		} else {
-			annotationTree.hideAnnotationEditForm(annotation);
+			annotationTree.hideAnnotationEditForm(parent);
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
 				@Override
 				public void execute() {
@@ -294,9 +272,8 @@ public class AnnotationPanel extends Composite
 		annotateFragmentButton.setEnabled(true);
 		
 		mediaViewer.stopEditing();
-		if (canceled && annotation != null && 
-				annotation.getAnnotation().getFragment() != null) { 
-			mediaViewer.showAnnotation(annotation.getAnnotation());
+		if (!canceled && created != null && created.getFragment() != null) { 
+			mediaViewer.showAnnotation(created);
 		}
 
 		layout();
@@ -324,6 +301,8 @@ public class AnnotationPanel extends Composite
 			parent.removeReply(annotation);
 			
 		annotationTree.removeAnnotation(annotation);
+		if (annotation.hasFragment())
+			mediaViewer.hideAnnotation(annotation);
 	}
 	
 	/**
@@ -344,6 +323,8 @@ public class AnnotationPanel extends Composite
 					annotationTree.removeItems();
 					for (Annotation a : foundAnnotations) {
 						annotationTree.addAnnotation(a);
+						if (a.hasFragment())
+							mediaViewer.showAnnotation(a);
 					}
 					
 					scrollPanel.add(annotationTree);				
@@ -386,7 +367,7 @@ public class AnnotationPanel extends Composite
 	 * set the size of this composite
 	 */
 	public void setSize(int width, int height) {
-		if(height<15) return;
+		if (height<15) return;
 		if (YUMACoreProperties.getUserAgent().contains("firefox")) height = height - 2;
 		this.setSize(new Integer(width).toString(), new Integer(height).toString());
 		scrollPanel.setSize(new Integer(width).toString(), new Integer(

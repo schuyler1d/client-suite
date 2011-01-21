@@ -54,7 +54,7 @@ public class UpdateClickHandler extends AbstractClickHandler {
 				}
 
 				public void onSuccess(Annotation result) {
-					panel.stopEditing(annotation, false);
+					panel.stopEditing(annotation, result, false);
 					panel.removeAnnotation(annotation.getAnnotation());
 					panel.appendChild(parent, result);
 					if (parent != null)

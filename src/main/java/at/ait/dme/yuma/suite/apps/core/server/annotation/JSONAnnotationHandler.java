@@ -167,7 +167,7 @@ public class JSONAnnotationHandler {
 				jsonObj.put(KEY_TEXT, annotation.getText());
 				jsonObj.put(KEY_MEDIA_TYPE, annotation.getMediaType().name());
 						
-				if (annotation.getMediaType() == MediaType.IMAGE) {
+				if (annotation.getMediaType() == MediaType.IMAGE || annotation.getMediaType() == MediaType.MAP) {
 					ImageAnnotation i = (ImageAnnotation) annotation;
 					if(i.hasFragment()) {		
 						SVGFragmentHandler svg = new SVGFragmentHandler();
