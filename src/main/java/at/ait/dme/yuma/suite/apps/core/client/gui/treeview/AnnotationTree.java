@@ -101,10 +101,11 @@ public class AnnotationTree extends Tree {
 	
 	public void removeAnnotation(Annotation annotation) {
 		AnnotationTreeNode node = nodes.get(annotation);
-		annotations.remove(node.getTreeItem());
+		TreeItem treeItem = node.getTreeItem();
+		annotations.remove(treeItem);
+		treeItem.remove();
 		nodes.remove(annotation);
-		nodes.clear();
-		this.remove(node);
+		node.clear();
 	}
 	
 	public void showAnnotationEditForm(AnnotationTreeNode annotation, AnnotationEditForm editForm) {		
