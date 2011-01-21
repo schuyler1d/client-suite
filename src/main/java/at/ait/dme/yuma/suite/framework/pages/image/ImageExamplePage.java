@@ -39,7 +39,7 @@ public class ImageExamplePage extends BaseExamplePage {
 		List<ImageExampleLink> links = new ArrayList<ImageExampleLink>();
 		links.add(new ImageExampleLink(
 				"Perth",
-				"/image?user=csa1980&objectURI=http://www.destination360.com/australia-south-pacific/australia/images/s/australia-perth.jpg"
+				"image?user=csa1980&objectURI=http://www.destination360.com/australia-south-pacific/australia/images/s/australia-perth.jpg"
 		));
 
 		add(new ListView<ImageExampleLink>("links", links) {
