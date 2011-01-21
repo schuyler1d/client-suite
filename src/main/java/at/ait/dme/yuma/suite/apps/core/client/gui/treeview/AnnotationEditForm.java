@@ -42,28 +42,31 @@ public abstract class AnnotationEditForm extends Composite {
 	/**
 	 * The annotation to edit or null, if new annotation
 	 */
-	protected Annotation annotation = null;
+	protected AnnotationTreeNode annotation = null;
 	
 	/**
 	 * The parent of this annotation or null, if it's a root annotation
 	 */
-	protected Annotation parent = null;
+	protected AnnotationTreeNode parent = null;
 
 	public AnnotationEditForm() { }
 
-	public AnnotationEditForm(AnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationEditForm(AnnotationPanel panel,
+			AnnotationTreeNode annotation, AnnotationTreeNode parent) {
+		
 		this.panel = panel;
 		this.annotation = annotation;
 		this.parent = parent;
 	}
 	
-	public abstract AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent);
+	public abstract AnnotationEditForm newInstance(AnnotationPanel panel,
+			AnnotationTreeNode annotation, AnnotationTreeNode parent);
 	
 	public abstract void layout();
 
 	public abstract Annotation getAnnotation();
 	
-	public Annotation getParentAnnotation() {
+	public AnnotationTreeNode getParentNode() {
 		return parent;
 	}
 	

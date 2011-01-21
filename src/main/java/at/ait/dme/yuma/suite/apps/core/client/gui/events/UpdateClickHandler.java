@@ -24,6 +24,7 @@ package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -35,21 +36,18 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * @author Christian Sadilek
  */
 public class UpdateClickHandler extends AbstractClickHandler {
-
-	private Annotation parent;
 	
-	public UpdateClickHandler(AnnotationPanel panel, Annotation parent,
-			Annotation annotation, AnnotationEditForm editForm) {
+	public UpdateClickHandler(AnnotationPanel panel, AnnotationTreeNode annotation, 
+			AnnotationTreeNode parent, AnnotationEditForm editForm) {
 		
-		super(panel, annotation,editForm);
-		this.parent = parent;
+		super(panel, annotation, parent, editForm);
 	}
 	
 	public void onClick(ClickEvent event) {
 		panel.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
 	
-		getAnnotationService().updateAnnotation(annotation.getId(), editForm.getAnnotation(),
+		getAnnotationService().updateAnnotation(annotation.getAnnotation().getId(), editForm.getAnnotation(),
 			new AsyncCallback<Annotation>() {
 				public void onFailure(Throwable caught) {
 					handleFailure(caught, errorMessages.failedToSaveAnnotation());				
@@ -57,9 +55,10 @@ public class UpdateClickHandler extends AbstractClickHandler {
 
 				public void onSuccess(Annotation result) {
 					panel.stopEditing(annotation, false);
-					panel.removeAnnotation(annotation);
+					panel.removeAnnotation(annotation.getAnnotation());
 					panel.appendChild(parent, result);
-					panel.refresh();
+					if (parent != null)
+						parent.refresh();
 					panel.disableLoadingImage();
 				}
 			}

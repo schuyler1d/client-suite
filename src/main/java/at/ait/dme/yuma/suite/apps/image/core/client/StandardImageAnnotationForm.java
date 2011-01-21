@@ -35,6 +35,7 @@ import at.ait.dme.yuma.suite.apps.core.client.gui.events.SaveClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.UpdateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -78,13 +79,20 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 
 	private List<SemanticTag> tags = new ArrayList<SemanticTag>();
     private VerticalPanel linksStack;
+    
+    protected MediaType mediaType;
 
-    public StandardImageAnnotationForm() {
+    public StandardImageAnnotationForm(MediaType mediaType) {
     	super();
+    	this.mediaType = mediaType;
     }
     
-	public StandardImageAnnotationForm(AnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public StandardImageAnnotationForm(AnnotationPanel panel, AnnotationTreeNode annotation, 
+			AnnotationTreeNode parent, MediaType mediaType) {
+		
 		super(panel, annotation, parent);
+		this.mediaType = mediaType;
+		
     	formPanel.setStyleName("imageAnnotation-form");		
 		formPanel.add(createTitlePanel());
 		formPanel.add(createTextPanel());
@@ -95,8 +103,10 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 	}
 	
 	@Override
-	public AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent) {
-		return new StandardImageAnnotationForm(panel, annotation, parent);
+	public AnnotationEditForm newInstance(AnnotationPanel panel, AnnotationTreeNode annotation,
+			AnnotationTreeNode parent) {
+		
+		return new StandardImageAnnotationForm(panel, annotation, parent, mediaType);
 	}
 
 	/**
@@ -126,9 +136,9 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 		
 		titleTextBox.setStyleName("imageAnnotation-form-title");
 		if (annotation == null && parent != null) {
-			titleTextBox.setText("RE: " + parent.getTitle());
+			titleTextBox.setText("RE: " + parent.getAnnotation().getTitle());
 		} else if (annotation != null) { 
-			titleTextBox.setText(annotation.getTitle());
+			titleTextBox.setText(annotation.getAnnotation().getTitle());
 		}
 			
 		titlePanel.add(titleLabel);		
@@ -144,7 +154,7 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 		
 		textArea.setStyleName("imageAnnotation-form-text");
 		if (annotation != null)
-			textArea.setText(annotation.getText());
+			textArea.setText(annotation.getAnnotation().getText());
 		
 		textPanel.add(textLabel);
 		textPanel.add(textArea);
@@ -166,7 +176,7 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
                 " " + YUMACoreProperties.getConstants().privateScope());
         rdPrivate.setStyleName("imageAnnotation-form-radiobutton");     
         		
-		if (annotation != null && annotation.getScope() == Scope.PRIVATE) {
+		if (annotation != null && annotation.getAnnotation().getScope() == Scope.PRIVATE) {
 			rdPrivate.setValue(true, true);
 		} else {
 			rdPublic.setValue(true, true);
@@ -190,8 +200,8 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
         linksStack.setStyleName("imageAnnotation-form-links");
         linksPanel.add(linksStack);
         
-        if(annotation != null && annotation.hasTags()) {
-            for(SemanticTag t: annotation.getTags()) {
+        if(annotation != null && annotation.getAnnotation().hasTags()) {
+            for(SemanticTag t: annotation.getAnnotation().getTags()) {
                 addTag(t);
             }
         }
@@ -207,13 +217,17 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 		if (annotation == null) {
 			btnSave.addClickHandler(new SaveClickHandler(panel, parent, this));	
 		} else {
-			btnSave.addClickHandler(new UpdateClickHandler(panel, parent, annotation, this));
+			btnSave.addClickHandler(new UpdateClickHandler(panel, annotation, parent, this));
 		}
 		buttonsPanel.add(btnSave);
 		
 		PushButton btnCancel = new PushButton(YUMACoreProperties.getConstants().actionCancel());
 		btnCancel.setStyleName("imageAnnotation-form-button");
-		btnCancel.addClickHandler(new CancelClickHandler(panel, annotation));
+		if (annotation == null) {
+			btnCancel.addClickHandler(new CancelClickHandler(panel, parent));
+		} else {
+			btnCancel.addClickHandler(new CancelClickHandler(panel, annotation));
+		}
 		buttonsPanel.add(btnCancel);
 		
 		return buttonsPanel;
@@ -227,23 +241,23 @@ public class StandardImageAnnotationForm extends AnnotationEditForm {
 		a.setObjectUri(YUMACoreProperties.getObjectURI());
 		
 		if (parent != null) {
-			a.setParentId(parent.getId());
+			a.setParentId(parent.getAnnotation().getId());
 		
-			String rootId = parent.getRootId();
+			String rootId = parent.getAnnotation().getRootId();
 			if (rootId == null)
-				rootId = parent.getId();
+				rootId = parent.getAnnotation().getId();
 			a.setRootId(rootId);
 		}
 		
 		if (annotation == null) {
 			a.setCreated(timestamp);
 		} else {
-			a.setCreated(annotation.getCreated());
+			a.setCreated(annotation.getAnnotation().getCreated());
 		}
 		
 		a.setLastModified(timestamp);
 		a.setCreatedBy(YUMACoreProperties.getUser());
-		a.setMediaType(MediaType.IMAGE);
+		a.setMediaType(mediaType);
 		a.setTitle(titleTextBox.getText());
 		a.setText(textArea.getText());
 

@@ -81,7 +81,7 @@ public class JSONAnnotationHandler {
 			Annotation annotation;
 			
 			MediaType type = MediaType.valueOf(((String) jsonObj.get(KEY_MEDIA_TYPE)).toUpperCase());
-			if (type == MediaType.IMAGE) {
+			if (type == MediaType.IMAGE || type == MediaType.MAP) {
 				annotation = new ImageAnnotation();		
 				
 				String fragment = (String) jsonObj.get(KEY_FRAGMENT);

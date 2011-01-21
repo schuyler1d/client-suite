@@ -21,8 +21,8 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 
@@ -33,15 +33,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
  */
 public class AnnotateClickHandler extends AbstractClickHandler {
 	
-	private Annotation parent;
-	
 	private boolean showFragmentEditor;
 	
-	public AnnotateClickHandler(AnnotationPanel panel, Annotation annotation,
-			Annotation parent, boolean showFragmentEditor) {
+	public AnnotateClickHandler(AnnotationPanel panel, AnnotationTreeNode annotation,
+			AnnotationTreeNode parent, boolean showFragmentEditor) {
 
-		super(panel, annotation, null);
-		this.parent = parent;
+		super(panel, annotation, parent, null);
 		this.showFragmentEditor = showFragmentEditor;
 	}
 	

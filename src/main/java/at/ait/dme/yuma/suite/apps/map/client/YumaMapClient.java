@@ -28,6 +28,7 @@ import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionHandler;
@@ -196,7 +197,7 @@ public class YumaMapClient implements EntryPoint {
 		AnnotationPanel annComposite;
 
 		annComposite = new AnnotationPanel(imageComposite, 
-				new TagEnabledAnnotationForm(((TileBasedImageViewer)imageComposite).getTagCloud()));
+				new TagEnabledAnnotationForm(((TileBasedImageViewer)imageComposite).getTagCloud(), MediaType.MAP));
 				// ShapeTypeRegistry.allTypes());			
 
 		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {

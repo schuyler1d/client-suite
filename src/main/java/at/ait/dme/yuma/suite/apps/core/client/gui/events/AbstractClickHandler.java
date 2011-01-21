@@ -24,9 +24,9 @@ package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceAsync;
@@ -49,7 +49,12 @@ public abstract class AbstractClickHandler implements ClickHandler {
 	/**
 	 * Reference to the original annotation (if any)
 	 */
-	protected Annotation annotation;
+	protected AnnotationTreeNode annotation;
+	
+	/**
+	 * Reference to the parent annotation (if any)
+	 */
+	protected AnnotationTreeNode parent;
 	
 	/**
 	 * Reference to the annotation edit form
@@ -61,10 +66,11 @@ public abstract class AbstractClickHandler implements ClickHandler {
 	 */
 	protected I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
 	
-	public AbstractClickHandler(AnnotationPanel panel,
-			Annotation annotation, AnnotationEditForm editForm) {
+	public AbstractClickHandler(AnnotationPanel panel, AnnotationTreeNode annotation,
+			 AnnotationTreeNode parent, AnnotationEditForm editForm) {
 		this.panel = panel;
 		this.annotation = annotation;
+		this.parent = parent;
 		this.editForm = editForm;
 	}
 		
@@ -92,10 +98,12 @@ public abstract class AbstractClickHandler implements ClickHandler {
 				MessageBox.error(errorMessages.error(), errorMessages.annotationConflict());
 				panel.reload();								
 			} else {
-				MessageBox.error(errorMessages.error(), defaultMessage);
+				MessageBox.error(errorMessages.error(), defaultMessage + " (" + e.getMessage() + ")");
+				// e.printStackTrace();
 			}
 		} catch (Throwable t) {
-			MessageBox.error(errorMessages.error(), defaultMessage);
+			MessageBox.error(errorMessages.error(), defaultMessage + " (" + t.getMessage() + ")");
+			// t.printStackTrace();
 		}									
 	}
 }

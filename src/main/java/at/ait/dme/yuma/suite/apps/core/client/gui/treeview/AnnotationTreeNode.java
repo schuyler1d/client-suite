@@ -38,9 +38,9 @@ public class AnnotationTreeNode extends Composite
 	protected Annotation annotation;
 	
 	/**
-	 * The parent annotation (if any)
+	 * The parent annotation tree node (if any)
 	 */
-	protected Annotation parent;
+	protected AnnotationTreeNode parent;
 	
 	/**
 	 * The parent node of this annotation tree node
@@ -58,13 +58,14 @@ public class AnnotationTreeNode extends Composite
 	private PushButton btnReply;
 	private PushButton btnReplyFragment;
 	private PushButton btnEdit;
+	private PushButton btnDelete;
 	
 	/**
 	 * This node's edit form
 	 */
 	private AnnotationEditForm editForm;
 
-	public AnnotationTreeNode(AnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationTreeNode(AnnotationPanel panel, Annotation annotation, AnnotationTreeNode parent) {
 		this.panel = panel;
 		this.annotation = annotation;
 		this.parent = parent;
@@ -119,13 +120,13 @@ public class AnnotationTreeNode extends Composite
 		
 		btnReply = new PushButton(YUMACoreProperties.getConstants().actionReply());
 		btnReply.setStyleName("imageAnnotation-action");
-		btnReply.addClickHandler(new AnnotateClickHandler(panel, null, annotation, false));
+		btnReply.addClickHandler(new AnnotateClickHandler(panel, null, this, false));
 		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
 		actionsPanel.add(btnReply);
 
 		btnReplyFragment = new PushButton(YUMACoreProperties.getConstants().actionReplyFragment());
 		btnReplyFragment.setStyleName("imageAnnotation-action");
-		btnReplyFragment.addClickHandler(new AnnotateClickHandler(panel, null, annotation, true));
+		btnReplyFragment.addClickHandler(new AnnotateClickHandler(panel, null, this, true));
 		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
 		actionsPanel.add(btnReplyFragment);
 
@@ -133,15 +134,15 @@ public class AnnotationTreeNode extends Composite
 		btnEdit.setStyleName("imageAnnotation-action");
 		btnEdit.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
-		btnEdit.addClickHandler(new AnnotateClickHandler(panel, annotation, parent, annotation.hasFragment()));
+		btnEdit.addClickHandler(new AnnotateClickHandler(panel, this, parent, annotation.hasFragment()));
 		actionsPanel.add(btnEdit);
 
-		PushButton btnDelete = new PushButton(YUMACoreProperties.getConstants().actionDelete());
+		btnDelete = new PushButton(YUMACoreProperties.getConstants().actionDelete());
 		btnDelete.setStyleName("imageAnnotation-action");
 		btnDelete.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		btnDelete.addClickHandler(
-				new DeleteClickHandler(panel, annotation));
+				new DeleteClickHandler(panel, this, parent));
 		actionsPanel.add(btnDelete);
 
 		actionsPanel.setStyleName("imageAnnotation-actions");		
@@ -158,9 +159,19 @@ public class AnnotationTreeNode extends Composite
 
 	public void hideAnnotationForm() {
 		this.editForm.setVisible(false);
-		btnReply.setEnabled(true);
-		btnReplyFragment.setEnabled(true);
+		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
+		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
 		btnEdit.setEnabled(true);
+	}
+	
+	public void refresh() {
+		deselect();
+		btnReply.setEnabled(YUMACoreProperties.getUser() != null);
+		btnReplyFragment.setEnabled(YUMACoreProperties.getUser() != null);
+		btnEdit.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+			&& !annotation.hasReplies());
+		btnDelete.setEnabled(YUMACoreProperties.getUser().equals(annotation.getCreatedBy())
+				&& !annotation.hasReplies());
 	}
 	
 	public Annotation getAnnotation() {
@@ -193,6 +204,10 @@ public class AnnotationTreeNode extends Composite
 
 		AnnotationTreeNode node = (AnnotationTreeNode) other;
 		return annotation.equals(node.getAnnotation());
+	}
+	
+	public void clear() {
+		container.clear();
 	}
 
 	@Override

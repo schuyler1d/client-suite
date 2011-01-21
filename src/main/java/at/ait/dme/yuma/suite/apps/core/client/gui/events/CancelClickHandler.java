@@ -21,8 +21,8 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.gui.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 
@@ -33,8 +33,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
  */
 public class CancelClickHandler extends AbstractClickHandler {
 	
-	public CancelClickHandler(AnnotationPanel panel, Annotation annotation) {
-		super(panel, annotation, null);
+	public CancelClickHandler(AnnotationPanel panel, AnnotationTreeNode annotation) {
+		super(panel, annotation, null, null);
 	}
 		
 	public void onClick(ClickEvent event) {

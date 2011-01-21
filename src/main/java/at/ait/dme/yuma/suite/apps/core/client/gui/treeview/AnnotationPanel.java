@@ -227,7 +227,7 @@ public class AnnotationPanel extends Composite
 		return header;
 	}
 	
-	public void editAnnotation(Annotation annotation, Annotation parent, boolean showFragmentEditor) {
+	public void editAnnotation(AnnotationTreeNode annotation, AnnotationTreeNode parent, boolean showFragmentEditor) {
 		scrollPosition = scrollPanel.getScrollPosition();	
 		annotateButton.setEnabled(false);
 		editForm = editForm.newInstance(this, annotation, parent);
@@ -276,11 +276,9 @@ public class AnnotationPanel extends Composite
 	 * 	@param canceled true if the user canceled the operation, otherwise false
 	 *  @see #showAnnotationForm(AnnotationTreeNode, boolean, boolean)
 	 */
-	public void stopEditing(Annotation annotation, boolean canceled) {
+	public void stopEditing(AnnotationTreeNode annotation, boolean canceled) {
 		if (annotation == null) {
 			editFormPanel.clear();
-			annotateButton.setEnabled(true);
-			annotateFragmentButton.setEnabled(true);
 		} else {
 			annotationTree.hideAnnotationEditForm(annotation);
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -291,10 +289,13 @@ public class AnnotationPanel extends Composite
 			});
 		}
 		
+		annotateButton.setEnabled(true);
+		annotateFragmentButton.setEnabled(true);
+		
 		mediaViewer.stopEditing();
 		if (canceled && annotation != null && 
-				annotation.getFragment() != null) { 
-			mediaViewer.showAnnotation(annotation);
+				annotation.getAnnotation().getFragment() != null) { 
+			mediaViewer.showAnnotation(annotation.getAnnotation());
 		}
 
 		layout();
@@ -304,7 +305,10 @@ public class AnnotationPanel extends Composite
 		annotationTree.addAnnotation(annotation);
 	}
 	
-	public void appendChild(Annotation parent, Annotation child) {
+	public void appendChild(AnnotationTreeNode parent, Annotation child) {
+		if (parent != null)
+			parent.getAnnotation().addReply(child);
+		
 		annotationTree.appendChild(parent, child);
 	}
 	
@@ -314,6 +318,10 @@ public class AnnotationPanel extends Composite
 	 * @param annotationNode
 	 */
 	public void removeAnnotation(Annotation annotation) {
+		Annotation parent = annotationTree.getParentAnnotation(annotation);
+		if (parent != null)
+			parent.removeReply(annotation);
+			
 		annotationTree.removeAnnotation(annotation);
 	}
 	
@@ -326,9 +334,9 @@ public class AnnotationPanel extends Composite
 
 		imageAnnotationService.listAnnotations(YUMACoreProperties.getObjectURI(),
 			new AsyncCallback<Collection<Annotation>>() {
-				public void onFailure(Throwable caught) {
+				public void onFailure(Throwable t) {
 					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
-					MessageBox.error(errorMessages.error(), errorMessages.failedToReadAnnotations());
+					MessageBox.error(errorMessages.error(), errorMessages.failedToReadAnnotations() + " (" + t.getMessage() + ")");
 				}
 
 				public void onSuccess(Collection<Annotation> foundAnnotations) {
@@ -350,10 +358,6 @@ public class AnnotationPanel extends Composite
 		loadAnnotations();
 	}
 
-	public void refresh() {
-		annotationTree.refresh();
-	}
-	
 	/**
 	 * show the loading image
 	 */

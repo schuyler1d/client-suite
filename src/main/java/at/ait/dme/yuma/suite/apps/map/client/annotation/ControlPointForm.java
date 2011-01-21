@@ -27,6 +27,7 @@ import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.gui.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.client.shape.GeoPoint;
@@ -75,7 +76,7 @@ public class ControlPointForm extends AnnotationEditForm {
 		this.controlPointLayer = controlPointLayer;
 	}
 	
-	public ControlPointForm(AnnotationPanel panel, Annotation annotation, ControlPointLayer controlPointLayer) {
+	public ControlPointForm(AnnotationPanel panel, AnnotationTreeNode annotation, ControlPointLayer controlPointLayer) {
 		// Reference to control point layer
 		this.controlPointLayer = controlPointLayer;
 		
@@ -137,7 +138,7 @@ public class ControlPointForm extends AnnotationEditForm {
 	
 		if (annotation != null) {
 			placeName.setText(annotation.getTitle());
-			GeoPoint p = (GeoPoint) ((ImageFragment)annotation.getFragment()).getShape();
+			GeoPoint p = (GeoPoint) ((ImageFragment)annotation.getAnnotation().getFragment()).getShape();
 			lon.setText(Double.toString(p.getLng()));
 			lat.setText(Double.toString(p.getLat()));
 			setXY(p.getX(), p.getY());
@@ -150,13 +151,13 @@ public class ControlPointForm extends AnnotationEditForm {
 		form.add(lonPanel);
 		form.add(latPanel);
 		form.add(xyPanel);
-		form.add(createButtonsPanel(panel, annotation));
+		form.add(createButtonsPanel(panel, annotation.getAnnotation()));
 		form.setStyleName("imageAnnotation-form");		
 		initWidget(form);
 		
 		controlPointLayer.setControlPointForm(this);
 		if (annotation != null) {
-			controlPointLayer.showActiveFragmentPanel((ImageAnnotation) annotation, false);
+			controlPointLayer.showActiveFragmentPanel(((ImageAnnotation)annotation.getAnnotation()), false);
 		} else {
 			controlPointLayer.showActiveFragmentPanel(null, false);
 		}
@@ -190,7 +191,9 @@ public class ControlPointForm extends AnnotationEditForm {
 	}
 	
 	@Override
-	public AnnotationEditForm newInstance(AnnotationPanel panel, Annotation annotation, Annotation parent) {
+	public AnnotationEditForm newInstance(AnnotationPanel panel, 
+			AnnotationTreeNode annotation, AnnotationTreeNode parent) {
+		
 		return new ControlPointForm(panel, annotation, controlPointLayer);
 	}
 	

@@ -28,6 +28,7 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
+import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.gui.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.gui.events.selection.AnnotationSelectionHandler;
@@ -176,7 +177,7 @@ public class YumaImageClient implements EntryPoint {
 
 		annComposite = new AnnotationPanel(
 				imageComposite, 
-				new TagEnabledAnnotationForm(((ImageViewer)imageComposite).getTagCloud()));
+				new TagEnabledAnnotationForm(((ImageViewer)imageComposite).getTagCloud(), MediaType.IMAGE));
 				// ShapeTypeRegistry.allTypes());			
 
 		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
