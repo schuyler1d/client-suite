@@ -227,6 +227,8 @@ public class AnnotationPanel extends Composite
 			if (annotation == null) {
 				// Reply
 				annotationTree.showAnnotationEditForm(parent, editForm);
+				if (showFragmentEditor)
+					mediaViewer.editAnnotation(null);
 			} else {
 				// Update
 				annotationTree.showAnnotationEditForm(annotation, editForm);
