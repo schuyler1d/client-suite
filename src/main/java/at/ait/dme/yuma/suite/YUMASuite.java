@@ -21,6 +21,8 @@
 
 package at.ait.dme.yuma.suite;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.Request;
 import org.apache.wicket.Response;
@@ -34,6 +36,8 @@ import at.ait.dme.yuma.suite.framework.pages.map.MapHostPage;
 
 public class YUMASuite extends WebApplication {    
     
+	private static final String HTTP = "http://";
+	
 	public YUMASuite() {
 		this.mountBookmarkablePage("image", ImageHostPage.class);
 		this.mountBookmarkablePage("image/examples", ImageExamplePage.class);
@@ -51,5 +55,27 @@ public class YUMASuite extends WebApplication {
 	public final Session newSession(Request request, Response response) {
 		return new YUMAWebSession(request);
 	}
+	
+	public static boolean isDevMode() {
+		return YUMASuite.get()
+			.getConfigurationType().equals(WebApplication.DEVELOPMENT);
+	}
+	
+    public static String getBaseUrl(HttpServletRequest request) {
+		String baseURL = HTTP + request.getServerName();
+		
+		int serverPort = request.getServerPort();
+		if (serverPort != 80)
+			baseURL += ":" + serverPort;
+		
+		if (request.getContextPath() != null && request.getContextPath().length() > 0) {
+			baseURL += request.getContextPath();
+		} else if (request.getPathInfo() != null && request.getPathInfo().length()> 0) {
+			int lastSlash = request.getPathInfo().lastIndexOf("/");
+			if (lastSlash > 0)
+				baseURL += request.getPathInfo().substring(0, lastSlash);
+		}
+		return baseURL + "/";
+    }
 
 }

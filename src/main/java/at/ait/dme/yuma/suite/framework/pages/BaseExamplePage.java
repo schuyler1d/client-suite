@@ -24,23 +24,23 @@ package at.ait.dme.yuma.suite.framework.pages;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.protocol.http.WebApplication;
 
 import at.ait.dme.yuma.suite.YUMASuite;
 
 public abstract class BaseExamplePage extends WebPage {
 
-	protected String gwtCodesvr = "";
+	protected String devModeParams = "";
 	
 	public BaseExamplePage(String title, final PageParameters parameters) {
 		add(new Label("title", title));
 		add(new Label("header", title));
 		
-		// Make sure gwt.codesvr attribute is forwarded in development mode
-		if (YUMASuite.get().getConfigurationType()
-				.equals(WebApplication.DEVELOPMENT) && parameters.getString("gwt.codesvr") != null)
-			
-			gwtCodesvr = "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
+		// When in dev mode, append user name, email and gwt.codesvr attribute
+		if (YUMASuite.isDevMode()) {
+			devModeParams = "&username=rsimon&email=rainer@no5.at";
+			if (parameters.getString("gwt.codesvr") != null)
+				devModeParams += "&gwt.codesvr=" + parameters.getString("gwt.codesvr");
+		}
 	}
 	
 }

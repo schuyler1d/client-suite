@@ -107,6 +107,40 @@ public class User implements Serializable {
 		return username == null;
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof User))
+			return false;
+		
+		User user = (User) other;
+		
+		if (!this.username.equals(user.username))
+			return false;
+		
+		if (!equalsNullable(this.gravatarHash, user.gravatarHash))
+			return false;
+		
+		if (!equalsNullable(this.uri, user.uri))
+			return false;
+		
+		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		return username.hashCode();
+	}
+	
+	protected boolean equalsNullable(Object a, Object b) {
+		if (a == null)
+			return b == null;
+		
+		if (b == null)
+			return a == null;
+		
+		return a.equals(b);
+	}
+	
 	public static void set(User user) {
 		instance = user;
 	}

@@ -29,6 +29,7 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
+import at.ait.dme.yuma.suite.YUMASuite;
 import at.ait.dme.yuma.suite.framework.pages.BaseExamplePage;
 
 public class MapExamplePage extends BaseExamplePage {
@@ -39,8 +40,14 @@ public class MapExamplePage extends BaseExamplePage {
 		List<MapExampleLink> links = new ArrayList<MapExampleLink>();
 		links.add(new MapExampleLink(
 				"Map of Upper Austria",
-				"../map?user=csa1980&objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
+				"../map?objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
 		));
+		links.add(new MapExampleLink(
+				"Ortelius World Map 1570",
+				"?objectURI=" + 
+					YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest()) +
+					"images/samples/OrteliusWorldMap1570.jpg"
+		));		
 		
 		add(new ListView<MapExampleLink>("links", links) {
 			private static final long serialVersionUID = 2565049376850724577L;
@@ -58,7 +65,7 @@ public class MapExamplePage extends BaseExamplePage {
 		
 		MapExampleLink(String label, String href) {
 			this.label = label;
-			this.href = href + gwtCodesvr;
+			this.href = href + devModeParams;
 		}	
 	}
 

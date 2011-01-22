@@ -21,55 +21,41 @@
 
 package at.ait.dme.yuma.suite.framework.pages;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 
+import at.ait.dme.yuma.suite.YUMASuite;
 import at.ait.dme.yuma.suite.YUMAWebSession;
 import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.framework.auth.MD5Util;
 
 public abstract class BaseHostPage extends WebPage {
 	
-	public BaseHostPage(String title, String js, final PageParameters parameters) {
+	public BaseHostPage(String title, String js, final PageParameters params) {
 		add(JavascriptPackageResource.getHeaderContribution(js));
-
-		add(new Label("title", title));	
-
-		// Base URL
-		final HttpServletRequest request = getWebRequestCycle().getWebRequest().getHttpServletRequest();
-		String baseURL = 
-			request.getScheme()+ "://" + 
-			request.getServerName()+ ":" + request.getServerPort();
+		add(new Label("title", title));
 		
-		if (request.getContextPath() != null && request.getContextPath().length()!=0) {
-			baseURL += request.getContextPath();
-		} else if (request.getPathInfo() != null && request.getPathInfo().length()!=0) {
-			int lastSlashPos = request.getPathInfo().lastIndexOf("/");
-			if(lastSlashPos>0)
-				baseURL += request.getPathInfo().substring(0,lastSlashPos);
-		}
-		baseURL+="/";
-				
-		// User
-		String username = parameters.getString("user");
+		YUMAWebSession.get().setUser(getUser(params));
+
+		String baseUrl = YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest());		
+		String dictionary = "\nvar parameters = {\n" +
+							"  objectURI: \"" + params.getString("objectURI") + "\",\n" +
+							"  baseURL:   \"" + baseUrl + "\", \n" +
+							"}\n";
+		add(new Label("dictionary", dictionary).setEscapeModelStrings(false));
+    }; 
+    
+    private User getUser(PageParameters params) {
+		String username = params.getString("username");
 		User user = new User(username);
-		
-		String email = parameters.getString("email");
+
+		String email = params.getString("email");
 		if (email != null)
 			user.setGravatarHash(MD5Util.md5Hex(email));
 		
-		YUMAWebSession.get().setUser(user);
-		
-		String dictionary = "\nvar parameters = {\n" +
-							"  objectURI: \"" + parameters.getString("objectURI") + "\",\n" +
-							"  baseURL:   \"" + baseURL + "\", \n" +
-							"}\n";
-		
-		add(new Label("dictionary", dictionary).setEscapeModelStrings(false));
-    }; 
-
+    	return user;
+    }
+    
 }

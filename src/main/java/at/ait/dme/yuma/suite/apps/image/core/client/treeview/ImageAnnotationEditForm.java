@@ -200,10 +200,6 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	
 	protected Panel createTagPanel() {
 	    HorizontalPanel linksPanel = new HorizontalPanel();
-	    
-	    Label linksLabel = new Label(YUMACoreProperties.getConstants().annotationLinks());
-	    linksLabel.setStyleName("imageAnnotation-form-label");      
-        linksPanel.add(linksLabel);
         
         if(annotation != null && annotation.getAnnotation().hasTags()) {
             for(SemanticTag t: annotation.getAnnotation().getTags()) {

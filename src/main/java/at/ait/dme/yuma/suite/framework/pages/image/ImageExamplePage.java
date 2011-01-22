@@ -29,6 +29,7 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
+import at.ait.dme.yuma.suite.YUMASuite;
 import at.ait.dme.yuma.suite.framework.pages.BaseExamplePage;
 
 public class ImageExamplePage extends BaseExamplePage {
@@ -39,7 +40,13 @@ public class ImageExamplePage extends BaseExamplePage {
 		List<ImageExampleLink> links = new ArrayList<ImageExampleLink>();
 		links.add(new ImageExampleLink(
 				"Perth",
-				"../image?user=csa1980&objectURI=http://www.destination360.com/australia-south-pacific/australia/images/s/australia-perth.jpg"
+				"../image?objectURI=http://www.destination360.com/australia-south-pacific/australia/images/s/australia-perth.jpg"
+		));
+		links.add(new ImageExampleLink(
+				"Sample from Swedish National Heritage Board",
+				"../image?objectURI=" +
+				YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest()) +
+				"images/samples/snhb-sample.jpg"
 		));
 
 		add(new ListView<ImageExampleLink>("links", links) {
@@ -58,7 +65,7 @@ public class ImageExamplePage extends BaseExamplePage {
 		
 		ImageExampleLink(String label, String href) {
 			this.label = label;
-			this.href = href + gwtCodesvr;
+			this.href = href + devModeParams;
 		}	
 	}
 
