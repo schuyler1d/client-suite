@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
+
 /**
  * The base class for all types of annotations. Annotations are usually identical
  * across different media types. The major difference is the fragment, which is 
@@ -79,9 +81,9 @@ public abstract class Annotation implements Serializable {
 	private Date lastModified;
 	
 	/**
-	 * Creator user ID
+	 * Creator
 	 */
-	private String createdBy;
+	private User createdBy;
 
 	/**
 	 * The title
@@ -166,12 +168,12 @@ public abstract class Annotation implements Serializable {
 		this.lastModified = new Date(lastModified.getTime());
 	}
 	
-	public String getCreatedBy() {
+	public User getCreatedBy() {
 		return createdBy;
 	}
 	
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = toNullIfEmpty(createdBy);
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public String getTitle() {

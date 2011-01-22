@@ -125,11 +125,11 @@ public class AnnotationTreeNode extends Composite
 		HorizontalPanel headerPanel = new HorizontalPanel();
 		headerPanel.setStyleName("imageAnnotation-header");
 
-		Image avatar = new Image(User.ANONYMOUS.getGravatarURL());
+		Image avatar = new Image(annotation.getCreatedBy().getGravatarURL());
 		avatar.setStyleName("imageAnnotation-header-avatar");
 		headerPanel.add(avatar);
 		
-		Label userLabel = new Label(annotation.getCreatedBy());
+		Label userLabel = new Label(annotation.getCreatedBy().getUsername());
 		userLabel.setStyleName("imageAnnotation-header-user");
 		headerPanel.add(userLabel);
 

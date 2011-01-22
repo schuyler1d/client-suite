@@ -23,6 +23,7 @@ package at.ait.dme.yuma.suite.server;
 
 import java.util.Date;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
@@ -43,7 +44,7 @@ public class Data {
 		  "\"scope\" : \"PUBLIC\" , "+
 		  "\"last-modified\" : 1224043200000 ,"+
 		  "\"created\" : 1224043200000 , "+
-		  "\"created-by\" : \"rsimon\" , "+
+		  "\"created-by\" : { \"user-name\" : \"rsimon\" } , "+
 		  "\"fragment\" : \"" +
 			"<svg:svg xmlns:svg=\\\"http://www.w3.org/2000/svg\\\" width=\\\"640px\\\" height=\\\"480px\\\" viewbox=\\\"0px 0px 640px 480px\\\"> " +
 			  "<svg:defs xmlns:svg=\\\"http://www.w3.org/2000/svg\\\"> " +
@@ -71,7 +72,7 @@ public class Data {
 		a.setObjectUri("object-lissabon");
 		a.setCreated(new Date());
 		a.setLastModified(new Date());
-		a.setCreatedBy("rsimon");
+		a.setCreatedBy(new User("rsimon"));
 		a.setTitle("Ponte 25 de Abril");
 		a.setText("The 25 de Abril Bridge is a suspension bridge connecting the city of Lisbon, " +
 				"capital of Portugal, to the municipality of Almada on the left bank of the Tagus " +

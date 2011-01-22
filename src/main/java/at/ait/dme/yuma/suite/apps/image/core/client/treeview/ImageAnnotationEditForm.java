@@ -261,7 +261,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		}
 		
 		a.setLastModified(timestamp);
-		a.setCreatedBy(User.get().getUsername());
+		a.setCreatedBy(User.get());
 		a.setMediaType(mediaType);
 		a.setTitle(titleTextBox.getText());
 		a.setText(textArea.getText());

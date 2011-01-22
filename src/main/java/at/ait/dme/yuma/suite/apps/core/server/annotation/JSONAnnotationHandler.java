@@ -31,6 +31,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
@@ -60,6 +61,10 @@ public class JSONAnnotationHandler {
 	private static final String KEY_SCOPE = "scope";
 	private static final String KEY_TAGS = "tags";
 	private static final String KEY_REPLIES = "replies";
+	
+	private static final String KEY_USER_NAME = "user-name";
+	private static final String KEY_USER_HASH = "user-gravatar-hash";
+	private static final String KEY_USER_URI = "user-uri";
 	
 	private static final String KEY_TAG_URI = "uri";
 	private static final String KEY_TAG_LABEL = "label";
@@ -103,7 +108,7 @@ public class JSONAnnotationHandler {
 			annotation.setObjectUri((String) jsonObj.get(KEY_OBJECT_URI));
 			annotation.setCreated(new Date((Long) jsonObj.get(KEY_CREATED)));
 			annotation.setLastModified(new Date((Long) jsonObj.get(KEY_LAST_MODIFIED)));
-			annotation.setCreatedBy((String) jsonObj.get(KEY_CREATED_BY));
+			annotation.setCreatedBy(parseUser((JSONObject) jsonObj.get(KEY_CREATED_BY)));
 			annotation.setTitle((String) jsonObj.get(KEY_TITLE));
 			annotation.setText((String) jsonObj.get(KEY_TEXT));
 			annotation.setMediaType(type);
@@ -130,7 +135,14 @@ public class JSONAnnotationHandler {
 		return annotations;
 	}
 	
-	public static ArrayList<SemanticTag> parseSemanticTags(JSONArray jsonArray) {
+	private static User parseUser(JSONObject jsonObject) {
+		User user = new User((String) jsonObject.get(KEY_USER_NAME));
+		user.setGravatarHash((String) jsonObject.get(KEY_USER_HASH));
+		user.setUri((String) jsonObject.get(KEY_USER_URI));
+		return user;
+	}
+	
+	private static ArrayList<SemanticTag> parseSemanticTags(JSONArray jsonArray) {
 		ArrayList<SemanticTag> tags = new ArrayList<SemanticTag>();
 		
 		for (Object obj : jsonArray) {
@@ -162,7 +174,7 @@ public class JSONAnnotationHandler {
 				jsonObj.put(KEY_OBJECT_URI, annotation.getObjectUri());						
 				jsonObj.put(KEY_CREATED, annotation.getCreated().getTime());
 				jsonObj.put(KEY_LAST_MODIFIED, annotation.getLastModified().getTime());
-				jsonObj.put(KEY_CREATED_BY, annotation.getCreatedBy());
+				jsonObj.put(KEY_CREATED_BY, serializeUser(annotation.getCreatedBy()));
 				jsonObj.put(KEY_TITLE, annotation.getTitle());		
 				jsonObj.put(KEY_TEXT, annotation.getText());
 				jsonObj.put(KEY_MEDIA_TYPE, annotation.getMediaType().name());
@@ -191,7 +203,18 @@ public class JSONAnnotationHandler {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static JSONArray serializeSemanticTags(List<SemanticTag> tags) {
+	private static JSONObject serializeUser(User user) {
+		JSONObject jsonObj = new JSONObject();
+		
+		jsonObj.put(KEY_USER_NAME, user.getUsername());
+		jsonObj.put(KEY_USER_HASH, user.getGravatarHash());
+		jsonObj.put(KEY_USER_URI, user.getUri());
+		
+		return jsonObj;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static JSONArray serializeSemanticTags(List<SemanticTag> tags) {
 		JSONArray jsonArray = new JSONArray();
 		
 		for (SemanticTag t : tags) {

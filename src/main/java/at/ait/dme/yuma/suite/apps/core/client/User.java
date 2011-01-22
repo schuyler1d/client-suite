@@ -53,9 +53,9 @@ public class User implements Serializable {
 	private String username = null;
 	
 	/**
-	 * The user's Gravatar URL (if any)
+	 * The user's Gravatar hash (if any)
 	 */
-	private String gravatarUrl = null;
+	private String gravatarHash = null;
 	
 	/**
 	 * A URI for this user (if any)
@@ -80,15 +80,19 @@ public class User implements Serializable {
 	}
 
 	public void setGravatarHash(String hash) {
-		this.gravatarUrl = "http://www.gravatar.com/avatar/"
-			 + hash + "?s=20&d=mm";
+		this.gravatarHash = hash;
+	}
+	
+	public String getGravatarHash() {
+		return gravatarHash;
 	}
 
 	public String getGravatarURL() {
-		if (gravatarUrl == null)
+		if (gravatarHash == null)
 			return "http://www.gravatar.com/avatar/?s=20&d=mm";
-		
-		return gravatarUrl;
+			
+		return "http://www.gravatar.com/avatar/"
+			 + gravatarHash + "?s=20&d=mm";
 	}
 
 	public void setUri(String uri) {

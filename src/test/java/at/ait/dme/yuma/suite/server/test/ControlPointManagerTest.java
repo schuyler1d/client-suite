@@ -40,6 +40,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.server.Config;
 import at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationManager;
@@ -108,7 +109,7 @@ public class ControlPointManagerTest {
 		for(ControlPoint cp : controlPoints) {
 			ImageAnnotation annotation = new ImageAnnotation();
 			annotation.setObjectUri(imageUrl);
-			annotation.setCreatedBy("importer");
+			annotation.setCreatedBy(new User("importer"));
 			ImageFragment fragment = new ImageFragment(new ImageRect(),
 					new GeoPoint(cp.getName(),cp.getXY().x,cp.getXY().y,cp.getLatLon().lat,cp.getLatLon().lon));
 			annotation.setFragment(fragment);
