@@ -44,7 +44,7 @@ public class MapExamplePage extends BaseExamplePage {
 		));
 		links.add(new MapExampleLink(
 				"Ortelius World Map 1570",
-				"?objectURI=" + 
+				"../map?objectURI=" + 
 					YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest()) +
 					"images/samples/OrteliusWorldMap1570.jpg"
 		));		
