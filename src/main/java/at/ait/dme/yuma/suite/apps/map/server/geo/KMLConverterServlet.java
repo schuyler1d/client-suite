@@ -44,11 +44,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.map.client.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.client.server.exception.TransformationException;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.TransformationResult;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TransformationException;
 
 /**
  * Servlet for converting KML files from geo- to map-coordinates.

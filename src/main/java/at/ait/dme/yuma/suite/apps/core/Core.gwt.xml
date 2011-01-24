@@ -14,8 +14,6 @@
   	<extend-property name="locale" values="de"/>
   	<extend-property name="locale" values="fr"/>
   	
-  	<script src="http://maps.google.com/maps?gwt=1&amp;file=api&amp;v=2&amp;key=', {
-	    'dme.ait.ac.at': 'ABQIAAAAapqr3t_QNx5qoEDwcY3APxSHOYmJ0Gm-4W76tcH6UPz2tSaGORRKM04b8Aeh1YaavSss6bxsoNoZQQ',
-		'62.218.164.175': 'ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BSNXNqvEJUB-F_8FkyqgxCsb4TYehQydJLD993xOqeesxhuC0e8vH7YoQ'
-	  }[window.location.host],'" />	  	
+	<source path = "client"/>
+	<source path = "shared"/>
 </module>

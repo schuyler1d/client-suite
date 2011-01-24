@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import at.ait.dme.yuma.suite.apps.map.client.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.client.annotation.XYCoordinate;
-import at.ait.dme.yuma.suite.apps.map.client.server.exception.TransformationException;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TransformationException;
 
 /**
  * Abstract base class for transformations that convert between two

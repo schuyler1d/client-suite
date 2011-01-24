@@ -29,6 +29,7 @@ import at.ait.dme.gwt.openlayers.client.controls.MousePosition;
 import at.ait.dme.gwt.openlayers.client.controls.PanZoomBar;
 import at.ait.dme.gwt.openlayers.client.layers.TMS;
 import at.ait.dme.gwt.openlayers.client.layers.Zoomify;
+import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
 
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.LayoutPanel;

@@ -29,15 +29,17 @@ import java.util.Map;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Point;
-import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Polygon;
-import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Polyline;
-import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.Shape;
+import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Point;
+import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Polygon;
+import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Polyline;
+import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Shape;
 import at.ait.dme.yuma.suite.apps.map.client.MapUtils;
-import at.ait.dme.yuma.suite.apps.map.client.server.TransformationService;
-import at.ait.dme.yuma.suite.apps.map.client.server.TransformationServiceAsync;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.TransformationService;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.TransformationServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.http.client.URL;

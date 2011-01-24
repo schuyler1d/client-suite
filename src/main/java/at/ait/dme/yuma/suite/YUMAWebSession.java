@@ -25,7 +25,7 @@ import org.apache.wicket.Request;
 import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebSession;
 
-import at.ait.dme.yuma.suite.apps.core.client.User;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
 
 public final class YUMAWebSession extends WebSession {
 	

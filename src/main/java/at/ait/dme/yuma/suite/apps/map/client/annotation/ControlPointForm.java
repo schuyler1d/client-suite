@@ -22,17 +22,18 @@
 package at.ait.dme.yuma.suite.apps.map.client.annotation;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
-import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
-import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderService;
-import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderServiceAsync;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.Scope;
+import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.GeocoderService;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.GeocoderServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyPressEvent;

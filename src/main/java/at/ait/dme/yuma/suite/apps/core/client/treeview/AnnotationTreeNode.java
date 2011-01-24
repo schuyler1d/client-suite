@@ -21,12 +21,12 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.treeview;
 
-import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.DeleteClickHandler;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
 
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.HasMouseOverHandlers;

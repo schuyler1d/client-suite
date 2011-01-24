@@ -31,9 +31,9 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
-import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 
 /**

@@ -27,10 +27,10 @@ import java.util.Set;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.core.server.Config;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationServiceException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

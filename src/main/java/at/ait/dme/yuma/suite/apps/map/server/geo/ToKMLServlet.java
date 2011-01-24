@@ -28,13 +28,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceException;
-import at.ait.dme.yuma.suite.apps.map.client.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.client.annotation.XYCoordinate;
-import at.ait.dme.yuma.suite.apps.map.client.server.exception.TransformationException;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.CoordinateTransformation;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TransformationException;
 
 /**
  * Servlet for converting a set of shapes (in request query String) to KML.

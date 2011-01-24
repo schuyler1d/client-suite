@@ -29,11 +29,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationManager;
-import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.client.drawing.shape.GeoPoint;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationServiceException;
+import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
 
 /**
  * Provides map control points

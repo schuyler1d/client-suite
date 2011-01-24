@@ -26,17 +26,16 @@ import org.gwt.mosaic.ui.client.TabLayoutPanel;
 import org.gwt.mosaic.ui.client.WindowPanel;
 
 import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthService;
-import at.ait.dme.yuma.suite.apps.core.client.server.auth.AuthServiceAsync;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageViewer;
-import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.auth.AuthService;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.auth.AuthServiceAsync;
+import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

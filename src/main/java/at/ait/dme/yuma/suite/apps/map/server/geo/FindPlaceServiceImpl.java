@@ -21,14 +21,14 @@
 
 package at.ait.dme.yuma.suite.apps.map.server.geo;
 
-import at.ait.dme.yuma.suite.apps.map.client.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.client.server.FindPlaceResponse;
-import at.ait.dme.yuma.suite.apps.map.client.server.FindPlaceService;
-import at.ait.dme.yuma.suite.apps.map.client.server.exception.FindPlaceException;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.CoordinateTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.TransformationResult;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.FindPlaceResponse;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.FindPlaceService;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.FindPlaceException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

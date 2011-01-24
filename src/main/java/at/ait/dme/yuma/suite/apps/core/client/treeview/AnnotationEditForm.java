@@ -21,8 +21,8 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.treeview;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
 
 import com.google.gwt.user.client.ui.Composite;
 

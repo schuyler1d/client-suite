@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.events.selection;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
 
 import com.google.gwt.event.shared.GwtEvent;
 

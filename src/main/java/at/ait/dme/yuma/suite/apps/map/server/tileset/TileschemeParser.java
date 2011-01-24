@@ -29,7 +29,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import at.ait.dme.yuma.suite.apps.map.client.Tileset;
+import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
 
 /**
  * A utility class for parsing tile scheme descriptor files

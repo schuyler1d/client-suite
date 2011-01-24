@@ -28,7 +28,7 @@ import org.apache.wicket.markup.html.basic.Label;
 
 import at.ait.dme.yuma.suite.YUMASuite;
 import at.ait.dme.yuma.suite.YUMAWebSession;
-import at.ait.dme.yuma.suite.apps.core.client.User;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
 import at.ait.dme.yuma.suite.framework.auth.MD5Util;
 
 public abstract class BaseHostPage extends WebPage {

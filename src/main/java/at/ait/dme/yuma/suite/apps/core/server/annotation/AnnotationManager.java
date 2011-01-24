@@ -43,12 +43,12 @@ import org.jboss.resteasy.util.HttpResponseCodes;
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap;
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap.EvictionPolicy;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation.MediaType;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.image.core.client.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationServiceException;
+import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
 
 /**
  * This class contains all actions on annotations.

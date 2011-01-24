@@ -32,15 +32,15 @@ import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.User;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.HasAnnotationSelectionHandlers;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationService;
-import at.ait.dme.yuma.suite.apps.core.client.server.annotation.AnnotationServiceAsync;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation.AnnotationServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;

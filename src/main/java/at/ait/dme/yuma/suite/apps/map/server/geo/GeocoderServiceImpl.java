@@ -45,17 +45,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import at.ait.dme.yuma.suite.apps.core.client.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.map.client.annotation.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.client.annotation.XYCoordinate;
-import at.ait.dme.yuma.suite.apps.map.client.server.GeocoderService;
-import at.ait.dme.yuma.suite.apps.map.client.server.exception.GeocoderException;
-import at.ait.dme.yuma.suite.apps.map.client.server.exception.TransformationException;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.CoordinateTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.TransformationResult;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.GeocoderService;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.GeocoderException;
+import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TransformationException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
