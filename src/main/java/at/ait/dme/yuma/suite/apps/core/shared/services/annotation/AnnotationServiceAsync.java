@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.rpc.annotation;
+package at.ait.dme.yuma.suite.apps.core.shared.services.annotation;
 
 import java.util.Collection;
 import java.util.Set;

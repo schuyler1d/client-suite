@@ -19,15 +19,18 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.rpc.enrichment;
-
-import java.util.Collection;
+package at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection;
 
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.event.shared.EventHandler;
 
-public interface SemanticEnrichmentServiceAsync {
-    
-    public void getTagSuggestions(String text, String service, AsyncCallback<Collection<SemanticTagSuggestions>> callback);
+/**
+ *
+ * Handler for {@link AnnotationSelectionEvent} events.
+ * 
+ * @author Christian Sadilek
+ */
+public interface AnnotationSelectionHandler extends EventHandler {
 
+	public void onAnnotationSelection(AnnotationSelectionEvent event);
 }

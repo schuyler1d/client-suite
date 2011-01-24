@@ -19,43 +19,49 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.events;
+package at.ait.dme.yuma.suite.apps.core.client.treeview.events;
 
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusWidget;
 
 /**
- * click listener to delete an annotation
+ * click listener to save annotations
  * 
  * @author Christian Sadilek
  */
-public class DeleteClickHandler extends AbstractClickHandler {
+public class SaveClickHandler extends AbstractClickHandler {
 
-	public DeleteClickHandler(AnnotationPanel panel, 
-			AnnotationTreeNode annotation, AnnotationTreeNode parent) {
-		super(panel, annotation, parent, null);
-	}
+	public SaveClickHandler(AnnotationPanel panel, AnnotationTreeNode parent,
+			AnnotationEditForm editForm) {
+		
+		super(panel, null, parent, editForm);
+	}	
 	
 	public void onClick(ClickEvent event) {
-		panel.enableLoadingImage();				
+		panel.enableLoadingImage();		
 		((FocusWidget)event.getSource()).setEnabled(false);
-
-		getAnnotationService().deleteAnnotation(annotation.getAnnotation().getId(),
-			new AsyncCallback<Void>() {
+		
+		getAnnotationService().createAnnotation(editForm.getAnnotation(),
+			new AsyncCallback<Annotation>() {
+			
 				public void onFailure(Throwable caught) {
-					handleFailure(caught, errorMessages.failedToDeleteAnnotation());
+					handleFailure(caught, errorMessages.failedToSaveAnnotation());					
 				}
 
-				public void onSuccess(Void result) {
-					panel.removeAnnotation(annotation.getAnnotation());
+				public void onSuccess(Annotation result) {
+					panel.stopEditing(parent, result, false);
+					panel.appendChild(parent, result);
 					if (parent != null)
 						parent.refresh();
 					panel.disableLoadingImage();
 				}
-			});
+			}
+		);
 	}	
 }

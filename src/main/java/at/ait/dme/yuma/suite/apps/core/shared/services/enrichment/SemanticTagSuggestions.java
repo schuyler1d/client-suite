@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.rpc.enrichment;
+package at.ait.dme.yuma.suite.apps.core.shared.services.enrichment;
 
 import java.io.Serializable;
 import java.util.ArrayList;

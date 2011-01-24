@@ -19,26 +19,16 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.events;
+package at.ait.dme.yuma.suite.apps.core.shared.services.auth;
 
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
 
-import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-/**
- * click listener to hide the annotation form 
- * 
- * @author Christian Sadilek
- */
-public class CancelClickHandler extends AbstractClickHandler {
-	
-	public CancelClickHandler(AnnotationPanel panel, AnnotationTreeNode annotation) {
-		super(panel, annotation, null, null);
-	}
-		
-	public void onClick(ClickEvent event) {
-		panel.stopEditing(annotation, null, true);	
-	}	
-	
+@RemoteServiceRelativePath("../auth")
+public interface AuthService extends RemoteService {
+
+	public User getUser();
+
 }

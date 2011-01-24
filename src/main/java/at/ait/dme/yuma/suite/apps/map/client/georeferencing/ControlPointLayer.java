@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.client.annotation;
+package at.ait.dme.yuma.suite.apps.map.client.georeferencing;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.HandlerManager;
@@ -36,7 +36,8 @@ import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Shape;
-import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
+import at.ait.dme.yuma.suite.apps.map.client.annotation.AnnotationLayer;
+import at.ait.dme.yuma.suite.apps.map.client.widgets.MapComponent;
 
 /**
  * A sub-class of the AnnotationLayer specifically for control

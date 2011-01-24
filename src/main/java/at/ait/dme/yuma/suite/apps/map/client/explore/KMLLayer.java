@@ -27,7 +27,7 @@ import at.ait.dme.gwt.openlayers.client.StyleMap;
 import at.ait.dme.gwt.openlayers.client.controls.SelectFeature;
 import at.ait.dme.gwt.openlayers.client.layers.KML;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
+import at.ait.dme.yuma.suite.apps.map.client.widgets.MapComponent;
 
 /**
  * Implements functionality to load KML vector data through the server-side

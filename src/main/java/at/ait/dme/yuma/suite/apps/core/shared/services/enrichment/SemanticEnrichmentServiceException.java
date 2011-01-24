@@ -19,18 +19,24 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.events.selection;
+package at.ait.dme.yuma.suite.apps.core.shared.services.enrichment;
 
+import at.ait.dme.yuma.suite.apps.core.shared.services.RESTfulServiceException;
 
-import com.google.gwt.event.shared.EventHandler;
+public class SemanticEnrichmentServiceException extends RESTfulServiceException{
 
-/**
- *
- * Handler for {@link AnnotationSelectionEvent} events.
- * 
- * @author Christian Sadilek
- */
-public interface AnnotationSelectionHandler extends EventHandler {
+    private static final long serialVersionUID = -9184520577364218892L;
+    
+    public SemanticEnrichmentServiceException(int statusCode) {
+        super(statusCode);
+    }
 
-	public void onAnnotationSelection(AnnotationSelectionEvent event);
+    public SemanticEnrichmentServiceException(String message) {
+        super(message);
+    }
+    
+    public SemanticEnrichmentServiceException() {
+        
+    }
+
 }

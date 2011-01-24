@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.events;
+package at.ait.dme.yuma.suite.apps.core.client.treeview.events;
 
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
@@ -31,31 +31,31 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusWidget;
 
 /**
- * click listener to save annotations
+ * click listener for annotation updates
  * 
  * @author Christian Sadilek
  */
-public class SaveClickHandler extends AbstractClickHandler {
-
-	public SaveClickHandler(AnnotationPanel panel, AnnotationTreeNode parent,
-			AnnotationEditForm editForm) {
+public class UpdateClickHandler extends AbstractClickHandler {
+	
+	public UpdateClickHandler(AnnotationPanel panel, AnnotationTreeNode annotation, 
+			AnnotationTreeNode parent, AnnotationEditForm editForm) {
 		
-		super(panel, null, parent, editForm);
-	}	
+		super(panel, annotation, parent, editForm);
+	}
 	
 	public void onClick(ClickEvent event) {
-		panel.enableLoadingImage();		
+		panel.enableLoadingImage();				
 		((FocusWidget)event.getSource()).setEnabled(false);
-		
-		getAnnotationService().createAnnotation(editForm.getAnnotation(),
+	
+		getAnnotationService().updateAnnotation(annotation.getAnnotation().getId(), editForm.getAnnotation(),
 			new AsyncCallback<Annotation>() {
-			
 				public void onFailure(Throwable caught) {
-					handleFailure(caught, errorMessages.failedToSaveAnnotation());					
+					handleFailure(caught, errorMessages.failedToSaveAnnotation());				
 				}
 
 				public void onSuccess(Annotation result) {
-					panel.stopEditing(parent, result, false);
+					panel.stopEditing(annotation, result, false);
+					panel.removeAnnotation(annotation.getAnnotation());
 					panel.appendChild(parent, result);
 					if (parent != null)
 						parent.refresh();

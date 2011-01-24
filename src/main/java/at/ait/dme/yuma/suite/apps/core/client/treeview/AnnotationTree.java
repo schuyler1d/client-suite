@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
 
 import com.google.gwt.core.client.Scheduler;

@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.client.annotation;
+package at.ait.dme.yuma.suite.apps.map.client.widgets;
 
 import java.util.ArrayList;
 import java.util.Collection;

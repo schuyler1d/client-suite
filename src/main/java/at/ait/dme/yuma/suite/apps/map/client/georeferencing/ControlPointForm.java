@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.client.annotation;
+package at.ait.dme.yuma.suite.apps.map.client.georeferencing;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;

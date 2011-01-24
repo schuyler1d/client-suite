@@ -44,7 +44,7 @@ import at.ait.dme.gwt.openlayers.client.handler.Handler;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
@@ -52,8 +52,8 @@ import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagSelectionListene
 import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Shape;
-import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
 import at.ait.dme.yuma.suite.apps.map.client.MapUtils;
+import at.ait.dme.yuma.suite.apps.map.client.widgets.MapComponent;
 import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
 import at.ait.dme.yuma.suite.apps.map.shared.rpc.GeocoderService;
 import at.ait.dme.yuma.suite.apps.map.shared.rpc.GeocoderServiceAsync;

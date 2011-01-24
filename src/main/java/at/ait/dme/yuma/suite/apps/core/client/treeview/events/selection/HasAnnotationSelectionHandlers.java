@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.events.selection;
+package at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection;
 
 
 import com.google.gwt.event.shared.HandlerRegistration;

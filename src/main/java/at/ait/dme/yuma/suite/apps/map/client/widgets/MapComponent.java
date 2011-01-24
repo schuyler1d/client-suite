@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.client;
+package at.ait.dme.yuma.suite.apps.map.client.widgets;
 
 import at.ait.dme.gwt.openlayers.client.Map;
 import at.ait.dme.gwt.openlayers.client.MapOptions;

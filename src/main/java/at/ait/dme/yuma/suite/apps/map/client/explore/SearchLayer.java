@@ -28,7 +28,7 @@ import at.ait.dme.gwt.openlayers.client.StyleMap;
 import at.ait.dme.gwt.openlayers.client.geometry.Point;
 import at.ait.dme.gwt.openlayers.client.geometry.VectorFeature;
 import at.ait.dme.gwt.openlayers.client.layers.Vector;
-import at.ait.dme.yuma.suite.apps.map.client.MapComponent;
+import at.ait.dme.yuma.suite.apps.map.client.widgets.MapComponent;
 import at.ait.dme.yuma.suite.apps.map.client.widgets.MapPopup;
 
 import com.google.gwt.event.dom.client.ClickEvent;

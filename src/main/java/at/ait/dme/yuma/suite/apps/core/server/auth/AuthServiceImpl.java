@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.apps.core.server.auth;
 
 import at.ait.dme.yuma.suite.YUMAWebSession;
 import at.ait.dme.yuma.suite.apps.core.shared.User;
-import at.ait.dme.yuma.suite.apps.core.shared.rpc.auth.AuthService;
+import at.ait.dme.yuma.suite.apps.core.shared.services.auth.AuthService;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
