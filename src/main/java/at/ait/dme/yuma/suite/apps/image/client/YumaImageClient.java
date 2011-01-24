@@ -81,7 +81,7 @@ public class YumaImageClient implements EntryPoint {
 						showAnnotations();
 					}
 					public void onSuccess(User user) {
-						User.set(user);						 
+						User.set(user);
 						showAnnotations();
 					}
 				});					

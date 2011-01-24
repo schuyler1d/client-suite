@@ -114,7 +114,7 @@ public class User implements Serializable {
 		
 		User user = (User) other;
 		
-		if (!this.username.equals(user.username))
+		if (!equalsNullable(this.username, user.username))
 			return false;
 		
 		if (!equalsNullable(this.gravatarHash, user.gravatarHash))

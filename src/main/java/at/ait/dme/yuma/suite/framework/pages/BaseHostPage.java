@@ -37,7 +37,9 @@ public abstract class BaseHostPage extends WebPage {
 		add(JavascriptPackageResource.getHeaderContribution(js));
 		add(new Label("title", title));
 		
-		YUMAWebSession.get().setUser(getUser(params));
+		User user = getUser(params);
+		if (user != null)
+			YUMAWebSession.get().setUser(getUser(params));	
 
 		String baseUrl = YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest());		
 		String dictionary = "\nvar parameters = {\n" +
@@ -49,6 +51,9 @@ public abstract class BaseHostPage extends WebPage {
     
     private User getUser(PageParameters params) {
 		String username = params.getString("username");
+		if (username == null)
+			return null;
+		
 		User user = new User(username);
 
 		String email = params.getString("email");

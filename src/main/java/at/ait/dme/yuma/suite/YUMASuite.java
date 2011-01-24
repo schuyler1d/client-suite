@@ -48,7 +48,7 @@ public class YUMASuite extends WebApplication {
 
 	@Override
 	public Class<? extends Page> getHomePage() {
-		return ImageHostPage.class;
+		return ImageExamplePage.class;
 	}
 	
 	@Override

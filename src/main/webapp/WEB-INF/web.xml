@@ -40,7 +40,12 @@
 		<param-value>ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BREhleYDHJKagFSHdQe6xjbhVCp5BSz22jHD-GiLjy3M2rOz689ph-BFg</param-value>
 	</context-param>
 
+	<!-- Wicket Deployment Mode ('development' or  'deployment') -->
 
+	<context-param>
+         <param-name>configuration</param-name>
+         <param-value>development</param-value>
+	</context-param>
 
 	<!--                              -->
 	<!--   Servlet mappings           -->
