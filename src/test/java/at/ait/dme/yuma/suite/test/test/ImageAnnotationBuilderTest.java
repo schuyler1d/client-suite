@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.server.test;
+package at.ait.dme.yuma.suite.test.test;
 
 import org.junit.Test;
 

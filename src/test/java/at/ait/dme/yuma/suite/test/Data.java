@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.server;
+package at.ait.dme.yuma.suite.test;
 
 import java.util.Date;
 

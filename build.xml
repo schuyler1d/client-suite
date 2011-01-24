@@ -123,9 +123,17 @@
 	</target>
 
 	<target name="create-war" depends="compile-gwt-image, compile-gwt-map">
+		<copy todir="${classes.dir}">
+    		<fileset dir="${src.resources.dir}"/>
+  		</copy>	
 		<war destfile="${war.filename}" webxml="${web.inf.dir}/web.xml">
 			<fileset dir="${gwt.war.dir}">
-				<exclude name="${tiles.dir}/*/**" />
+				<exclude name="**/client/**" />
+ 				<exclude name="**/at/ait/dme/yuma/suite/test/**" />
+ 				<exclude name="**/*.gwt.xml" />
+ 				<exclude name="**/com/**" />
+				<exclude name="**/tilesets/*/**" />
+				<exclude name="**/.gitignore" />
 			</fileset>
 		</war>
 	</target>

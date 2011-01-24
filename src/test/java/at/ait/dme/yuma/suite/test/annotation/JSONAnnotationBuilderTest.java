@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.server.annotation;
+package at.ait.dme.yuma.suite.test.annotation;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.server.Data;
+import at.ait.dme.yuma.suite.test.Data;
 
 public class JSONAnnotationBuilderTest {
 	

@@ -4,9 +4,9 @@
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
 	<!-- Create a daily rolling file appender called annotation-frontend-log -->
-	<appender name="yuma-log"
+	<appender name="yuma-suite-log"
 		class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="${catalina.home}/logs/yuma.log" />
+		<param name="File" value="${catalina.home}/logs/yuma-suite.log" />
 		<param name="Append" value="true" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
