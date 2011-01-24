@@ -90,6 +90,9 @@ public class AnnotationTree extends Tree {
 			treeItem = parent.getTreeItem().addItem(annotation);
 		}
 		annotation.setTreeItem(treeItem);
+		
+		if (annotation.getAnnotation().hasFragment())
+			panel.getMediaViewer().showAnnotation(annotation.getAnnotation());
 	
 		annotation.addMouseOverHandler(new MouseOverHandler() {
 			public void onMouseOver(MouseOverEvent event) {

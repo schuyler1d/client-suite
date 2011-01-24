@@ -325,8 +325,6 @@ public class AnnotationPanel extends Composite
 					annotationTree.removeItems();
 					for (Annotation a : foundAnnotations) {
 						annotationTree.addAnnotation(a);
-						if (a.hasFragment())
-							mediaViewer.showAnnotation(a);
 					}
 					
 					scrollPanel.add(annotationTree);				

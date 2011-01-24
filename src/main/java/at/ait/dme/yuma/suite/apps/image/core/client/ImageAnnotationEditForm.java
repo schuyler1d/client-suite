@@ -268,7 +268,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 			a.setScope(Scope.PRIVATE);
 		}
 		
-		a.setTags(new ArrayList<SemanticTag>(tags.keySet()));		
+		a.setTags(new ArrayList<SemanticTag>(tags.keySet()));			
 		a.setFragment(panel.getMediaViewer().getActiveMediaFragment());		
 		return a;
 	}

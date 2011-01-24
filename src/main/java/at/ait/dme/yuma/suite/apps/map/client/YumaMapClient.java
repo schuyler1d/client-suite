@@ -114,7 +114,7 @@ public class YumaMapClient implements EntryPoint {
 		tabPanel.setPadding(0);
 		showAnnotationsTab(tabPanel);
 
-		showGeoReferencingTab(tabPanel);
+		// showGeoReferencingTab(tabPanel);
 		showExplorationTab(tabPanel);
 		tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
 				
