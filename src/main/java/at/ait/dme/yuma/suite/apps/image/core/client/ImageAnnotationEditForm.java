@@ -95,6 +95,13 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		this.mediaType = mediaType;
 		this.tagCloud = tagCloud;
 		
+    	formPanel.setStyleName("imageAnnotation-form");		
+		formPanel.add(createTitlePanel());
+		formPanel.add(createTextPanel());
+		formPanel.add(createScopePanel());
+		formPanel.add(createTagPanel());
+		formPanel.add(createButtonsPanel());
+		
 		panel.getMediaViewer().setAnnotationEditForm(this);
 		if (annotation != null && annotation.getAnnotation().hasTags()) {
 			for (SemanticTag t : annotation.getAnnotation().getTags()) {
@@ -102,12 +109,6 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 			}
 		}
 		
-    	formPanel.setStyleName("imageAnnotation-form");		
-		formPanel.add(createTitlePanel());
-		formPanel.add(createTextPanel());
-		formPanel.add(createScopePanel());
-		formPanel.add(createTagPanel());
-		formPanel.add(createButtonsPanel());	
 	 	initWidget(formPanel);
 	}
 	
@@ -199,15 +200,9 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	}
 	
 	protected Panel createTagPanel() {
-	    HorizontalPanel linksPanel = new HorizontalPanel();
-        
-        if(annotation != null && annotation.getAnnotation().hasTags()) {
-            for(SemanticTag t: annotation.getAnnotation().getTags()) {
-                addTag(t);
-            }
-        }
-	    
-	    return linksPanel;
+	    tagPanel = new FlowPanel();
+		tagPanel.setStyleName("imageAnnotation-taglist");
+		return tagPanel;
 	}
 	
 	protected HorizontalPanel createButtonsPanel() {
