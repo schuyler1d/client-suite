@@ -41,7 +41,7 @@ import org.junit.Test;
 import at.ait.dme.yuma.suite.apps.map.server.tileset.TilesetGenerator;
 import at.ait.dme.yuma.suite.apps.map.server.tileset.TilesetServiceImpl;
 import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TilesetNotAvailableException;
 
 /**
  * tests the image tileset provider service

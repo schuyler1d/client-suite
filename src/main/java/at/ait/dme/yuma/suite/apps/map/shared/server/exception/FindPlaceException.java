@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services.exception;
+package at.ait.dme.yuma.suite.apps.map.shared.server.exception;
 
 import java.io.Serializable;
 

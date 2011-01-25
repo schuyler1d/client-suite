@@ -19,22 +19,28 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services.exception;
+package at.ait.dme.yuma.suite.apps.map.shared.server.exception;
 
 import java.io.Serializable;
 
-public class GeocoderException extends Exception implements Serializable {
-	private static final long serialVersionUID = -5968895636554744578L;
+/**
+ * Thrown by the tileset service when there is no cached tileset available
+ * for the specified URL, or the cached tileset is corrupt for some reason.
+ * 
+ * @author Christian Sadilek
+ * @author Rainer Simon
+ */
+public class TilesetNotAvailableException extends Exception implements Serializable {
 
-	public GeocoderException() {
-		
-	}
+	private static final long serialVersionUID = 5195817700909626856L;
+
+	public TilesetNotAvailableException() { }
 	
-	public GeocoderException(String message) {
+	public TilesetNotAvailableException(String message) {
 		super(message);
 	}	
 	
-	public GeocoderException(Throwable cause) {
+	public TilesetNotAvailableException(Throwable cause) {
 		super(cause);
 	}
 	

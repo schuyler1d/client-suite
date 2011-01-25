@@ -25,11 +25,11 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.LoadingPopup;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.image.core.client.annotationpanel.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
-import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageRect;
@@ -41,9 +41,9 @@ import at.ait.dme.yuma.suite.apps.map.client.explore.SearchLayer;
 import at.ait.dme.yuma.suite.apps.map.client.georeferencing.ControlPointLayer;
 import at.ait.dme.yuma.suite.apps.map.client.widgets.MapComponent;
 import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
-import at.ait.dme.yuma.suite.apps.map.shared.services.TilesetService;
-import at.ait.dme.yuma.suite.apps.map.shared.services.TilesetServiceAsync;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.apps.map.shared.server.TilesetService;
+import at.ait.dme.yuma.suite.apps.map.shared.server.TilesetServiceAsync;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TilesetNotAvailableException;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;

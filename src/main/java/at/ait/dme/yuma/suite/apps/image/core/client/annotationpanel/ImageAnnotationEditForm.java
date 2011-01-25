@@ -19,19 +19,19 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.image.core.client.treeview;
+package at.ait.dme.yuma.suite.apps.image.core.client.annotationpanel;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.events.CancelClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.SaveClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.UpdateClickHandler;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;

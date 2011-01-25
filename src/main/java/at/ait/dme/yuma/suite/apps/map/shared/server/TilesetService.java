@@ -19,15 +19,15 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilesetNotAvailableException;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilingException;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.UnsupportedTileSchemeException;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TilingException;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.UnsupportedTileSchemeException;
 
 /**
  * Interface to the tileset provider service.

@@ -19,23 +19,21 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services.exception;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
-import java.io.Serializable;
+import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
 
-public class TransformationException extends Exception implements Serializable {
-	private static final long serialVersionUID = -5968895636554744578L;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-	public TransformationException() {
-		
-	}
+/**
+ * async interface to the image tiles provider service
+ *
+ * @author Christian Sadilek
+ */
+public interface TilesetServiceAsync {
 	
-	public TransformationException(String message) {
-		super(message);
-	}	
-	
-	public TransformationException(Throwable cause) {
-		super(cause);
-	}
+	public void getTileset(String url, AsyncCallback<Tileset> callback);	
+	public void startOnTheFlyTiler(String imageUrl, AsyncCallback<Void> callback);
+	public void pollOnTheFlyTiler(String imageUrl, AsyncCallback<Tileset> callback);
 	
 }

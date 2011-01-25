@@ -27,9 +27,9 @@ import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
-import at.ait.dme.yuma.suite.apps.map.shared.services.FindPlaceResponse;
-import at.ait.dme.yuma.suite.apps.map.shared.services.FindPlaceService;
-import at.ait.dme.yuma.suite.apps.map.shared.services.FindPlaceServiceAsync;
+import at.ait.dme.yuma.suite.apps.map.shared.server.FindPlaceResponse;
+import at.ait.dme.yuma.suite.apps.map.shared.server.FindPlaceService;
+import at.ait.dme.yuma.suite.apps.map.shared.server.FindPlaceServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

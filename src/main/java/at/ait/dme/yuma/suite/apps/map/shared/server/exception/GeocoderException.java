@@ -19,21 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server.exception;
 
-import at.ait.dme.yuma.suite.apps.map.client.explore.MapMetadata;
+import java.io.Serializable;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+public class GeocoderException extends Exception implements Serializable {
+	private static final long serialVersionUID = -5968895636554744578L;
 
-/**
- * Interface to the map metadata service.
- * 
- * @author Rainer Simon
- */
-@RemoteServiceRelativePath("../metadata")
-public interface MapMetadataService extends RemoteService {
+	public GeocoderException() {
+		
+	}
 	
-	public MapMetadata getMetadata(String url);
-
+	public GeocoderException(String message) {
+		super(message);
+	}	
+	
+	public GeocoderException(Throwable cause) {
+		super(cause);
+	}
+	
 }

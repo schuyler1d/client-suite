@@ -19,29 +19,16 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services.exception;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
-import java.io.Serializable;
+import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
 
-/**
- * Thrown by the tile service when the tileset URL points to a
- * tileset of unsupported format.
- * 
- * @author Christian Sadilek
- * @author Rainer Simon
- */
-public class UnsupportedTileSchemeException extends Exception implements Serializable {
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-	private static final long serialVersionUID = 3770669097079130889L;
-
-	public UnsupportedTileSchemeException() { }
-	
-	public UnsupportedTileSchemeException(String message) {
-		super(message);
-	}	
-	
-	public UnsupportedTileSchemeException(Throwable cause) {
-		super(cause);
-	}
-	
+public interface GeocoderServiceAsync {
+	void getCoordinate(String query, AsyncCallback<WGS84Coordinate> callback);
+	void getPlacename(String mapUrl, XYCoordinate coordinate, AsyncCallback<String> callback);
+	void getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight, AsyncCallback<SemanticTag[]> callback);
 }

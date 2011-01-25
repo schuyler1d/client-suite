@@ -21,8 +21,8 @@
 
 package at.ait.dme.yuma.suite.apps.map.client.explore;
 
-import at.ait.dme.yuma.suite.apps.map.shared.services.MapMetadataService;
-import at.ait.dme.yuma.suite.apps.map.shared.services.MapMetadataServiceAsync;
+import at.ait.dme.yuma.suite.apps.map.shared.server.MapMetadataService;
+import at.ait.dme.yuma.suite.apps.map.shared.server.MapMetadataServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;

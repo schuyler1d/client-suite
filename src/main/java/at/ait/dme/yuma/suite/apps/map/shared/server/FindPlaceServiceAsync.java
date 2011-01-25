@@ -19,21 +19,13 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
-import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-/**
- * async interface to the image tiles provider service
- *
- * @author Christian Sadilek
- */
-public interface TilesetServiceAsync {
-	
-	public void getTileset(String url, AsyncCallback<Tileset> callback);	
-	public void startOnTheFlyTiler(String imageUrl, AsyncCallback<Void> callback);
-	public void pollOnTheFlyTiler(String imageUrl, AsyncCallback<Tileset> callback);
-	
+public interface FindPlaceServiceAsync {
+	void findPlace(String mapUrl, String query, AsyncCallback<FindPlaceResponse> callback);
+	void findPlace(String mapUrl, WGS84Coordinate latlon, AsyncCallback<FindPlaceResponse> callback);
 }

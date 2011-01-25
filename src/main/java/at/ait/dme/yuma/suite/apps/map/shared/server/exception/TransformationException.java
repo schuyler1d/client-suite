@@ -19,19 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server.exception;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.io.Serializable;
 
-import at.ait.dme.yuma.suite.apps.map.client.explore.MapMetadata;
+public class TransformationException extends Exception implements Serializable {
+	private static final long serialVersionUID = -5968895636554744578L;
 
-/**
- * Async interface to the map metadata service
- * 
- * @author Rainer Simon
- */
-public interface MapMetadataServiceAsync {
-
-	public void getMetadata(String url, AsyncCallback<MapMetadata> callback);
+	public TransformationException() {
+		
+	}
+	
+	public TransformationException(String message) {
+		super(message);
+	}	
+	
+	public TransformationException(Throwable cause) {
+		super(cause);
+	}
 	
 }

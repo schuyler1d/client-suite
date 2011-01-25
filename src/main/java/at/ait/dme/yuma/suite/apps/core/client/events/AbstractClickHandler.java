@@ -24,9 +24,9 @@ package at.ait.dme.yuma.suite.apps.core.client.events;
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceAsync;

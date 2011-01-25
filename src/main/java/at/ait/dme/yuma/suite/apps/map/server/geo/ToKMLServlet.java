@@ -32,9 +32,9 @@ import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServic
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.CoordinateTransformation;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TransformationException;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TransformationException;
 
 /**
  * Servlet for converting a set of shapes (in request query String) to KML.

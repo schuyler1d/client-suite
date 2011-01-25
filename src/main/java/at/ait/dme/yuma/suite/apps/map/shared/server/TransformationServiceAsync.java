@@ -19,29 +19,22 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services.exception;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
-import java.io.Serializable;
+import java.util.List;
+
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * This exception indicates that something went wrong during 
- * on-the-fly tileset generation.
+ * async interface to the transformation service
  * 
  * @author Christian Sadilek
- * @author Rainer Simon
  */
-public class TilingException extends Exception implements Serializable {
-	
-	private static final long serialVersionUID = -5651510626251478045L;
-
-	public TilingException() { }
-	
-	public TilingException(String message) {
-		super(message);
-	}	
-	
-	public TilingException(Throwable cause) {
-		super(cause);
-	}
-	
+public interface TransformationServiceAsync {
+    
+	public void transformCoordinates(String mapUrl, List<XYCoordinate> xyCoords, 
+			AsyncCallback<List<WGS84Coordinate>> callback);
 }

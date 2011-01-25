@@ -19,12 +19,12 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
 import java.io.IOException;
 
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.FindPlaceException;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.FindPlaceException;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

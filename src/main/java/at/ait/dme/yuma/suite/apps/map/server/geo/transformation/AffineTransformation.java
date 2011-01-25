@@ -25,9 +25,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TransformationException;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TransformationException;
 
 /**
  * Implements an affine transformation that converts between two cartesion

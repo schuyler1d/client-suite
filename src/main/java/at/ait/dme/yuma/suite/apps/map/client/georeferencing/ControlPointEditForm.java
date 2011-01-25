@@ -24,12 +24,12 @@ package at.ait.dme.yuma.suite.apps.map.client.georeferencing;
 import java.util.Date;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.events.CancelClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.SaveClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.UpdateClickHandler;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
@@ -38,9 +38,9 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.services.GeocoderService;
-import at.ait.dme.yuma.suite.apps.map.shared.services.GeocoderServiceAsync;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.server.GeocoderService;
+import at.ait.dme.yuma.suite.apps.map.shared.server.GeocoderServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyPressEvent;

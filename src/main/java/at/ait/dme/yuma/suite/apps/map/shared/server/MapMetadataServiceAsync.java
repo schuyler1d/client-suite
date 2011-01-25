@@ -19,13 +19,19 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
-
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
+package at.ait.dme.yuma.suite.apps.map.shared.server;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public interface FindPlaceServiceAsync {
-	void findPlace(String mapUrl, String query, AsyncCallback<FindPlaceResponse> callback);
-	void findPlace(String mapUrl, WGS84Coordinate latlon, AsyncCallback<FindPlaceResponse> callback);
+import at.ait.dme.yuma.suite.apps.map.client.explore.MapMetadata;
+
+/**
+ * Async interface to the map metadata service
+ * 
+ * @author Rainer Simon
+ */
+public interface MapMetadataServiceAsync {
+
+	public void getMetadata(String url, AsyncCallback<MapMetadata> callback);
+	
 }

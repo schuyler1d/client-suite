@@ -19,22 +19,29 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server.exception;
 
-import java.util.List;
-
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.io.Serializable;
 
 /**
- * async interface to the transformation service
+ * Thrown by the tile service when the tileset URL points to a
+ * tileset of unsupported format.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
-public interface TransformationServiceAsync {
-    
-	public void transformCoordinates(String mapUrl, List<XYCoordinate> xyCoords, 
-			AsyncCallback<List<WGS84Coordinate>> callback);
+public class UnsupportedTileSchemeException extends Exception implements Serializable {
+
+	private static final long serialVersionUID = 3770669097079130889L;
+
+	public UnsupportedTileSchemeException() { }
+	
+	public UnsupportedTileSchemeException(String message) {
+		super(message);
+	}	
+	
+	public UnsupportedTileSchemeException(Throwable cause) {
+		super(cause);
+	}
+	
 }

@@ -21,8 +21,8 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;

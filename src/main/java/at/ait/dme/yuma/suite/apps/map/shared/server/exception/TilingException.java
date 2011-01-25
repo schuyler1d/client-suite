@@ -19,16 +19,29 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.shared.services;
+package at.ait.dme.yuma.suite.apps.map.shared.server.exception;
 
-import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
+import java.io.Serializable;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+/**
+ * This exception indicates that something went wrong during 
+ * on-the-fly tileset generation.
+ * 
+ * @author Christian Sadilek
+ * @author Rainer Simon
+ */
+public class TilingException extends Exception implements Serializable {
+	
+	private static final long serialVersionUID = -5651510626251478045L;
 
-public interface GeocoderServiceAsync {
-	void getCoordinate(String query, AsyncCallback<WGS84Coordinate> callback);
-	void getPlacename(String mapUrl, XYCoordinate coordinate, AsyncCallback<String> callback);
-	void getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight, AsyncCallback<SemanticTag[]> callback);
+	public TilingException() { }
+	
+	public TilingException(String message) {
+		super(message);
+	}	
+	
+	public TilingException(Throwable cause) {
+		super(cause);
+	}
+	
 }
