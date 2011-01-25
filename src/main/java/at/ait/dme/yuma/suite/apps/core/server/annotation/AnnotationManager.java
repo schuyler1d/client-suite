@@ -204,7 +204,7 @@ public class AnnotationManager implements AnnotationService {
 		// List all annotations of this object and keep only those that have
 		// a fragment with a shape of one of the given types
 		for (Annotation a : listAnnotations(objectId)) {
-			if (a.getMediaType() == MediaType.IMAGE) {
+			if ((a.getMediaType() == MediaType.IMAGE) || (a.getMediaType() == MediaType.MAP)) {
 				ImageFragment fragment = (ImageFragment) a.getFragment();
 				if (fragment != null && fragment.getShape() != null && shapeTypes != null &&
 						shapeTypes.contains(fragment.getShape().getClass().getName())) {

@@ -48,14 +48,8 @@ public class ControlPointManager {
 	 */
 	private List<ControlPoint> controlPoints = new ArrayList<ControlPoint>();
 	
-	@SuppressWarnings("unchecked")
 	public ControlPointManager(HttpServletRequest clientRequest, String mapUrl) 
 			throws AnnotationServiceException {
-		
-		if (mapUrl.startsWith("http://georeferencer/")) {
-			controlPoints = (List<ControlPoint>) clientRequest.getSession().getAttribute("controlPoints");
-			return;
-		}
 		
 		Collection<Annotation> annotations = new ArrayList<Annotation>();
 		
