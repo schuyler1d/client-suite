@@ -46,8 +46,8 @@ import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedH
 import at.ait.dme.yuma.suite.apps.core.server.Config;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceException;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 
 /**

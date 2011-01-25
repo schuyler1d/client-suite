@@ -32,8 +32,8 @@ import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelecti
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
-import at.ait.dme.yuma.suite.apps.core.shared.services.auth.AuthService;
-import at.ait.dme.yuma.suite.apps.core.shared.services.auth.AuthServiceAsync;
+import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthServiceAsync;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.MapAnnotationPanel;
 import at.ait.dme.yuma.suite.apps.map.client.explore.ExplorationComposite;

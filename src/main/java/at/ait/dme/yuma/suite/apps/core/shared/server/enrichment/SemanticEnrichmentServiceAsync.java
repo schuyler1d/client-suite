@@ -19,27 +19,15 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.services.enrichment;
+package at.ait.dme.yuma.suite.apps.core.shared.server.enrichment;
 
 import java.util.Collection;
 
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-@RemoteServiceRelativePath("../enrichment")
-public interface SemanticEnrichmentService extends RemoteService {
+public interface SemanticEnrichmentServiceAsync {
     
-	/**
-	 * String constant for Uni Vienna link discovery service
-	 */
-	public static final String UNIVIE_LINK_DISCOVERY_SERVICE = "univieLinkDiscoveryService";
-	
-	/**
-	 * String constant for OpenCalais + DBpedia combination
-	 */
-	public static final String OPENCALAIS_DBPEDIA_LOOKUP = "openCalaisDBpediaLookup";
-	
-    public Collection<SemanticTagSuggestions> getTagSuggestions(String text, String service) throws SemanticEnrichmentServiceException;
+    public void getTagSuggestions(String text, String service, AsyncCallback<Collection<SemanticTagSuggestions>> callback);
 
 }

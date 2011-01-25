@@ -19,15 +19,24 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.services.enrichment;
+package at.ait.dme.yuma.suite.apps.core.shared.server.enrichment;
 
-import java.util.Collection;
+import at.ait.dme.yuma.suite.apps.core.shared.server.RESTfulServiceException;
 
+public class SemanticEnrichmentServiceException extends RESTfulServiceException{
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-
-public interface SemanticEnrichmentServiceAsync {
+    private static final long serialVersionUID = -9184520577364218892L;
     
-    public void getTagSuggestions(String text, String service, AsyncCallback<Collection<SemanticTagSuggestions>> callback);
+    public SemanticEnrichmentServiceException(int statusCode) {
+        super(statusCode);
+    }
+
+    public SemanticEnrichmentServiceException(String message) {
+        super(message);
+    }
+    
+    public SemanticEnrichmentServiceException() {
+        
+    }
 
 }

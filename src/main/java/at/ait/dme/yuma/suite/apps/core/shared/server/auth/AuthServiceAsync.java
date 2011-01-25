@@ -19,16 +19,14 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.services.auth;
+package at.ait.dme.yuma.suite.apps.core.shared.server.auth;
 
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-@RemoteServiceRelativePath("../auth")
-public interface AuthService extends RemoteService {
+public interface AuthServiceAsync {
 
-	public User getUser();
+	public void getUser(AsyncCallback<User> callback);
 
 }

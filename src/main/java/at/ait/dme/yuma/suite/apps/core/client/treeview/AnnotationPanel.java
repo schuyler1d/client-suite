@@ -39,8 +39,8 @@ import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelecti
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.HasAnnotationSelectionHandlers;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceAsync;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;

@@ -40,8 +40,8 @@ import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceAsync;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.MapAnnotationPanel;
 

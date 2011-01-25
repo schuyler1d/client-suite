@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationManager;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
-import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceException;
+import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceException;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
 

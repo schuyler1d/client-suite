@@ -19,14 +19,23 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.services.auth;
+package at.ait.dme.yuma.suite.apps.core.shared.server.annotation;
 
-import at.ait.dme.yuma.suite.apps.core.shared.model.User;
+import java.io.Serializable;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import at.ait.dme.yuma.suite.apps.core.shared.server.RESTfulServiceException;
 
-public interface AuthServiceAsync {
+public class AnnotationServiceException extends RESTfulServiceException implements Serializable {
+	private static final long serialVersionUID = -1021896871854802248L;
 
-	public void getUser(AsyncCallback<User> callback);
-
+	public AnnotationServiceException() {
+	}
+	
+	public AnnotationServiceException(String message) {
+		super(message);
+	}
+	
+	public AnnotationServiceException(int statusCode) {
+	    super(statusCode);
+	}
 }

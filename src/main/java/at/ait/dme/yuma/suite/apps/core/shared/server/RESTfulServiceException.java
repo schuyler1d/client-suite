@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.services;
+package at.ait.dme.yuma.suite.apps.core.shared.server;
 
 import java.io.Serializable;
 
