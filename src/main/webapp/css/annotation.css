@@ -77,6 +77,8 @@ body,td,.a,div,.p {
 
 .imageAnnotation-header-avatar {
 	padding-right:7px;
+	margin:2px;
+	border:1px solid gray;
 }
 
 .imageAnnotation-header-user {
