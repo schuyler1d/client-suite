@@ -42,6 +42,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
+import at.ait.dme.yuma.suite.apps.core.shared.model.PlainLiteral;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.services.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.apps.core.shared.services.enrichment.SemanticEnrichmentServiceException;
@@ -227,7 +228,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
                                     description = r.getTextContent();
                                 }
                             }
-                            e.addTag(new SemanticTag(e.getTitle(), new ArrayList<String>(), e.getType(), label, description, url));
+                            e.addTag(new SemanticTag(e.getTitle(), new ArrayList<PlainLiteral>(), e.getType(), label, description, url));
                         }
                     }
                 }
@@ -273,7 +274,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
         	}
         	
     		if (description != null && uri != null && title != null && title.equalsIgnoreCase(term))
-    			tags.add(new SemanticTag(title, new ArrayList<String>(), "", "en", description, uri));
+    			tags.add(new SemanticTag(title, new ArrayList<PlainLiteral>(), "", "en", description, uri));
         }
         
         return tags;

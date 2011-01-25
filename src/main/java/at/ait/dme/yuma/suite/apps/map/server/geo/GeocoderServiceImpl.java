@@ -46,6 +46,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
+import at.ait.dme.yuma.suite.apps.core.shared.model.PlainLiteral;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
@@ -314,8 +315,8 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 		}
 	}
 	
-	private List<String> getAlternativePlacenames(String placename) {		
-        ArrayList<String> altLabels = new ArrayList<String>();
+	private List<PlainLiteral> getAlternativePlacenames(String placename) {		
+        ArrayList<PlainLiteral> altLabels = new ArrayList<PlainLiteral>();
 
         try {
 	        HttpClient client = new HttpClient();
@@ -332,7 +333,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	            
 	            NodeList labels = doc.getElementsByTagName("rdfs:label");
 	            for (int i=0; i<labels.getLength(); i++) {
-	            	altLabels.add(labels.item(i).getTextContent());
+	            	altLabels.add(new PlainLiteral(labels.item(i).getTextContent()));
 	            }
 	        }
         } catch (Exception e) {

@@ -25,8 +25,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * A Semantic Tag - i.e. a tag which represents a resource
- * on the linked data Web.
+ * A semantic tag which is part of an annotation. A semantic
+ * tag is a link to a data resource (denoted by a dereferencable
+ * URI), plus various metadata about his resource (such as title,
+ * alternative labels, description, etc.)
  * 
  * @author Rainer Simon
  */
@@ -40,40 +42,42 @@ public class SemanticTag implements Serializable {
 	private String uri;
 	
 	/**
-	 * The tag title
+	 * The tag's primary label
 	 */
-	private String label;
+	private String primaryLabel;
+	
+	/**
+	 * The primary description/abstract of this tag
+	 */
+	private String primaryDescription;
+		
+	/**
+	 * The language of the primary label and description
+	 * 
+	 * OPTIONAL
+	 */
+	private String primaryLang;
+
+	/**
+	 * The tag type (freely definable)
+	 */
+	private String type;	
 	
 	/**
 	 * Alternative labels
 	 */
-	private List<String> alternativeLabels = null;
-
-	/**
-	 * The description/abstract for this tag
-	 */
-	private String description;
-	
-	/**
-	 * Language(s)
-	 */
-	private String lang;
-		
-	/**
-	 * The type
-	 */
-	private String type;
-			
+	private List<PlainLiteral> alternativeLabels = null;
+				
 	public SemanticTag() {
 		// Required for GWT serialization
 	}
 	
-	public SemanticTag(String label, List<String> alternativeLabels, String type, String lang, String description, String uri) {
-		this.label = label;
+	public SemanticTag(String primaryLabel, List<PlainLiteral> alternativeLabels, String type, String primaryLang, String primaryDescription , String uri) {
+		this.primaryLabel = primaryLabel;
 		this.alternativeLabels = alternativeLabels;
 		this.type = type;
-		this.lang = lang;
-		this.description = description;
+		this.primaryLang = primaryLang;
+		this.primaryDescription = primaryDescription ;
 		this.uri = uri;
 	}
 	
@@ -85,28 +89,28 @@ public class SemanticTag implements Serializable {
 		this.uri = uri;
 	}
 	
-	public String getLabel() {
-		return label;
+	public String getPrimaryLabel() {
+		return primaryLabel;
 	}
 	
-	public void setLabel(String label) {
-		this.label = label;
+	public void setPrimaryLabel(String label) {
+		this.primaryLabel = label;
 	}
 	
-	public String getDescription() {
-		return description;
+	public String getPrimaryDescription() {
+		return primaryDescription ;
 	}
 	
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPrimaryDescription(String description) {
+		this.primaryDescription  = description;
 	}
 	
-	public String getLanguage() {
-		return lang;
+	public String getPrimaryLanguage() {
+		return primaryLang;
 	}
 	
-	public void setLanguage(String lang) {
-		this.lang = lang;
+	public void setPrimaryLanguage(String lang) {
+		this.primaryLang = lang;
 	}
 	
 	public String getType() {
@@ -117,6 +121,10 @@ public class SemanticTag implements Serializable {
 		this.type = type;
 	}
 	
+	public void addAlternativeLabel(PlainLiteral label) {
+		alternativeLabels.add(label);
+	}
+	
 	public boolean hasAltLabels() {
 		if (alternativeLabels == null)
 			return false;
@@ -124,7 +132,7 @@ public class SemanticTag implements Serializable {
 		return alternativeLabels.size() > 0;
 	}
 	
-	public List<String> getAlternativeLabels() {
+	public List<PlainLiteral> getAlternativeLabels() {
 		return alternativeLabels;
 	}
 	
@@ -133,7 +141,7 @@ public class SemanticTag implements Serializable {
 		// TODO implement this properly!
 		if (!(tag instanceof SemanticTag)) return false; 
 		SemanticTag s = (SemanticTag) tag;
-		return this.uri.equals(s.uri) && this.label.equals(s.label);
+		return this.uri.equals(s.uri) && this.primaryLabel.equals(s.primaryLabel);
 	}
 
 }

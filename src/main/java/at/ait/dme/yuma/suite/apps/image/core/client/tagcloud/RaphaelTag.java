@@ -92,7 +92,7 @@ public class RaphaelTag {
 		this.listener = listener;
 		
 		// Text
-		textEl = paper.text(x, y, tag.getLabel(), TagCloud.FONT, fontsize, hAlign, TagCloud.TAG_TEXT_COLOR, 0);
+		textEl = paper.text(x, y, tag.getPrimaryLabel(), TagCloud.FONT, fontsize, hAlign, TagCloud.TAG_TEXT_COLOR, 0);
 		bbox = textEl.getBBox();
 		
 		// Background
@@ -175,7 +175,7 @@ public class RaphaelTag {
 		// Tooltip
 		tooltip = new PopupPanel();
 		tooltip.setStyleName("tooltip");
-		tooltip.setWidget(new HTML(tag.getDescription() + "<br/><b>" + tag.getURI()));
+		tooltip.setWidget(new HTML(tag.getPrimaryDescription() + "<br/><b>" + tag.getURI()));
 		tooltip.hide();
 	}
 	

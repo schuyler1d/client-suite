@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.apps.core.shared.model;
 import java.io.Serializable;
 
 /**
- * A simple user object.
+ * A YUMA User.
  * 
  * @author Rainer Simon
  */

@@ -108,8 +108,8 @@ public class AnnotationTreeNode extends Composite
 			for (SemanticTag t : annotation.getTags()) {
 				InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""
 						+ t.getURI() + "\" title=\"" 
-						+ t.getDescription() + "\">" 
-						+ t.getLabel() + "</a>"
+						+ t.getPrimaryDescription() + "\">" 
+						+ t.getPrimaryLabel() + "</a>"
 				);
 				tagPanel.add(span);
 			}

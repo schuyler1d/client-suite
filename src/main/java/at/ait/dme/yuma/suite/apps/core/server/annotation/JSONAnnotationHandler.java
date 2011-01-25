@@ -150,9 +150,9 @@ public class JSONAnnotationHandler {
 			SemanticTag t = new SemanticTag();
 			
 			t.setURI((String) jsonObj.get(KEY_TAG_URI));
-			t.setLabel((String) jsonObj.get(KEY_TAG_LABEL));
-			t.setDescription((String) jsonObj.get(KEY_TAG_DESCRIPTION));
-			t.setLanguage((String) jsonObj.get(KEY_TAG_LANG));
+			t.setPrimaryLabel((String) jsonObj.get(KEY_TAG_LABEL));
+			t.setPrimaryDescription((String) jsonObj.get(KEY_TAG_DESCRIPTION));
+			t.setPrimaryLanguage((String) jsonObj.get(KEY_TAG_LANG));
 			t.setType((String) jsonObj.get(KEY_TAG_TYPE));
 			
 			tags.add(t);
@@ -220,9 +220,9 @@ public class JSONAnnotationHandler {
 			JSONObject jsonObj = new JSONObject();
 			
 			jsonObj.put(KEY_TAG_URI, t.getURI());
-			jsonObj.put(KEY_TAG_LABEL, t.getLabel());
-			jsonObj.put(KEY_TAG_DESCRIPTION, t.getDescription());
-			jsonObj.put(KEY_TAG_LANG, t.getLanguage());
+			jsonObj.put(KEY_TAG_LABEL, t.getPrimaryLabel());
+			jsonObj.put(KEY_TAG_DESCRIPTION, t.getPrimaryDescription());
+			jsonObj.put(KEY_TAG_LANG, t.getPrimaryLanguage());
 			jsonObj.put(KEY_TAG_TYPE, t.getType());
 			
 			jsonArray.add(jsonObj);

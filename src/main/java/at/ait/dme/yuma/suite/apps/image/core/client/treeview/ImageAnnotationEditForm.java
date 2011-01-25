@@ -272,8 +272,8 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	public void addTag(SemanticTag tag) {
 		InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""
 				+ tag.getURI() + "\" title=\"" 
-				+ tag.getDescription() + "\">" 
-				+ tag.getLabel() + "</a>"
+				+ tag.getPrimaryDescription() + "\">" 
+				+ tag.getPrimaryLabel() + "</a>"
 		);
 		tagPanel.add(span);
 		tags.put(tag, span);

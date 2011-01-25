@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The base class for all types of annotations. Annotations are usually identical
  * across different media types. The major difference is the fragment, which is 
@@ -38,6 +37,11 @@ import java.util.List;
 public abstract class Annotation implements Serializable {
 
 	private static final long serialVersionUID = 5702749187171740401L;
+
+	/**
+	 * Media type definitions
+	 */
+	public enum MediaType { IMAGE, MAP, AUDIO, VIDEO };
 	
 	/**
 	 * Scope definitions
@@ -45,72 +49,76 @@ public abstract class Annotation implements Serializable {
 	public enum Scope { PUBLIC, PRIVATE };
 	
 	/**
-	 * Type definitionsR
+	 * The ID of this annotation
 	 */
-	public enum MediaType { IMAGE, MAP, AUDIO, VIDEO };
-		
+	private String annotationId;	
+
 	/**
-	 * Annotation ID
+	 * The ID of the root annotation, if this annotation
+	 * is a reply. A root annotation is the first annotation
+	 * in an annotation thread and does not have a root or
+	 * parent ID itself.
 	 */
-	private String annotationId;
+	private String rootId;
 	
 	/**
-	 * The annotation's parent ID (if it is a reply)
+	 * The ID of the parent annotation, if this annotation
+	 * is a reply. 
 	 */
 	private String parentId;
-	
+
 	/**
-	 * The annotation's root ID (if it is a reply)
+	 * The URI of the object which this annotation 
+	 * annotates.
+	 * 
+	 * MANDATORY
 	 */
-	private String rootId;	
+	private String objectUri;	
 	
 	/**
-	 * The URI of the annotated object (must be resolvable by the annotation frontend)
-	 */
-	private String objectUri;
-	
-	/**
-	 * Creation timestamp
+	 * Date and time of creation
 	 */
 	private Date created;
 	
 	/**
-	 * Timestamp of last modification
+	 * Date and time of last modification
 	 */
 	private Date lastModified;
 	
 	/**
-	 * Creator
+	 * The creator of this annotation
+	 * 
+	 * MANDATORY
 	 */
 	private User createdBy;
 
 	/**
-	 * The title
+	 * The title of this annotation
 	 */
 	private String title;
 	
 	/**
-	 * The annotation text
+	 * The text of this annotation
 	 */
 	private String text;
-	
+		
 	/**
-	 * The annotation media type
+	 * The media type of this annotation
 	 */
 	private MediaType mediaType;
 	
 	/**
-	 * The media fragment
+	 * The media fragment this annotation annotates
 	 */
 	private MediaFragment fragment;
 	
 	/**
-	 * The annotation scope
+	 * The scope of this annotation
 	 */
 	private Scope scope;
 	
 	/**
-	 * The semantic tags which are part of this annotation
+	 * This annotation's semantic tags
 	 */
 	protected List<SemanticTag> tags;
 	
