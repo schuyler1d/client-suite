@@ -167,7 +167,6 @@ public class JSONAnnotationHandler {
 		if (annotations != null) {
 			for(Annotation annotation : annotations) {
 				JSONObject jsonObj = new JSONObject();
-
 				jsonObj.put(KEY_ID, annotation.getId());
 				jsonObj.put(KEY_PARENT_ID, annotation.getParentId());		
 				jsonObj.put(KEY_ROOT_ID, annotation.getRootId());						

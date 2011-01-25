@@ -177,6 +177,9 @@ public abstract class Annotation implements Serializable {
 	}
 
 	public String getTitle() {
+		if (title == null)
+			return "";
+		
 		return title;
 	}
 	
@@ -185,6 +188,9 @@ public abstract class Annotation implements Serializable {
 	}
 	
 	public String getText() {
+		if (text == null)
+			return "";
+		
 		return text;
 	}
 	

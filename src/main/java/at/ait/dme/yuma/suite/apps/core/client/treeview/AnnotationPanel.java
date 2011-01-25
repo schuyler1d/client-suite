@@ -276,6 +276,8 @@ public class AnnotationPanel extends Composite
 		mediaViewer.stopEditing();
 		if (!canceled && created != null && created.getFragment() != null) { 
 			mediaViewer.showAnnotation(created);
+		} else if (canceled && parent != null) {
+			mediaViewer.showAnnotation(parent.getAnnotation());
 		}
 
 		layout();
