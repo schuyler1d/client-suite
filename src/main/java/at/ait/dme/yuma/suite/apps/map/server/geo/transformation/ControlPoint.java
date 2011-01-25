@@ -21,11 +21,11 @@
 
 package at.ait.dme.yuma.suite.apps.map.server.geo.transformation;
 
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
-import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

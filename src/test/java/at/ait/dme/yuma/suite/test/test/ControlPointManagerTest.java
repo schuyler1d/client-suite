@@ -42,17 +42,17 @@ import org.junit.Test;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
 import at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationManager;
-import at.ait.dme.yuma.suite.apps.core.shared.User;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageRect;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.User;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageRect;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPoint;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.tileset.TilesetGenerator;
-import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
 
 public class ControlPointManagerTest {
 

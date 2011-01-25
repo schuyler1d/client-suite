@@ -24,8 +24,8 @@ package at.ait.dme.yuma.suite.apps.map.server.geo.transformation;
 import java.util.ArrayList;
 import java.util.List;
 
-import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
 
 
 /**

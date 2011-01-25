@@ -21,12 +21,12 @@
 
 package at.ait.dme.yuma.suite.apps.core.client;
 
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionHandler;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.HasAnnotationSelectionHandlers;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.HasAnnotationSelectionHandlers;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.MediaFragment;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.MediaFragment;
 
 import com.google.gwt.event.dom.client.HasLoadHandlers;
 import com.google.gwt.event.shared.HandlerManager;

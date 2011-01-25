@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.apps.core.shared.services.auth;
 
-import at.ait.dme.yuma.suite.apps.core.shared.User;
+import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

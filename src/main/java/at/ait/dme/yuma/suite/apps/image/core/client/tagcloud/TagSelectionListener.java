@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.apps.image.core.client.tagcloud;
 
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 
 /**
  * Listener for reacting to Tag Selection Events in the tag cloud.

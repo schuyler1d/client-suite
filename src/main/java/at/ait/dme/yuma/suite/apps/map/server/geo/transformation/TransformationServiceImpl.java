@@ -24,10 +24,10 @@ package at.ait.dme.yuma.suite.apps.map.server.geo.transformation;
 import java.util.ArrayList;
 import java.util.List;
 
-import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.geo.XYCoordinate;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.TransformationService;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TransformationException;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.XYCoordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.services.TransformationService;
+import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TransformationException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 

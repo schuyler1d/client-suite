@@ -33,12 +33,12 @@ import org.gwt.mosaic.ui.client.layout.LayoutPanel;
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.AnnotateClickHandler;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionEvent;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionHandler;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.HasAnnotationSelectionHandlers;
-import at.ait.dme.yuma.suite.apps.core.shared.User;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionHandler;
+import at.ait.dme.yuma.suite.apps.core.client.events.selection.HasAnnotationSelectionHandlers;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceAsync;
 

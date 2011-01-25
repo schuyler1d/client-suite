@@ -31,13 +31,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
-import at.ait.dme.yuma.suite.apps.core.shared.User;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.Scope;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.model.User;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.Scope;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 
 /**
  * Converts annotations to and from JSON.

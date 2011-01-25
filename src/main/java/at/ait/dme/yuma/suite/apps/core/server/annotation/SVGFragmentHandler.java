@@ -36,8 +36,8 @@ import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageRect;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageRect;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Color;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Cross;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.Ellipse;

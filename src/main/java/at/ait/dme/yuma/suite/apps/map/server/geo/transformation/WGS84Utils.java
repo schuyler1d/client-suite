@@ -21,7 +21,7 @@
 
 package at.ait.dme.yuma.suite.apps.map.server.geo.transformation;
 
-import at.ait.dme.yuma.suite.apps.map.shared.geo.WGS84Coordinate;
+import at.ait.dme.yuma.suite.apps.map.shared.model.geo.WGS84Coordinate;
 
 
 /**

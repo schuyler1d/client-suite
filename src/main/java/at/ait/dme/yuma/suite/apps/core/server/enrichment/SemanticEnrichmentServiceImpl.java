@@ -42,7 +42,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.services.enrichment.SemanticEnrichmentService;
 import at.ait.dme.yuma.suite.apps.core.shared.services.enrichment.SemanticEnrichmentServiceException;
 import at.ait.dme.yuma.suite.apps.core.shared.services.enrichment.SemanticTagSuggestions;

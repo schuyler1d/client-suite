@@ -25,7 +25,7 @@ import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupPanel;
 
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.raphael.AnimationEventHandler;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.raphael.BBox;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.raphael.Image;

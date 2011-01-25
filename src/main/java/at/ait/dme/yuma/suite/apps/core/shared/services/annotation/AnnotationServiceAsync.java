@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.apps.core.shared.services.annotation;
 import java.util.Collection;
 import java.util.Set;
 
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

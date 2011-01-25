@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
 import at.ait.dme.magicktiler.MagickTiler;
 import at.ait.dme.magicktiler.tms.TMSTiler;
 import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TilingException;
+import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilingException;
 
 /**
  * This class uses MagickTiler to generate TMS tiles for

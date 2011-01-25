@@ -39,10 +39,10 @@ import org.apache.log4j.Logger;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
 import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.TilesetService;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TilesetNotAvailableException;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.TilingException;
-import at.ait.dme.yuma.suite.apps.map.shared.rpc.exception.UnsupportedTileSchemeException;
+import at.ait.dme.yuma.suite.apps.map.shared.services.TilesetService;
+import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilesetNotAvailableException;
+import at.ait.dme.yuma.suite.apps.map.shared.services.exception.TilingException;
+import at.ait.dme.yuma.suite.apps.map.shared.services.exception.UnsupportedTileSchemeException;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap;

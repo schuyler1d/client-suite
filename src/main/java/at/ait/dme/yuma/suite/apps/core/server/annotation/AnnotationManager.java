@@ -44,11 +44,11 @@ import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedH
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap.EvictionPolicy;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceException;
-import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageFragment;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 
 /**
  * This class contains all actions on annotations.

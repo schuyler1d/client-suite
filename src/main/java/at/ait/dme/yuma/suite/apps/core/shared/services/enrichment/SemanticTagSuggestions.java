@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
+import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 
 /**
  * A group of {@link SemanticTag}s (with a name and type). 

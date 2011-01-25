@@ -37,9 +37,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.events.AnnotateClickHandler;
-import at.ait.dme.yuma.suite.apps.core.shared.User;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
