@@ -256,7 +256,9 @@ public class AnnotationLayer {
 				if (!isExternalHilight) { // Ignore if select was triggered externally from the annotation tree panel
 					ImageAnnotation annotation = findByVectorFeature(feature);
 					if (annotation != null) {
-						if (handlerManager != null) handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, true));
+						if (handlerManager != null) {
+							handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, true));
+						}
 					}
 				} else {
 					isExternalHilight = false; // Reset for next event
@@ -271,7 +273,8 @@ public class AnnotationLayer {
 				if (!isExternalHilight) { // Ignore if select was triggered externally from the annotation tree panel
 					ImageAnnotation annotation = findByVectorFeature(feature);
 					if (annotation != null) {
-						if (handlerManager != null) handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, false));
+						if (handlerManager != null)
+							handlerManager.fireEvent(new AnnotationSelectionEvent(annotation, false));
 					}
 				} else {
 					isExternalHilight = false; // Reset for next event

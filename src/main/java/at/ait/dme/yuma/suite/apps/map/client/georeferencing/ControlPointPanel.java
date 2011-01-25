@@ -121,8 +121,9 @@ public class ControlPointPanel extends MapAnnotationPanel {
 					annotationTree.removeItems();
 					
 					for (Annotation a : foundAnnotations) {
-						if (isControlPoint(a))
+						if (isControlPoint(a)) {
 							annotationTree.addAnnotation(a);
+						}
 					}
 					
 					scrollPanel.add(annotationTree);				

@@ -151,6 +151,9 @@ public class AnnotationTree extends Tree {
 	
 	public void selectAnnotation(Annotation annotation, boolean selected) {
 		final AnnotationTreeNode node = nodes.get(annotation);
+		if (node == null)
+			return;
+		
 		if(selected) {
 			node.select();
 			Scheduler.get().scheduleDeferred(new ScheduledCommand() {
