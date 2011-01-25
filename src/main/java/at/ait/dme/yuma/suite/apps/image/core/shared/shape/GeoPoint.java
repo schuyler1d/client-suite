@@ -29,8 +29,6 @@ package at.ait.dme.yuma.suite.apps.image.core.shared.shape;
  */
 public class GeoPoint extends Shape {
 	private static final long serialVersionUID = 1468050282536498352L;
-
-	private String name = null;
 	
 	private Point point = new Point();
 	private double lat = 0.0;
@@ -49,22 +47,20 @@ public class GeoPoint extends Shape {
 		
 		this.lat = shape.lat;
 		this.lng = shape.lng;
-		this.name = new String(shape.name);
 		this.point = new Point(shape.point.getX(), shape.point.getY());
 	}
 	
-	public GeoPoint(String name, int x, int y, double lat, double lng) {
-		this(x, y, 1, 1, name, new Point(x,y), lat, lng);
+	public GeoPoint(int x, int y, double lat, double lng) {
+		this(x, y, 1, 1, new Point(x,y), lat, lng);
 	}
 	
-	public GeoPoint(String name, Point point, double lat, double lng) {
-		this(point.getX(), point.getY(), 1, 1, name, point, lat, lng);
+	public GeoPoint(Point point, double lat, double lng) {
+		this(point.getX(), point.getY(), 1, 1, point, lat, lng);
 	}
 	
 	public GeoPoint(int left, int top, int width, int height, 
-			String name, Point point, double lat, double lng) {
+			Point point, double lat, double lng) {
 		super(left, top, width, height, new Color(0,0,0), 0);
-		this.name = name;
 		this.point = point;
 		this.lat = lat;
 		this.lng = lng;
@@ -83,11 +79,6 @@ public class GeoPoint extends Shape {
 		GeoPoint geoPoint = (GeoPoint)obj;
 		if(!point.equals(geoPoint.point)) return false;
 		if(lat != geoPoint.lat || lng != geoPoint.lng) return false;
-		if (name == null) {
-			if (geoPoint.name != null)
-				return false;
-		} else if (!name.equals(geoPoint.name))
-			return false;
 	
 		return super.equals(geoPoint);
 	}
@@ -95,10 +86,6 @@ public class GeoPoint extends Shape {
 	@Override
 	public int hashCode() {
 		return super.hashCode();
-	}
-	
-	public String getName() {
-		return name;
 	}
 
 	public Point getCoordinates() {

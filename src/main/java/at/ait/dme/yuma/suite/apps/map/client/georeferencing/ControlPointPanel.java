@@ -21,9 +21,13 @@
 
 package at.ait.dme.yuma.suite.apps.map.client.georeferencing;
 
-import java.util.Set;
+import java.util.Collection;
 
+import org.gwt.mosaic.ui.client.MessageBox;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.LocaleInfo;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -31,10 +35,15 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
+import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.shared.User;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationService;
+import at.ait.dme.yuma.suite.apps.core.shared.services.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
+import at.ait.dme.yuma.suite.apps.map.client.annotation.MapAnnotationPanel;
 
 /**
  * Composite used to manage control points
@@ -42,17 +51,15 @@ import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class ControlPointComposite extends AnnotationPanel {
+public class ControlPointPanel extends MapAnnotationPanel {
 	
 	/**
 	 * 'Create control point' button
 	 */
 	private PushButton createButton;
 
-	public ControlPointComposite(TileBasedImageViewer imageComposite, 
-			ControlPointForm imageAnnotationForm, Set<String> shapeTypes)   {
-	
-		super(imageComposite, imageAnnotationForm); //, shapeTypes);
+	public ControlPointPanel(TileBasedImageViewer imageViewer)   {
+		super(imageViewer, new ControlPointEditForm(imageViewer.getControlPointLayer()));
 	}
 
 	@Override
@@ -83,7 +90,7 @@ public class ControlPointComposite extends AnnotationPanel {
 		// 'Create Control Point' button
 		createButton = new PushButton(YUMACoreProperties.getConstants().actionCreateCP());
 		createButton.setStyleName("imageAnnotation-button");
-		// createButton.addClickHandler(new CreateClickHandler(this,null,false,false));
+		createButton.addClickHandler(new AnnotateClickHandler(this, null, null, false));
 		createButton.setEnabled(!User.get().isAnonymous());
 		buttons.add(createButton);
 		
@@ -97,4 +104,33 @@ public class ControlPointComposite extends AnnotationPanel {
 		
 		return header;
 	}
+	
+	@Override
+	protected void loadAnnotations() {
+		AnnotationServiceAsync imageAnnotationService = (AnnotationServiceAsync) GWT
+				.create(AnnotationService.class);
+
+		imageAnnotationService.listAnnotations(YUMACoreProperties.getObjectURI(),
+			new AsyncCallback<Collection<Annotation>>() {
+				public void onFailure(Throwable t) {
+					I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
+					MessageBox.error(errorMessages.error(), errorMessages.failedToReadAnnotations() + " (" + t.getMessage() + ")");
+				}
+
+				public void onSuccess(Collection<Annotation> foundAnnotations) {
+					annotationTree.removeItems();
+					
+					for (Annotation a : foundAnnotations) {
+						if (isControlPoint(a))
+							annotationTree.addAnnotation(a);
+					}
+					
+					scrollPanel.add(annotationTree);				
+					disableLoadingImage();
+					layout();
+				}
+			});	
+	}
+	
+	
 }

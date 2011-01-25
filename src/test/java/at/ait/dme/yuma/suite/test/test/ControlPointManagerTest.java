@@ -111,7 +111,7 @@ public class ControlPointManagerTest {
 			annotation.setObjectUri(imageUrl);
 			annotation.setCreatedBy(new User("importer"));
 			ImageFragment fragment = new ImageFragment(new ImageRect(),
-					new GeoPoint(cp.getName(),cp.getXY().x,cp.getXY().y,cp.getLatLon().lat,cp.getLatLon().lon));
+					new GeoPoint(cp.getXY().x,cp.getXY().y,cp.getLatLon().lat,cp.getLatLon().lon));
 			annotation.setFragment(fragment);
 			annotation.setTitle("controlPoint for:"+cp.getName());
 			iam.createAnnotation(annotation);

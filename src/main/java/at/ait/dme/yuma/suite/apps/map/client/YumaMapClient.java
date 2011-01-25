@@ -32,15 +32,12 @@ import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.Annotati
 import at.ait.dme.yuma.suite.apps.core.client.treeview.events.selection.AnnotationSelectionHandler;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.core.shared.User;
-import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.services.auth.AuthService;
 import at.ait.dme.yuma.suite.apps.core.shared.services.auth.AuthServiceAsync;
-import at.ait.dme.yuma.suite.apps.image.core.client.ImageAnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.image.core.shared.shape.ShapeTypeRegistry;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
+import at.ait.dme.yuma.suite.apps.map.client.annotation.MapAnnotationPanel;
 import at.ait.dme.yuma.suite.apps.map.client.explore.ExplorationComposite;
-import at.ait.dme.yuma.suite.apps.map.client.georeferencing.ControlPointComposite;
-import at.ait.dme.yuma.suite.apps.map.client.georeferencing.ControlPointForm;
+import at.ait.dme.yuma.suite.apps.map.client.georeferencing.ControlPointPanel;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -109,12 +106,11 @@ public class YumaMapClient implements EntryPoint {
 			}
 		});
 		
-		// Parent tab panel 
 		TabLayoutPanel tabPanel = new DecoratedTabLayoutPanel();
 		tabPanel.setPadding(0);
 		showAnnotationsTab(tabPanel);
 
-		// showGeoReferencingTab(tabPanel);
+		showGeoReferencingTab(tabPanel);
 		showExplorationTab(tabPanel);
 		tabPanel.addSelectionHandler(new SelectionHandler<Integer>() {
 				
@@ -141,11 +137,7 @@ public class YumaMapClient implements EntryPoint {
 	private void showAnnotationsTab(TabLayoutPanel tabPanel) {
 		AnnotationPanel annComposite;
 
-		annComposite = new AnnotationPanel(mapViewer, 
-				new ImageAnnotationEditForm(
-						MediaType.MAP,
-						((TileBasedImageViewer)mapViewer).getTagCloud()));			
-
+		annComposite = new MapAnnotationPanel(mapViewer); 
 		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
 			public void onAnnotationSelection(AnnotationSelectionEvent event) {
@@ -156,11 +148,9 @@ public class YumaMapClient implements EntryPoint {
 	}
 	
 	private void showGeoReferencingTab(TabLayoutPanel tabPanel) {
-		AnnotationPanel geoRefComposite = new ControlPointComposite(
-				(TileBasedImageViewer)mapViewer, 
-				new ControlPointForm(((TileBasedImageViewer)mapViewer).getControlPointLayer()), 
-				ShapeTypeRegistry.geoTypes());
-		
+		AnnotationPanel geoRefComposite =
+			new ControlPointPanel((TileBasedImageViewer) mapViewer); 
+
 		geoRefComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override
 			public void onAnnotationSelection(AnnotationSelectionEvent event) {

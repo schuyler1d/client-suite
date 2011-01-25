@@ -84,7 +84,7 @@ public class ControlPoint implements IsSerializable {
 			throw new IllegalArgumentException("annotation is not a control point");
 
 		GeoPoint gp = (GeoPoint) ((ImageFragment)annotation.getFragment()).getShape();
-		return new ControlPoint(gp.getName(), 
+		return new ControlPoint(annotation.getTitle(),
 				new XYCoordinate(gp.getX(), gp.getY()),
 				new WGS84Coordinate(gp.getLat(), gp.getLng()));
 	}

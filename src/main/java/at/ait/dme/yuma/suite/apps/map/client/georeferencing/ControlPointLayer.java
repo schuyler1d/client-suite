@@ -51,7 +51,7 @@ public class ControlPointLayer extends AnnotationLayer {
 	/**
 	 * Reference to Control Point Form
 	 */
-	private ControlPointForm controlPointForm;
+	private ControlPointEditForm controlPointForm;
 	
 	public ControlPointLayer(String layerName, MapComponent mapComponent, HandlerManager handlerManager) {
 		super(layerName, mapComponent, handlerManager, false);
@@ -140,7 +140,6 @@ public class ControlPointLayer extends AnnotationLayer {
 		if (editedFeature != null) {
 			Point p = (Point) editedFeature.getGeometry();
 			return new GeoPoint(
-					controlPointForm.getAnnotation().getTitle(),
 					Integer.valueOf((int)p.getX()), 
 					Integer.valueOf((int)p.getY()), 
 					controlPointForm.getLat(),
@@ -150,7 +149,7 @@ public class ControlPointLayer extends AnnotationLayer {
 		return null;
 	}
 	
-	public void setControlPointForm(ControlPointForm controlPointForm) {
+	public void setControlPointForm(ControlPointEditForm controlPointForm) {
 		this.controlPointForm = controlPointForm;
 	}
 

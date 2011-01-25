@@ -67,7 +67,6 @@ public class SVGFragmentHandler {
 	private static final String SVG_Y2 = "y2";
 	private static final String LAT = "lat";
 	private static final String LNG = "lng";
-	private static final String NAME = "name";
 	
 	private static final String SVG_WIDTH = "width";
 	private static final String SVG_HEIGHT = "height";
@@ -269,10 +268,9 @@ public class SVGFragmentHandler {
 			int y=new Integer(pointElement.getAttributeValue(SVG_Y));
 			double lat=new Double(pointElement.getAttributeValue(LAT));
 			double lng=new Double(pointElement.getAttributeValue(LNG));
-			String name=pointElement.getAttributeValue(NAME);
 			
 			shape = new GeoPoint(useRect.getLeft(), useRect.getTop(), useRect.getWidth(), 
-					useRect.getHeight(), name, new Point(x, y), lat, lng);
+					useRect.getHeight(), new Point(x, y), lat, lng);
 		}
 		return shape;
 	}
@@ -463,7 +461,6 @@ public class SVGFragmentHandler {
 			shapeEl.setAttribute(new Attribute(SVG_Y, new Integer(point.getY()).toString()));
 			shapeEl.setAttribute(new Attribute(LAT, new Double(point.getLat()).toString()));		
 			shapeEl.setAttribute(new Attribute(LNG, new Double(point.getLng()).toString()));
-			shapeEl.setAttribute(new Attribute(NAME, point.getName()));
 			symbol.addContent(shapeEl);		
 		}
 		

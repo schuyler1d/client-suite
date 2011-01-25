@@ -21,11 +21,18 @@
 
 package at.ait.dme.yuma.suite.apps.map.client.georeferencing;
 
+import java.util.Date;
+
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.events.CancelClickHandler;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.events.SaveClickHandler;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.events.UpdateClickHandler;
+import at.ait.dme.yuma.suite.apps.core.shared.User;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.datamodel.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.image.core.shared.datamodel.ImageAnnotation;
@@ -50,7 +57,7 @@ import com.google.gwt.user.client.ui.TextBox;
  * 
  * @author Rainer Simon
  */
-public class ControlPointForm extends AnnotationEditForm {
+public class ControlPointEditForm extends AnnotationEditForm {
 	
 	/**
 	 * Place name
@@ -73,11 +80,13 @@ public class ControlPointForm extends AnnotationEditForm {
 	 */
 	private ControlPointLayer controlPointLayer;
 	
-	public ControlPointForm(ControlPointLayer controlPointLayer) {
+	public ControlPointEditForm(ControlPointLayer controlPointLayer) {
 		this.controlPointLayer = controlPointLayer;
 	}
 	
-	public ControlPointForm(AnnotationPanel panel, AnnotationTreeNode annotation, ControlPointLayer controlPointLayer) {
+	public ControlPointEditForm(AnnotationPanel panel, AnnotationTreeNode annotation, ControlPointLayer controlPointLayer) {
+		super(panel, annotation, null);
+		
 		// Reference to control point layer
 		this.controlPointLayer = controlPointLayer;
 		
@@ -152,35 +161,35 @@ public class ControlPointForm extends AnnotationEditForm {
 		form.add(lonPanel);
 		form.add(latPanel);
 		form.add(xyPanel);
-		form.add(createButtonsPanel(panel, annotation.getAnnotation()));
+		form.add(createButtonsPanel(panel, annotation));
 		form.setStyleName("imageAnnotation-form");		
 		initWidget(form);
 		
-		controlPointLayer.showActiveFragmentPanel(((ImageAnnotation)annotation.getAnnotation()), false);
+		controlPointLayer.setControlPointForm(this);
+		if (annotation != null) {
+			controlPointLayer
+				.showActiveFragmentPanel((ImageAnnotation) annotation.getAnnotation(), false);
+		} else {
+			controlPointLayer
+				.showActiveFragmentPanel(null, false);
+		}
 	}
 	
-	private HorizontalPanel createButtonsPanel(AnnotationPanel panel, Annotation annotation) {
+	private HorizontalPanel createButtonsPanel(AnnotationPanel panel, AnnotationTreeNode annotation) {
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
 		
 		PushButton saveButton = new PushButton(YUMACoreProperties.getConstants().actionSave());
-		/*
-		if(update) {
-			saveButton.addClickHandler(new UpdateClickHandler(annotationComposite, 
-					annotationTreeNode, this));
+		if (annotation == null) {
+			saveButton.addClickHandler(new SaveClickHandler(panel, null, this));
 		} else {
-			saveButton.addClickHandler(new SaveClickHandler(annotationComposite, 
-					annotationTreeNode, this));
+			saveButton.addClickHandler(new UpdateClickHandler(panel, annotation, null, this));
 		}
-		*/
 		saveButton.setStyleName("imageAnnotation-form-button");
 		buttonsPanel.add(saveButton);
 		
 		PushButton cancelButton = new PushButton(YUMACoreProperties.getConstants().actionCancel());
 		cancelButton.setStyleName("imageAnnotation-form-button");
-		/*
-		cancelButton.addClickHandler(new CancelClickHandler(annotationComposite,
-				annotationTreeNode));
-		*/
+		cancelButton.addClickHandler(new CancelClickHandler(panel, annotation));
 		buttonsPanel.add(cancelButton);
 		
 		return buttonsPanel;
@@ -190,7 +199,7 @@ public class ControlPointForm extends AnnotationEditForm {
 	public AnnotationEditForm newInstance(AnnotationPanel panel, 
 			AnnotationTreeNode annotation, AnnotationTreeNode parent) {
 		
-		return new ControlPointForm(panel, annotation, controlPointLayer);
+		return new ControlPointEditForm(panel, annotation, controlPointLayer);
 	}
 	
 	private void doAsyncGeocoding(String place) {
@@ -224,10 +233,24 @@ public class ControlPointForm extends AnnotationEditForm {
 
 	@Override
 	public Annotation getAnnotation() {
+		Date timestamp = new Date();
+		
 		Annotation a = new ImageAnnotation();
+		a.setObjectUri(YUMACoreProperties.getObjectURI());
+		
+		if (annotation == null) {
+			a.setCreated(timestamp);
+		} else {
+			a.setCreated(annotation.getAnnotation().getCreated());
+		}
+		
+		a.setLastModified(timestamp);
+		a.setCreatedBy(User.get());
+		a.setMediaType(MediaType.MAP);
 		a.setTitle(placeName.getValue());
-		a.setText("x/y:" + xy.getText() + "<br/>Lat=" + lat.getText() + ", Lon=" + lon.getText());
+		a.setText("Control Point for '" + placeName.getValue().trim() + "' (" + lat.getText() + ", " + lon.getText() + ")");
 		a.setScope(Scope.PUBLIC);
+		a.setFragment(panel.getMediaViewer().getActiveMediaFragment());				
 		return a;
 	}
 

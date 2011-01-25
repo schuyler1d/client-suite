@@ -86,7 +86,7 @@ public class AnnotationPanel extends Composite
 	/**
 	 * The scroll panel which containes the annotation tree
 	 */
-	private ScrollPanel scrollPanel = new ScrollPanel();	
+	protected ScrollPanel scrollPanel = new ScrollPanel();	
 	private int scrollPosition = 0;
 
 	/**
@@ -102,7 +102,7 @@ public class AnnotationPanel extends Composite
 	/**
 	 * The annotation tree
 	 */
-	private AnnotationTree annotationTree;
+	protected AnnotationTree annotationTree;
 	
 	/**
 	 * 'Annotate' buttons
@@ -310,7 +310,7 @@ public class AnnotationPanel extends Composite
 	/**
 	 * makes a server call to retrieve all annotations for the image and displays the using a tree
 	 */
-	private void loadAnnotations() {
+	protected void loadAnnotations() {
 		AnnotationServiceAsync imageAnnotationService = (AnnotationServiceAsync) GWT
 				.create(AnnotationService.class);
 
