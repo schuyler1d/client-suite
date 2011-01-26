@@ -55,7 +55,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * Image-specific sub-class of the AnnotationEdit form.
+ * Image-specific sub-class of the AnnotationEdit form. The media type
+ * can be configured (so that it can be used for Images and Maps); and 
+ * ti is compatible with the Tag Cloud.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon

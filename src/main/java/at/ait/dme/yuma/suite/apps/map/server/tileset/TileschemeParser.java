@@ -32,7 +32,8 @@ import org.jdom.input.SAXBuilder;
 import at.ait.dme.yuma.suite.apps.map.shared.Tileset;
 
 /**
- * A utility class for parsing tile scheme descriptor files
+ * A utility class for parsing tile scheme descriptor files.
+ * Currently supports Zoomify and TMS tile schemes.
  * 
  * @author Rainer Simon
  */

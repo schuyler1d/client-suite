@@ -25,7 +25,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.VoidShape;
 
 /**
- * Represents an image annotation with an unique addressable URI as id.
+ * An annotation subclass for annotations on images and maps.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon

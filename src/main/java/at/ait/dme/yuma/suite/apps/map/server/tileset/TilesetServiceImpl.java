@@ -49,7 +49,10 @@ import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedH
 import com.reardencommerce.kernel.collections.shared.evictable.ConcurrentLinkedHashMap.EvictionPolicy;
 
 /**
- * Implementation of the tileset service.
+ * Implementation of the tileset service. The tileset service will
+ * either generate a Tileset object based on an existing Zoomify or
+ * TMS descriptor, or generate a TMS tileset on the fly from an image
+ * file.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon

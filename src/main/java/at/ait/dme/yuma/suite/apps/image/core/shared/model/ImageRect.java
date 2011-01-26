@@ -24,7 +24,7 @@ package at.ait.dme.yuma.suite.apps.image.core.shared.model;
 import java.io.Serializable;
 
 /**
- * represents an image rect
+ * Represents an image rect.
  * 
  * @author Christian Sadilek
  */

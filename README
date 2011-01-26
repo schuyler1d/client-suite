@@ -5,9 +5,29 @@ WARNING: The YUMA Annotation Client Suite is not yet completed. The documentatio
 below is PRELIMINARY DEVELOPER DOC! And not yet suitable for end users!
 Please contact rainer.simon@ait.ac.at for further details.
 
-MORE WARNING: The YUMA client suite was massively restructured recently. That means 
-there may still be bugs lurking in various places. Also, the ANT build is currently
-outdated and will not work yet!
+TODOs
+-----
+- Re-enable NER
+- Improve the Keyboard listener for NER so that it listens to periods of
+  idleness rather than Space or '.' characters!
+- JSON/SVG parsing is now in Core module. Refactor this! Base JSON parsing
+  needs to stay in Core. Media-specific parts + SVG parsing belong into
+  ImageCore.
+- Split parsing/serializing functionality into two separate classes.
+- Clean up the services mess in the enrichment packages.
+- Clean up the map annotation tool packages. In particular, introduce a
+  package-by-feature structure for the services, and clean up services mess
+  in the .geo subpackage!
+- Finish the example pages
+- Finish the landing page
+- Move Userguide pages to Wicket
+- Create developer doc pages
+- Make sure everything from annotate.jsp, index.html and test.html is moved over
+  to Wicket and remove the files.
+- Integrate Christians Auth-Token decoding code
+- Geonames is constantly down - create a 'local' DB-based solution with a
+  Geonames dump
+- DBpedia lookup seems down for good. Investigate (and think about a local solution).
 
 Requirements
 ------------

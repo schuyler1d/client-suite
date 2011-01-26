@@ -43,7 +43,6 @@ import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TilingException;
  * images on the fly.
  * 
  * @author Christian Sadilek
- * @author Rainer Simon
  */
 public class TilesetGenerator {
 
