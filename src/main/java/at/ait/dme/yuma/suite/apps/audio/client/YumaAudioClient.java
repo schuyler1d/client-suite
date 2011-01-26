@@ -25,12 +25,18 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 
+/**
+ * Entry point class to the HTML5 audio annotation tool.
+ * 
+ * TODO implement!
+ * 
+ * @author Rainer Simon
+ */
 public class YumaAudioClient implements EntryPoint {
 
 	@Override
 	public void onModuleLoad() {
 		Label label = new Label("YUMA Audio Annotation");
-
 		RootPanel.get().add(label);
 	}
 }
