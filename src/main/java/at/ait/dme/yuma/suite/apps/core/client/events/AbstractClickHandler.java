@@ -24,9 +24,9 @@ package at.ait.dme.yuma.suite.apps.core.client.events;
 import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.server.RESTfulServiceException;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceAsync;
@@ -35,9 +35,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 
 /**
- * base click listener class
+ * Base click handler class.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
 public abstract class AbstractClickHandler implements ClickHandler {
 	
@@ -84,10 +85,9 @@ public abstract class AbstractClickHandler implements ClickHandler {
 	}
 	
 	/**
-	 * handle failures. in case of a conflict reload the application. 
-	 * 
-	 * @param caught
-	 * @param defaultMessage
+	 * Handle failures. In case of a conflict reload the application. 
+	 * @param t the failure
+	 * @param defaultMessage the default error message to use
 	 */
 	protected void handleFailure(Throwable caught, String defaultMessage) {
 		I18NErrorMessages errorMessages = (I18NErrorMessages) GWT.create(I18NErrorMessages.class);
@@ -99,11 +99,10 @@ public abstract class AbstractClickHandler implements ClickHandler {
 				panel.reload();								
 			} else {
 				MessageBox.error(errorMessages.error(), defaultMessage + " (" + e.getMessage() + ")");
-				// e.printStackTrace();
 			}
 		} catch (Throwable t) {
 			MessageBox.error(errorMessages.error(), defaultMessage + " (" + t.getMessage() + ")");
-			// t.printStackTrace();
 		}									
 	}
+	
 }

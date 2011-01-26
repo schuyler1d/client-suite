@@ -21,9 +21,9 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,9 +31,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusWidget;
 
 /**
- * click listener to save annotations
+ * Click handler to save a new annotation.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
 public class SaveClickHandler extends AbstractClickHandler {
 

@@ -25,7 +25,7 @@ import org.gwt.mosaic.ui.client.MessageBox;
 
 import at.ait.dme.yuma.suite.apps.core.client.I18NErrorMessages;
 import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.LoadingPopup;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.image.core.client.annotationpanel.ImageAnnotationEditForm;

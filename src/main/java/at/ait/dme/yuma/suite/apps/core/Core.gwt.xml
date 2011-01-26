@@ -1,4 +1,8 @@
 <module rename-to="yuma.core">
+	
+	<!-- TODO some modules are not needed here, but should be -->
+	<!-- included in the media-specific modules!              -->
+	
 	<inherits name='com.google.gwt.user.User'/>
 	<inherits name="com.google.gwt.i18n.I18N"/>
 	<inherits name='org.gwtwidgets.WidgetLibrary'/>    

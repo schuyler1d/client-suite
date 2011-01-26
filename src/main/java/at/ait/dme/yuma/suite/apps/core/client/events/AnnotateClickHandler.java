@@ -21,15 +21,17 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 
 /**
- * click listener to show the annotation form for annotation creation and update
+ * Click handler to start editing (create, update) an annotation. Triggers
+ * display of the annotation edit form.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
 public class AnnotateClickHandler extends AbstractClickHandler {
 	

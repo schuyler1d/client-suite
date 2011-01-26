@@ -27,9 +27,9 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 
 import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionEvent;
 import at.ait.dme.yuma.suite.apps.core.client.events.selection.AnnotationSelectionHandler;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;

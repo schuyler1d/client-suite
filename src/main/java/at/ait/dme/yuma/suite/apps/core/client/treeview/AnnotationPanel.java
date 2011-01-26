@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.annotationpanel;
+package at.ait.dme.yuma.suite.apps.core.client.treeview;
 
 import java.util.Collection;
 

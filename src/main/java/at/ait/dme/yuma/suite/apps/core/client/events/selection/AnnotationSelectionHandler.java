@@ -33,4 +33,5 @@ import com.google.gwt.event.shared.EventHandler;
 public interface AnnotationSelectionHandler extends EventHandler {
 
 	public void onAnnotationSelection(AnnotationSelectionEvent event);
+	
 }

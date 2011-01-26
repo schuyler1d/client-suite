@@ -21,17 +21,18 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.events;
 
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusWidget;
 
 /**
- * click listener to delete an annotation
+ * Click handler to delete an annotation.
  * 
  * @author Christian Sadilek
+ * @author Rainer Simon
  */
 public class DeleteClickHandler extends AbstractClickHandler {
 

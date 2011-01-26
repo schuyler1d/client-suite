@@ -64,4 +64,5 @@ public class AnnotationSelectionEvent extends GwtEvent<AnnotationSelectionHandle
 	public boolean isSelected() {
 		return selected;
 	}
+	
 }

@@ -24,12 +24,12 @@ package at.ait.dme.yuma.suite.apps.map.client.georeferencing;
 import java.util.Date;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationEditForm;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationPanel;
-import at.ait.dme.yuma.suite.apps.core.client.annotationpanel.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.events.CancelClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.SaveClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.UpdateClickHandler;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
