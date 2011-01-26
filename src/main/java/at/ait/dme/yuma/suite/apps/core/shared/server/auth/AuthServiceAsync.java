@@ -25,6 +25,11 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * Async interface to the auth service.
+ * 
+ * @author Rainer Simon
+ */
 public interface AuthServiceAsync {
 
 	public void getUser(AsyncCallback<User> callback);

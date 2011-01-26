@@ -30,7 +30,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
- * Interface to the image annotation service.
+ * The annotation service provides annotation CRUD operations
+ * to the JS client. 
  * 
  * @author Christian Sadilek
  * @author Rainer Simon
@@ -41,7 +42,7 @@ public interface AnnotationService extends RemoteService {
 	/**
 	 * Create a new annotation.
 	 * @param annotation the annotation
-	 * @return then new annotation's ID
+	 * @return then new annotation
 	 * @throws AnnotationServiceException if anything goes wrong
 	 */
 	public Annotation createAnnotation(Annotation annotation) 
@@ -49,8 +50,9 @@ public interface AnnotationService extends RemoteService {
 
 	/**
 	 * Update an existing annotation.
-	 * @param annotation the annotation
-	 * @return the updated annotation's ID
+	 * @param id the id of the annotation to update
+	 * @param annotation the new annotation
+	 * @return the updated annotation
 	 * @throws AnnotationServiceException if anything goes wrong
 	 */
 	public Annotation updateAnnotation(String id, Annotation annotation) 
@@ -76,6 +78,9 @@ public interface AnnotationService extends RemoteService {
 	/**
 	 * List annotations for the given object, filtering results by shape type. 
 	 * Use the class name as shape type e.g. <code>Ellipse.class.getName()<code>.
+	 * 
+	 * TODO ultimately we will no longer need this method!
+	 * 
 	 * @param objectId the object ID
 	 * @param shapeTypes the list of acceptable shape types 
 	 * @return the annotations

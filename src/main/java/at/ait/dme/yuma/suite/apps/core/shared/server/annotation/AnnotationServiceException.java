@@ -25,6 +25,12 @@ import java.io.Serializable;
 
 import at.ait.dme.yuma.suite.apps.core.shared.server.RESTfulServiceException;
 
+/**
+ * A general-purpose exception thrown by the annotation service in case
+ * of problems.
+ * 
+ * @author Rainer Simon
+ */
 public class AnnotationServiceException extends RESTfulServiceException implements Serializable {
 	private static final long serialVersionUID = -1021896871854802248L;
 

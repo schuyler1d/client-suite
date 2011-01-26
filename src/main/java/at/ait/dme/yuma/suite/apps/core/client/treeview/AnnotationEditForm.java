@@ -27,7 +27,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
- * Base class for image annotation forms
+ * Base class for image annotation edit forms.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon
@@ -58,7 +58,7 @@ public abstract class AnnotationEditForm extends Composite {
 		this.annotation = annotation;
 		this.parent = parent;
 	}
-	
+
 	public abstract AnnotationEditForm newInstance(AnnotationPanel panel,
 			AnnotationTreeNode annotation, AnnotationTreeNode parent);
 	

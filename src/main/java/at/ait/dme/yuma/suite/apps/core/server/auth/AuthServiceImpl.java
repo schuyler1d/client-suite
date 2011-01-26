@@ -27,6 +27,11 @@ import at.ait.dme.yuma.suite.framework.YUMAWebSession;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+/**
+ * Implementation of the auth service.
+ * 
+ * @author Rainer Simon
+ */
 public class AuthServiceImpl extends RemoteServiceServlet implements AuthService {
 
 	private static final long serialVersionUID = -3607603963872144162L;

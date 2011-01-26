@@ -26,6 +26,12 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+/**
+ * The auth service provides access to the authorized YUMA user 
+ * for this session (or null, if none).
+ *  
+ * @author Rainer Simon
+ */
 @RemoteServiceRelativePath("../auth")
 public interface AuthService extends RemoteService {
 

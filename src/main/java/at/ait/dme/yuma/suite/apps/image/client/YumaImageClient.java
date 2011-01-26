@@ -48,7 +48,7 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * This is the entry point to the application.
+ * Entry point to the image annotation application.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon

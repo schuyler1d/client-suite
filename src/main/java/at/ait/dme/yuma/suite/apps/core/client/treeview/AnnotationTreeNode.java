@@ -47,6 +47,13 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+/**
+ * The annotation tree node, i.e. the panel element that represents
+ * one annotation in the annotation tree.
+ *  
+ * @author Christian Sadilek
+ * @author Rainer Simon
+ */
 public class AnnotationTreeNode extends Composite 
 	implements HasMouseOutHandlers, HasMouseOverHandlers {
 	

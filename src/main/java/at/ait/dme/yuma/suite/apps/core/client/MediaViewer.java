@@ -34,7 +34,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 
 /**
- * Base class for all YUMA media viewers. 
+ * Base class for all YUMA 'media viewers'. A media viewer shows
+ * the annotatable media (image, map, audio, video) and provides
+ * the necessary methods for showing, hiding, editing, etc.
+ * annotations. 
  * 
  * @author Christian Sadilek
  * @author Rainer Simon

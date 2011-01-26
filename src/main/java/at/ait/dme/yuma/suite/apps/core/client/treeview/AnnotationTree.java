@@ -42,6 +42,12 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 
+/**
+ * The annotation tree.
+ * 
+ * @author Christian Sadilek
+ * @author Rainer Simon
+ */
 public class AnnotationTree extends Tree {
 	
 	private AnnotationPanel panel;

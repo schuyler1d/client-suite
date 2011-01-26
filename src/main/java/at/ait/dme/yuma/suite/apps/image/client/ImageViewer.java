@@ -73,11 +73,13 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
- * image composite that allows to zoom in and select a fragment of an image.
+ * YUMA media viewer implementation that shows an annotatable image.
+ * Provides zooming/panning. 
  * 
  * @author Christian Sadilek
  */
 public class ImageViewer extends MediaViewer {
+	
 	private static final int IMAGE_OFFSET_LEFT = 11;
 	private static final int IMAGE_OFFSET_TOP = 10;
 	private static final String PX = "px";

@@ -29,7 +29,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * Async interface to the image annotation service.
+ * Async interface to the annotation service.
  * 
  * @author Christian Sadilek
  * @author Rainer Simon
