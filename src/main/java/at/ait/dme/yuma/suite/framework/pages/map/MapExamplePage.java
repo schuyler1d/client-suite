@@ -29,19 +29,26 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
-import at.ait.dme.yuma.suite.YUMASuite;
+import at.ait.dme.yuma.suite.framework.YUMASuite;
 import at.ait.dme.yuma.suite.framework.pages.BaseExamplePage;
 
+/**
+ * Example page for the map annotation tool.
+ * 
+ * @author Rainer Simon
+ */
 public class MapExamplePage extends BaseExamplePage {
 	
 	public MapExamplePage(final PageParameters parameters) {
 		super("YUMA Map Annotation - Examples", parameters);
 		
 		List<MapExampleLink> links = new ArrayList<MapExampleLink>();
+		
 		links.add(new MapExampleLink(
 				"Map of Upper Austria",
 				"../map?objectURI=http://upload.wikimedia.org/wikipedia/commons/4/49/Hirschvogel_Map_Austria.jpg"
 		));
+		
 		links.add(new MapExampleLink(
 				"Ortelius World Map 1570",
 				"../map?objectURI=" + 

@@ -29,19 +29,26 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
-import at.ait.dme.yuma.suite.YUMASuite;
+import at.ait.dme.yuma.suite.framework.YUMASuite;
 import at.ait.dme.yuma.suite.framework.pages.BaseExamplePage;
 
+/**
+ * Example page for the image annotation tool.
+ * 
+ * @author Rainer Simon
+ */
 public class ImageExamplePage extends BaseExamplePage {
 	
 	public ImageExamplePage(final PageParameters parameters) {
 		super("YUMA Image Annotation - Examples", parameters);
 		
 		List<ImageExampleLink> links = new ArrayList<ImageExampleLink>();
+		
 		links.add(new ImageExampleLink(
 				"Perth",
 				"../image?objectURI=http://www.destination360.com/australia-south-pacific/australia/images/s/australia-perth.jpg"
 		));
+		
 		links.add(new ImageExampleLink(
 				"Sample from Swedish National Heritage Board",
 				"../image?objectURI=" +

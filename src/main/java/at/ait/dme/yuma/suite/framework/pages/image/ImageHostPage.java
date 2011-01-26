@@ -26,12 +26,16 @@ import org.apache.wicket.markup.html.JavascriptPackageResource;
 
 import at.ait.dme.yuma.suite.framework.pages.BaseHostPage;
 
+/**
+ * Host page for the image annotation tool.
+ * 
+ * @author Rainer Simon
+ */
 public class ImageHostPage extends BaseHostPage {
 	
 	public ImageHostPage(final PageParameters parameters) {
 		super("YUMA Image", "yuma.image/yuma.image.nocache.js", parameters);
 		
-		// Add required JS libaries
 		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
 		add(JavascriptPackageResource.getHeaderContribution("js/wz_jsgraphics.js"));		
 		

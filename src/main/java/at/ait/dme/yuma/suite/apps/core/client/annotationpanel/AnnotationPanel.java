@@ -225,12 +225,12 @@ public class AnnotationPanel extends Composite
 				mediaViewer.editAnnotation(null);	
 		} else {
 			if (annotation == null) {
-				// Reply
+				// New reply
 				annotationTree.showAnnotationEditForm(parent, editForm);
 				if (showFragmentEditor)
 					mediaViewer.editAnnotation(null);
 			} else {
-				// Update
+				// Update existing annotation (root or reply)
 				annotationTree.showAnnotationEditForm(annotation, editForm);
 				if (showFragmentEditor) {
 					mediaViewer.editAnnotation(annotation.getAnnotation());
@@ -249,7 +249,7 @@ public class AnnotationPanel extends Composite
 	}
 	
 	/**
-	 *  hides the annotation form, again either from above the annotation tree or from
+	 *  Hides the annotation form, again either from above the annotation tree or from
 	 *  underneath a tree node, also hides the active fragment panel. if in case of
 	 *  an update the operation was canceled we have to restore a possible fragment.
 	 *  
@@ -275,8 +275,10 @@ public class AnnotationPanel extends Composite
 		
 		mediaViewer.stopEditing();
 		if (!canceled && created != null && created.getFragment() != null) { 
+			// Updated or created new annotation -> add to media viewer
 			mediaViewer.showAnnotation(created);
 		} else if (canceled && parent != null) {
+			// Canceled editing of existing annotation -> add previous state to media viewer 
 			mediaViewer.showAnnotation(parent.getAnnotation());
 		}
 

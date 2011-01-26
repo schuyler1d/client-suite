@@ -26,22 +26,34 @@ import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 
-import at.ait.dme.yuma.suite.YUMASuite;
-import at.ait.dme.yuma.suite.YUMAWebSession;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
+import at.ait.dme.yuma.suite.framework.YUMASuite;
+import at.ait.dme.yuma.suite.framework.YUMAWebSession;
 import at.ait.dme.yuma.suite.framework.auth.MD5Util;
 
+/**
+ * Base class for all host pages. Host pages are (mostly) empty pages
+ * that launch the GWT annotation tool app. There is a separate host 
+ * page for each annotation tool; host pages are mapped to
+ * yuma-suite/[mediatype].
+ * 
+ * @author Rainer Simon
+ */
 public abstract class BaseHostPage extends WebPage {
 	
 	public BaseHostPage(String title, String js, final PageParameters params) {
 		add(JavascriptPackageResource.getHeaderContribution(js));
 		add(new Label("title", title));
 		
+		// Add the user to the session, if credentials are in the query string 
 		User user = getUser(params);
 		if (user != null)
 			YUMAWebSession.get().setUser(getUser(params));	
 
-		String baseUrl = YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest());		
+		String baseUrl = YUMASuite
+			.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest());
+		
+		// Add URL of the annotated object and the page base URL to the JS dictionary 
 		String dictionary = "\nvar parameters = {\n" +
 							"  objectURI: \"" + params.getString("objectURI") + "\",\n" +
 							"  baseURL:   \"" + baseUrl + "\", \n" +
@@ -49,6 +61,17 @@ public abstract class BaseHostPage extends WebPage {
 		add(new Label("dictionary", dictionary).setEscapeModelStrings(false));
     }; 
     
+    /**
+     * Extracts user credentials from the query string and
+     * creates a user object, if credentials are valid.
+     * 
+     * TODO modify this! needs to work with the encrypted/signed
+     * auth token; plain username+email MUST NOT BE ALLOWED when
+     * application is deployed in Deployment Mode.
+     * 
+     * @param params query string params
+     * @return the User
+     */
     private User getUser(PageParameters params) {
 		String username = params.getString("username");
 		if (username == null)

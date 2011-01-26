@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite;
+package at.ait.dme.yuma.suite.framework;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,20 +34,28 @@ import at.ait.dme.yuma.suite.framework.pages.image.ImageHostPage;
 import at.ait.dme.yuma.suite.framework.pages.map.MapExamplePage;
 import at.ait.dme.yuma.suite.framework.pages.map.MapHostPage;
 
+/**
+ * The entry point for the YUMA Suite Wicket Frontend.
+ * 
+ * @author Rainer Simon
+ */
 public class YUMASuite extends WebApplication {    
-    
+
 	private static final String HTTP = "http://";
 	
 	public YUMASuite() {
+		// Image tool URL mappings
 		this.mountBookmarkablePage("image", ImageHostPage.class);
 		this.mountBookmarkablePage("image/examples", ImageExamplePage.class);
 		
+		// Map tool URL mappings
 		this.mountBookmarkablePage("map", MapHostPage.class);
 		this.mountBookmarkablePage("map/examples", MapExamplePage.class);
 	}
 
 	@Override
 	public Class<? extends Page> getHomePage() {
+		// TODO needs to point to the HomePage class (when done)
 		return ImageExamplePage.class;
 	}
 	
@@ -56,11 +64,21 @@ public class YUMASuite extends WebApplication {
 		return new YUMAWebSession(request);
 	}
 	
+	/**
+	 * Utility method that returns true when the YUMA Suite is 
+	 * deployed in Development Mode.
+	 * @return true when the YUMA Suite is in dev mode
+	 */
 	public static boolean isDevMode() {
 		return YUMASuite.get()
 			.getConfigurationType().equals(WebApplication.DEVELOPMENT);
 	}
 	
+	/**
+	 * Utility method that constructs the base URL for a servlet request.
+	 * @param request the request
+	 * @return the base URL
+	 */
     public static String getBaseUrl(HttpServletRequest request) {
 		String baseURL = HTTP + request.getServerName();
 		

@@ -26,12 +26,16 @@ import org.apache.wicket.markup.html.JavascriptPackageResource;
 
 import at.ait.dme.yuma.suite.framework.pages.BaseHostPage;
 
+/**
+ * Host page for the map annotation tool.
+ * 
+ * @author Rainer Simon
+ */
 public class MapHostPage extends BaseHostPage {
 	
 	public MapHostPage(final PageParameters parameters) {
 		super("YUMA Map", "yuma.map/yuma.map.nocache.js", parameters);	
 		
-		// Add required JS libaries
 		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
 		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));
 		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));

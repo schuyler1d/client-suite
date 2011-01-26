@@ -23,6 +23,16 @@ package at.ait.dme.yuma.suite.framework.pages;
 
 import org.apache.wicket.markup.html.WebPage;
 
+/**
+ * A landing page to be shown when the user accesses the YUMA Suite root
+ * path (which should normally not happen). The page should simply provide a
+ * short abstract with general info about YUMA, plus links to the example pages
+ * and developer doc. 
+ * 
+ * TODO implement this
+ * 
+ * @author Rainer Simon
+ */
 public class HomePage extends WebPage {
 
 }
