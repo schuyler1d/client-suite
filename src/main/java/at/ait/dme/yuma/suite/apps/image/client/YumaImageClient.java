@@ -35,7 +35,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthServiceAsync;
-import at.ait.dme.yuma.suite.apps.image.core.client.annotationpanel.ImageAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEditForm;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

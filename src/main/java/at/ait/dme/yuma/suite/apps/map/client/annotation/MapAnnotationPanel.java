@@ -16,7 +16,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceAsync;
-import at.ait.dme.yuma.suite.apps.image.core.client.annotationpanel.ImageAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
