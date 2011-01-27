@@ -7,27 +7,35 @@ Please contact rainer.simon@ait.ac.at for further details.
 
 TODOs
 -----
-- Re-enable NER
-- Improve the Keyboard listener for NER so that it listens to periods of
-  idleness rather than Space or '.' characters!
+- Re-enable NER in the annotation edit form.
+- Improve the keyboard listener for NER so that it listens to periods of
+  idleness rather than Space or '.' characters.
+- Re-enable 'Show on Google Maps' in YUMA Maps.
+- The ImageAnnotationEditForm REALLY needs some better CSS styling.
 - JSON/SVG parsing is now in Core module. Refactor this! Base JSON parsing
   needs to stay in Core. Media-specific parts + SVG parsing belong into
-  ImageCore.
+  appropriate media module.
 - Split parsing/serializing functionality into two separate classes.
 - Clean up the services mess in the enrichment packages.
 - Clean up the map annotation tool packages. In particular, introduce a
-  package-by-feature structure for the services, and clean up services mess
+  package-by-feature structure for the services - and clean up services mess
   in the .geo subpackage!
-- Finish the example pages
-- Finish the landing page
-- Move Userguide pages to Wicket
-- Create developer doc pages
+- Finish the example pages.
+- Finish the landing page.
+- Move Userguide pages to Wicket.
+- Create developer doc pages.
 - Make sure everything from annotate.jsp, index.html and test.html is moved over
-  to Wicket and remove the files.
-- Integrate Christians Auth-Token decoding code
-- Geonames is constantly down - create a 'local' DB-based solution with a
-  Geonames dump
-- DBpedia lookup seems down for good. Investigate (and think about a local solution).
+  to Wicket and then delete those files.
+- Integrate Christians Auth-Token decoding code.
+- Geonames is CONSTANTLY down - create a DB-based solution with a local 
+  Geonames dump.
+- DBpedia lookup seems to have moved, changed endpoint, changed syntax (?)
+  Investigate - and think about a solution based on a local dump as well!
+- Controlled vocabulary tagging: see if this can be integrated. (Possibly makes
+  sense to integrate this with the DBpedia dump? "YUMA Tag Server"? -> Look into 
+  MOAT!)
+- Last but not least: we need more & better unit tests. Possibly some Web
+  tests, too. (Look into Wicket test tooling for this!)
 
 Requirements
 ------------
