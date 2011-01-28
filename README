@@ -14,6 +14,7 @@ TODOs
 - The ImageAnnotationEditForm REALLY needs some better CSS styling.
 - There is a strange character encoding problem. (Try adding a a tag with an 
   international character -> works -> reload the page -> character is messed up.)
+- Different drawing tools: 'place marker' feature!
 - JSON/SVG parsing is now in Core module. Refactor this! Base JSON parsing
   needs to stay in Core. Media-specific parts + SVG parsing belong into
   appropriate media module.
