@@ -185,6 +185,7 @@ public class AnnotationTreeNode extends Composite
 	
 	public void showAnnotationForm(AnnotationEditForm editForm) {
 		this.editForm = editForm;
+		addStyleName("imageAnnotation-edit");
 		container.add(editForm);
 		btnReply.setEnabled(false);
 		btnReplyFragment.setEnabled(false);
@@ -193,6 +194,7 @@ public class AnnotationTreeNode extends Composite
 
 	public void hideAnnotationForm() {
 		this.editForm.setVisible(false);
+		removeStyleName("imageAnnotation-edit");
 		btnReply.setEnabled(!User.get().isAnonymous());
 		btnReplyFragment.setEnabled(!User.get().isAnonymous());
 		btnEdit.setEnabled(true);
@@ -221,11 +223,13 @@ public class AnnotationTreeNode extends Composite
 	}
 	
 	public void select() {
-		setStyleName("imageAnnotation-selected");
+		removeStyleName("imageAnnotation");
+		addStyleName("imageAnnotation-selected");
 	}
 
 	public void deselect() {
-		setStyleName("imageAnnotation");
+		removeStyleName("imageAnnotation-selected");
+		addStyleName("imageAnnotation");
 	}
 	
 	@Override

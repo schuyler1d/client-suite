@@ -97,7 +97,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		this.mediaType = mediaType;
 		this.tagCloud = tagCloud;
 		
-    	formPanel.setStyleName("imageAnnotation-form");		
+    	formPanel.setStyleName("annotationEditForm");		
 		formPanel.add(createTitlePanel());
 		formPanel.add(createTextPanel());
 		formPanel.add(createScopePanel());
@@ -140,13 +140,13 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		}
 	}
 
-	protected HorizontalPanel createTitlePanel() {
-		HorizontalPanel titlePanel = new HorizontalPanel();
+	protected FlowPanel createTitlePanel() {
+		FlowPanel titlePanel = new FlowPanel();
 		
 		Label titleLabel = new Label(YUMACoreProperties.getConstants().annotationTitle());
-		titleLabel.setStyleName("imageAnnotation-form-label");
+		titleLabel.setStyleName("annotationEditForm-label");
 		
-		titleTextBox.setStyleName("imageAnnotation-form-title");
+		titleTextBox.setStyleName("annotationEditForm-title-input");
 		if (annotation == null && parent != null) {
 			titleTextBox.setText("RE: " + parent.getAnnotation().getTitle());
 		} else if (annotation != null) { 
@@ -158,13 +158,13 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		return titlePanel;		
 	}
 	
-	protected HorizontalPanel createTextPanel() {
-		HorizontalPanel textPanel = new HorizontalPanel();
+	protected FlowPanel createTextPanel() {
+		FlowPanel textPanel = new FlowPanel();
 		
 		Label textLabel = new Label(YUMACoreProperties.getConstants().annotationText());
-		textLabel.setStyleName("imageAnnotation-form-label");		
+		textLabel.setStyleName("annotationEditForm-label");		
 		
-		textArea.setStyleName("imageAnnotation-form-text");
+		textArea.setStyleName("annotationEditForm-text-input");
 		if (annotation != null)
 			textArea.setText(annotation.getAnnotation().getText());
 		

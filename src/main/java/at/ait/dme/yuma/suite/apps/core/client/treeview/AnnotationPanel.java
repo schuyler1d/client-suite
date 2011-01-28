@@ -119,7 +119,7 @@ public class AnnotationPanel extends Composite
 		this.mediaViewer = mediaViewer;
 		this.editForm = editForm;
 		
-		containerPanel.setStyleName("imageAnnotation-composite");
+		containerPanel.setStyleName("annotationPanel");
 		containerPanel.add(createHeader(), new BorderLayoutData(BorderLayout.Region.NORTH));
 
 		annotationTree = new AnnotationTree(this, handlerManager);

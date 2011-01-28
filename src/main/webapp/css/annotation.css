@@ -48,24 +48,6 @@ body,td,.a,div,.p {
 	height: 15px;
 }
 
-.imageAnnotation {
-	padding:6px;
-	margin-right: 4px;
-	background-color:#ffffff;
-	border: #ffffff solid 1px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-.imageAnnotation-selected {
-	padding:6px;
-	margin-right: 4px;
-	background-color: #FFC800;
-	border: #AF8900 solid 1px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
 .imageAnnotation-search {
 	font-size: 12px;
 }
@@ -209,12 +191,7 @@ body,td,.a,div,.p {
 }
 
 /* styles for the annotation composite */
-.imageAnnotation-composite {
-	font-family: arial;
-	font-size: 10px;
-	background-color: #ffffff;
-	z-index: 500;
-}
+
 
 .imageAnnotation-composite-loading {
 	border: 1px solid gray;
@@ -276,12 +253,6 @@ body,td,.a,div,.p {
 }
 
 /* styles for the annotation form */
-.imageAnnotation-form {
-	z-index: 100;
-	background-color: #E8E8E8;
-	width: 345px;
-}
-
 .imageAnnotation-form-title {
 	height: 16px;
 	margin-left: 10px;
@@ -292,27 +263,10 @@ body,td,.a,div,.p {
 	margin-bottom: 2px;
 }
 
-.imageAnnotation-form-label {
-	font-family: arial;
-	font-size: 10px;
-	margin-left: 5px;
-	margin-top: 10px;
-	width: 22px;
-}
-
 .imageAnnotation-form-radiobutton {
 	font-family: arial;
 	font-size: 10px;
 	padding: 4px 4px 3px 4px;
-}
-
-.imageAnnotation-form-text {
-	margin-left: 10px;
-	width: 300px;
-	font-family: arial;
-	font-size: 10px;
-	height: 80px;
-	margin-bottom: 5px;
 }
 
 .imageAnnotation-form-links {
