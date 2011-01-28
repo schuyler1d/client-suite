@@ -29,10 +29,14 @@ import org.apache.wicket.Response;
 import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import at.ait.dme.yuma.suite.framework.pages.audio.AudioExamplePage;
+import at.ait.dme.yuma.suite.framework.pages.audio.AudioHostPage;
 import at.ait.dme.yuma.suite.framework.pages.image.ImageExamplePage;
 import at.ait.dme.yuma.suite.framework.pages.image.ImageHostPage;
 import at.ait.dme.yuma.suite.framework.pages.map.MapExamplePage;
 import at.ait.dme.yuma.suite.framework.pages.map.MapHostPage;
+import at.ait.dme.yuma.suite.framework.pages.video.VideoExamplePage;
+import at.ait.dme.yuma.suite.framework.pages.video.VideoHostPage;
 
 /**
  * The entry point for the YUMA Suite Wicket Frontend.
@@ -51,6 +55,14 @@ public class YUMASuite extends WebApplication {
 		// Map tool URL mappings
 		this.mountBookmarkablePage("map", MapHostPage.class);
 		this.mountBookmarkablePage("map/examples", MapExamplePage.class);
+		
+		// Audio tool URL mappings
+		this.mountBookmarkablePage("audio", AudioHostPage.class);
+		this.mountBookmarkablePage("audio/examples", AudioExamplePage.class);
+		
+		// Video tool URL mappings
+		this.mountBookmarkablePage("video", VideoHostPage.class);
+		this.mountBookmarkablePage("video/examples", VideoExamplePage.class);
 	}
 
 	@Override
