@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.server.enrichment;
+package at.ait.dme.yuma.suite.apps.core.server.ner;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;

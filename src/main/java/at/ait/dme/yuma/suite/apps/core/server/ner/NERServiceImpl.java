@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.server.enrichment;
+package at.ait.dme.yuma.suite.apps.core.server.ner;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -32,56 +32,31 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.log4j.Logger;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClientExecutor;
 import org.jboss.resteasy.util.HttpResponseCodes;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import at.ait.dme.yuma.suite.apps.core.server.Config;
 import at.ait.dme.yuma.suite.apps.core.shared.model.PlainLiteral;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
-import at.ait.dme.yuma.suite.apps.core.shared.server.enrichment.SemanticEnrichmentService;
-import at.ait.dme.yuma.suite.apps.core.shared.server.enrichment.SemanticEnrichmentServiceException;
-import at.ait.dme.yuma.suite.apps.core.shared.server.enrichment.SemanticTagSuggestions;
+import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERServiceException;
+import at.ait.dme.yuma.suite.apps.core.shared.server.ner.SemanticTagSuggestions;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
- * Implementation of the {@link SemanticEnrichmentService}
+ * Implementation of the {@link NERService}
  * 
  * @author Manuel Gay
  * @author Rainer Simon
  */
-public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet 
-		implements SemanticEnrichmentService {
+public class NERServiceImpl extends RemoteServiceServlet implements NERService {
 
     private static final long serialVersionUID = 828296400911475297L;
-    
-    private static Logger logger = Logger.getLogger(SemanticEnrichmentServiceImpl.class);
-
-    /**
-     * UniVie link discovery service base URL property name
-     */
-    private static final String ENRICHMENT_SERVICE_URL_PROPERTY = "enrichmentServiceUrl";
-    
-    /**
-     * UniVie link discovery service base URL
-     */
-    private static String univieLinkDiscoveryServiceBaseURL;
-    
-    /**
-     * Tags used in UniVie link discovery service response
-     */
-    private static final String LINK_ABSTRACT = "linkAbstract";
-    private static final String LINK_LABEL = "linkLabel";
-    private static final String LINK = "link";
-    private static final String REFERENCE = "reference";
-    private static final String ENTITY_TYPE = "entityType";
-    private static final String ENTITY_NAME = "entityName";
 
     /**
      * OpenCalais endpoint base URL
@@ -116,57 +91,25 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
         super.init(servletConfig);
         Config config = new Config(servletConfig, 
         		getClass().getResourceAsStream("enrichment-service.properties"));
-        univieLinkDiscoveryServiceBaseURL = 
-        	config.getStringProperty(ENRICHMENT_SERVICE_URL_PROPERTY);
+
         openCalaisLicenceID = config.getStringProperty(OPENCALAIS_API_KEY_PROPERTY);
     }
     
 	@Override
-	public Collection<SemanticTagSuggestions> getTagSuggestions(String text, String service) 
-			throws SemanticEnrichmentServiceException {
+	public Collection<SemanticTagSuggestions> getTagSuggestions(String text) 
+			throws NERServiceException {
 		
-		if (service.equals(UNIVIE_LINK_DISCOVERY_SERVICE)) {
-			return getTagSuggestionsUniVie(text);
-		} else if (service.equals(OPENCALAIS_DBPEDIA_LOOKUP)) {
-			return getTagSuggestionsOpenCalaisDBpedia(text);
-		}
-		throw new SemanticEnrichmentServiceException("unsupported semantic enrichment service: " + service);
-	}
-	
-	private Collection<SemanticTagSuggestions> getTagSuggestionsUniVie(String text) 
-			throws SemanticEnrichmentServiceException {
-		
-		Collection<SemanticTagSuggestions> resources = null;
-        try {
-            // call the enrichment service
-            ClientResponse<String> response = getUniVieLinkDiscoveryEndpoint().findEntities(text);
-
-            // check the response
-            if (response.getStatus() != HttpResponseCodes.SC_OK)
-                throw new SemanticEnrichmentServiceException(response.getStatus());
-
-            // parse the result
-            resources = parseUniVieResponse(response.getEntity());
-
-        } catch (SemanticEnrichmentServiceException sese) {
-            logger.error(sese.getMessage(), sese);
-            throw sese;
-        } catch (Exception e) {
-            logger.error(e);
-            throw new SemanticEnrichmentServiceException(e.getMessage());
-        }
-
-        return resources;
+		return getTagSuggestionsOpenCalaisDBpedia(text);
 	}
 	
 	private Collection<SemanticTagSuggestions> getTagSuggestionsOpenCalaisDBpedia(String text) 
-			throws SemanticEnrichmentServiceException {
+			throws NERServiceException {
 		
 		// First, resolve named entities using OpenCalais
 		ClientResponse<String> response = getOpenCalaisEndpoint().findEntities(openCalaisLicenceID, text);
 
         if (response.getStatus() != HttpResponseCodes.SC_OK)
-        	throw new SemanticEnrichmentServiceException(response.getStatus());
+        	throw new NERServiceException(response.getStatus());
 		
 		// Then, try obtaining links for each entity via DBpediaLookup
 		DBpediaLookupEndpoint dbpedia = getDBpediaLookupEndpoint();
@@ -176,7 +119,7 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 				response = dbpedia.keyWordSearch(namedEntity, "any", "4");
 				
 				if (response.getStatus() != HttpResponseCodes.SC_OK)
-					throw new SemanticEnrichmentServiceException(response.getStatus());
+					throw new NERServiceException(response.getStatus());
 				
 				SemanticTagSuggestions ambiguousTags = new SemanticTagSuggestions(); 
 				ambiguousTags.setTitle(namedEntity);
@@ -184,59 +127,12 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
 				tagSuggestions.add(ambiguousTags);
 			}
 		} catch (Exception e) {
-			throw new SemanticEnrichmentServiceException(e.getMessage());
+			throw new NERServiceException(e.getMessage());
 		}
 		return tagSuggestions;
 	}
 
-    private Collection<SemanticTagSuggestions> parseUniVieResponse(String text) throws Exception {
-
-        Collection<SemanticTagSuggestions> resources = new ArrayList<SemanticTagSuggestions>();
-
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document doc = builder.parse(new ByteArrayInputStream(text.getBytes("UTF-8")));
-
-        NodeList childNodes = doc.getChildNodes();
-        for(int a = 0; a < childNodes.getLength(); a++) {
-            if(childNodes.item(a).getNodeName().equals("entities")) {
-                NodeList entities = childNodes.item(a).getChildNodes();
-                for (int i = 0; i < entities.getLength(); i++) {
-                    Node entity = entities.item(i);
-                    NodeList entityContent = entity.getChildNodes();
-                    SemanticTagSuggestions e = new SemanticTagSuggestions();
-                    resources.add(e);
-
-                    for (int j = 0; j < entityContent.getLength(); j++) {
-                        Node n = entityContent.item(j);
-                        String nName = n.getNodeName();
-                        if (nName.equals(ENTITY_NAME)) {
-                            e.setTitle(n.getTextContent());
-                        } else if (nName.equals(ENTITY_TYPE)) {
-                            e.setType(n.getTextContent());
-                        } else if (nName.equals(REFERENCE)) {
-                            NodeList referenceContent = n.getChildNodes();
-                            String url = "", label = "", description = "";
-                            for (int k = 0; k < referenceContent.getLength(); k++) {
-                                Node r = referenceContent.item(k);
-
-                                String nodeName = r.getNodeName();
-                                if (nodeName.equals(LINK)) {
-                                    url = r.getTextContent();
-                                } else if (nodeName.equals(LINK_LABEL)) {
-                                    label = r.getTextContent();
-                                } else if (nodeName.equals(LINK_ABSTRACT)) {
-                                    description = r.getTextContent();
-                                }
-                            }
-                            e.addTag(new SemanticTag(e.getTitle(), new ArrayList<PlainLiteral>(), e.getType(), label, description, url));
-                        }
-                    }
-                }
-            }
-        }
-        return resources;
-    }
-    
+  
 	private List<String> parseOpenCalaisResponse(String xml) throws Exception {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = builder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
@@ -279,13 +175,6 @@ public class SemanticEnrichmentServiceImpl extends RemoteServiceServlet
         
         return tags;
 	}
-	
-    private UniVieLinkDiscoveryEndpoint getUniVieLinkDiscoveryEndpoint() {
-        HttpClient client = new HttpClient();
-        return ProxyFactory.create(UniVieLinkDiscoveryEndpoint.class, univieLinkDiscoveryServiceBaseURL,
-        		new ApacheHttpClientExecutor(client));
-
-    }
     
     private OpenCalaisEndpoint getOpenCalaisEndpoint() {
     	HttpClient client = new HttpClient();

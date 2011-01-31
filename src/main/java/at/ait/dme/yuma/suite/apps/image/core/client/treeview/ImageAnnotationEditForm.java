@@ -22,10 +22,12 @@
 package at.ait.dme.yuma.suite.apps.image.core.client.treeview;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
+import at.ait.dme.yuma.suite.apps.core.client.events.AbstractKeyboardHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.CancelClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.SaveClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.UpdateClickHandler;
@@ -37,11 +39,16 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.Scope;
+import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERServiceAsync;
+import at.ait.dme.yuma.suite.apps.core.shared.server.ner.SemanticTagSuggestions;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineHTML;
@@ -80,6 +87,9 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
     private MediaType mediaType;
     
 	private TagCloud tagCloud;
+	
+	private NERServiceAsync enrichmentService = 
+		(NERServiceAsync) GWT.create(NERService.class);
 
     public ImageAnnotationEditForm(MediaType mediaType, TagCloud tagCloud) {
     	super();
@@ -167,6 +177,17 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		textArea.setStyleName("annotationEditForm-text-input");
 		if (annotation != null)
 			textArea.setText(annotation.getAnnotation().getText());
+		textArea.addKeyDownHandler(new AbstractKeyboardHandler(1000) {
+			@Override
+			public void onSpace() {
+				// Do nothing
+			}
+			
+			@Override
+			public void onIdle() {
+				getTagSuggestions();
+			}
+		});
 		
 		textPanel.add(textLabel);
 		textPanel.add(textArea);
@@ -287,6 +308,28 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		tagPanel.remove(tags.get(tag));
 		tags.remove(tag);
 		panel.layout();
+	}
+	
+	private void getTagSuggestions() {
+    	enrichmentService.getTagSuggestions(textArea.getText(),
+    			new AsyncCallback<Collection<SemanticTagSuggestions>>() {
+					@Override
+					public void onFailure(Throwable t) {
+						// Do nothing...
+					}
+
+					@Override
+					public void onSuccess(Collection<SemanticTagSuggestions> result) {
+						if (result.size() > 0 && !tagCloud.isVisible()) tagCloud.show();
+						
+						for (SemanticTagSuggestions group : result) {
+							for (SemanticTag tag : group.getTags()) {
+								tagCloud.addTag(tag, 22, "#ffd77d");
+							}
+						}
+					}
+				}
+    	);
 	}
 
 }

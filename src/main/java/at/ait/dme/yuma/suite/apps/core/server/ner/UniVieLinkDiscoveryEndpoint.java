@@ -19,24 +19,26 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.server.enrichment;
+package at.ait.dme.yuma.suite.apps.core.server.ner;
 
-import at.ait.dme.yuma.suite.apps.core.shared.server.RESTfulServiceException;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
-public class SemanticEnrichmentServiceException extends RESTfulServiceException{
+import org.jboss.resteasy.client.ClientResponse;
 
-    private static final long serialVersionUID = -9184520577364218892L;
+/**
+ * The interface to the RESTful semantic enrichment service by Uni Wien
+ * @author Manuel Gay
+ *
+ */
+public interface UniVieLinkDiscoveryEndpoint {
     
-    public SemanticEnrichmentServiceException(int statusCode) {
-        super(statusCode);
-    }
-
-    public SemanticEnrichmentServiceException(String message) {
-        super(message);
-    }
-    
-    public SemanticEnrichmentServiceException() {
-        
-    }
+    @GET
+    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+    @Path("/findEntities")
+    public ClientResponse<String> findEntities(@QueryParam("annotation") String annotation);
 
 }

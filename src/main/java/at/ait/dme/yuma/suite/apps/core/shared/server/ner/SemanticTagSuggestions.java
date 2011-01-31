@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.shared.server.enrichment;
+package at.ait.dme.yuma.suite.apps.core.shared.server.ner;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
  * @author Rainer Simon
  */
 public class SemanticTagSuggestions implements Serializable {
+	
 	private static final long serialVersionUID = 5225121871824438123L;
 
 	/**
@@ -63,7 +64,7 @@ public class SemanticTagSuggestions implements Serializable {
         this.type = type;
     }
     
-    public Collection<SemanticTag> getAmbiguousTags() {
+    public Collection<SemanticTag> getTags() {
         return tags;
     }
 

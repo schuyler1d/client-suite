@@ -24,11 +24,6 @@
 		<param-name>tiles.root.path</param-name>
 		 <param-value>C:/Workspaces/Yuma/client-suite/src/main/webapp/tilesets</param-value>
 	</context-param>
-	
-	<context-param>
-		<param-name>enrichmentServiceUrl</param-name>
-		<param-value>http://dme.arcs.ac.at/enrichmentService/</param-value>
-	</context-param>
 
 	<context-param>
 		<param-name>openCalaisLicenceID</param-name>
@@ -70,12 +65,12 @@
 	</servlet-mapping>
 
     <servlet>
-        <servlet-name>semanticenrichment</servlet-name>
-        <servlet-class>at.ait.dme.yuma.suite.apps.core.server.enrichment.SemanticEnrichmentServiceImpl</servlet-class>
+        <servlet-name>ner</servlet-name>
+        <servlet-class>at.ait.dme.yuma.suite.apps.core.server.ner.NERServiceImpl</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>semanticenrichment</servlet-name>
-        <url-pattern>/enrichment</url-pattern>
+        <servlet-name>ner</servlet-name>
+        <url-pattern>/ner</url-pattern>
     </servlet-mapping>
 	
 	<servlet>
