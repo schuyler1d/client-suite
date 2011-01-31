@@ -209,6 +209,7 @@ public class AnnotationPanel extends Composite
 		buttons.add(showOnMapButton);	*/
 		
 		header.add(buttons);	
+		editFormPanel.setStyleName("globalAnnotationEditForm");
 		header.add(editFormPanel);
 		return header;
 	}
