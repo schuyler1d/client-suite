@@ -31,16 +31,14 @@ public abstract class AbstractKeyboardHandler implements KeyDownHandler {
         if (event.getNativeKeyCode() == 32)
         	onSpace();
         
-		if (timer != null)
-			timer.cancel();
-		
-		timer = new Timer() {
-			@Override
-			public void run() {
-				onIdle();				
-			}
-		};
-		
+		if (timer == null)
+			timer = new Timer() {
+				@Override
+				public void run() {
+					onIdle();				
+				}
+			};
+			
 		timer.schedule(delayMillis);
     }
 	

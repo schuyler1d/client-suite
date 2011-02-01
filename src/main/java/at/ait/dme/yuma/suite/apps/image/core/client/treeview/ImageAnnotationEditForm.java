@@ -180,7 +180,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		textArea.addKeyDownHandler(new AbstractKeyboardHandler(1000) {
 			@Override
 			public void onSpace() {
-				// Do nothing
+				getTagSuggestions();
 			}
 			
 			@Override
