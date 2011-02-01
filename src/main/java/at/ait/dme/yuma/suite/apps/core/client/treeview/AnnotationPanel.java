@@ -87,6 +87,7 @@ public class AnnotationPanel extends Composite
 	 * The scroll panel which containes the annotation tree
 	 */
 	protected ScrollPanel scrollPanel = new ScrollPanel();	
+	protected FlowPanel treePanel = new FlowPanel(); 
 	private int scrollPosition = 0;
 
 	/**
@@ -122,6 +123,10 @@ public class AnnotationPanel extends Composite
 		containerPanel.setStyleName("annotationPanel");
 		containerPanel.add(createHeader(), new BorderLayoutData(BorderLayout.Region.NORTH));
 
+		editFormPanel.setStyleName("globalAnnotationEditForm");
+		treePanel.add(editFormPanel);
+		scrollPanel.add(treePanel);
+		
 		annotationTree = new AnnotationTree(this, handlerManager);
 		loadAnnotations();		
 		
@@ -209,8 +214,6 @@ public class AnnotationPanel extends Composite
 		buttons.add(showOnMapButton);	*/
 		
 		header.add(buttons);	
-		editFormPanel.setStyleName("globalAnnotationEditForm");
-		header.add(editFormPanel);
 		return header;
 	}
 	
@@ -332,7 +335,7 @@ public class AnnotationPanel extends Composite
 						annotationTree.addAnnotation(a);
 					}
 					
-					scrollPanel.add(annotationTree);				
+					treePanel.add(annotationTree);				
 					disableLoadingImage();
 					layout();
 				}
@@ -375,7 +378,7 @@ public class AnnotationPanel extends Composite
 		if (height<15) return;
 		if (YUMACoreProperties.getUserAgent().contains("firefox")) height = height - 2;
 		this.setSize(new Integer(width).toString(), new Integer(height).toString());
-		scrollPanel.setSize(new Integer(width).toString(), new Integer(
+		treePanel.setSize(new Integer(width).toString(), new Integer(
 				Math.max(0, height-150)).toString());		
 	}
 

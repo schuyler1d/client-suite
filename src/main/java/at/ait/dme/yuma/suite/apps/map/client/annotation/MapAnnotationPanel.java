@@ -54,7 +54,7 @@ public class MapAnnotationPanel extends AnnotationPanel {
 						}
 					}
 					
-					scrollPanel.add(annotationTree);				
+					treePanel.add(annotationTree);				
 					disableLoadingImage();
 					layout();
 				}

@@ -126,7 +126,7 @@ public class ControlPointPanel extends MapAnnotationPanel {
 						}
 					}
 					
-					scrollPanel.add(annotationTree);				
+					treePanel.add(annotationTree);				
 					disableLoadingImage();
 					layout();
 				}
