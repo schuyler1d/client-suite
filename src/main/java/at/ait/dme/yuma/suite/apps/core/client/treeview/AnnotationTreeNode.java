@@ -21,13 +21,21 @@
 
 package at.ait.dme.yuma.suite.apps.core.client.treeview;
 
+import org.gwt.mosaic.ui.client.WindowPanel;
+
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.DeleteClickHandler;
+import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
+import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
+import at.ait.dme.yuma.suite.apps.map.client.widgets.GoogleMapsComposite;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasMouseOutHandlers;
 import com.google.gwt.event.dom.client.HasMouseOverHandlers;
 import com.google.gwt.event.dom.client.MouseOutEvent;
@@ -81,6 +89,11 @@ public class AnnotationTreeNode extends Composite
 	 * The container panel
 	 */
 	private VerticalPanel container = new VerticalPanel();
+	
+	/**
+	 * 'Show on Map' icon
+	 */
+	private Image showOnMapIcon = new Image("images/empty.gif");
 	
 	/**
 	 * Buttons
@@ -146,6 +159,19 @@ public class AnnotationTreeNode extends Composite
 		dateLabel.setStyleName("imageAnnotation-header-date");
 		
 		headerPanel.add(dateLabel);
+		
+		if (annotation.getMediaType() == MediaType.MAP && annotation.hasFragment()) {
+			showOnMapIcon.setStyleName("imageAnnotation-header-map");
+			showOnMapIcon.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(550, 300, 500, 300);
+					window.setWidget(new GoogleMapsComposite((ImageAnnotation) annotation));
+					window.show();
+				}
+			});
+			headerPanel.add(showOnMapIcon);
+		}
+		
 		return headerPanel;
 	}
 	

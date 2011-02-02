@@ -24,6 +24,7 @@ package at.ait.dme.yuma.suite.framework.pages.map;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 
+import at.ait.dme.yuma.suite.framework.YUMASuite;
 import at.ait.dme.yuma.suite.framework.pages.BaseHostPage;
 
 /**
@@ -35,6 +36,11 @@ public class MapHostPage extends BaseHostPage {
 	
 	public MapHostPage(final PageParameters parameters) {
 		super("YUMA Map", "yuma.map/yuma.map.nocache.js", parameters);	
+	
+		add(JavascriptPackageResource
+			.getHeaderContribution("http://maps.google.com/maps?file=api&amp;v=2&amp;key=" +
+					YUMASuite.getGoogleMapsAPIKey() +
+					"&sensor=false"));		
 		
 		add(JavascriptPackageResource.getHeaderContribution("js/raphael/raphael-min.js"));
 		add(JavascriptPackageResource.getHeaderContribution("js/openlayers/OpenLayers.js"));
