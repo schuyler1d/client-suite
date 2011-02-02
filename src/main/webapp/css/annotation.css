@@ -61,6 +61,8 @@ body,td,.a,div,.p {
 	padding:1px;
 	margin-right:7px;
 	border:1px solid gray;
+	width:20px;
+	height:20px;
 }
 
 .imageAnnotation-header-user {
