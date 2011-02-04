@@ -22,7 +22,7 @@
 package at.ait.dme.yuma.suite.apps.core.shared.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A semantic tag which is part of an annotation. A semantic
@@ -66,13 +66,13 @@ public class SemanticTag implements Serializable {
 	/**
 	 * Alternative labels
 	 */
-	private List<PlainLiteral> alternativeLabels = null;
+	private ArrayList<PlainLiteral> alternativeLabels = null;
 				
 	public SemanticTag() {
 		// Required for GWT serialization
 	}
 	
-	public SemanticTag(String primaryLabel, List<PlainLiteral> alternativeLabels, String type, String primaryLang, String primaryDescription , String uri) {
+	public SemanticTag(String primaryLabel, ArrayList<PlainLiteral> alternativeLabels, String type, String primaryLang, String primaryDescription , String uri) {
 		this.primaryLabel = primaryLabel;
 		this.alternativeLabels = alternativeLabels;
 		this.type = type;
@@ -131,11 +131,11 @@ public class SemanticTag implements Serializable {
 		
 		return alternativeLabels.size() > 0;
 	}
-	
-	public List<PlainLiteral> getAlternativeLabels() {
+
+	public ArrayList<PlainLiteral> getAlternativeLabels() {
 		return alternativeLabels;
 	}
-	
+
 	@Override
 	public boolean equals(Object tag) {
 		// TODO implement this properly!

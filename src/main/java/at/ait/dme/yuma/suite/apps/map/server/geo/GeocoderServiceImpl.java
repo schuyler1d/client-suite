@@ -276,7 +276,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 			ArrayList<SemanticTag> tags = new ArrayList<SemanticTag>();
 			for (String country : countries) {
 				// Query Geonames 'search' service
-				URL url = new URL(GEONAMES_SEARCH_QUERY + "q=" + country);
+				URL url = new URL(GEONAMES_SEARCH_QUERY + "q=" + URLEncoder.encode(country, "UTF-8"));
 					
 				// Parse response
 				BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
@@ -315,7 +315,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 		}
 	}
 	
-	private List<PlainLiteral> getAlternativePlacenames(String placename) {		
+	private ArrayList<PlainLiteral> getAlternativePlacenames(String placename) {		
         ArrayList<PlainLiteral> altLabels = new ArrayList<PlainLiteral>();
 
         try {
