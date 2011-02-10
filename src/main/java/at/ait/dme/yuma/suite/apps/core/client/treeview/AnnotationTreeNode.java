@@ -12,6 +12,11 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TreeItem;
 
+/**
+ * Base class for annotation tree nodes.
+ * 
+ * @author Rainer Simon
+ */
 public abstract class AnnotationTreeNode
 						extends Composite 
 						implements HasMouseOutHandlers, HasMouseOverHandlers {

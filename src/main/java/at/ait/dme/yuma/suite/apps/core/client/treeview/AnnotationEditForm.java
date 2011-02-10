@@ -40,12 +40,12 @@ public abstract class AnnotationEditForm extends Composite {
 	protected AnnotationPanel panel = null;
 	
 	/**
-	 * The annotation to edit or null, if new annotation
+	 * The tree node of the annotation to edit, or null if new annotation
 	 */
 	protected AnnotationTreeNode annotation = null;
 	
 	/**
-	 * The parent of this annotation or null, if it's a root annotation
+	 * The parent tree node of this annotation or null, if it's a root annotation
 	 */
 	protected AnnotationTreeNode parent = null;
 
@@ -69,7 +69,7 @@ public abstract class AnnotationEditForm extends Composite {
 	public AnnotationTreeNode getParentNode() {
 		return parent;
 	}
-	
+
 	public abstract void addTag(SemanticTag t);
 	
 	public abstract void removeTag(SemanticTag t);
