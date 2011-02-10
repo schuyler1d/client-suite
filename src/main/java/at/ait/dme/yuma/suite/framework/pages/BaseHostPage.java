@@ -21,12 +21,16 @@
 
 package at.ait.dme.yuma.suite.framework.pages;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.JavascriptPackageResource;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
+import at.ait.dme.yuma.suite.framework.LinkHeaderContributor;
 import at.ait.dme.yuma.suite.framework.YUMASuite;
 import at.ait.dme.yuma.suite.framework.YUMAWebSession;
 import at.ait.dme.yuma.suite.framework.auth.MD5Util;
@@ -42,6 +46,14 @@ import at.ait.dme.yuma.suite.framework.auth.MD5Util;
 public abstract class BaseHostPage extends WebPage {
 	
 	public BaseHostPage(String title, String js, final PageParameters params) {
+		try {
+			add(LinkHeaderContributor.forRss(
+					YUMASuite.getAnnotationServerBaseUrl() + "feeds/object/" + 
+					URLEncoder.encode(params.getString("objectURI"), "UTF-8")));
+		} catch (UnsupportedEncodingException e) {
+			// Should never ever happen
+		}
+		
 		add(JavascriptPackageResource.getHeaderContribution(js));
 		add(new Label("title", title));
 		
