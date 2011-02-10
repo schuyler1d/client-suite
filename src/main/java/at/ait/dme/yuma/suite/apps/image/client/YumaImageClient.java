@@ -36,6 +36,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthServiceAsync;
 import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationTreeNode;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -114,7 +115,8 @@ public class YumaImageClient implements EntryPoint {
 				imageViewer, 
 				new ImageAnnotationEditForm(
 						MediaType.IMAGE,
-						((ImageViewer) imageViewer).getTagCloud()));			
+						((ImageViewer) imageViewer).getTagCloud()),
+				new ImageAnnotationTreeNode());			
 
 		annComposite.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
 			@Override

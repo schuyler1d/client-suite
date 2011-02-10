@@ -19,32 +19,19 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.core.client.treeview;
-
-import org.gwt.mosaic.ui.client.WindowPanel;
+package at.ait.dme.yuma.suite.apps.image.core.client.treeview;
 
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.DeleteClickHandler;
-import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
-import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
-import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
-import at.ait.dme.yuma.suite.apps.map.client.widgets.GoogleMapsComposite;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasMouseOutHandlers;
-import com.google.gwt.event.dom.client.HasMouseOverHandlers;
-import com.google.gwt.event.dom.client.MouseOutEvent;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -52,7 +39,6 @@ import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.PushButton;
-import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -62,38 +48,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * @author Christian Sadilek
  * @author Rainer Simon
  */
-public class AnnotationTreeNode extends Composite 
-	implements HasMouseOutHandlers, HasMouseOverHandlers {
-	
-	/**
-	 * Reference to the annotation panel
-	 */
-	protected AnnotationPanel panel;
-	
-	/**
-	 * The annotation
-	 */
-	protected Annotation annotation;
-	
-	/**
-	 * The parent annotation tree node (if any)
-	 */
-	protected AnnotationTreeNode parent;
-	
-	/**
-	 * The parent node of this annotation tree node
-	 */
-	protected TreeItem treeItem;
+public class ImageAnnotationTreeNode extends AnnotationTreeNode {
 	
 	/**
 	 * The container panel
 	 */
 	private VerticalPanel container = new VerticalPanel();
-	
-	/**
-	 * 'Show on Map' icon
-	 */
-	private Image showOnMapIcon = new Image("images/empty.gif");
 	
 	/**
 	 * Buttons
@@ -107,11 +67,13 @@ public class AnnotationTreeNode extends Composite
 	 * This node's edit form
 	 */
 	private AnnotationEditForm editForm;
+	
+	public ImageAnnotationTreeNode() { }
 
-	public AnnotationTreeNode(AnnotationPanel panel, Annotation annotation, AnnotationTreeNode parent) {
-		this.panel = panel;
-		this.annotation = annotation;
-		this.parent = parent;
+	public ImageAnnotationTreeNode(AnnotationPanel panel, 
+			Annotation annotation, AnnotationTreeNode parent) {
+		
+		super(panel, annotation, parent);
 		container.add(createHeader());
 		
 		Label title = new Label(annotation.getTitle());
@@ -159,23 +121,10 @@ public class AnnotationTreeNode extends Composite
 		dateLabel.setStyleName("imageAnnotation-header-date");
 		
 		headerPanel.add(dateLabel);
-		
-		if (annotation.getMediaType() == MediaType.MAP && annotation.hasFragment()) {
-			showOnMapIcon.setStyleName("imageAnnotation-header-map");
-			showOnMapIcon.addClickHandler(new ClickHandler() {
-				public void onClick(ClickEvent event) {
-					WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(550, 300, 500, 300);
-					window.setWidget(new GoogleMapsComposite((ImageAnnotation) annotation));
-					window.show();
-				}
-			});
-			headerPanel.add(showOnMapIcon);
-		}
-		
 		return headerPanel;
 	}
 	
-	protected Panel createActions() {
+	private Panel createActions() {
 		HorizontalPanel actionsPanel = new HorizontalPanel();
 		
 		btnReply = new PushButton(YUMACoreProperties.getConstants().actionReply());
@@ -209,6 +158,14 @@ public class AnnotationTreeNode extends Composite
 		return actionsPanel;
 	}
 	
+	@Override
+	public AnnotationTreeNode newInstance(AnnotationPanel panel, 
+			Annotation annotation, AnnotationTreeNode parent) {
+
+		return new ImageAnnotationTreeNode(panel, annotation, parent);
+	}
+	
+	@Override
 	public void showAnnotationForm(AnnotationEditForm editForm) {
 		this.editForm = editForm;
 		addStyleName("imageAnnotation-edit");
@@ -218,6 +175,7 @@ public class AnnotationTreeNode extends Composite
 		btnEdit.setEnabled(false);
 	}
 
+	@Override
 	public void hideAnnotationForm() {
 		this.editForm.setVisible(false);
 		removeStyleName("imageAnnotation-edit");
@@ -226,6 +184,7 @@ public class AnnotationTreeNode extends Composite
 		btnEdit.setEnabled(true);
 	}
 	
+	@Override
 	public void refresh() {
 		deselect();
 		btnReply.setEnabled(!User.get().isAnonymous());
@@ -236,57 +195,9 @@ public class AnnotationTreeNode extends Composite
 				&& !annotation.hasReplies());
 	}
 	
-	public Annotation getAnnotation() {
-		return annotation;
-	}
-	
-	TreeItem getTreeItem() {
-		return treeItem;
-	}
-	
-	void setTreeItem(TreeItem treeItem) {
-		this.treeItem = treeItem;
-	}
-	
-	public void select() {
-		removeStyleName("imageAnnotation");
-		addStyleName("imageAnnotation-selected");
-	}
-
-	public void deselect() {
-		removeStyleName("imageAnnotation-selected");
-		addStyleName("imageAnnotation");
-	}
-	
-	@Override
-	public boolean equals(Object other) {
-		if (!(other instanceof AnnotationTreeNode))
-			return false;
-		
-		if (this == other)
-			return true;
-
-		AnnotationTreeNode node = (AnnotationTreeNode) other;
-		return annotation.equals(node.getAnnotation());
-	}
-	
+	@Override	
 	public void clear() {
 		container.clear();
-	}
-
-	@Override
-	public int hashCode() {
-		return annotation.hashCode();
-	}
-	
-	@Override
-	public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
-		return addDomHandler(handler, MouseOutEvent.getType());
-	}
-
-	@Override
-	public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
-		return addDomHandler(handler, MouseOverEvent.getType());
 	}
 
 }

@@ -116,9 +116,9 @@ public class AnnotationPanel extends Composite
 	 */
 	private MediaViewer mediaViewer = null;
 
-	public AnnotationPanel(MediaViewer mediaViewer, AnnotationEditForm editForm) {	
+	public AnnotationPanel(MediaViewer mediaViewer, AnnotationEditForm editFormPrototype, AnnotationTreeNode treeNodePrototype) {	
 		this.mediaViewer = mediaViewer;
-		this.editForm = editForm;
+		this.editForm = editFormPrototype;
 		
 		containerPanel.setStyleName("annotationPanel");
 		containerPanel.add(createHeader(), new BorderLayoutData(BorderLayout.Region.NORTH));
@@ -127,7 +127,7 @@ public class AnnotationPanel extends Composite
 		treePanel.add(editFormPanel);
 		scrollPanel.add(treePanel);
 		
-		annotationTree = new AnnotationTree(this, handlerManager);
+		annotationTree = new AnnotationTree(this, handlerManager, treeNodePrototype);
 		loadAnnotations();		
 		
 		mediaViewer.addAnnotationSelectionHandler(new AnnotationSelectionHandler() {
@@ -198,21 +198,6 @@ public class AnnotationPanel extends Composite
 		annotateFragmentButton.setEnabled(!User.get().isAnonymous());
 		buttons.add(annotateFragmentButton);
 		
-		/* 'Show on Map' button
-		showOnMapButton.setStyleName("imageAnnotation-button");
-		showOnMapButton.setText(YumaImageClient.getConstants().actionShowOnMap());
-		showOnMapButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(550, 300, 500, 300);
-				window.getHeader().setText("Map");
-				window.setWidget(new GoogleMapsComposite(annotations));
-				window.setResizable(false);
-				window.show();
-			}			
-		});			
-		showOnMapButton.setVisible(YumaImageClient.getBbox()!=null||YumaImageClient.isInTileMode());
-		buttons.add(showOnMapButton);	*/
-		
 		header.add(buttons);	
 		return header;
 	}
@@ -259,7 +244,7 @@ public class AnnotationPanel extends Composite
 	 *  
 	 *  @param annotationTreeNode
 	 * 	@param canceled true if the user canceled the operation, otherwise false
-	 *  @see #showAnnotationForm(AnnotationTreeNode, boolean, boolean)
+	 *  @see #showAnnotationForm(ImageAnnotationTreeNode, boolean, boolean)
 	 */
 	public void stopEditing(AnnotationTreeNode parent, Annotation created, boolean canceled) {
 		if (parent == null) {

@@ -12,6 +12,7 @@ import at.ait.dme.yuma.suite.apps.core.client.MediaViewer;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
+import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationService;
@@ -20,17 +21,21 @@ import at.ait.dme.yuma.suite.apps.image.core.client.treeview.ImageAnnotationEdit
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageFragment;
 import at.ait.dme.yuma.suite.apps.image.core.shared.shape.GeoPoint;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
+import at.ait.dme.yuma.suite.apps.map.client.treeview.MapAnnotationTreeNode;
 
 public class MapAnnotationPanel extends AnnotationPanel {
 	
 	public MapAnnotationPanel(MediaViewer mediaViewer) {
 		super(mediaViewer,
 				new ImageAnnotationEditForm(
-					MediaType.MAP, ((TileBasedImageViewer) mediaViewer).getTagCloud()));			
+					MediaType.MAP, ((TileBasedImageViewer) mediaViewer).getTagCloud()),
+				new MapAnnotationTreeNode());	
 	}
 	
-	public MapAnnotationPanel(MediaViewer mediaViewer, AnnotationEditForm editForm) {
-		super(mediaViewer, editForm);			
+	public MapAnnotationPanel(MediaViewer mediaViewer, 
+			AnnotationEditForm editForm, AnnotationTreeNode treeNode) {
+
+		super(mediaViewer, editForm, treeNode);
 	}
 	
 	@Override

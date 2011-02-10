@@ -44,6 +44,7 @@ import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServic
 import at.ait.dme.yuma.suite.apps.core.shared.server.annotation.AnnotationServiceAsync;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 import at.ait.dme.yuma.suite.apps.map.client.annotation.MapAnnotationPanel;
+import at.ait.dme.yuma.suite.apps.map.client.treeview.MapAnnotationTreeNode;
 
 /**
  * Composite used to manage control points
@@ -59,7 +60,9 @@ public class ControlPointPanel extends MapAnnotationPanel {
 	private PushButton createButton;
 
 	public ControlPointPanel(TileBasedImageViewer imageViewer)   {
-		super(imageViewer, new ControlPointEditForm(imageViewer.getControlPointLayer()));
+		super(imageViewer,
+				new ControlPointEditForm(imageViewer.getControlPointLayer()),
+				new MapAnnotationTreeNode());
 	}
 
 	@Override

@@ -54,12 +54,15 @@ public class AnnotationTree extends Tree {
 	
     private HandlerManager handlerManager;	
     
+    private AnnotationTreeNode prototype;
+    
     private Map<Annotation, AnnotationTreeNode> nodes = new HashMap<Annotation, AnnotationTreeNode>();
     private Map<TreeItem, Annotation> annotations = new HashMap<TreeItem, Annotation>();
     
-    public AnnotationTree(AnnotationPanel panel, HandlerManager handlerManager) {
+    public AnnotationTree(AnnotationPanel panel, HandlerManager handlerManager, AnnotationTreeNode prototype) {
     	this.panel = panel;
     	this.handlerManager = handlerManager;
+    	this.prototype = prototype;
     	this.setStyleName("imageAnnotation-tree");
     }
     
@@ -80,12 +83,12 @@ public class AnnotationTree extends Tree {
 	}
 	
 	public void appendChild(AnnotationTreeNode parent, Annotation child) {
-		AnnotationTreeNode childNode = new AnnotationTreeNode(panel, child, parent);
+		AnnotationTreeNode childNode = prototype.newInstance(panel, child, parent);
 		addAnnotation(childNode, parent);
 	}
 
 	public void addAnnotation(Annotation annotation) {
-		addAnnotation(new AnnotationTreeNode(panel, annotation, null), null);
+		addAnnotation(prototype.newInstance(panel, annotation, null), null);
 	}
 	
 	private void addAnnotation(final AnnotationTreeNode annotation, AnnotationTreeNode parent) {
@@ -120,7 +123,7 @@ public class AnnotationTree extends Tree {
 			List<Annotation> replies = sort(annotation.getAnnotation().getReplies());
 			
 			for(Annotation reply : replies) {
-				AnnotationTreeNode node = new AnnotationTreeNode(panel, reply, annotation);	
+				AnnotationTreeNode node = prototype.newInstance(panel, reply, annotation);	
 				addAnnotation(node, annotation);				
 			}			
 		}
