@@ -105,7 +105,7 @@ public class ImageAnnotationTreeNode extends AnnotationTreeNode {
 		deselect();
 	}
 	
-	protected Panel createHeader() {
+	protected HorizontalPanel createHeader() {
 		HorizontalPanel headerPanel = new HorizontalPanel();
 		headerPanel.setStyleName("imageAnnotation-header");
 

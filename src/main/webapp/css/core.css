@@ -32,6 +32,11 @@
 	margin-top:2px;
 	margin-left:8px;
 	cursor: pointer;
+	visibility:hidden;
+}
+
+.imageAnnotation-selected .imageAnnotation-header-feedicon {
+	visibility:visible;
 }
 
 .imageAnnotation-actions {

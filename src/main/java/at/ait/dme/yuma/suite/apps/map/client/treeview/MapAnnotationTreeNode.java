@@ -4,8 +4,8 @@ import org.gwt.mosaic.ui.client.WindowPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Panel;
 
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
@@ -26,8 +26,8 @@ public class MapAnnotationTreeNode extends ImageAnnotationTreeNode {
 	}
 	
 	@Override
-	protected Panel createHeader() {
-		Panel headerPanel = super.createHeader();
+	protected HorizontalPanel createHeader() {
+		HorizontalPanel headerPanel = super.createHeader();
 		
 		if (annotation.hasFragment()) {
 			Image showOnMapIcon = new Image("images/earth.gif");
@@ -39,7 +39,7 @@ public class MapAnnotationTreeNode extends ImageAnnotationTreeNode {
 					window.show();
 				}
 			});
-			headerPanel.add(showOnMapIcon);
+			headerPanel.insert(showOnMapIcon, headerPanel.getWidgetCount() - 1);
 		}
 		
 		return headerPanel;
