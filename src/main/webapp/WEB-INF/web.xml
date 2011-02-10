@@ -32,7 +32,7 @@
 
 	<context-param>
 		<param-name>gmaps.api.key</param-name>
-		<param-value>ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BREhleYDHJKagFSHdQe6xjbhVCp5BSz22jHD-GiLjy3M2rOz689ph-BFg</param-value>
+		<param-value>ABQIAAAAapqr3t_QNx5qoEDwcY3APxSHOYmJ0Gm-4W76tcH6UPz2tSaGORRKM04b8Aeh1YaavSss6bxsoNoZQQ</param-value>
 	</context-param>
 
 	<!-- Wicket Deployment Mode ('development' or  'deployment') -->

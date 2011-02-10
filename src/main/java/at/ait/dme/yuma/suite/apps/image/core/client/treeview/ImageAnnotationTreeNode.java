@@ -127,7 +127,7 @@ public class ImageAnnotationTreeNode extends AnnotationTreeNode {
 		feedIcon.setStyleName("imageAnnotation-header-feedicon");
 		feedIcon.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Window.open(YUMACoreProperties.getFeedUrl() + "annotation/" + annotation.getId(),
+				Window.open(YUMACoreProperties.getFeedUrl() + "replies/" + annotation.getId(),
 						"_self", "");
 			}
 		});
