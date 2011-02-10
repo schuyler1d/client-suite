@@ -31,7 +31,7 @@ public class MapAnnotationTreeNode extends ImageAnnotationTreeNode {
 		
 		if (annotation.hasFragment()) {
 			Image showOnMapIcon = new Image("images/earth.gif");
-			showOnMapIcon.setStyleName("imageAnnotation-header-map");
+			showOnMapIcon.setStyleName("imageAnnotation-header-mapicon");
 			showOnMapIcon.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(550, 300, 500, 300);

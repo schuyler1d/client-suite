@@ -20,7 +20,6 @@
  */
 
 package at.ait.dme.yuma.suite.apps.image.core.client.treeview;
-
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.events.AnnotateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.DeleteClickHandler;
@@ -31,7 +30,10 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -119,8 +121,18 @@ public class ImageAnnotationTreeNode extends AnnotationTreeNode {
 					DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_TIME_SHORT).format(annotation.getLastModified()) +
 					")");
 		dateLabel.setStyleName("imageAnnotation-header-date");
-		
 		headerPanel.add(dateLabel);
+		
+		PushButton feedIcon = new PushButton(new Image("images/feed-icon-14x14.png"));
+		feedIcon.setStyleName("imageAnnotation-header-feedicon");
+		feedIcon.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Window.open(YUMACoreProperties.getFeedUrl() + "annotation/" + annotation.getId(),
+						"_self", "");
+			}
+		});
+		headerPanel.add(feedIcon);
+		
 		return headerPanel;
 	}
 	

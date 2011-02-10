@@ -74,6 +74,9 @@ public class AnnotationManager implements AnnotationService {
 
 	public static void init(Config config) throws ServletException {
 		annotationServerBaseUrl = config.getStringProperty(ANNOTATION_SERVICE_URL_PROPERTY);
+		if (!annotationServerBaseUrl.endsWith("/"))
+			annotationServerBaseUrl += "/";
+		annotationServerBaseUrl += "api/";
 	}
 
 	public AnnotationManager(HttpServletRequest clientRequest) {

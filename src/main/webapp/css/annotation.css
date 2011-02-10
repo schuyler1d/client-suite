@@ -88,11 +88,6 @@ body,td,.a,div,.p {
 	margin-left: 5px;
 }
 
-.imageAnnotation-header-map {
-	background: url(../images/earth.gif) no-repeat scroll 0px 0px;
-	margin-left: 5px;
-}
-
 .imageAnnotation-header-rate {
 	font-family: arial;
 	font-size: 11px;

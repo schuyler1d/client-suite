@@ -22,6 +22,17 @@
 	-webkit-border-radius: 5px;
 }
 
+.imageAnnotation-header-mapicon {
+	margin-left:5px;
+	cursor: pointer;
+}
+
+.imageAnnotation-header-feedicon {
+	margin-top:2px;
+	margin-left:5px;
+	cursor: pointer;
+}
+
 .imageAnnotation-actions {
 	padding-bottom:5px;
 }

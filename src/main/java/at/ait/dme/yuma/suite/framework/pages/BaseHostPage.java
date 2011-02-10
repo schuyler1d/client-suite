@@ -50,13 +50,13 @@ public abstract class BaseHostPage extends WebPage {
 		if (user != null)
 			YUMAWebSession.get().setUser(getUser(params));	
 
-		String baseUrl = YUMASuite
-			.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest());
+		String baseUrl = YUMASuite.getBaseUrl(getWebRequestCycle().getWebRequest().getHttpServletRequest());
 		
 		// Add URL of the annotated object and the page base URL to the JS dictionary 
 		String dictionary = "\nvar parameters = {\n" +
 							"  objectURI: \"" + params.getString("objectURI") + "\",\n" +
 							"  baseURL:   \"" + baseUrl + "\", \n" +
+							"  feedURL:   \"" + YUMASuite.getAnnotationServerBaseUrl() + "feeds/\", \n" +
 							"}\n";
 		add(new Label("dictionary", dictionary).setEscapeModelStrings(false));
     }; 

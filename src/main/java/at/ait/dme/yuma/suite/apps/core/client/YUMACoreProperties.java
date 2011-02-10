@@ -36,6 +36,10 @@ public class YUMACoreProperties {
 		return getValue("baseURL");	
 	}
 	
+	public static String getFeedUrl() {
+		return getValue("feedURL");
+	}
+	
 	public static I18NConstants getConstants() {
 		if (annotationConstants == null)
 			annotationConstants = (I18NConstants) GWT.create(I18NConstants.class);

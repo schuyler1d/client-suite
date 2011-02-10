@@ -108,6 +108,16 @@ public class YUMASuite extends WebApplication {
 		return baseURL + "/";
     }
     
+    public static String getAnnotationServerBaseUrl() {
+    	String baseUrl = (String) YUMASuite.get().getServletContext()
+    		.getInitParameter("annotation.server.base.url");
+    	
+    	if (!baseUrl.endsWith("/"))
+    		baseUrl += "/";
+    	
+    	return baseUrl; 
+    }
+    
     public static String getGoogleMapsAPIKey() {
     	return (String) YUMASuite.get().getServletContext().getInitParameter("gmaps.api.key"); 
     }
