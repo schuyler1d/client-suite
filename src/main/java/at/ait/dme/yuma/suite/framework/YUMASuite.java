@@ -109,7 +109,7 @@ public class YUMASuite extends WebApplication {
     }
     
     public static String getGoogleMapsAPIKey() {
-    	return (String) YUMASuite.get().getServletContext().getAttribute("map.google.api.key"); 
+    	return (String) YUMASuite.get().getServletContext().getInitParameter("gmaps.api.key"); 
     }
 
 }

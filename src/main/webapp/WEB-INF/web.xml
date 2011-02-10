@@ -31,7 +31,7 @@
 	</context-param>
 
 	<context-param>
-		<param-name>map.google.api.key</param-name>
+		<param-name>gmaps.api.key</param-name>
 		<param-value>ABQIAAAAhScxmuV3ybzUgUXK5Hrc6BREhleYDHJKagFSHdQe6xjbhVCp5BSz22jHD-GiLjy3M2rOz689ph-BFg</param-value>
 	</context-param>
 
