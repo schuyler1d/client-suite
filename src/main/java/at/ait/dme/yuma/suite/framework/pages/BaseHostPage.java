@@ -49,7 +49,8 @@ public abstract class BaseHostPage extends WebPage {
 		try {
 			add(LinkHeaderContributor.forRss(
 					YUMASuite.getAnnotationServerBaseUrl() + "feeds/object/" + 
-					URLEncoder.encode(params.getString("objectURI"), "UTF-8")));
+					URLEncoder.encode(params.getString("objectURI"), "UTF-8")
+						.replace("%", "%25")));
 		} catch (UnsupportedEncodingException e) {
 			// Should never ever happen
 		}
