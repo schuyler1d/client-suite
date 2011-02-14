@@ -51,6 +51,8 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -59,6 +61,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -205,23 +208,30 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		FlowPanel container = new FlowPanel();
 		container.setStyleName("annotationEditForm-tag");
 		
-		// TODO I18N
 		Label addTagLabel = new Label(i18n.addTag());
 		addTagLabel.setStyleName("annotationEditForm-label");	
 		
 		HorizontalPanel addTagPanel = new HorizontalPanel();
 		final TagSuggestBox newTagTextBox = new TagSuggestBox(10);	
 		newTagTextBox.setStyleName("annotationEditForm-tag-input");
+		newTagTextBox.addSelectionHandler(new SelectionHandler<Suggestion>() {
+			@Override
+			public void onSelection(SelectionEvent<Suggestion> evt) {
+				SemanticTag t = newTagTextBox.getTag();
+				if (t != null) addTag(t);
+				newTagTextBox.clear();
+			}
+		});
 		addTagPanel.add(newTagTextBox);
 		
 		PushButton btnAdd = new PushButton(i18n.add());
 		btnAdd.addStyleName("annotationEditForm-tag-btn-add");
 		btnAdd.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(ClickEvent arg0) {
+			public void onClick(ClickEvent evt) {
 				SemanticTag t = newTagTextBox.getTag();
-				if (t != null)
-					addTag(t);
+				if (t != null) addTag(t);
+				newTagTextBox.clear();
 			}
 		});
 		addTagPanel.add(btnAdd);

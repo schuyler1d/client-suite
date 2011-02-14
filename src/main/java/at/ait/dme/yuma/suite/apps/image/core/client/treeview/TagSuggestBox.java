@@ -31,10 +31,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 /**
  * 'Add tag' input field with auto-suggest functionality based
@@ -108,6 +110,14 @@ public class TagSuggestBox extends Composite {
 	@Override
 	public void setStyleName(String style) {
 		suggestBox.getTextBox().setStyleName(style);
+	}
+	
+	public void addSelectionHandler(SelectionHandler<Suggestion> handler) {
+		suggestBox.addSelectionHandler(handler);
+	}
+	
+	public void clear() {
+		suggestBox.getTextBox().setText("");
 	}
 	
 	public SemanticTag getTag() {
