@@ -89,9 +89,8 @@ public class NERServiceImpl extends RemoteServiceServlet implements NERService {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
-        Config config = new Config(servletConfig, 
-        		getClass().getResourceAsStream("enrichment-service.properties"));
-
+        Config config = new Config(servletConfig);
+        
         openCalaisLicenceID = config.getStringProperty(OPENCALAIS_API_KEY_PROPERTY);
     }
     

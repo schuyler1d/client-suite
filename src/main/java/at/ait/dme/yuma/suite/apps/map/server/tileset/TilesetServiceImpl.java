@@ -71,8 +71,7 @@ public class TilesetServiceImpl extends RemoteServiceServlet implements TilesetS
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
-		Config config = new Config(servletConfig, 
-				getClass().getResourceAsStream("tileset-service.properties"));
+		Config config = new Config(servletConfig);
 		TilesetGenerator.init(config.getStringProperty("tiles.root.path"));		
 	}
 	

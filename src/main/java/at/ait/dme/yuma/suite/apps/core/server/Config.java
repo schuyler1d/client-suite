@@ -21,10 +21,6 @@
 
 package at.ait.dme.yuma.suite.apps.core.server;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,24 +31,9 @@ public class Config {
 	private static Logger logger = Logger.getLogger(Config.class);
 
 	private ServletConfig servletConfig = null;
-	private Properties properties = null;
 
-	public Config(ServletConfig servletConfig, InputStream propertiesStream) 
-		throws ServletException {
-		
+	public Config(ServletConfig servletConfig) throws ServletException {
 		this.servletConfig = servletConfig;
-		
-		try {
-			properties = new Properties();
-			if (propertiesStream==null) throw new IOException("null stream provided");
-			properties.load(propertiesStream);
-		} catch (Exception e) {
-			logger.info("property file could not be read, using context parameters only", e);			
-		}
-	}
-
-	public Config(Properties properties) {
-		this.properties = properties;
 	}
 	
 	public Integer getIntegerProperty(String key) throws ServletException {
@@ -65,17 +46,6 @@ public class Config {
 				value = application.getInitParameter(key);
 				if (value != null)
 					result = Integer.parseInt(value);
-			}
-
-			if (result == null && properties!=null) {
-				value = properties.getProperty(key);
-				if (value != null)
-					result = Integer.parseInt(value);
-				else {
-					logger.fatal("property" + key + "could not be found");
-					throw new ServletException("missing property");
-				}
-				
 			}
 		} catch (NumberFormatException nfe) {
 			logger.fatal("invalid value of " + key);
@@ -95,16 +65,6 @@ public class Config {
 			if (value != null)
 				result = Boolean.parseBoolean(value);
 		}
-
-		if (result == null && properties!=null) {
-			value = properties.getProperty(key);
-			if (value != null)
-				result = Boolean.parseBoolean(value);
-			else {
-				logger.fatal("property" + key + "could not be found");
-				throw new ServletException("missing property");
-			}			
-		}
 	
 		return result;
 	}
@@ -115,10 +75,6 @@ public class Config {
 		if(servletConfig!=null) {
 			ServletContext application = servletConfig.getServletContext();
 			result = application.getInitParameter(key);
-		}
-
-		if (result == null && properties!=null) {
-			result = properties.getProperty(key);
 		}
 		
 		if(result == null) {

@@ -71,7 +71,7 @@ public class KMLConverterServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
-		Config config = new Config(servletConfig, getClass().getResourceAsStream("map-service.properties"));
+		Config config = new Config(servletConfig);
 		outlierThreshold = config.getIntegerProperty(OUTLIER_THRESHOLD_PROPERTY);
 	}
 	 

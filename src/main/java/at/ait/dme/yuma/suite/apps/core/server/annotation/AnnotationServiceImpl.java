@@ -51,9 +51,7 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 	    super.init(servletConfig);	
-	    Config config = new Config(servletConfig, 
-				getClass().getResourceAsStream("annotation-service.properties"));
-	    
+	    Config config = new Config(servletConfig);
 	    AnnotationManager.init(config);
 	}
 

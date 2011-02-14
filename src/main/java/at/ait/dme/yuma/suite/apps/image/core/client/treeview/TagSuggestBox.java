@@ -72,25 +72,27 @@ public class TagSuggestBox extends Composite {
 		suggestBox.setLimit(limit);
 		suggestBox.getTextBox().addKeyPressHandler(new KeyPressHandler() {
 			@Override
-			public void onKeyPress(KeyPressEvent arg0) {
-				tagService.getTagSuggestions(suggestBox.getText(), limit,
-					new AsyncCallback<Collection<SemanticTag>>() {
-						@Override
-						public void onFailure(Throwable arg0) {
-							// Ignore
-						}
-
-						@Override
-						public void onSuccess(Collection<SemanticTag> tags) {
-							oracle.clear();
-							for (SemanticTag t : tags) {
-								oracle.add(t.getPrimaryLabel());
+			public void onKeyPress(KeyPressEvent evt) {
+				// Don't handle arrow key events, backspace, etc.
+				if (evt.getUnicodeCharCode() != 0) {
+					tagService.getTagSuggestions(suggestBox.getText() + evt.getCharCode(), limit,
+						new AsyncCallback<Collection<SemanticTag>>() {
+							@Override
+							public void onFailure(Throwable arg0) {
+								// Ignore
 							}
-						}
-				});
+	
+							@Override
+							public void onSuccess(Collection<SemanticTag> tags) {
+								for (SemanticTag t : tags) {
+									oracle.add(t.getPrimaryLabel());
+								}
+								suggestBox.showSuggestionList();
+							}
+					});
+				}
 			}
 		});
-		
 		initWidget(suggestBox);
 	}
 	

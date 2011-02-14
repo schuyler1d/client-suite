@@ -11,6 +11,11 @@
 	</context-param>
 	
 	<context-param>
+		<param-name>tag.server.url</param-name>
+		<param-value>http://localhost:8081/extras-tagserver/</param-value>
+	</context-param>
+	
+	<context-param>
 		<param-name>authentication.keystore.dir</param-name>
 		<param-value>/opt/tomcat/webapps/yuma/keys</param-value>
 	</context-param>

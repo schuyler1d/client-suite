@@ -102,7 +102,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
-		Config config = new Config(servletConfig, getClass().getResourceAsStream("map-service.properties"));
+		Config config = new Config(servletConfig);
 		googleApiKey = config.getStringProperty(GOOGLE_API_KEY_PROPERTY);
 		// stopwordFile = config.getStringProperty(STOPWORD_FILE_PROPERTY);
 	}

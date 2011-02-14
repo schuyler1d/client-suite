@@ -142,7 +142,7 @@ public class JSONAnnotationHandler {
 		return user;
 	}
 	
-	private static ArrayList<SemanticTag> parseSemanticTags(JSONArray jsonArray) {
+	public static ArrayList<SemanticTag> parseSemanticTags(JSONArray jsonArray) {
 		ArrayList<SemanticTag> tags = new ArrayList<SemanticTag>();
 		
 		for (Object obj : jsonArray) {
