@@ -220,8 +220,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		newTagTextBox.addSelectionHandler(new SelectionHandler<Suggestion>() {
 			@Override
 			public void onSelection(SelectionEvent<Suggestion> evt) {
-				SemanticTag t = newTagTextBox.getTag();
-				if (t != null) addTag(t);
+				addTag(newTagTextBox.getTag());
 				newTagTextBox.clear();
 			}
 		});
@@ -232,8 +231,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		btnAdd.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent evt) {
-				SemanticTag t = newTagTextBox.getTag();
-				if (t != null) addTag(t);
+				addTag(newTagTextBox.getTag());
 				newTagTextBox.clear();
 			}
 		});
@@ -347,6 +345,12 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	
 	@Override
 	public void addTag(final SemanticTag tag) {
+		if (tag == null)
+			return;
+		
+		if (tags.containsKey(tag))
+			return;
+		
 		FlowPanel container = new FlowPanel();
 		
 		InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""

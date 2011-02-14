@@ -137,11 +137,20 @@ public class SemanticTag implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object tag) {
-		// TODO implement this properly!
-		if (!(tag instanceof SemanticTag)) return false; 
-		SemanticTag s = (SemanticTag) tag;
-		return this.uri.equals(s.uri) && this.primaryLabel.equals(s.primaryLabel);
+	public boolean equals(Object other) {
+		if (!(other instanceof SemanticTag))
+			return false; 
+		
+		SemanticTag tag = (SemanticTag) other;
+		if (!this.uri.equals(tag.uri))
+			return false;
+		
+		return true;
 	}
 
+	@Override
+	public int hashCode() {
+		return uri.hashCode();
+	}
+	
 }
