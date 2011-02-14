@@ -178,7 +178,7 @@ public class ControlPointEditForm extends AnnotationEditForm {
 	private HorizontalPanel createButtonsPanel(AnnotationPanel panel, AnnotationTreeNode annotation) {
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
 		
-		PushButton saveButton = new PushButton(YUMACoreProperties.getConstants().actionSave());
+		PushButton saveButton = new PushButton(YUMACoreProperties.getConstants().save());
 		if (annotation == null) {
 			saveButton.addClickHandler(new SaveClickHandler(panel, null, this));
 		} else {
@@ -187,7 +187,7 @@ public class ControlPointEditForm extends AnnotationEditForm {
 		saveButton.setStyleName("imageAnnotation-form-button");
 		buttonsPanel.add(saveButton);
 		
-		PushButton cancelButton = new PushButton(YUMACoreProperties.getConstants().actionCancel());
+		PushButton cancelButton = new PushButton(YUMACoreProperties.getConstants().cancel());
 		cancelButton.setStyleName("imageAnnotation-form-button");
 		cancelButton.addClickHandler(new CancelClickHandler(panel, annotation));
 		buttonsPanel.add(cancelButton);

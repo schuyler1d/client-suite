@@ -23,16 +23,42 @@ package at.ait.dme.yuma.suite.apps.core.client;
 
 import com.google.gwt.i18n.client.Constants;
 
+/**
+ * Internationalized text labels
+ * 
+ * @author Christian Sadilek
+ * @author Rainer Simon
+ */
 public interface I18NConstants extends Constants {
-	public String actionCreate();
-	public String actionCreateFragment();
-	public String actionReply();
-	public String actionReplyFragment();
-	public String actionEdit();
-	public String actionShowOnMap();
-	public String actionDelete();
-	public String actionSave();
-	public String actionCancel();	
+	
+	/**
+	 * AnnotationPanel
+	 */
+	public String annotate();
+	public String annotateFragment();
+	
+	/**
+	 * ImageAnnotationTreeNode
+	 */
+	public String reply();
+	public String replyWithFragment();
+	public String edit();
+	public String delete();
+
+	/**
+	 * ImageAnnotationEditForm
+	 */
+	public String title();
+	public String text();
+	public String addTag();
+	public String add();
+	public String browse();
+	public String save();
+	public String cancel();
+	
+	
+	
+	
 	public String annotation();
 	public String annotations();
 	public String addAnnotation();
@@ -40,9 +66,7 @@ public interface I18NConstants extends Constants {
 	public String helpGeoreferenceHint();
 	public String actionCreateCP();
 	public String addAnnotationHint();
-	public String annotationTitle();
 	public String annotationReplyTitlePrefix();
-	public String annotationText();
 	public String annotationLinks();
 	public String annotationSuggestedLinks();
 	public String annotationSearch();

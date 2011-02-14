@@ -63,6 +63,15 @@
 		<servlet-name>auth</servlet-name>
 		<url-pattern>/auth</url-pattern>
 	</servlet-mapping>
+	
+    <servlet>
+        <servlet-name>tagging</servlet-name>
+        <servlet-class>at.ait.dme.yuma.suite.apps.core.server.tagging.TagServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tagging</servlet-name>
+        <url-pattern>/tags</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>ner</servlet-name>

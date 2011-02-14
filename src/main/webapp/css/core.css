@@ -106,3 +106,42 @@
 	font-family: arial;
 	font-size: 12px;
 }
+
+.annotationEditForm-tag table {
+	padding:0px;
+	position:relative;
+	left:10px;
+	width:100%;
+	margin-bottom:10px;
+}
+
+.gwt-SuggestBoxPopup {
+    z-index:10001;
+}
+
+.annotationEditForm-tag-input {
+	position:relative;
+	left:-12px;
+	margin:5px 4px;
+	padding:4px;
+	width:100%;
+	border:1px solid #8db2e3;
+	font-family: arial;
+	font-size: 12px;
+}
+
+.annotationEditForm-tag .gwt-PushButton-up, 
+.annotationEditForm-tag .gwt-PushButton-up-hovering,
+.annotationEditForm-tag .gwt-PushButton-up-disabled, 
+.annotationEditForm-tag .gwt-PushButton-down, 
+.annotationEditForm-tag .gwt-PushButton-down-hovering,
+.annotationEditForm-tag .gwt-PushButton-down-disabled {
+	margin:5px 0px 5px 4px;
+	padding:5px;
+	position:relative;
+	left:2px;
+}
+
+.annotationEditForm-tag-btn-add, .annotationEditForm-tag-btn-browse {
+	text-align:center;
+}

@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 
+import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.events.AbstractKeyboardHandler;
 import at.ait.dme.yuma.suite.apps.core.client.events.CancelClickHandler;
@@ -88,6 +89,8 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
     
 	private TagCloud tagCloud;
 	
+	private I18NConstants i18n = YUMACoreProperties.getConstants();
+	
 	private NERServiceAsync enrichmentService = 
 		(NERServiceAsync) GWT.create(NERService.class);
 
@@ -110,8 +113,9 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
     	formPanel.setStyleName("annotationEditForm");		
 		formPanel.add(createTitlePanel());
 		formPanel.add(createTextPanel());
+		formPanel.add(createAddNewTagPanel());
 		formPanel.add(createScopePanel());
-		formPanel.add(createTagPanel());
+		formPanel.add(createTagsPanel());
 		formPanel.add(createButtonsPanel());
 		
 		panel.getMediaViewer().setAnnotationEditForm(this);
@@ -153,7 +157,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	protected FlowPanel createTitlePanel() {
 		FlowPanel titlePanel = new FlowPanel();
 		
-		Label titleLabel = new Label(YUMACoreProperties.getConstants().annotationTitle());
+		Label titleLabel = new Label(i18n.title());
 		titleLabel.setStyleName("annotationEditForm-label");
 		
 		titleTextBox.setStyleName("annotationEditForm-title-input");
@@ -171,7 +175,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	protected FlowPanel createTextPanel() {
 		FlowPanel textPanel = new FlowPanel();
 		
-		Label textLabel = new Label(YUMACoreProperties.getConstants().annotationText());
+		Label textLabel = new Label(i18n.text());
 		textLabel.setStyleName("annotationEditForm-label");		
 		
 		textArea.setStyleName("annotationEditForm-text-input");
@@ -195,6 +199,33 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		return textPanel;
 	}
 	
+	protected FlowPanel createAddNewTagPanel() {
+		FlowPanel container = new FlowPanel();
+		container.setStyleName("annotationEditForm-tag");
+		
+		// TODO I18N
+		Label addTagLabel = new Label(i18n.addTag());
+		addTagLabel.setStyleName("annotationEditForm-label");	
+		
+		HorizontalPanel addTagPanel = new HorizontalPanel();
+		TagSuggestBox newTagTextBox = new TagSuggestBox(10);	
+		newTagTextBox.setStyleName("annotationEditForm-tag-input");
+		addTagPanel.add(newTagTextBox);
+		
+		PushButton btnAdd = new PushButton(i18n.add());
+		btnAdd.addStyleName("annotationEditForm-tag-btn-add");
+		addTagPanel.add(btnAdd);
+		
+		PushButton btnBrowse = new PushButton(i18n.browse());
+		btnBrowse.addStyleName("annotationEditForm-tag-btn-browse");
+		addTagPanel.add(btnBrowse);
+		
+		container.add(addTagLabel);
+		container.add(addTagPanel);
+		
+		return container;
+	}
+	
 	protected HorizontalPanel createScopePanel() {
 	    HorizontalPanel radioPanel = new HorizontalPanel();
 
@@ -202,11 +233,11 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		scopeLabel.setStyleName("imageAnnotation-form-label");         
 	     
         rdPublic = new RadioButton(SCOPE_RADIO_GROUP_NAME,
-                " " + YUMACoreProperties.getConstants().publicScope());
+                " " + i18n.publicScope());
         rdPublic.setStyleName("imageAnnotation-form-radiobutton");
         
         rdPrivate = new RadioButton(SCOPE_RADIO_GROUP_NAME,
-                " " + YUMACoreProperties.getConstants().privateScope());
+                " " + i18n.privateScope());
         rdPrivate.setStyleName("imageAnnotation-form-radiobutton");     
         		
 		if (annotation != null && annotation.getAnnotation().getScope() == Scope.PRIVATE) {
@@ -222,7 +253,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		return radioPanel;
 	}
 	
-	protected Panel createTagPanel() {
+	protected Panel createTagsPanel() {
 	    tagPanel = new FlowPanel();
 		tagPanel.setStyleName("imageAnnotation-taglist");
 		return tagPanel;
@@ -231,7 +262,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	protected HorizontalPanel createButtonsPanel() {
 		HorizontalPanel buttonsPanel = new HorizontalPanel();
 		
-		PushButton btnSave = new PushButton(YUMACoreProperties.getConstants().actionSave());
+		PushButton btnSave = new PushButton(i18n.save());
 		btnSave.setStyleName("imageAnnotation-form-button");
 		if (annotation == null) {
 			btnSave.addClickHandler(new SaveClickHandler(panel, parent, this));	
@@ -240,7 +271,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		}
 		buttonsPanel.add(btnSave);
 		
-		PushButton btnCancel = new PushButton(YUMACoreProperties.getConstants().actionCancel());
+		PushButton btnCancel = new PushButton(i18n.cancel());
 		btnCancel.setStyleName("imageAnnotation-form-button");
 		if (annotation == null) {
 			btnCancel.addClickHandler(new CancelClickHandler(panel, parent));

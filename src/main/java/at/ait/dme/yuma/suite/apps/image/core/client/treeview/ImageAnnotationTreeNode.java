@@ -139,26 +139,26 @@ public class ImageAnnotationTreeNode extends AnnotationTreeNode {
 	private Panel createActions() {
 		HorizontalPanel actionsPanel = new HorizontalPanel();
 		
-		btnReply = new PushButton(YUMACoreProperties.getConstants().actionReply());
+		btnReply = new PushButton(YUMACoreProperties.getConstants().reply());
 		btnReply.setStyleName("imageAnnotation-action");
 		btnReply.addClickHandler(new AnnotateClickHandler(panel, null, this, false));
 		btnReply.setEnabled(!User.get().isAnonymous());
 		actionsPanel.add(btnReply);
 
-		btnReplyFragment = new PushButton(YUMACoreProperties.getConstants().actionReplyFragment());
+		btnReplyFragment = new PushButton(YUMACoreProperties.getConstants().replyWithFragment());
 		btnReplyFragment.setStyleName("imageAnnotation-action");
 		btnReplyFragment.addClickHandler(new AnnotateClickHandler(panel, null, this, true));
 		btnReplyFragment.setEnabled(!User.get().isAnonymous());
 		actionsPanel.add(btnReplyFragment);
 
-		btnEdit = new PushButton(YUMACoreProperties.getConstants().actionEdit());
+		btnEdit = new PushButton(YUMACoreProperties.getConstants().edit());
 		btnEdit.setStyleName("imageAnnotation-action");
 		btnEdit.setEnabled(User.get().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());
 		btnEdit.addClickHandler(new AnnotateClickHandler(panel, this, parent, annotation.hasFragment()));
 		actionsPanel.add(btnEdit);
 
-		btnDelete = new PushButton(YUMACoreProperties.getConstants().actionDelete());
+		btnDelete = new PushButton(YUMACoreProperties.getConstants().delete());
 		btnDelete.setStyleName("imageAnnotation-action");
 		btnDelete.setEnabled(User.get().equals(annotation.getCreatedBy())
 				&& !annotation.hasReplies());

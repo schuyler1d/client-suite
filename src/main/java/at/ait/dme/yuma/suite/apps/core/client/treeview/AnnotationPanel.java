@@ -184,7 +184,7 @@ public class AnnotationPanel extends Composite
 		
 		// 'Annotate' button
 		annotateButton.setStyleName("imageAnnotation-button");
-		annotateButton.setText(YUMACoreProperties.getConstants().actionCreate());
+		annotateButton.setText(YUMACoreProperties.getConstants().annotate());
 		annotateButton.addClickHandler(
 				new AnnotateClickHandler(this, null, null, false));
 		annotateButton.setEnabled(!User.get().isAnonymous());
@@ -192,7 +192,7 @@ public class AnnotationPanel extends Composite
 		
 		// 'Annotate Fragment' button
 		annotateFragmentButton.setStyleName("imageAnnotation-button");
-		annotateFragmentButton.setText(YUMACoreProperties.getConstants().actionCreateFragment());
+		annotateFragmentButton.setText(YUMACoreProperties.getConstants().annotateFragment());
 		annotateFragmentButton.addClickHandler(
 				new AnnotateClickHandler(this, null, null, true));
 		annotateFragmentButton.setEnabled(!User.get().isAnonymous());
