@@ -49,6 +49,8 @@ import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -208,12 +210,20 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		addTagLabel.setStyleName("annotationEditForm-label");	
 		
 		HorizontalPanel addTagPanel = new HorizontalPanel();
-		TagSuggestBox newTagTextBox = new TagSuggestBox(10);	
+		final TagSuggestBox newTagTextBox = new TagSuggestBox(10);	
 		newTagTextBox.setStyleName("annotationEditForm-tag-input");
 		addTagPanel.add(newTagTextBox);
 		
 		PushButton btnAdd = new PushButton(i18n.add());
 		btnAdd.addStyleName("annotationEditForm-tag-btn-add");
+		btnAdd.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent arg0) {
+				SemanticTag t = newTagTextBox.getTag();
+				if (t != null)
+					addTag(t);
+			}
+		});
 		addTagPanel.add(btnAdd);
 		
 		PushButton btnBrowse = new PushButton(i18n.browse());

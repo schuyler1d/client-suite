@@ -21,14 +21,16 @@
 package at.ait.dme.yuma.suite.apps.image.core.client.treeview;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.server.tagging.TagService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.tagging.TagServiceAsync;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
@@ -63,6 +65,11 @@ public class TagSuggestBox extends Composite {
 	 */
 	private TagServiceAsync tagService;
 	
+	/**
+	 * Lookup table Label->SemanticTag
+	 */
+	private HashMap<String, SemanticTag> tags = new HashMap<String, SemanticTag>();
+	
 	public TagSuggestBox(int maxItems) {
 		this.limit = maxItems;
 		
@@ -70,26 +77,28 @@ public class TagSuggestBox extends Composite {
 		GWT.create(TagService.class);
 		
 		suggestBox.setLimit(limit);
-		suggestBox.getTextBox().addKeyPressHandler(new KeyPressHandler() {
+		suggestBox.getTextBox().addKeyUpHandler(new KeyUpHandler() {
 			@Override
-			public void onKeyPress(KeyPressEvent evt) {
-				// Don't handle arrow key events, backspace, etc.
-				if (evt.getUnicodeCharCode() != 0) {
-					tagService.getTagSuggestions(suggestBox.getText() + evt.getCharCode(), limit,
+			public void onKeyUp(KeyUpEvent evt) {
+				int key = evt.getNativeKeyCode();
+				if (key != KeyCodes.KEY_DOWN && key != KeyCodes.KEY_UP) {
+					tagService.getTagSuggestions(suggestBox.getText().trim(), limit, 
 						new AsyncCallback<Collection<SemanticTag>>() {
 							@Override
 							public void onFailure(Throwable arg0) {
 								// Ignore
 							}
-	
+
 							@Override
-							public void onSuccess(Collection<SemanticTag> tags) {
-								for (SemanticTag t : tags) {
+							public void onSuccess(Collection<SemanticTag> result) {
+								for (SemanticTag t : result) {
 									oracle.add(t.getPrimaryLabel());
+									tags.put(t.getPrimaryLabel(), t);
 								}
 								suggestBox.showSuggestionList();
 							}
-					});
+						}	
+					);	
 				}
 			}
 		});
@@ -99,6 +108,10 @@ public class TagSuggestBox extends Composite {
 	@Override
 	public void setStyleName(String style) {
 		suggestBox.getTextBox().setStyleName(style);
+	}
+	
+	public SemanticTag getTag() {
+		return tags.get(suggestBox.getTextBox().getText());
 	}
 
 }
