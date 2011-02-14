@@ -352,8 +352,14 @@ TABLE.sortableTable TD {
 }
 
 .imageAnnotation-taglist {
-	margin:8px 2px 0px 2px;
+	margin:8px 0px 0px 0px;
 	padding:0px;
+}
+
+.imageAnnotation-taglist div {
+	display:inline;
+	margin-left:2px;
+	margin-right:-5px;
 }
 
 .imageAnnotation-taglist span {

@@ -56,6 +56,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -83,6 +84,8 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 
 	private TextBox titleTextBox = new TextBox();	
 	private TextArea textArea = new TextArea();
+	
+	private static final String DELETE_TAG_ICON = "/images/remove_tag.png";
 	
 	private RadioButton rdPublic, rdPrivate = null;
 
@@ -343,14 +346,29 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	}
 	
 	@Override
-	public void addTag(SemanticTag tag) {
+	public void addTag(final SemanticTag tag) {
+		FlowPanel container = new FlowPanel();
+		
 		InlineHTML span = new InlineHTML("<a target=\"_blank\" href=\""
 				+ tag.getURI() + "\" title=\"" 
 				+ tag.getPrimaryDescription() + "\">" 
 				+ tag.getPrimaryLabel() + "</a>"
 		);
-		tagPanel.add(span);
-		tags.put(tag, span);
+		container.add(span);
+		
+		PushButton x = new PushButton(new Image(DELETE_TAG_ICON));
+		x.setTitle("Remove Tag '" + tag.getPrimaryLabel() + "'");
+		x.setStyleName("annotationEditForm-tag-btn-delete");
+		x.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent arg0) {
+				removeTag(tag);
+			}
+		});
+		container.add(x);
+		
+		tagPanel.add(container);
+		tags.put(tag, container);
 		panel.layout();
 	}
 	

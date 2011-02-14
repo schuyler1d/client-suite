@@ -144,3 +144,10 @@
 .annotationEditForm-tag-btn-add, .annotationEditForm-tag-btn-browse {
 	text-align:center;
 }
+
+.annotationEditForm-tag-btn-delete {
+	position:relative;
+	left:-10px;
+	bottom:-8px;
+	cursor: pointer;
+}
