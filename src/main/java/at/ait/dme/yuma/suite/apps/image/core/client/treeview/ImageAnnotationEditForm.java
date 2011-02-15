@@ -90,7 +90,7 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	private TextBox titleTextBox = new TextBox();	
 	private TextArea textArea = new TextArea();
 	
-	private static final String DELETE_TAG_ICON = "/images/remove_tag.png";
+	private static final String DELETE_TAG_ICON = "images/remove_tag.png";
 	
 	private RadioButton rdPublic, rdPrivate = null;
 
