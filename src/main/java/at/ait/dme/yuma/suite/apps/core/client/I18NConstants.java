@@ -61,6 +61,10 @@ public interface I18NConstants extends Constants {
 	 */
 	public String vocabularyBrowser();
 	
+	/**
+	 * Google Map Popup
+	 */
+	public String map();
 	
 	public String annotation();
 	public String annotations();

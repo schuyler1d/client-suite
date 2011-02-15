@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
 import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
@@ -36,6 +37,7 @@ public class MapAnnotationTreeNode extends ImageAnnotationTreeNode {
 				public void onClick(ClickEvent event) {
 					WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(550, 300, 500, 300);
 					window.setWidget(new GoogleMapsComposite((ImageAnnotation) annotation));
+					window.getHeader().setText(YUMACoreProperties.getConstants().map());
 					window.show();
 				}
 			});
