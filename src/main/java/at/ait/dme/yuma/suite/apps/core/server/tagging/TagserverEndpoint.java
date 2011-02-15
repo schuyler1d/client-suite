@@ -18,5 +18,14 @@ public interface TagserverEndpoint {
     public ClientResponse<String> getTagSuggestions(
     		@QueryParam("q") String query,
     		@QueryParam("limit") int limit);
+	
+	@GET
+	@Path("/vocabularies")
+	public ClientResponse<String> getVocabularies();
+
+	@GET
+	@Path("/children")
+	public ClientResponse<String> getChildren(
+			@QueryParam("uri") String uri);
 
 }

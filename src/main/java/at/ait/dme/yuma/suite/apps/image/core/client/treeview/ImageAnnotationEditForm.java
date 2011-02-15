@@ -26,6 +26,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 
+import org.gwt.mosaic.ui.client.WindowPanel;
+
 import at.ait.dme.yuma.suite.apps.core.client.I18NConstants;
 import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.core.client.events.AbstractKeyboardHandler;
@@ -35,6 +37,7 @@ import at.ait.dme.yuma.suite.apps.core.client.events.UpdateClickHandler;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationEditForm;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationPanel;
 import at.ait.dme.yuma.suite.apps.core.client.treeview.AnnotationTreeNode;
+import at.ait.dme.yuma.suite.apps.core.client.widgets.MinMaxWindowPanel;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
@@ -44,6 +47,8 @@ import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERServiceAsync;
 import at.ait.dme.yuma.suite.apps.core.shared.server.ner.SemanticTagSuggestions;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
+import at.ait.dme.yuma.suite.apps.image.core.client.tagging.TagSuggestBox;
+import at.ait.dme.yuma.suite.apps.image.core.client.tagging.TagTreePanel;
 import at.ait.dme.yuma.suite.apps.image.core.shared.model.ImageAnnotation;
 
 import com.google.gwt.core.client.GWT;
@@ -239,6 +244,16 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 		
 		PushButton btnBrowse = new PushButton(i18n.browse());
 		btnBrowse.addStyleName("annotationEditForm-tag-btn-browse");
+		
+		final TagTreePanel tagTreePanel = new TagTreePanel(this);
+		btnBrowse.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				WindowPanel window = MinMaxWindowPanel.createMinMaxWindowPanel(200, 200, 350, 450);
+				window.setWidget(tagTreePanel);
+				window.getHeader().setText(i18n.vocabularyBrowser());
+				window.show();
+			}
+		});
 		addTagPanel.add(btnBrowse);
 		
 		container.add(addTagLabel);

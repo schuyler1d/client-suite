@@ -1,12 +1,18 @@
 /* CSS styles for YUMA Core module                 */
 /* TODO refactor - move all the core stuff in here */
 
+.mosaic-Caption-text {
+	color:#416AA3;
+	font-family:"Myriad Pro","Myriad Web","Tahoma","Helvetica","Arial";
+	font-size: 11px;
+	padding-bottom:6px;
+}
 
 /* AnnotationPanel */
 .annotationPanel {
 	font-family: arial;
 	font-size: 10px;
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
 .imageAnnotation-tree {
@@ -150,4 +156,18 @@
 	left:-10px;
 	bottom:-8px;
 	cursor: pointer;
+}
+
+.vocabularyBrowser {
+	margin:2px;
+	background-color:#fff;
+	border:1px solid #8DB2E3;
+}
+
+.vocabularyBrowser-treeNode {
+	font-family:Arial;
+	font-size:12px;
+	padding-top:2px;
+	padding-bottom:3px;
+	height:17px;
 }

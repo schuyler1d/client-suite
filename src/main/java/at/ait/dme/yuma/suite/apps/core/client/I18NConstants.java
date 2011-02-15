@@ -56,7 +56,10 @@ public interface I18NConstants extends Constants {
 	public String save();
 	public String cancel();
 	
-	
+	/**
+	 * Vocabulary browser
+	 */
+	public String vocabularyBrowser();
 	
 	
 	public String annotation();

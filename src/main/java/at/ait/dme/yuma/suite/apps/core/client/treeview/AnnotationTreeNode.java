@@ -37,7 +37,7 @@ public abstract class AnnotationTreeNode
 	protected AnnotationTreeNode parent;
 
 	/**
-	 * The parent node of this annotation tree node
+	 * The this annotation's tree item
 	 */
 	protected TreeItem treeItem;
 	

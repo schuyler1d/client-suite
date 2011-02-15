@@ -11,5 +11,9 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface TagService extends RemoteService {
 	
     public Collection<SemanticTag> getTagSuggestions(String text, int limit);
+    
+    public Collection<String> getVocabularies();
+    
+    public Collection<SemanticTag> getChildren(String parentUri);
 
 }

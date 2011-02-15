@@ -1,5 +1,6 @@
 package at.ait.dme.yuma.suite.apps.core.server.tagging;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletConfig;
@@ -34,14 +35,35 @@ public class TagServiceImpl extends RemoteServiceServlet implements TagService {
 	
 	@Override
 	public Collection<SemanticTag> getTagSuggestions(String text, int limit) {
-    	HttpClient client = new HttpClient();
-        TagserverEndpoint tagserver = 
-        	ProxyFactory.create(TagserverEndpoint.class, TAG_SERVER_URL,
-        		new ApacheHttpClientExecutor(client));
-        
-        ClientResponse<String> response = tagserver.getTagSuggestions(text, limit);
+        ClientResponse<String> response = getEndpoint().getTagSuggestions(text, limit);
         JSONArray json = (JSONArray) JSONValue.parse(response.getEntity());
         return JSONAnnotationHandler.parseSemanticTags(json);
+	}
+
+	@Override
+	public Collection<String> getVocabularies() {
+		ClientResponse<String> response = getEndpoint().getVocabularies();
+		JSONArray json = (JSONArray) JSONValue.parse(response.getEntity());
+		
+		ArrayList<String> vocabularies = new ArrayList<String>();
+		for (int i=0; i<json.size(); i++) {
+			vocabularies.add(json.get(i).toString());
+		}
+
+		return vocabularies;
+	}
+
+	@Override
+	public Collection<SemanticTag> getChildren(String parentUri) {
+		ClientResponse<String> response = getEndpoint().getChildren(parentUri);
+		JSONArray json = (JSONArray) JSONValue.parse(response.getEntity());
+		return JSONAnnotationHandler.parseSemanticTags(json);
+	}
+	
+	private TagserverEndpoint getEndpoint() {
+    	HttpClient client = new HttpClient();
+        return ProxyFactory.create(TagserverEndpoint.class, TAG_SERVER_URL,
+        		new ApacheHttpClientExecutor(client));
 	}
 
 }

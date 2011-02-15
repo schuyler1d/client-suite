@@ -202,7 +202,7 @@ public class AnnotationPanel extends Composite
 		return header;
 	}
 	
-	public void editAnnotation(AnnotationTreeNode annotation, AnnotationTreeNode parent, boolean showFragmentEditor) {
+	public void editAnnotation(AnnotationTreeNode annotation, AnnotationTreeNode parent, boolean showFragmentEditor) {		
 		scrollPosition = scrollPanel.getScrollPosition();	
 		annotateButton.setEnabled(false);
 		editForm = editForm.newInstance(this, annotation, parent);
@@ -246,7 +246,7 @@ public class AnnotationPanel extends Composite
 	 * 	@param canceled true if the user canceled the operation, otherwise false
 	 *  @see #showAnnotationForm(ImageAnnotationTreeNode, boolean, boolean)
 	 */
-	public void stopEditing(AnnotationTreeNode parent, Annotation created, boolean canceled) {
+	public void stopEditing(AnnotationTreeNode parent, Annotation created, boolean canceled) {		
 		if (parent == null) {
 			editFormPanel.clear();
 		} else {

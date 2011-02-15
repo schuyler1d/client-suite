@@ -18,7 +18,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.image.core.client.treeview;
+package at.ait.dme.yuma.suite.apps.image.core.client.tagging;
 
 import java.util.Collection;
 import java.util.HashMap;
