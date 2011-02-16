@@ -21,26 +21,19 @@
 
 package at.ait.dme.yuma.suite.apps.core.server.ner;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClientExecutor;
-import org.jboss.resteasy.util.HttpResponseCodes;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
-import at.ait.dme.yuma.suite.apps.core.server.Config;
-import at.ait.dme.yuma.suite.apps.core.shared.model.PlainLiteral;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERServiceException;
@@ -61,46 +54,96 @@ public class NERServiceImpl extends RemoteServiceServlet implements NERService {
     /**
      * OpenCalais endpoint base URL
      */
-	private static final String OPENCALAIS_API_URL = "http://api.opencalais.com/enlighten/rest";
+    // private static final String OPENCALAIS_API_URL = "http://api.opencalais.com/enlighten/rest";
 	
 	/**
 	 * OpenCalais API key property name
 	 */
-	private static final String OPENCALAIS_API_KEY_PROPERTY = "openCalaisLicenceID";
+	// private static final String OPENCALAIS_API_KEY_PROPERTY = "openCalaisLicenceID";
 	
 	/**
 	 * OpenCalais licence ID 
 	 */
-	private static String openCalaisLicenceID;
+	// private static String openCalaisLicenceID;
 	
 	/**
 	 * DBpediaLookup endpoint base URL
 	 */
-	private static final String DBPEDIA_LOOKUP_URL = "http://lookup.dbpedia.org/";
+	// private static final String DBPEDIA_LOOKUP_URL = "http://lookup.dbpedia.org/";
+	
+	/**
+	 * DBpedia Spotlight base URL
+	 */
+	private static final String DBPEDIA_SPOTLIGHT_URL = "http://spotlight.dbpedia.org/";
 	
 	/**
 	 * Tags used in DBpedia lookup response
 	 */
-	private static final String DBPEDIA_RESULT = "Result";
-	private static final String DBPEDIA_LABEL = "Label";
-	private static final String DBPEDIA_DESCRIPTION = "Description";
-	private static final String DBPEDIA_URI = "URI";
+	// private static final String DBPEDIA_RESULT = "Result";
+	// private static final String DBPEDIA_LABEL = "Label";
+	// private static final String DBPEDIA_DESCRIPTION = "Description";
+	// private static final String DBPEDIA_URI = "URI";
 
+	/*
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         Config config = new Config(servletConfig);
         
-        openCalaisLicenceID = config.getStringProperty(OPENCALAIS_API_KEY_PROPERTY);
+       //  openCalaisLicenceID = config.getStringProperty(OPENCALAIS_API_KEY_PROPERTY);
     }
+    */
     
 	@Override
 	public Collection<SemanticTagSuggestions> getTagSuggestions(String text) 
 			throws NERServiceException {
 		
-		return getTagSuggestionsOpenCalaisDBpedia(text);
+		return getTagSuggestionsDBpediaSpotlight(text);
 	}
 	
+	private Collection<SemanticTagSuggestions> getTagSuggestionsDBpediaSpotlight(String text) {
+    	HttpClient client = new HttpClient();
+        DBpediaSpotlightEndpoint endpoint = 
+        	ProxyFactory.create(DBpediaSpotlightEndpoint.class, DBPEDIA_SPOTLIGHT_URL,
+        		new ApacheHttpClientExecutor(client));
+      
+        ClientResponse<String> response = endpoint.annotate(text, 0.2, 20);
+        JSONObject json = (JSONObject) JSONValue.parse(response.getEntity());
+        
+        @SuppressWarnings("unchecked")
+		Map<String, String> error = (Map<String, String>) json.get("Error");
+        if (error != null) {
+        	System.out.println("DBpedia Spotlight error: " + error.get("@message"));
+        	return new ArrayList<SemanticTagSuggestions>(); 
+        }
+                
+        @SuppressWarnings("unchecked")
+		List<Map<String, String>> resources = (List<Map<String, String>>) json.get("Resources");
+
+        ArrayList<SemanticTagSuggestions> allSuggestions = new ArrayList<SemanticTagSuggestions>();
+        for (Map<String, String> resource : resources) {        	
+        	String uri = resource.get("@URI");
+        	String label = resource.get("@surfaceForm");
+        	String type = resource.get("@types");
+
+        	SemanticTagSuggestions suggestion = new SemanticTagSuggestions();
+        	suggestion.setTitle(label);
+        	suggestion.setType(type);
+        	
+        	SemanticTag t = new SemanticTag();
+        	t.setURI(uri);
+        	t.setPrimaryLabel(label);
+        	t.setPrimaryDescription(label);
+        	t.setType(type);
+
+        	suggestion.setTags(Arrays.asList(t));
+        	allSuggestions.add(suggestion);
+        }
+        
+        return allSuggestions;
+	}
+	
+	/*
 	private Collection<SemanticTagSuggestions> getTagSuggestionsOpenCalaisDBpedia(String text) 
 			throws NERServiceException {
 		
@@ -186,4 +229,6 @@ public class NERServiceImpl extends RemoteServiceServlet implements NERService {
         return ProxyFactory.create(DBpediaLookupEndpoint.class, DBPEDIA_LOOKUP_URL,
         		new ApacheHttpClientExecutor(client));
     }
+    */
+    
 }

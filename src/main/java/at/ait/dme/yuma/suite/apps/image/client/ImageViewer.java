@@ -429,6 +429,7 @@ public class ImageViewer extends MediaViewer {
 			activeFragmentControlPanel = null;
 			activeFragmentPanel = null;
 		}
+		tagCloud.fadeoutAndClear();
 	}
 
 	/**
