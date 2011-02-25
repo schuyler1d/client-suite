@@ -128,7 +128,8 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	public String getPlacename(String mapUrl, XYCoordinate c) throws GeocoderException {
 		try {
 			// Interpolate lat/lon
-			ControlPointManager cpm = new ControlPointManager(getThreadLocalRequest(), mapUrl);
+			ControlPointManager cpm =
+				new ControlPointManager(getThreadLocalRequest(), getThreadLocalResponse(), mapUrl);
 			CoordinateTransformation interpolator = new AffineTransformation(cpm.getControlPoints());
 			TransformationResult ir = interpolator.getLatLonFromKnownXY(c);
 			
@@ -151,7 +152,8 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	public SemanticTag[] getTags(String mapUrl, XYCoordinate lowerLeft, XYCoordinate upperRight) throws GeocoderException, TransformationException {
 		try {
 			// Convert bounding box to geo-coordinates
-			ControlPointManager cpm = new ControlPointManager(getThreadLocalRequest(), mapUrl);
+			ControlPointManager cpm =
+				new ControlPointManager(getThreadLocalRequest(), getThreadLocalResponse(), mapUrl);
 			CoordinateTransformation interpolator = new AffineTransformation(cpm.getControlPoints());
 			WGS84Coordinate ll = interpolator.getLatLonFromKnownXY(lowerLeft).latlon;
 			WGS84Coordinate ur = interpolator.getLatLonFromKnownXY(upperRight).latlon;

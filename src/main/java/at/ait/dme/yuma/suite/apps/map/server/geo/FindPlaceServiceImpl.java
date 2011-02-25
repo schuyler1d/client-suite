@@ -50,7 +50,8 @@ public class FindPlaceServiceImpl extends RemoteServiceServlet implements FindPl
 			WGS84Coordinate latlon = geocoder.getCoordinate(query);
 			
 			// Interpolate latlon
-			ControlPointManager cpm = new ControlPointManager(getThreadLocalRequest(), mapUrl);
+			ControlPointManager cpm = 
+				new ControlPointManager(getThreadLocalRequest(), getThreadLocalResponse(), mapUrl);
 			CoordinateTransformation interpolator = new AffineTransformation(cpm.getControlPoints());
 			TransformationResult result = interpolator.getXYFromKnownLatLon(latlon);
 			return new FindPlaceResponse(query, result.xy, result.latlon, result.getNeighbors());
@@ -62,7 +63,8 @@ public class FindPlaceServiceImpl extends RemoteServiceServlet implements FindPl
 	@Override
 	public FindPlaceResponse findPlace(String mapUrl, WGS84Coordinate latlon) throws FindPlaceException {
 		try {
-			ControlPointManager cpm = new ControlPointManager(getThreadLocalRequest(), mapUrl);
+			ControlPointManager cpm =
+				new ControlPointManager(getThreadLocalRequest(), getThreadLocalResponse(), mapUrl);
 			CoordinateTransformation interpolator = new AffineTransformation(cpm.getControlPoints());
 			TransformationResult result = interpolator.getXYFromKnownLatLon(latlon);
 			return new FindPlaceResponse("unknown", result.xy, result.latlon, result.getNeighbors());

@@ -29,6 +29,8 @@ import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MultivaluedMap;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
@@ -63,7 +65,8 @@ public class AnnotationManager implements AnnotationService {
 	private static final String FAILED_TO_PARSE_ANNOTATION = "failed to parse anntotation";
 	
 	private static String annotationServerBaseUrl = null;
-	private HttpServletRequest clientRequest = null;
+	private HttpServletRequest request = null;
+	private HttpServletResponse response = null;
 	
 	// we will use a simple cache here for now.
 	// TODO don't use this on a cluster
@@ -79,18 +82,20 @@ public class AnnotationManager implements AnnotationService {
 		annotationServerBaseUrl += "api/";
 	}
 
-	public AnnotationManager(HttpServletRequest clientRequest) {
-		this.clientRequest = clientRequest;
+	public AnnotationManager(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
 	}
 	
 	@Override
 	public Annotation createAnnotation(Annotation annotation)
 			throws AnnotationServiceException {
-				
+			
+		ClientResponse<String> response = null;
 		String annotationId = null;
 		try {
 			// Call the Annotation Server
-			ClientResponse<String> response = getAnnotationServer()
+			response = getAnnotationServer()
 				.createAnnotation(JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
 			
 			// Check response
@@ -107,6 +112,10 @@ public class AnnotationManager implements AnnotationService {
 		} catch (Exception e) {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
 			throw new AnnotationServiceException(e.getMessage());
+		} finally {
+			// TODO make header forwarding optional (via web.xml init param)
+			if(response != null)
+				forwardResponseHeaders(response.getHeaders());
 		}
 		
 		annotation.setId(annotationId);
@@ -117,10 +126,11 @@ public class AnnotationManager implements AnnotationService {
 	public Annotation updateAnnotation(String id, Annotation annotation) 
 			throws AnnotationServiceException {
 		
+		ClientResponse<String> response = null;
 		String newId;
 		try {
 			// Call the Annotation Server
-			ClientResponse<String> response = getAnnotationServer()
+			response = getAnnotationServer()
 				.updateAnnotation(encode(id), JSONAnnotationHandler.serializeAnnotations(Arrays.asList(annotation)).toString());
 			
 			// Check response			
@@ -136,7 +146,11 @@ public class AnnotationManager implements AnnotationService {
 		} catch (Exception e) {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
 			throw new AnnotationServiceException(e.getMessage());
-		} 
+		} finally {
+			// TODO make header forwarding optional (via web.xml init param)
+			if(response != null)
+				forwardResponseHeaders(response.getHeaders());
+		}
 		
 		annotation.setId(newId);
 		return annotation;
@@ -144,9 +158,10 @@ public class AnnotationManager implements AnnotationService {
 	
 	@Override
 	public void deleteAnnotation(String annotationId) throws AnnotationServiceException {
+		ClientResponse<String> response = null;
 		try {					
 			// Call the Annotation Server
-			ClientResponse<String> response = getAnnotationServer().
+			response = getAnnotationServer().
 				deleteAnnotation(encode(annotationId));
 			
 			// Check response			
@@ -162,19 +177,24 @@ public class AnnotationManager implements AnnotationService {
 		} catch (Exception e) {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
 			throw new AnnotationServiceException(e.getMessage());
+		} finally {
+			// TODO make header forwarding optional (via web.xml init param)
+			if(response != null)
+				forwardResponseHeaders(response.getHeaders());
 		} 		
 	}
 	
 	@Override
 	public Collection<Annotation> listAnnotations(String objectId) 
 			throws AnnotationServiceException {
+		
+		ClientResponse<String> response = null;
 		Collection<Annotation> annotations = null;			
-
 		try {
 			if ((annotations = annotationCache.get(objectId)) == null) {
 				
 				// Call the Annotation Server
-				ClientResponse<String> response=getAnnotationServer().
+				response = getAnnotationServer().
 					getAnnotationTree(encode(objectId));	
 				
 				// Check response
@@ -193,7 +213,11 @@ public class AnnotationManager implements AnnotationService {
 		} catch (Exception e) {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, e);
 			throw new AnnotationServiceException(e.getMessage());
-		}
+		} finally {
+			// TODO make header forwarding optional (via web.xml init param)
+			if(response != null)
+				forwardResponseHeaders(response.getHeaders());
+		} 
 		
 		return annotations;
 	}
@@ -221,20 +245,18 @@ public class AnnotationManager implements AnnotationService {
 	
 	private RESTAnnotationServer getAnnotationServer() {
 		HttpClient client = new HttpClient();
-		/*
-		 * Credentials defaultcreds = new UsernamePasswordCredentials("both",
-		 * "tomcat"); client.getState().setCredentials(new
-		 * AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT,
-		 * AuthScope.ANY_REALM), defaultcreds);
-		 */
 
-		if(clientRequest!=null) {
-			// make sure to forward all cookies to the middleware
-			javax.servlet.http.Cookie[] cookies = clientRequest.getCookies();
+		// Forward all cookies from the calling request
+		if (request != null) {
+			
+			javax.servlet.http.Cookie[] cookies =
+				request.getCookies();
+			
 			if (cookies != null) {
 				for (javax.servlet.http.Cookie c : cookies) {
-					c.setDomain(clientRequest.getServerName());
+					c.setDomain(request.getServerName());
 					c.setPath("/");
+					
 					Cookie apacheCookie = new Cookie(c.getDomain(), c.getName(), c.getValue(), c
 							.getPath(), c.getMaxAge(), c.getSecure());
 					client.getState().addCookie(apacheCookie);
@@ -247,8 +269,18 @@ public class AnnotationManager implements AnnotationService {
 				new ApacheHttpClientExecutor(client));
 	}
 	
+	private void forwardResponseHeaders(MultivaluedMap<String, String> headers) {
+		if (headers==null) return;
+		//  copy response headers
+		for(String key : headers.keySet()) {
+			for (String value : headers.get(key)) {						
+				response.addHeader(key, value);
+			}
+		}
+	}
+	
 	private String encode(String url) throws UnsupportedEncodingException {
-		// yes, this will always be UTF-8.
 		return java.net.URLEncoder.encode(url,"UTF-8").replace("%", "%25");
 	}
+	
 }

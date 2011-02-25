@@ -98,7 +98,7 @@ public class ToKMLServlet extends HttpServlet {
 			// 1. Instantiate Interpolator for the specified map
 			ControlPointManager cpm;
 			try {
-				cpm = new ControlPointManager(request, mapUrl);
+				cpm = new ControlPointManager(request, response, mapUrl);
 			} catch (AnnotationServiceException ase) {
 				response.sendError(500, "failed to load control points");
 				return;

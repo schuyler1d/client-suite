@@ -59,37 +59,44 @@ public class AnnotationServiceImpl extends RemoteServiceServlet implements Annot
 	public Annotation createAnnotation(Annotation annotation) 
 			throws AnnotationServiceException {
 
-		return new AnnotationManager(getThreadLocalRequest()).createAnnotation(annotation);
+		return new AnnotationManager(getThreadLocalRequest(), getThreadLocalResponse())
+			.createAnnotation(annotation);
 	}
 
 	@Override
 	public Annotation updateAnnotation(String id, Annotation annotation) 
 			throws AnnotationServiceException {
 
-		return new AnnotationManager(getThreadLocalRequest()).updateAnnotation(id, annotation);
+		return new AnnotationManager(getThreadLocalRequest(), getThreadLocalResponse())
+			.updateAnnotation(id, annotation);
 	}
 	
 	@Override
 	public void deleteAnnotation(String annotationId)
 		throws AnnotationServiceException {
 		
-		new AnnotationManager(getThreadLocalRequest()).deleteAnnotation(annotationId);
+		new AnnotationManager(getThreadLocalRequest(), getThreadLocalResponse())
+			.deleteAnnotation(annotationId);
 	}
 	
 	@Override
 	public Collection<Annotation> listAnnotations(String objectId) 
 			throws AnnotationServiceException {	
+		
 		Collection<Annotation> annotations = 
-			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId);
+			new AnnotationManager(getThreadLocalRequest(), getThreadLocalResponse())
+				.listAnnotations(objectId);
 		
 		return annotations;
 	}
 	
 	@Override
 	public Collection<Annotation> listAnnotations(String objectId, Set<String> shapeTypes)
-		throws AnnotationServiceException {		
+		throws AnnotationServiceException {	
+		
 		Collection<Annotation> annotations = 
-			new AnnotationManager(getThreadLocalRequest()).listAnnotations(objectId, shapeTypes);
+			new AnnotationManager(getThreadLocalRequest(), getThreadLocalResponse())
+				.listAnnotations(objectId, shapeTypes);
 
 		return annotations;
 	}

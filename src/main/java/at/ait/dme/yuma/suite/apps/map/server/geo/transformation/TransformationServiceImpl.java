@@ -46,7 +46,8 @@ public class TransformationServiceImpl extends RemoteServiceServlet implements T
 		try {
 			List<WGS84Coordinate> coords = new ArrayList<WGS84Coordinate>();
 			
-			ControlPointManager cpm = new ControlPointManager(getThreadLocalRequest(), mapUrl);
+			ControlPointManager cpm = 
+				new ControlPointManager(getThreadLocalRequest(), getThreadLocalResponse(), mapUrl);
 			CoordinateTransformation interpolator = new AffineTransformation(cpm.getControlPoints());
 			
 			for(XYCoordinate xyCoord : xyCoords) {

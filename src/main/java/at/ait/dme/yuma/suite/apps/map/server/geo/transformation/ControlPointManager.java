@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import at.ait.dme.yuma.suite.apps.core.server.annotation.AnnotationManager;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
@@ -48,14 +49,14 @@ public class ControlPointManager {
 	 */
 	private List<ControlPoint> controlPoints = new ArrayList<ControlPoint>();
 	
-	public ControlPointManager(HttpServletRequest clientRequest, String mapUrl) 
-			throws AnnotationServiceException {
+	public ControlPointManager(HttpServletRequest request, HttpServletResponse response,
+			String mapUrl) throws AnnotationServiceException {
 		
 		Collection<Annotation> annotations = new ArrayList<Annotation>();
 		
 		Set<String> shapeTypes = new HashSet<String>();
 		shapeTypes.add(GeoPoint.class.getName());
-		annotations = new AnnotationManager(clientRequest).listAnnotations(mapUrl,shapeTypes);
+		annotations = new AnnotationManager(request, response).listAnnotations(mapUrl,shapeTypes);
 		
 		for(Annotation annotation : annotations) {
 			controlPoints.add(ControlPoint.fromAnnotation((ImageAnnotation) annotation));

@@ -92,7 +92,8 @@ public class KMLConverterServlet extends HttpServlet {
 			        Document kml = builder.parse(kmlRequest.getResponseBodyAsStream());
 			        
 					// Instantiate Interpolator
-					ControlPointManager cpm = new ControlPointManager(request, mapUrl);
+					ControlPointManager cpm = 
+						new ControlPointManager(request, response, mapUrl);
 					AffineTransformation ip = new AffineTransformation(cpm.getControlPoints());	
 			        
 			        // Convert coordinates in DOM
