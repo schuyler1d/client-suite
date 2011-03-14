@@ -73,7 +73,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	/**
 	 * Properties
 	 */
-	private static final String GOOGLE_API_KEY_PROPERTY = "map.google.api.key";
+	private static final String GOOGLE_API_KEY_PROPERTY = "gmaps.api.key";
 	
 	/**
 	 * Google API key
@@ -104,7 +104,6 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 		super.init(servletConfig);
 		Config config = new Config(servletConfig);
 		googleApiKey = config.getStringProperty(GOOGLE_API_KEY_PROPERTY);
-		// stopwordFile = config.getStringProperty(STOPWORD_FILE_PROPERTY);
 	}
 	
 	@Override
@@ -117,7 +116,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	        while ((line = br.readLine()) != null) {
 	            s.append(line + "\n");
 	        }
-	        // System.out.println(s.toString());
+	        System.out.println(s.toString());
 			return parseGeocoderResponse(s);
 		} catch (Exception e) {
 			throw new GeocoderException(e);
