@@ -32,6 +32,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation;
+import at.ait.dme.yuma.suite.apps.core.shared.model.PlainLiteral;
 import at.ait.dme.yuma.suite.apps.core.shared.model.SemanticTag;
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
@@ -71,6 +72,10 @@ public class JSONAnnotationHandler {
 	private static final String KEY_TAG_DESCRIPTION = "description";
 	private static final String KEY_TAG_LANG = "lang";
 	private static final String KEY_TAG_TYPE = "type";
+	private static final String KEY_TAG_ALT_LABELS = "alt-labels";
+	
+	private static final String KEY_ALT_LABEL_VAL = "val";
+	private static final String KEY_ALT_LABEL_LANG = "lang";
 
     private static Logger logger = Logger.getLogger(JSONAnnotationHandler.class);
 	
@@ -224,6 +229,15 @@ public class JSONAnnotationHandler {
 			jsonObj.put(KEY_TAG_DESCRIPTION, t.getPrimaryDescription());
 			jsonObj.put(KEY_TAG_LANG, t.getPrimaryLanguage());
 			jsonObj.put(KEY_TAG_TYPE, t.getType());
+			
+			JSONArray altLabels = new JSONArray();
+			for (PlainLiteral p : t.getAlternativeLabels()) {
+				JSONObject label = new JSONObject();
+				label.put(KEY_ALT_LABEL_LANG, p.getLanguage());
+				label.put(KEY_ALT_LABEL_VAL, p.getValue());
+				altLabels.add(label);
+			}
+			jsonObj.put(KEY_TAG_ALT_LABELS, altLabels);
 			
 			jsonArray.add(jsonObj);
 		}
