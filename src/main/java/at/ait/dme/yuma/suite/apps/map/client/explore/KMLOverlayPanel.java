@@ -21,6 +21,7 @@
 
 package at.ait.dme.yuma.suite.apps.map.client.explore;
 
+import at.ait.dme.yuma.suite.apps.core.client.YUMACoreProperties;
 import at.ait.dme.yuma.suite.apps.map.client.TileBasedImageViewer;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -49,13 +50,17 @@ public class KMLOverlayPanel extends FlowPanel {
 	private static final String RADIO_GROUP = "kml";
 	
 	/**
+	 * YUMA Suite base URL
+	 */
+	private static final String BASE_URL = YUMACoreProperties.getBaseUrl() + "kml/";
+	
+	/**
 	 * KML file URLs
 	 */
-	private static final String KML_TRADE_ROUTES = "http://dme.ait.ac.at/yuma/kml/traderoutes-mediterrenean-2nd-century.kml";
-	private static final String KML_AGE_OF_DISCOVERY = "http://dme.ait.ac.at/yuma/kml/ageofdiscovery.kml";
-	private static final String KML_COUNTRY_BORDERS = "http://dme.ait.ac.at/yuma/kml/country-borders.kml";
-	private static final String KML_PTOLEMY = "http://dme.ait.ac.at/yuma/kml/ptolemy.kml";
-	private static final String KML_CHINESE_ROADS = "http://dme.ait.ac.at/yuma/kml/prc_roads.kml";
+	private static final String KML_TRADE_ROUTES = BASE_URL + "traderoutes-mediterrenean-2nd-century.kml";
+	private static final String KML_AGE_OF_DISCOVERY = BASE_URL + "ageofdiscovery.kml";
+	private static final String KML_COUNTRY_BORDERS = BASE_URL + "country-borders.kml";
+	private static final String KML_EUROPE = BASE_URL + "european-country-borders.kml";
 	private static final String KML_RAINERS_LOCATION = "http://geekvault.no5.at/blogloc/kml/aboutgeo.kml";
 	
 	public KMLOverlayPanel(TileBasedImageViewer imageComposite) {
@@ -81,14 +86,8 @@ public class KMLOverlayPanel extends FlowPanel {
 			));
 
 		this.add(createRadioButton(
-				KML_PTOLEMY,
-				"Ptolemy's Geographia (<a href=\"" + KML_PTOLEMY + "\">KML</a>)",
-				false
-			));
-		
-		this.add(createRadioButton(
-				KML_CHINESE_ROADS,
-				"Bejing Road Network (<a href=\"" + KML_CHINESE_ROADS + "\">KML</a>)",
+				KML_EUROPE,
+				"European Country Borders (<a href=\"" + KML_EUROPE + "\">KML</a>)",
 				false
 			));
 		
