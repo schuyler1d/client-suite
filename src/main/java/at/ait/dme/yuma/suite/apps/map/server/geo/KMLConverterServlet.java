@@ -23,7 +23,6 @@ package at.ait.dme.yuma.suite.apps.map.server.geo;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +42,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import at.ait.dme.yuma.suite.apps.core.server.Config;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.AffineTransformation;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.ControlPointManager;
 import at.ait.dme.yuma.suite.apps.map.server.geo.transformation.TransformationResult;
@@ -57,23 +55,11 @@ import at.ait.dme.yuma.suite.apps.map.shared.server.exception.TransformationExce
  */
 @SuppressWarnings("serial")
 public class KMLConverterServlet extends HttpServlet {
-
-	/**
-	 * Property names
-	 */
-	private static final String OUTLIER_THRESHOLD_PROPERTY = "map.kml.outlier.threshold";
 	
 	/**
 	 * Outlier threshold in pixel
 	 */
-	private int outlierThreshold;
-	
-	@Override
-	public void init(ServletConfig servletConfig) throws ServletException {
-		super.init(servletConfig);
-		Config config = new Config(servletConfig);
-		outlierThreshold = config.getIntegerProperty(OUTLIER_THRESHOLD_PROPERTY);
-	}
+	private int outlierThreshold = 1000;
 	 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Params: URL of the base map into which KML shall be transformed, URL of the KML  

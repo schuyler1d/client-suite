@@ -38,7 +38,7 @@ import at.ait.dme.yuma.suite.apps.map.client.widgets.MapComponent;
 public class KMLLayer {
 	
 	/**
-	 * KML importer base URL (relative)
+	 * KML importer base URL
 	 */
 	private final static String KML_IMPORT_BASE_URL = "importkml";
 
