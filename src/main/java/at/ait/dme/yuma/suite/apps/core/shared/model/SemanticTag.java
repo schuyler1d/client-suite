@@ -122,6 +122,9 @@ public class SemanticTag implements Serializable {
 	}
 	
 	public void addAlternativeLabel(PlainLiteral label) {
+		if (alternativeLabels == null)
+			alternativeLabels = new ArrayList<PlainLiteral>();
+			
 		alternativeLabels.add(label);
 	}
 	

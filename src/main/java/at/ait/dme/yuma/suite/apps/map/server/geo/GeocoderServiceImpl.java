@@ -116,7 +116,7 @@ public class GeocoderServiceImpl extends RemoteServiceServlet  implements Geocod
 	        while ((line = br.readLine()) != null) {
 	            s.append(line + "\n");
 	        }
-	        System.out.println(s.toString());
+	        // System.out.println(s.toString());
 			return parseGeocoderResponse(s);
 		} catch (Exception e) {
 			throw new GeocoderException(e);

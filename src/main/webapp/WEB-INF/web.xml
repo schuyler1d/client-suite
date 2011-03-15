@@ -31,11 +31,6 @@
 	</context-param>
 
 	<context-param>
-		<param-name>openCalaisLicenceID</param-name>
-		<param-value>5g58wjng8y3avpqubrnnhyn7</param-value>
-	</context-param>
-
-	<context-param>
 		<param-name>gmaps.api.key</param-name>
 		<param-value>ABQIAAAAapqr3t_QNx5qoEDwcY3APxSHOYmJ0Gm-4W76tcH6UPz2tSaGORRKM04b8Aeh1YaavSss6bxsoNoZQQ</param-value>
 	</context-param>

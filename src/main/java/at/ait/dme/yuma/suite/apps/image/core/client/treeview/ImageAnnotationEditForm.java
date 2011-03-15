@@ -45,7 +45,6 @@ import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.MediaType;
 import at.ait.dme.yuma.suite.apps.core.shared.model.Annotation.Scope;
 import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERService;
 import at.ait.dme.yuma.suite.apps.core.shared.server.ner.NERServiceAsync;
-import at.ait.dme.yuma.suite.apps.core.shared.server.ner.SemanticTagSuggestions;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagcloud.TagCloud;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagging.TagSuggestBox;
 import at.ait.dme.yuma.suite.apps.image.core.client.tagging.TagTreePanel;
@@ -400,20 +399,18 @@ public class ImageAnnotationEditForm extends AnnotationEditForm {
 	
 	private void getTagSuggestions() {
     	enrichmentService.getTagSuggestions(textArea.getText(),
-    			new AsyncCallback<Collection<SemanticTagSuggestions>>() {
+    			new AsyncCallback<Collection<SemanticTag>>() {
 					@Override
 					public void onFailure(Throwable t) {
 						// Do nothing...
 					}
 
 					@Override
-					public void onSuccess(Collection<SemanticTagSuggestions> result) {
+					public void onSuccess(Collection<SemanticTag> result) {
 						if (result.size() > 0 && !tagCloud.isVisible()) tagCloud.show();
 						
-						for (SemanticTagSuggestions group : result) {
-							for (SemanticTag tag : group.getTags()) {
-								tagCloud.addTag(tag, 22, "#ffd77d");
-							}
+						for (SemanticTag tag : result) {
+							tagCloud.addTag(tag, 22, "#ffd77d");
 						}
 					}
 				}
