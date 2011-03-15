@@ -40,7 +40,7 @@ public class KMLLayer {
 	/**
 	 * KML importer base URL (relative)
 	 */
-	private final static String KML_IMPORT_BASE_URL = "yuma/importkml";
+	private final static String KML_IMPORT_BASE_URL = "importkml";
 
 	/**
 	 * The OpenLayers map
