@@ -58,6 +58,7 @@ public class DBpediaSpotlightParser {
 	    		String uri = getIfNotNull(resource, URI);
 	    		t = dereferenceEntity(uri);
 	    		t.setURI(uri);
+	    		t.setType(getIfNotNull(resource, TYPES));
 	    	} else {
 	    		// Construct a skeleton based on the Spotlight response only
 		    	t = new SemanticTag();
