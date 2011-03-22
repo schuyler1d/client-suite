@@ -35,6 +35,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("../auth")
 public interface AuthService extends RemoteService {
 
-	public User getUser();
+	public User getUser() throws AuthServiceException;
 
 }

@@ -23,6 +23,7 @@ package at.ait.dme.yuma.suite.apps.core.server.auth;
 
 import at.ait.dme.yuma.suite.apps.core.shared.model.User;
 import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthService;
+import at.ait.dme.yuma.suite.apps.core.shared.server.auth.AuthServiceException;
 import at.ait.dme.yuma.suite.framework.YUMAWebSession;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -37,8 +38,12 @@ public class AuthServiceImpl extends RemoteServiceServlet implements AuthService
 	private static final long serialVersionUID = -3607603963872144162L;
 
 	@Override
-	public User getUser() {	
-		return YUMAWebSession.get().getUser();
+	public User getUser() throws AuthServiceException {	
+		try {
+			return YUMAWebSession.get().getUser();
+		} catch (Throwable t) {
+			throw new AuthServiceException(t.getMessage());
+		}
 	}
 
 }

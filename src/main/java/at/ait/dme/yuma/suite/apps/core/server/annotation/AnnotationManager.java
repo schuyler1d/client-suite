@@ -209,6 +209,7 @@ public class AnnotationManager implements AnnotationService {
 			}
 		} catch(AnnotationServiceException ase) {
 			logger.error(ase.getMessage(), ase);
+			ase.printStackTrace();
 			throw ase;			
 		} catch (Throwable t) {
 			logger.error(FAILED_TO_PARSE_ANNOTATION, t);
@@ -216,8 +217,8 @@ public class AnnotationManager implements AnnotationService {
 			throw new AnnotationServiceException(t.getMessage());
 		} finally {
 			// TODO make header forwarding optional (via web.xml init param)
-			if(response != null)
-				forwardResponseHeaders(response.getHeaders());
+			// if(response != null)
+				// forwardResponseHeaders(response.getHeaders());
 		} 
 		
 		return annotations;
