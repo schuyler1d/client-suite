@@ -39,7 +39,7 @@ public class DBpediaSpotlightParser {
 	
 	public List<SemanticTag> parseJsonResponse(String json, boolean dereferenceEntities)
 		throws NERServiceException {
-		
+
 		JSONObject jsonObj = (JSONObject) JSONValue.parse(json);
 	        
 		@SuppressWarnings("unchecked")
@@ -47,10 +47,10 @@ public class DBpediaSpotlightParser {
 		if (error != null)
 			throw new NERServiceException(error.get(ERROR_MSG));
 	                
+	    List<SemanticTag> tags = new ArrayList<SemanticTag>();
+		
 		@SuppressWarnings("unchecked")
 		List<Map<String, String>> resources = (List<Map<String, String>>) jsonObj.get(RESOURCES);
-
-	    List<SemanticTag> tags = new ArrayList<SemanticTag>();   
 	    for (Map<String, String> resource : resources) {
 	    	SemanticTag t;
 	    	if (dereferenceEntities) {

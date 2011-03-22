@@ -230,14 +230,16 @@ public class JSONAnnotationHandler {
 			jsonObj.put(KEY_TAG_LANG, t.getPrimaryLanguage());
 			jsonObj.put(KEY_TAG_TYPE, t.getType());
 			
-			JSONArray altLabels = new JSONArray();
-			for (PlainLiteral p : t.getAlternativeLabels()) {
-				JSONObject label = new JSONObject();
-				label.put(KEY_ALT_LABEL_LANG, p.getLanguage());
-				label.put(KEY_ALT_LABEL_VAL, p.getValue());
-				altLabels.add(label);
+			if (t.hasAltLabels()) {
+				JSONArray altLabels = new JSONArray();
+				for (PlainLiteral p : t.getAlternativeLabels()) {
+					JSONObject label = new JSONObject();
+					label.put(KEY_ALT_LABEL_LANG, p.getLanguage());
+					label.put(KEY_ALT_LABEL_VAL, p.getValue());
+					altLabels.add(label);
+				}
+				jsonObj.put(KEY_TAG_ALT_LABELS, altLabels);
 			}
-			jsonObj.put(KEY_TAG_ALT_LABELS, altLabels);
 			
 			jsonArray.add(jsonObj);
 		}
