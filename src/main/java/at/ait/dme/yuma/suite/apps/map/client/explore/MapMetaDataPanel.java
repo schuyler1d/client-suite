@@ -21,6 +21,7 @@
 
 package at.ait.dme.yuma.suite.apps.map.client.explore;
 
+import at.ait.dme.yuma.suite.apps.map.shared.geo.MapMetadata;
 import at.ait.dme.yuma.suite.apps.map.shared.server.MapMetadataService;
 import at.ait.dme.yuma.suite.apps.map.shared.server.MapMetadataServiceAsync;
 

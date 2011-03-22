@@ -33,7 +33,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
-import at.ait.dme.yuma.suite.apps.map.client.explore.MapMetadata;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.MapMetadata;
 import at.ait.dme.yuma.suite.apps.map.shared.server.MapMetadataService;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

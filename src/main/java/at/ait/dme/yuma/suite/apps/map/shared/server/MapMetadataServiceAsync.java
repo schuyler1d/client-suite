@@ -23,7 +23,7 @@ package at.ait.dme.yuma.suite.apps.map.shared.server;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import at.ait.dme.yuma.suite.apps.map.client.explore.MapMetadata;
+import at.ait.dme.yuma.suite.apps.map.shared.geo.MapMetadata;
 
 /**
  * Async interface to the map metadata service

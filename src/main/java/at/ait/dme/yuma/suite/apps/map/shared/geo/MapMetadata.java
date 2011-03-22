@@ -19,7 +19,7 @@
  * permissions and limitations under the Licence.
  */
 
-package at.ait.dme.yuma.suite.apps.map.client.explore;
+package at.ait.dme.yuma.suite.apps.map.shared.geo;
 
 import java.io.Serializable;
 
