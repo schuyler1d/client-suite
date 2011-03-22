@@ -91,14 +91,14 @@ public class JSONAnnotationHandler {
 			Annotation annotation;
 			
 			MediaType type = MediaType.valueOf(((String) jsonObj.get(KEY_MEDIA_TYPE)).toUpperCase());
+			String fragment = (String) jsonObj.get(KEY_FRAGMENT);
 			if (type == MediaType.IMAGE || type == MediaType.MAP) {
 				annotation = new ImageAnnotation();		
 				
-				String fragment = (String) jsonObj.get(KEY_FRAGMENT);
 				if ((fragment != null) && (!fragment.isEmpty())){
 					SVGFragmentHandler svg = new SVGFragmentHandler();
 					try {
-						annotation.setFragment(svg.toImageFragment((String) jsonObj.get(KEY_FRAGMENT)));
+						annotation.setFragment(svg.toImageFragment(fragment));
 					} catch (IOException e) {
 						logger.warn("Could not parse image fragment: " + e.getMessage());
 					}

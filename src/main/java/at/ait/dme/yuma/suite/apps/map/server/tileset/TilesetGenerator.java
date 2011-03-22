@@ -92,7 +92,7 @@ public class TilesetGenerator {
 				throw new TilingException("GET " + url + " returned status code:" + statusCode);
 			
 			is = getImageMethod.getResponseBodyAsStream();			
-			File imageFile=new File(dir+"/"+url.substring(url.lastIndexOf("/")));
+			File imageFile=new File(dir+"/"+url.substring(url.lastIndexOf("/")).replace("%", "-"));
 		    os=new FileOutputStream(imageFile);
 		    
 		    byte buf[]=new byte[1024];
@@ -124,7 +124,6 @@ public class TilesetGenerator {
 		String path = imageUrl.replaceAll("[^(A-Za-z0-9)]+", "-");
 		if (path.length() > 255)
 			path = path.substring(path.length()-255);
-		
 		return path;
 	}
 

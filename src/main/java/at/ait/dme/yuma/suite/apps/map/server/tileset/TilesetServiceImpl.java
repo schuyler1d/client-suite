@@ -76,7 +76,9 @@ public class TilesetServiceImpl extends RemoteServiceServlet implements TilesetS
 	}
 	
 	@Override
-	public Tileset getTileset(String url) throws TilesetNotAvailableException, UnsupportedTileSchemeException {		
+	public Tileset getTileset(String url) throws TilesetNotAvailableException, UnsupportedTileSchemeException {
+		url = normalize(url);
+
 		if (url.toLowerCase().endsWith("xml")) {
 			// Remote tileset
 			if (url.toLowerCase().endsWith("tilemapresource.xml")) {
@@ -117,22 +119,25 @@ public class TilesetServiceImpl extends RemoteServiceServlet implements TilesetS
 	
 	
 	@Override
-	public void startOnTheFlyTiler(final String imageUrl) throws TilingException {	
-		if (tasks.get(imageUrl) != null) return;
+	public void startOnTheFlyTiler(String imageUrl) throws TilingException {	
+		final String url = normalize(imageUrl);
+		
+		if (tasks.get(url) != null) return;
 		
 		FutureTask<Tileset> future = new FutureTask<Tileset>(new Callable<Tileset>() {
 			public Tileset call() throws TilingException {
-				return new TilesetGenerator().renderTiles(imageUrl);
+				return new TilesetGenerator().renderTiles(url);
 			}
 		});
 				
-		if(tasks.putIfAbsent(imageUrl, future)==null) {
+		if(tasks.putIfAbsent(url, future)==null) {
 			executor.execute(future);
 		} 				
 	}
 
 	@Override
 	public Tileset pollOnTheFlyTiler(String imageUrl) throws TilingException  {
+		imageUrl = normalize(imageUrl);
 		Tileset tileset = null;
 		
 		try {
@@ -152,6 +157,10 @@ public class TilesetServiceImpl extends RemoteServiceServlet implements TilesetS
 		}
 		
 		return tileset;
+	}
+	
+	private String normalize(String url) {
+		return url.replace(" ", "%20");
 	}
 	
 }
